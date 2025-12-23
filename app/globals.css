@@ -1,6 +1,16 @@
 @import "tailwindcss";
 
+@theme {
+    --font-sans: "Inter", "system-ui", "sans-serif";
+    --color-ink: #010B13;
+    --color-page: #FFFFFF;
+    --color-muted: #6B7280;
+    --color-line: #E5E7EB;
+    --color-soft: #F3F4F6;
+}
+
 html,
 body {
     height: 100%;
+    font-family: var(--font-sans);
 }

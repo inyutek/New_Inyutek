@@ -1,21 +1,97 @@
-export default function Navbar() {
+"use client"
+
+import Link from "next/link"
+import { useEffect, useRef, useState } from "react"
+
+const BRAND_COLOR = "#000024"
+
+// ✅ Real contact details
+const PHONE_NUMBER = "9112235551"
+const WHATSAPP_NUMBER = "919112235551"
+
+const WHATSAPP_TEXT = encodeURIComponent(
+    "Hi Inyutek team, I want to schedule a meeting."
+)
+
+const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_TEXT}`
+const CALL_LINK = `tel:${PHONE_NUMBER}`
+
+export function Navbar() {
+    const [open, setOpen] = useState(false)
+    const ref = useRef<HTMLDivElement | null>(null)
+
+    useEffect(() => {
+        function handleClickOutside(e: MouseEvent) {
+            if (ref.current && !ref.current.contains(e.target as Node)) {
+                setOpen(false)
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => document.removeEventListener("mousedown", handleClickOutside)
+    }, [])
+
     return (
-        <header className="border-b border-line bg-page">
-            <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-                {/* Logo (text only in Inter) */}
-                <div className="text-ink font-semibold tracking-tight">Logo</div>
+        <nav className="border-b border-gray-100 bg-white/50 backdrop-blur-md sticky top-0 z-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
 
-                {/* Right side placeholder */}
-                <nav className="hidden md:flex items-center gap-8 text-sm text-ink/80">
-                    <a className="hover:text-ink" href="#">Services</a>
-                    <a className="hover:text-ink" href="#">Process</a>
-                    <a className="hover:text-ink" href="#">Work</a>
-                </nav>
+                {/* Left: Brand */}
+                <div className="w-[140px]">
+                    <div className="font-bold text-xl uppercase tracking-wider text-[#000024]">
+                        INYUTEK
+                    </div>
+                </div>
 
-                <button className="rounded-md bg-ink px-4 py-2 text-sm font-medium text-white">
-                    Button
-                </button>
+                {/* Center: Links */}
+                <div className="hidden md:flex flex-1 justify-center gap-8 text-sm font-medium text-gray-600">
+                    <Link href="#" className="hover:text-[#000024] transition-colors">
+                        Services
+                    </Link>
+                    <Link href="#" className="hover:text-[#000024] transition-colors">
+                        Blog
+                    </Link>
+                    <Link href="#" className="hover:text-[#000024] transition-colors">
+                        Case Studies
+                    </Link>
+                </div>
+
+                {/* Right: Book Call Dropdown */}
+                <div className="w-[140px] flex justify-end relative" ref={ref}>
+                    <button
+                        onClick={() => setOpen((v) => !v)}
+                        className="bg-[#000024] text-white px-6 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+                    >
+                        Book Call
+                    </button>
+
+                    {open && (
+                        <div className="absolute right-0 top-12 w-56 rounded-xl border border-black/10 bg-white shadow-lg overflow-hidden">
+                            <a
+                                href={WHATSAPP_LINK}
+                                target="_blank"
+                                rel="noreferrer"
+                                onClick={() => setOpen(false)}
+                                className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
+                            >
+                                WhatsApp
+                                <div className="text-xs text-black/50 mt-0.5">
+                                    Message us directly
+                                </div>
+                            </a>
+
+                            <a
+                                href={CALL_LINK}
+                                onClick={() => setOpen(false)}
+                                className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
+                            >
+                                Call
+                                <div className="text-xs text-black/50 mt-0.5">
+                                    {PHONE_NUMBER}
+                                </div>
+                            </a>
+                        </div>
+                    )}
+                </div>
             </div>
-        </header>
-    );
+        </nav>
+    )
 }
