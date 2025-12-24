@@ -43,7 +43,7 @@ export function Navbar() {
 
                 {/* Center: Links */}
                 <div className="hidden md:flex flex-1 justify-center gap-8 text-sm font-medium text-gray-600">
-                    <Link href="#" className="hover:text-[#000024] transition-colors">
+                    <Link href="/#services" className="hover:text-[#000024] transition-colors">
                         Services
                     </Link>
                     <Link href="#" className="hover:text-[#000024] transition-colors">

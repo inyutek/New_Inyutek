@@ -114,7 +114,7 @@ export function ServicesSection() {
     const groupTwoY = useTransform(scrollYProgress, [0.35, 0.65], ["100%", "0%"])
 
     return (
-        <div ref={containerRef} className="relative h-[300vh] bg-[#fbfbfb]">
+        <div id="services" ref={containerRef} className="relative h-[300vh] bg-[#fbfbfb]">
             <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
 
                 <div className="max-w-7xl w-full mx-auto px-6 lg:px-8 relative h-full flex items-center justify-between">
