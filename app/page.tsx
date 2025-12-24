@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/navbar"
+
 import { Hero } from "@/components/sections/Hero"
 import { ProblemSection } from "@/components/sections/ProblemSection"
 import { ServicesSection } from "@/components/sections/ServicesSection"
@@ -11,7 +11,7 @@ import Footer from "@/components/sections/Footer"
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#fbfbfb]">
-      <Navbar />
+
 
       {/* Scroll Scene (Hero) */}
       <Hero />

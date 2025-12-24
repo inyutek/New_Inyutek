@@ -4,6 +4,8 @@ import "./globals.css";
 import { TransitionProvider } from "./transition-provider";
 import SmoothScroll from "@/components/smooth-scroll";
 
+import { Navbar } from "@/components/navbar";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-white text-[#010B13] font-sans antialiased px-4 sm:px-6 lg:px-8`}>
         <SmoothScroll>
+          <Navbar />
           <TransitionProvider>{children}</TransitionProvider>
         </SmoothScroll>
       </body>

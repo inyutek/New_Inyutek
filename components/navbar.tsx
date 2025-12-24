@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { ChevronDown } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
 const BRAND_COLOR = "#000024"
@@ -18,12 +19,17 @@ const CALL_LINK = `tel:${PHONE_NUMBER}`
 
 export function Navbar() {
     const [open, setOpen] = useState(false)
+    const [resourcesOpen, setResourcesOpen] = useState(false)
     const ref = useRef<HTMLDivElement | null>(null)
+    const resourcesRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
         function handleClickOutside(e: MouseEvent) {
             if (ref.current && !ref.current.contains(e.target as Node)) {
                 setOpen(false)
+            }
+            if (resourcesRef.current && !resourcesRef.current.contains(e.target as Node)) {
+                setResourcesOpen(false)
             }
         }
         document.addEventListener("mousedown", handleClickOutside)
@@ -51,16 +57,53 @@ export function Navbar() {
                 </div>
 
                 {/* Center: Links */}
-                <div className="hidden md:flex flex-1 justify-center gap-8 text-sm font-medium text-gray-600">
+                <div className="hidden md:flex flex-1 justify-center gap-8 text-sm font-medium text-gray-600 items-center">
                     <Link href="/#services" className="hover:text-[#000024] transition-colors">
                         Services
                     </Link>
-                    <Link href="#" className="hover:text-[#000024] transition-colors">
-                        Blog
+                    <Link href="/#process" className="hover:text-[#000024] transition-colors">
+                        Process
                     </Link>
-                    <Link href="#" className="hover:text-[#000024] transition-colors">
-                        Case Studies
+                    <Link href="/about" className="hover:text-[#000024] transition-colors">
+                        About
                     </Link>
+
+                    {/* Resources Dropdown */}
+                    <div className="relative" ref={resourcesRef}>
+                        <button
+                            onClick={() => setResourcesOpen(!resourcesOpen)}
+                            className="flex items-center gap-1 hover:text-[#000024] transition-colors"
+                        >
+                            Resources
+                            <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${resourcesOpen ? "rotate-180" : ""}`} />
+                        </button>
+
+                        {resourcesOpen && (
+                            <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-100 rounded-xl shadow-lg overflow-hidden flex flex-col py-1 animate-in fade-in zoom-in-95 duration-200">
+                                <Link
+                                    href="/case-studies"
+                                    className="px-4 py-2 hover:bg-gray-50 text-left transition-colors text-gray-600 hover:text-[#000024]"
+                                    onClick={() => setResourcesOpen(false)}
+                                >
+                                    Case Studies
+                                </Link>
+                                <Link
+                                    href="/portfolio"
+                                    className="px-4 py-2 hover:bg-gray-50 text-left transition-colors text-gray-600 hover:text-[#000024]"
+                                    onClick={() => setResourcesOpen(false)}
+                                >
+                                    Portfolio
+                                </Link>
+                                <Link
+                                    href="/newsletter"
+                                    className="px-4 py-2 hover:bg-gray-50 text-left transition-colors text-gray-600 hover:text-[#000024]"
+                                    onClick={() => setResourcesOpen(false)}
+                                >
+                                    Newsletter
+                                </Link>
+                            </div>
+                        )}
+                    </div>
                 </div>
 
                 {/* Right: Book Call Dropdown */}
