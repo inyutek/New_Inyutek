@@ -58,19 +58,19 @@ export function Hero() {
     // [0, 0.7] means the animation finishes when user is 70% through the pinned section.
     // This leaves 30% duration for the user to admire the full grid before the next section arrives.
 
-    const c1y = useTransform(scrollYProgress, [0, 0.5], [startY, 0], { clamp: true })
-    const c2y = useTransform(scrollYProgress, [0.05, 0.55], [startY, 0], { clamp: true })
-    const c3y = useTransform(scrollYProgress, [0.1, 0.6], [startY, 0], { clamp: true })
-    const c4y = useTransform(scrollYProgress, [0.15, 0.65], [startY, 0], { clamp: true })
-    const c5y = useTransform(scrollYProgress, [0.2, 0.7], [startY, 0], { clamp: true })
-    const c6y = useTransform(scrollYProgress, [0.25, 0.75], [startY, 0], { clamp: true })
+    const c1y = useTransform(scrollYProgress, [0, 0.4], [startY, 0], { clamp: true })
+    const c2y = useTransform(scrollYProgress, [0.05, 0.45], [startY, 0], { clamp: true })
+    const c3y = useTransform(scrollYProgress, [0.1, 0.5], [startY, 0], { clamp: true })
+    const c4y = useTransform(scrollYProgress, [0.15, 0.55], [startY, 0], { clamp: true })
+    const c5y = useTransform(scrollYProgress, [0.2, 0.6], [startY, 0], { clamp: true })
+    const c6y = useTransform(scrollYProgress, [0.25, 0.65], [startY, 0], { clamp: true })
 
     // Fade in as they rise
     const cardsOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1])
 
     return (
-        // Height 300vh = 3x screen height of scrolling space to perform the animation
-        <div ref={containerRef} className="relative h-[300vh]">
+        // Height 250vh = 1.5x screen height of scrolling space (1 scroll anim, 0.5 scroll exit)
+        <div ref={containerRef} className="relative h-[250vh]">
 
             {/* Sticky Viewport: This stays fixed while measuring the parent's height for scroll progress */}
             <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#fbfbfb] flex flex-col items-center justify-center">
