@@ -42,43 +42,45 @@ export function Hero() {
     // We want the cards to come up from the bottom and settle into place.
     // The user scrolls through the "pinned" section.
 
-    // 1. Text Fades/Moves Out slightly to make room? Or stays? User said "reveal all six... then move to next block". 
-    // Let's keep text stable but maybe fade it slightly so focus goes to cards.
-    const textOpacity = useTransform(scrollYProgress, [0.6, 1], [1, 0])
-    const textScale = useTransform(scrollYProgress, [0, 1], [1, 0.9])
+
 
     // 2. Card Animation Config
     // Cards enter from off-screen bottom (positive Y) to their final position (0).
     // We stagger them slightly for smoothness.
 
-    // Distance to travel from bottom
-    const startY = 1000
+    // 3D PARALLAX CONFIGURATION
+    // Staggered entry for "Phase" effect.
 
-    // Hook the scroll progress to Y position. 
-    // [0, 0.7] means the animation finishes when user is 70% through the pinned section.
-    // This leaves 30% duration for the user to admire the full grid before the next section arrives.
+    // Transforms - Staggered Start Positions
+    // Layer 1 (Back): Starts closer, clears top earlier.
+    const yBack = useTransform(scrollYProgress, [0, 1], [500, -800], { clamp: true })
 
-    const c1y = useTransform(scrollYProgress, [0, 0.4], [startY, 0], { clamp: true })
-    const c2y = useTransform(scrollYProgress, [0.05, 0.45], [startY, 0], { clamp: true })
-    const c3y = useTransform(scrollYProgress, [0.1, 0.5], [startY, 0], { clamp: true })
-    const c4y = useTransform(scrollYProgress, [0.15, 0.55], [startY, 0], { clamp: true })
-    const c5y = useTransform(scrollYProgress, [0.2, 0.6], [startY, 0], { clamp: true })
-    const c6y = useTransform(scrollYProgress, [0.25, 0.65], [startY, 0], { clamp: true })
+    // Layer 2 (Mid): Starts mid-way.
+    const yMid = useTransform(scrollYProgress, [0, 1], [800, -800], { clamp: true })
 
-    // Fade in as they rise
-    const cardsOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1])
+    // Layer 3 (Front): Starts further down, arrives last.
+    const yFront = useTransform(scrollYProgress, [0, 1], [1200, -800], { clamp: true })
+
+    // Text Animation
+    // Remains visible ("floating a little") for most of the scroll.
+    const textOpacity = useTransform(scrollYProgress, [0.7, 0.9], [1, 0]) // Fades out late
+    const textScale = useTransform(scrollYProgress, [0, 1], [1, 0.9])
+    const textY = useTransform(scrollYProgress, [0, 1], [0, -100]) // Floats up slightly
+
+    // Fade in cards
+    const opacity = useTransform(scrollYProgress, [0, 0.15], [0, 1])
 
     return (
-        // Height 250vh = 1.5x screen height of scrolling space (1 scroll anim, 0.5 scroll exit)
-        <div id="hero" ref={containerRef} className="relative h-[250vh]">
+        // Height 300vh -> Faster scroll (less distance to cover)
+        <div id="hero" ref={containerRef} className="relative h-[300vh]">
 
             {/* Sticky Viewport: This stays fixed while measuring the parent's height for scroll progress */}
-            <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#fbfbfb] flex flex-col items-center justify-center">
+            <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#fbfbfb] flex flex-col items-center justify-center perspective-1000">
 
                 {/* Main Text Content */}
                 <motion.div
-                    style={{ opacity: textOpacity, scale: textScale }}
-                    className="relative z-30 max-w-4xl mx-auto px-4 text-center -mt-20"
+                    style={{ opacity: textOpacity, scale: textScale, y: textY }}
+                    className="relative z-40 max-w-4xl mx-auto px-4 text-center -mt-20"
                 >
                     <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#000024] leading-[1.1] mb-8">
                         Turn website traffic into
@@ -99,55 +101,57 @@ export function Hero() {
                 </motion.div>
 
 
-                {/* The 6 Cards - Positioned absolutely around the center, initially pushed down by transform */}
-                <div className="absolute inset-0 z-20 pointer-events-none w-full mx-auto">
+                {/* The 6 Cards - Positioned for 3D Overlap */}
+                <div className="absolute inset-0 z-20 pointer-events-none w-full mx-auto max-w-[1400px]">
 
-                    {/* 1. Top Left */}
+                    {/* LAYER 1: BACK (Starts at 500, Reaches top first) */}
+                    {/* Top Left */}
                     <Card
-                        y={c1y}
-                        opacity={cardsOpacity}
-                        rotate={-8}
-                        className="left-[5%] top-[10%] w-60 h-72 z-10"
+                        y={yBack}
+                        opacity={opacity}
+                        rotate={0}
+                        className="left-[10%] top-[15%] w-56 h-64 z-10 opacity-80 scale-90"
+                    />
+                    {/* Top Right */}
+                    <Card
+                        y={yBack}
+                        opacity={opacity}
+                        rotate={0}
+                        className="right-[10%] top-[18%] w-60 h-72 z-10 opacity-80 scale-90"
                     />
 
-                    {/* 2. Top Right */}
+                    {/* LAYER 2: MID (Starts at 800) */}
+                    {/* Overlaps Back layer slightly */}
+                    {/* Mid Left */}
                     <Card
-                        y={c2y}
-                        opacity={cardsOpacity}
-                        rotate={8}
-                        className="right-[5%] top-[12%] w-64 h-80 z-10"
+                        y={yMid}
+                        opacity={opacity}
+                        rotate={0}
+                        className="left-[18%] top-[38%] w-60 h-72 z-20 shadow-2xl"
+                    />
+                    {/* Mid Right */}
+                    <Card
+                        y={yMid}
+                        opacity={opacity}
+                        rotate={0}
+                        className="right-[18%] top-[35%] w-56 h-64 z-20 shadow-2xl"
                     />
 
-                    {/* 3. Middle Left */}
+                    {/* LAYER 3: FRONT (Starts at 1200, Becomes clear later) */}
+                    {/* Overlaps Mid layer at corners */}
+                    {/* Bottom Left */}
                     <Card
-                        y={c3y}
-                        opacity={cardsOpacity}
-                        rotate={-4}
-                        className="left-[15%] top-[45%] w-56 h-64 z-20"
+                        y={yFront}
+                        opacity={opacity}
+                        rotate={0}
+                        className="left-[12%] bottom-[10%] w-64 h-80 z-30 scale-105 shadow-2xl"
                     />
-
-                    {/* 4. Middle Right */}
+                    {/* Bottom Right */}
                     <Card
-                        y={c4y}
-                        opacity={cardsOpacity}
-                        rotate={5}
-                        className="right-[15%] top-[40%] w-52 h-68 z-20"
-                    />
-
-                    {/* 5. Bottom Left */}
-                    <Card
-                        y={c5y}
-                        opacity={cardsOpacity}
-                        rotate={-12}
-                        className="left-[8%] bottom-[5%] w-64 h-72 z-30"
-                    />
-
-                    {/* 6. Bottom Right */}
-                    <Card
-                        y={c6y}
-                        opacity={cardsOpacity}
-                        rotate={6}
-                        className="right-[8%] bottom-[8%] w-60 h-80 z-30"
+                        y={yFront}
+                        opacity={opacity}
+                        rotate={0}
+                        className="right-[12%] bottom-[12%] w-64 h-80 z-30 scale-105 shadow-2xl"
                     />
 
                 </div>
