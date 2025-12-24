@@ -11,6 +11,5 @@
 
 html,
 body {
-    height: 100%;
     font-family: var(--font-sans);
 }
