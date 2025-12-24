@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { TransitionProvider } from "./transition-provider";
+import SmoothScroll from "@/components/smooth-scroll";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-white text-[#010B13] font-sans antialiased`}>
-        <TransitionProvider>{children}</TransitionProvider>
+        <SmoothScroll>
+          <TransitionProvider>{children}</TransitionProvider>
+        </SmoothScroll>
       </body>
     </html>
   );
