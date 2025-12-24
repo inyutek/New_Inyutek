@@ -107,11 +107,12 @@ export function ServicesSection() {
 
     // 3. Group Animations
     // Group 1: Slide UP and Fade OUT
-    const groupOneY = useTransform(scrollYProgress, [0.35, 0.65], ["0%", "-100%"])
+    // Start later (0.35) and finish at 0.80 per user request
+    const groupOneY = useTransform(scrollYProgress, [0.35, 0.80], ["0%", "-100%"])
     const groupOneOpacity = useTransform(scrollYProgress, [0.35, 0.55], [1, 0])
 
     // Group 2: Slide UP from bottom
-    const groupTwoY = useTransform(scrollYProgress, [0.35, 0.65], ["100%", "0%"])
+    const groupTwoY = useTransform(scrollYProgress, [0.35, 0.80], ["100%", "0%"])
 
     return (
         <div id="services" ref={containerRef} className="relative h-[300vh] bg-[#fbfbfb]">
@@ -134,10 +135,10 @@ export function ServicesSection() {
                             x: cardX,
                             width: useTransform(scrollYProgress, [0.05, 0.25], ["100%", "48%"])
                         }}
-                        className="absolute top-1/2 -translate-y-1/2 z-20 h-[50vh] md:h-[60vh] bg-gray-600 rounded-3xl overflow-hidden shadow-2xl"
+                        className="absolute top-1/2 -translate-y-1/2 z-20 h-[50vh] md:h-[60vh] bg-black rounded-3xl overflow-hidden shadow-2xl"
                     >
-                        <div className="absolute inset-0 bg-neutral-800">
-                            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gray-200 via-gray-900 to-black"></div>
+                        <div className="absolute inset-0 bg-black">
+                            {/* Gradient removed for pure black look */}
                         </div>
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 text-white">
                             <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80">Services</div>
