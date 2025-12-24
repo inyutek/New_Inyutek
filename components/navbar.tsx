@@ -67,9 +67,9 @@ export function Navbar() {
                 <div className="w-[140px] flex justify-end relative" ref={ref}>
                     <button
                         onClick={() => setOpen((v) => !v)}
-                        className="bg-[#000024] text-white px-6 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+                        className="bg-[#000024] text-white px-6 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-all hover:-translate-y-1"
                     >
-                        Book Call
+                        Book a call
                     </button>
 
                     {open && (

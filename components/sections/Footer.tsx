@@ -57,7 +57,7 @@ export default function Footer() {
                             />
 
                             <button
-                                className="rounded-md px-4 py-2.5 text-sm border transition-colors"
+                                className="rounded-md px-4 py-2.5 text-sm border transition-all hover:-translate-y-1"
                                 style={{
                                     borderColor: BRAND_COLOR,
                                     color: BRAND_COLOR,

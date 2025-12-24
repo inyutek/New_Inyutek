@@ -89,10 +89,10 @@ export function Hero() {
                         that turn visitors into customers.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-                        <Link href="#" className="px-6 py-3 bg-[#000024] text-white text-sm rounded-lg font-medium shadow-lg hover:opacity-90 transition-opacity">
+                        <Link href="#" className="px-6 py-3 bg-[#000024] text-white text-sm rounded-lg font-medium shadow-lg hover:opacity-90 transition-all hover:-translate-y-1">
                             Book Call
                         </Link>
-                        <Link href="#" className="px-6 py-3 bg-white text-[#000024] text-sm border border-[#000024]/20 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                        <Link href="#" className="px-6 py-3 bg-white text-[#000024] text-sm border border-[#000024]/20 rounded-lg font-medium hover:bg-gray-50 transition-all hover:-translate-y-1">
                             Learn More
                         </Link>
                     </div>

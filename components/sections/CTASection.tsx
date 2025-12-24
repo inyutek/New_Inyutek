@@ -57,10 +57,10 @@ export function CTASection() {
                     transition={{ duration: 0.6, ease, delay: 0.55 }}
                     className="mt-10 flex items-center justify-center gap-4"
                 >
-                    <button className="px-8 py-3 bg-[#000024] text-white rounded-md font-medium shadow-lg hover:bg-[#000024]/90 transition-all hover:-translate-y-0.5">
+                    <button className="px-8 py-3 bg-[#000024] text-white rounded-md font-medium shadow-lg hover:bg-[#000024]/90 transition-all hover:-translate-y-1">
                         Book
                     </button>
-                    <button className="px-8 py-3 bg-white border border-gray-200 text-[#000024] rounded-md font-medium shadow-sm hover:bg-gray-50 transition-colors">
+                    <button className="px-8 py-3 bg-white border border-gray-200 text-[#000024] rounded-md font-medium shadow-sm hover:bg-gray-50 transition-all hover:-translate-y-1">
                         Learn
                     </button>
                 </motion.div>

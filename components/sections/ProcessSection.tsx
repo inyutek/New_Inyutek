@@ -107,7 +107,7 @@ export function ProcessSection() {
                         </div>
 
                         <div className="flex items-center gap-4">
-                            <button className="px-6 py-3 bg-white border border-gray-200 rounded-md font-medium text-[#000024] shadow-sm hover:bg-gray-50 transition-colors">
+                            <button className="px-6 py-3 bg-white border border-gray-200 rounded-md font-medium text-[#000024] shadow-sm hover:bg-gray-50 transition-all hover:-translate-y-1">
                                 Learn
                             </button>
                             <a href="#" className="text-sm font-semibold flex items-center gap-2 group text-gray-600 hover:text-[#000024] transition-colors">
@@ -155,7 +155,6 @@ export function ProcessSection() {
                                     <h3 className="text-lg font-bold text-[#000024]">{processes[1].title}</h3>
                                     <p className="mt-2 text-sm font-normal text-gray-500 leading-relaxed">{processes[1].description}</p>
                                 </div>
-                                <div className="mt-auto text-sm font-medium text-gray-400">Explore</div>
                             </motion.div>
 
                             {/* Card 3 */}
@@ -170,7 +169,6 @@ export function ProcessSection() {
                                     <h3 className="text-lg font-bold text-[#000024]">{processes[2].title}</h3>
                                     <p className="mt-2 text-sm font-normal text-gray-500 leading-relaxed">{processes[2].description}</p>
                                 </div>
-                                <div className="mt-auto text-sm font-medium text-gray-400">Explore</div>
                             </motion.div>
 
                             {/* Card 4 */}
@@ -185,7 +183,6 @@ export function ProcessSection() {
                                     <h3 className="text-lg font-bold text-[#000024]">{processes[3].title}</h3>
                                     <p className="mt-2 text-sm font-normal text-gray-500 leading-relaxed">{processes[3].description}</p>
                                 </div>
-                                <div className="mt-auto text-sm font-medium text-gray-400">Explore &gt;</div>
                             </motion.div>
 
                         </div>

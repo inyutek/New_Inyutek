@@ -77,9 +77,6 @@ function ServiceCard({
             <p className="text-gray-600 text-sm font-normal">
                 {data.description}
             </p>
-            <button className="mt-2 text-sm font-semibold flex items-center gap-2 group text-[#000024]">
-                Explore <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </button>
         </div>
     )
 }
@@ -146,7 +143,7 @@ export function ServicesSection() {
                             <h3 className="text-2xl md:text-3xl font-bold mb-4">Lead generation <br /> strategy and funnel <br /> design</h3>
                             <p className="text-sm font-normal opacity-80 max-w-md mb-8">Solve the core problems killing your lead flow</p>
                             <div className="flex gap-4">
-                                <button className="px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-colors">
+                                <button className="px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-1">
                                     Explore
                                 </button>
                             </div>
