@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-white text-[#010B13] font-sans antialiased`}>
+      <body className={`${inter.className} bg-white text-[#010B13] font-sans antialiased px-4 sm:px-6 lg:px-8`}>
         <SmoothScroll>
           <TransitionProvider>{children}</TransitionProvider>
         </SmoothScroll>

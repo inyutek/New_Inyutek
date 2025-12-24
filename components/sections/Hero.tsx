@@ -100,7 +100,7 @@ export function Hero() {
 
 
                 {/* The 6 Cards - Positioned absolutely around the center, initially pushed down by transform */}
-                <div className="absolute inset-0 z-20 pointer-events-none max-w-[1400px] mx-auto w-full">
+                <div className="absolute inset-0 z-20 pointer-events-none w-full mx-auto">
 
                     {/* 1. Top Left */}
                     <Card

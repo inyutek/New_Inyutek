@@ -117,7 +117,7 @@ export function ServicesSection() {
         <div id="services" ref={containerRef} className="relative h-[300vh] bg-[#fbfbfb]">
             <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
 
-                <div className="max-w-7xl w-full mx-auto px-6 lg:px-8 relative h-full flex items-center justify-between">
+                <div className="w-full mx-auto px-6 lg:px-8 relative h-full flex items-center justify-between">
 
                     {/* Grid Layout Helper */}
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0">
