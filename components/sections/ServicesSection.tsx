@@ -109,7 +109,8 @@ export function ServicesSection() {
     // Group 1: Slide UP and Fade OUT
     // Start later (0.35) and finish at 0.80 per user request
     const groupOneY = useTransform(scrollYProgress, [0.35, 0.80], ["0%", "-100%"])
-    const groupOneOpacity = useTransform(scrollYProgress, [0.35, 0.55], [1, 0])
+    // Method 2: Extend opacity to match movement (fade out only at the end)
+    const groupOneOpacity = useTransform(scrollYProgress, [0.60, 0.80], [1, 0])
 
     // Group 2: Slide UP from bottom
     const groupTwoY = useTransform(scrollYProgress, [0.35, 0.80], ["100%", "0%"])
