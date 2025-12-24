@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
 import { ChevronDown } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
@@ -22,6 +23,20 @@ export function Navbar() {
     const [resourcesOpen, setResourcesOpen] = useState(false)
     const ref = useRef<HTMLDivElement | null>(null)
     const resourcesRef = useRef<HTMLDivElement | null>(null)
+    const pathname = usePathname()
+    const router = useRouter()
+
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
+        e.preventDefault()
+        if (pathname === "/") {
+            const element = document.getElementById(id)
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth" })
+            }
+        } else {
+            router.push(`/#${id}`)
+        }
+    }
 
     useEffect(() => {
         function handleClickOutside(e: MouseEvent) {
@@ -58,12 +73,20 @@ export function Navbar() {
 
                 {/* Center: Links */}
                 <div className="hidden md:flex flex-1 justify-center gap-8 text-sm font-medium text-gray-600 items-center">
-                    <Link href="/#services" className="hover:text-[#000024] transition-colors">
+                    <a
+                        href="/#services"
+                        onClick={(e) => handleScroll(e, "services")}
+                        className="hover:text-[#000024] transition-colors cursor-pointer"
+                    >
                         Services
-                    </Link>
-                    <Link href="/#process" className="hover:text-[#000024] transition-colors">
+                    </a>
+                    <a
+                        href="/#process"
+                        onClick={(e) => handleScroll(e, "process")}
+                        className="hover:text-[#000024] transition-colors cursor-pointer"
+                    >
                         Process
-                    </Link>
+                    </a>
                     <Link href="/about" className="hover:text-[#000024] transition-colors">
                         About
                     </Link>

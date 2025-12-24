@@ -93,7 +93,7 @@ export function ProcessSection() {
     // Or just simply stacking. Let's start with clean Stacking.
 
     return (
-        <div ref={containerRef} className="relative h-[250vh] bg-[#fbfbfb]">
+        <div id="process" ref={containerRef} className="relative h-[250vh] bg-[#fbfbfb]">
             <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
 
                 <div className="max-w-7xl w-full mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-start h-full pt-32">
