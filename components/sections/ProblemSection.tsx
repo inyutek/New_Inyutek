@@ -51,7 +51,7 @@ export function ProblemSection() {
 
         const interval = setInterval(() => {
             setActiveIndex((prev) => (prev + 1) % problems.length)
-        }, 4000)
+        }, 2000)
 
         return () => clearInterval(interval)
     }, [isInView])
@@ -90,7 +90,7 @@ export function ProblemSection() {
                             {problems.map((item, index) => (
                                 <div
                                     key={item.id}
-                                    onClick={() => setActiveIndex(index)}
+                                    onMouseEnter={() => setActiveIndex(index)}
                                     className={`cursor-pointer transition-all duration-300 ${index !== problems.length - 1 ? "border-b border-gray-100 pb-10" : ""
                                         }`}
                                 >
