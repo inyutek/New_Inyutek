@@ -70,7 +70,7 @@ export function Hero() {
 
     return (
         // Height 250vh = 1.5x screen height of scrolling space (1 scroll anim, 0.5 scroll exit)
-        <div ref={containerRef} className="relative h-[250vh]">
+        <div id="hero" ref={containerRef} className="relative h-[250vh]">
 
             {/* Sticky Viewport: This stays fixed while measuring the parent's height for scroll progress */}
             <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#fbfbfb] flex flex-col items-center justify-center">

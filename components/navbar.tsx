@@ -36,9 +36,18 @@ export function Navbar() {
 
                 {/* Left: Brand */}
                 <div className="w-[140px]">
-                    <div className="font-bold text-xl uppercase tracking-wider text-[#000024]">
+                    <Link
+                        href="/"
+                        onClick={(e) => {
+                            if (window.location.pathname === "/") {
+                                e.preventDefault()
+                                window.scrollTo({ top: 0, behavior: "smooth" })
+                            }
+                        }}
+                        className="font-bold text-xl uppercase tracking-wider text-[#000024]"
+                    >
                         INYUTEK
-                    </div>
+                    </Link>
                 </div>
 
                 {/* Center: Links */}
