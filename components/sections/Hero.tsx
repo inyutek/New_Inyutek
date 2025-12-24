@@ -110,14 +110,14 @@ export function Hero() {
                         y={yBack}
                         opacity={opacity}
                         rotate={0}
-                        className="left-[10%] top-[15%] w-56 h-64 z-10 opacity-80 scale-90"
+                        className="left-[2%] top-[15%] w-56 h-64 z-10 opacity-80 scale-90"
                     />
                     {/* Top Right */}
                     <Card
                         y={yBack}
                         opacity={opacity}
                         rotate={0}
-                        className="right-[10%] top-[18%] w-60 h-72 z-10 opacity-80 scale-90"
+                        className="right-[2%] top-[18%] w-60 h-72 z-10 opacity-80 scale-90"
                     />
 
                     {/* LAYER 2: MID (Starts at 800) */}
@@ -127,14 +127,14 @@ export function Hero() {
                         y={yMid}
                         opacity={opacity}
                         rotate={0}
-                        className="left-[18%] top-[38%] w-60 h-72 z-20 shadow-2xl"
+                        className="left-[20%] top-[38%] w-60 h-72 z-20 shadow-2xl"
                     />
                     {/* Mid Right */}
                     <Card
                         y={yMid}
                         opacity={opacity}
                         rotate={0}
-                        className="right-[18%] top-[35%] w-56 h-64 z-20 shadow-2xl"
+                        className="right-[20%] top-[35%] w-56 h-64 z-20 shadow-2xl"
                     />
 
                     {/* LAYER 3: FRONT (Starts at 1200, Becomes clear later) */}
@@ -144,14 +144,14 @@ export function Hero() {
                         y={yFront}
                         opacity={opacity}
                         rotate={0}
-                        className="left-[12%] bottom-[10%] w-64 h-80 z-30 scale-105 shadow-2xl"
+                        className="left-[1%] bottom-[10%] w-64 h-80 z-30 scale-105 shadow-2xl"
                     />
                     {/* Bottom Right */}
                     <Card
                         y={yFront}
                         opacity={opacity}
                         rotate={0}
-                        className="right-[12%] bottom-[12%] w-64 h-80 z-30 scale-105 shadow-2xl"
+                        className="right-[1%] bottom-[12%] w-64 h-80 z-30 scale-105 shadow-2xl"
                     />
 
                 </div>
