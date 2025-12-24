@@ -34,7 +34,7 @@ export default function Footer() {
 
                     {/* Left */}
                     <div className="md:col-span-2">
-                        <h3 className="text-2xl font-semibold text-[#000024]">
+                        <h3 className="text-xl font-bold text-[#000024]">
                             Inyutek
                         </h3>
 

@@ -63,10 +63,10 @@ export function ProblemSection() {
                 {/* Centered Header */}
                 <div className="mx-auto max-w-3xl text-center mb-24">
                     <div className="text-sm font-semibold leading-7 text-gray-900 mb-4">Problem</div>
-                    <h2 className="text-4xl font-bold tracking-tight text-[#000024] sm:text-6xl mb-6">
+                    <h2 className="text-2xl font-bold tracking-tight text-[#000024] sm:text-3xl mb-6">
                         Your website isn&apos;t built to sell
                     </h2>
-                    <p className="text-lg leading-relaxed text-gray-600 max-w-2xl mx-auto mb-8">
+                    <p className="text-sm font-normal leading-relaxed text-gray-600 max-w-2xl mx-auto mb-8">
                         You&apos;re getting traffic but no leads. Your messaging doesn&apos;t speak to what buyers actually
                         need, and your funnel leaks money at every stage.
                     </p>
@@ -94,11 +94,11 @@ export function ProblemSection() {
                                     className={`cursor-pointer transition-all duration-300 ${index !== problems.length - 1 ? "border-b border-gray-100 pb-10" : ""
                                         }`}
                                 >
-                                    <h3 className={`text-2xl sm:text-3xl font-bold tracking-tight transition-colors duration-300 mb-3 ${activeIndex === index ? "text-[#000024]" : "text-gray-300"
+                                    <h3 className={`text-lg font-bold tracking-tight transition-colors duration-300 mb-3 ${activeIndex === index ? "text-[#000024]" : "text-gray-300"
                                         }`}>
                                         {item.title}
                                     </h3>
-                                    <p className={`text-lg leading-relaxed transition-colors duration-300 ${activeIndex === index ? "text-gray-600" : "text-gray-300"
+                                    <p className={`text-sm font-normal leading-relaxed transition-colors duration-300 ${activeIndex === index ? "text-gray-600" : "text-gray-300"
                                         }`}>
                                         {item.description}
                                     </p>

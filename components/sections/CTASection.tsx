@@ -19,7 +19,7 @@ export function CTASection() {
                         whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
                         viewport={{ once: false, margin: "-100px" }}
                         transition={{ duration: 1.1, ease: [0.25, 1, 0.5, 1] }}
-                        className="text-4xl md:text-6xl font-bold text-[#000024] tracking-tight leading-tight"
+                        className="text-3xl md:text-5xl font-bold text-[#000024] tracking-tight leading-tight"
                     >
                         Ready to talk
                     </motion.h2>
@@ -32,7 +32,7 @@ export function CTASection() {
                         whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
                         viewport={{ once: false, margin: "-100px" }}
                         transition={{ duration: 1.1, ease: [0.25, 1, 0.5, 1], delay: 0.15 }}
-                        className="text-4xl md:text-6xl font-bold text-[#000024] tracking-tight leading-tight"
+                        className="text-3xl md:text-5xl font-bold text-[#000024] tracking-tight leading-tight"
                     >
                         Not the right fit
                     </motion.h2>
@@ -44,7 +44,7 @@ export function CTASection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, ease, delay: 0.4 }}
-                    className="mt-6 text-lg text-gray-500 max-w-lg mx-auto"
+                    className="mt-6 text-sm font-normal text-gray-500 max-w-lg mx-auto"
                 >
                     A strategy call is 30 minutes. We listen, diagnose, and show you what's possible.
                 </motion.p>

@@ -82,8 +82,8 @@ export function ResultsSection() {
 
                     {/* LEFT: Static Header */}
                     <div className="flex flex-col gap-6 max-w-lg">
-                        <h2 className="text-4xl md:text-5xl font-bold text-[#000024] tracking-tight">Real results</h2>
-                        <p className="text-lg text-gray-500">Companies that trusted us grew their lead flow</p>
+                        <h2 className="text-2xl md:text-3xl font-bold text-[#000024] tracking-tight">Real results</h2>
+                        <p className="text-sm font-normal text-gray-500">Companies that trusted us grew their lead flow</p>
 
                         <div className="flex items-center gap-4 mt-4">
                             <button className="px-6 py-3 bg-white border border-gray-200 rounded-md font-medium text-[#000024] shadow-sm hover:bg-gray-50 transition-colors">

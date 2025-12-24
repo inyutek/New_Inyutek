@@ -71,10 +71,10 @@ function ServiceCard({
             <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center mb-2 text-[#000024]">
                 {data.icon}
             </div>
-            <h4 className="text-xl md:text-2xl font-bold text-[#000024] leading-tight">
+            <h4 className="text-lg font-bold text-[#000024] leading-tight">
                 {data.title}
             </h4>
-            <p className="text-gray-600 text-sm md:text-base">
+            <p className="text-gray-600 text-sm font-normal">
                 {data.description}
             </p>
             <button className="mt-2 text-sm font-semibold flex items-center gap-2 group text-[#000024]">
@@ -143,8 +143,8 @@ export function ServicesSection() {
                         </div>
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 text-white">
                             <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80">Services</div>
-                            <h3 className="text-3xl md:text-5xl font-bold mb-4">Lead generation <br /> strategy and funnel <br /> design</h3>
-                            <p className="text-lg opacity-80 max-w-md mb-8">Solve the core problems killing your lead flow</p>
+                            <h3 className="text-2xl md:text-3xl font-bold mb-4">Lead generation <br /> strategy and funnel <br /> design</h3>
+                            <p className="text-sm font-normal opacity-80 max-w-md mb-8">Solve the core problems killing your lead flow</p>
                             <div className="flex gap-4">
                                 <button className="px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-colors">
                                     Explore

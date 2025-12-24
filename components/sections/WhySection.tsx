@@ -31,13 +31,13 @@ export function WhySection() {
                         </Reveal>
 
                         <Reveal delay={0.1}>
-                            <h2 className="text-4xl md:text-5xl font-bold text-[#000024] tracking-tight leading-[1.1]">
+                            <h2 className="text-2xl md:text-3xl font-bold text-[#000024] tracking-tight leading-[1.1]">
                                 We think differently about growth
                             </h2>
                         </Reveal>
 
                         <Reveal delay={0.2}>
-                            <p className="text-lg text-gray-500 max-w-md leading-relaxed">
+                            <p className="text-sm font-normal text-gray-500 max-w-md leading-relaxed">
                                 Most agencies sell services. We sell results. We don't move on until your leads move the needle.
                             </p>
                         </Reveal>
@@ -49,7 +49,7 @@ export function WhySection() {
                                         <div className="flex-shrink-0 w-6 h-6 mt-1 text-gray-400 group-hover:text-[#000024] transition-colors">
                                             <item.icon className="w-full h-full" strokeWidth={1.5} />
                                         </div>
-                                        <p className="text-base text-gray-700 font-medium">
+                                        <p className="text-sm font-medium text-gray-700">
                                             {item.text}
                                         </p>
                                     </div>

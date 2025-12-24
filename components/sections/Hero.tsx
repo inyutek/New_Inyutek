@@ -80,19 +80,19 @@ export function Hero() {
                     style={{ opacity: textOpacity, scale: textScale }}
                     className="relative z-30 max-w-4xl mx-auto px-4 text-center -mt-20"
                 >
-                    <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tight text-[#000024] leading-[1.1] mb-8">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#000024] leading-[1.1] mb-8">
                         Turn website traffic into
                         <br className="hidden sm:block" /> qualified leads
                     </h1>
-                    <p className="text-xl sm:text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-10">
+                    <p className="text-sm font-normal text-gray-600 max-w-2xl mx-auto leading-relaxed mb-10">
                         Most SMBs waste money on traffic that never converts. We build funnels
                         that turn visitors into customers.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-                        <Link href="#" className="px-8 py-4 bg-[#000024] text-white rounded-lg font-medium shadow-lg hover:opacity-90 transition-opacity">
+                        <Link href="#" className="px-6 py-3 bg-[#000024] text-white text-sm rounded-lg font-medium shadow-lg hover:opacity-90 transition-opacity">
                             Book Call
                         </Link>
-                        <Link href="#" className="px-8 py-4 bg-white text-[#000024] border border-[#000024]/20 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                        <Link href="#" className="px-6 py-3 bg-white text-[#000024] text-sm border border-[#000024]/20 rounded-lg font-medium hover:bg-gray-50 transition-colors">
                             Learn More
                         </Link>
                     </div>
