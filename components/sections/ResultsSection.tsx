@@ -1,7 +1,8 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { useRef, useEffect } from "react"
+import Link from "next/link"
+import { motion, useTransform, useMotionValue } from "framer-motion"
 
 const testimonials = [
     {
@@ -39,125 +40,133 @@ const testimonials = [
 ]
 
 export function ResultsSection() {
+    // scrollYProgress: 0 to 1
+    const scrollYProgress = useMotionValue(0)
+
     const containerRef = useRef<HTMLDivElement>(null)
 
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"],
-    })
+    // Use native event listener for non-passive behavior (required to prevent default scroll)
+    useEffect(() => {
+        const container = containerRef.current
+        if (!container) return
 
-    // Animation Strategy: Window Stack
-    // We have a fixed "Window" on the right.
-    // Cards enter from the bottom and stack on top of each other.
-    // As a new card enters, the previous one scales down slightly to create depth.
+        const onWheel = (e: WheelEvent) => {
+            e.preventDefault()
+            e.stopPropagation() // Ensure event doesn't bubble to Lenis or other handlers
 
-    // 4 Cards.
-    // Range 0.0 - 0.25: Card 1 is visible (Static).
-    // Range 0.25 - 0.5: Card 2 enters.
-    // Range 0.5 - 0.75: Card 3 enters.
-    // Range 0.75 - 1.0: Card 4 enters.
+            const delta = e.deltaY * 0.001
+            let newProgress = scrollYProgress.get() + delta
+            newProgress = Math.max(0, Math.min(newProgress, 1))
+            scrollYProgress.set(newProgress)
+        }
+
+        container.addEventListener("wheel", onWheel, { passive: false })
+        return () => container.removeEventListener("wheel", onWheel)
+    }, [scrollYProgress])
+
+    // Animation Strategy: Internal Window Scroll
+    // scrollYProgress 0-1 drives the stack.
 
     // Transforms for entering cards (Y axis):
-    const y2 = useTransform(scrollYProgress, [0.1, 0.35], ["100%", "0%"])
-    const y3 = useTransform(scrollYProgress, [0.35, 0.6], ["100%", "0%"])
-    const y4 = useTransform(scrollYProgress, [0.6, 0.85], ["100%", "0%"])
+    // Start slightly visible (peeking)
+    // 95% -> 0%
+    const y2 = useTransform(scrollYProgress, [0, 0.33], ["95%", "0%"])
+    const y3 = useTransform(scrollYProgress, [0.33, 0.66], ["92%", "0%"])
+    const y4 = useTransform(scrollYProgress, [0.66, 1.0], ["92%", "0%"])
 
-    // Transforms for receding cards (Scale & Opacity):
-    // Card 1 recedes when Card 2 enters (0.1 - 0.35)
-    const s1 = useTransform(scrollYProgress, [0.1, 0.35], [1, 0.95])
-    const o1 = useTransform(scrollYProgress, [0.1, 0.35], [1, 0.5]) // Fade out slightly
+    // Scale to look like a stack
+    const s1 = useTransform(scrollYProgress, [0, 0.33], [1, 0.9])
+    const s2 = useTransform(scrollYProgress, [0.33, 0.66], [1, 0.9])
+    const s3 = useTransform(scrollYProgress, [0.66, 1.0], [1, 0.9])
 
-    // Card 2 recedes when Card 3 enters (0.35 - 0.6)
-    const s2 = useTransform(scrollYProgress, [0.35, 0.6], [1, 0.95])
-    const o2 = useTransform(scrollYProgress, [0.35, 0.6], [1, 0.5])
-
-    // Card 3 recedes when Card 4 enters (0.6 - 0.85)
-    const s3 = useTransform(scrollYProgress, [0.6, 0.85], [1, 0.95])
-    const o3 = useTransform(scrollYProgress, [0.6, 0.85], [1, 0.5])
+    // Opacity
+    const o1 = useTransform(scrollYProgress, [0, 0.33], [1, 0])
+    const o2 = useTransform(scrollYProgress, [0.33, 0.66], [1, 0])
+    const o3 = useTransform(scrollYProgress, [0.66, 1.0], [1, 0])
 
     return (
-        <div ref={containerRef} className="relative h-[300vh] bg-white">
-            <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
-                <div className="max-w-7xl w-full mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center h-full">
+        <section className="bg-white py-12 sm:py-20">
+            <div className="max-w-7xl w-full mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
 
-                    {/* LEFT: Static Header */}
-                    <div className="flex flex-col gap-6 max-w-lg">
-                        <h2 className="text-2xl md:text-3xl font-bold text-[#000024] tracking-tight">Real results</h2>
-                        <p className="text-sm font-normal text-gray-500">Companies that trusted us grew their lead flow</p>
+                {/* LEFT: Static Header */}
+                <div className="flex flex-col gap-6 max-w-lg">
+                    <h2 className="text-2xl md:text-3xl font-bold text-[#000024] tracking-tight">Real results</h2>
+                    <p className="text-sm font-normal text-gray-500">Companies that trusted us grew their lead flow</p>
 
-                        <div className="flex items-center gap-4 mt-4">
-                            <button className="px-6 py-3 bg-white border border-gray-200 rounded-md font-medium text-[#000024] shadow-sm hover:bg-gray-50 transition-colors">
-                                Read case study
-                            </button>
-                            <a href="#" className="text-sm font-semibold flex items-center gap-2 group text-gray-600 hover:text-[#000024] transition-colors">
-                                Read case study <span className="group-hover:translate-x-1 transition-transform">→</span>
-                            </a>
-                        </div>
+                    <div className="flex items-center gap-4 mt-4">
+                        <Link href="/case-studies" className="text-sm font-semibold flex items-center gap-2 group text-gray-600 hover:text-[#000024] transition-colors">
+                            Read case study <span className="group-hover:translate-x-1 transition-transform">→</span>
+                        </Link>
                     </div>
-
-                    {/* RIGHT: The "Window" */}
-                    <div className="relative w-full flex justify-center md:justify-end">
-                        <div className="relative w-full max-w-md h-[400px] bg-gray-50 rounded-2xl border border-gray-200 shadow-xl overflow-hidden">
-
-                            {/* Decoration: Window Controls? Keep it subtle. */}
-                            <div className="absolute top-0 left-0 w-full h-8 bg-gray-100 border-b border-gray-200 flex items-center gap-2 px-4 z-20">
-                                <div className="w-2.5 h-2.5 rounded-full bg-red-300"></div>
-                                <div className="w-2.5 h-2.5 rounded-full bg-amber-300"></div>
-                                <div className="w-2.5 h-2.5 rounded-full bg-green-300"></div>
-                            </div>
-
-                            {/* Cards Container */}
-                            <div className="absolute inset-0 top-8 p-6 flex items-center justify-center">
-
-                                {/* Card 1 */}
-                                <motion.div
-                                    style={{ scale: s1, opacity: o1 }}
-                                    className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between"
-                                >
-                                    <Stars />
-                                    <p className="text-lg text-gray-700 leading-relaxed">"{testimonials[0].quote}"</p>
-                                    <AuthorInfo item={testimonials[0]} />
-                                </motion.div>
-
-                                {/* Card 2 */}
-                                <motion.div
-                                    style={{ y: y2, scale: s2, opacity: o2, zIndex: 10 }}
-                                    className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between"
-                                >
-                                    <Stars />
-                                    <p className="text-lg text-gray-700 leading-relaxed">"{testimonials[1].quote}"</p>
-                                    <AuthorInfo item={testimonials[1]} />
-                                </motion.div>
-
-                                {/* Card 3 */}
-                                <motion.div
-                                    style={{ y: y3, scale: s3, opacity: o3, zIndex: 20 }}
-                                    className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between"
-                                >
-                                    <Stars />
-                                    <p className="text-lg text-gray-700 leading-relaxed">"{testimonials[2].quote}"</p>
-                                    <AuthorInfo item={testimonials[2]} />
-                                </motion.div>
-
-                                {/* Card 4 */}
-                                <motion.div
-                                    style={{ y: y4, zIndex: 30 }}
-                                    className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between"
-                                >
-                                    <Stars />
-                                    <p className="text-lg text-gray-700 leading-relaxed">"{testimonials[3].quote}"</p>
-                                    <AuthorInfo item={testimonials[3]} />
-                                </motion.div>
-
-                            </div>
-
-                            {/* Bottom Fade/Gradient for smooth entry? Optional. */}
-                        </div>
-                    </div>
-
                 </div>
+
+                {/* RIGHT: The "Window" */}
+                <div className="relative w-full flex justify-center md:justify-end">
+
+                    {/* Event Listener Container */}
+                    <div
+                        ref={containerRef}
+                        data-lenis-prevent
+                        className="relative w-full max-w-md h-[320px] bg-gray-50 rounded-2xl border border-gray-200 shadow-xl overflow-hidden cursor-default"
+                    >
+
+                        {/* Decoration: Window Controls */}
+                        <div className="absolute top-0 left-0 w-full h-8 bg-gray-100 border-b border-gray-200 flex items-center gap-2 px-4 z-20 pointer-events-none">
+                            <div className="w-2.5 h-2.5 rounded-full bg-red-300"></div>
+                            <div className="w-2.5 h-2.5 rounded-full bg-amber-300"></div>
+                            <div className="w-2.5 h-2.5 rounded-full bg-green-300"></div>
+                        </div>
+
+                        {/* Cards Container - Visual Layer */}
+                        <div className="absolute inset-0 top-8 p-6 flex items-center justify-center">
+
+                            {/* Card 1 */}
+                            <motion.div
+                                style={{ scale: s1, opacity: o1, zIndex: 1 }}
+                                className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between origin-top"
+                            >
+                                <Stars />
+                                <p className="text-lg text-gray-700 leading-relaxed">"{testimonials[0].quote}"</p>
+                                <AuthorInfo item={testimonials[0]} />
+                            </motion.div>
+
+                            {/* Card 2 */}
+                            <motion.div
+                                style={{ y: y2, scale: s2, opacity: o2, zIndex: 2 }}
+                                className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between origin-top"
+                            >
+                                <Stars />
+                                <p className="text-lg text-gray-700 leading-relaxed">"{testimonials[1].quote}"</p>
+                                <AuthorInfo item={testimonials[1]} />
+                            </motion.div>
+
+                            {/* Card 3 */}
+                            <motion.div
+                                style={{ y: y3, scale: s3, opacity: o3, zIndex: 3 }}
+                                className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between origin-top"
+                            >
+                                <Stars />
+                                <p className="text-lg text-gray-700 leading-relaxed">"{testimonials[2].quote}"</p>
+                                <AuthorInfo item={testimonials[2]} />
+                            </motion.div>
+
+                            {/* Card 4 */}
+                            <motion.div
+                                style={{ y: y4, zIndex: 4 }}
+                                className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between origin-top"
+                            >
+                                <Stars />
+                                <p className="text-lg text-gray-700 leading-relaxed">"{testimonials[3].quote}"</p>
+                                <AuthorInfo item={testimonials[3]} />
+                            </motion.div>
+
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
-        </div>
+        </section>
     )
 }
 
