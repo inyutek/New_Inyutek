@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion"
 
 const processes = [
     {
@@ -51,6 +51,94 @@ const processes = [
     }
 ]
 
+interface StepCardProps {
+    process: typeof processes[0]
+    index: number
+    scrollYProgress: MotionValue<number>
+}
+
+function StepCard({ process, index, scrollYProgress }: StepCardProps) {
+    // Each step takes about 22% of the scroll space
+    const start = index * 0.22
+    const end = start + 0.18
+
+    // Horizontal Expansion & Positional Movement
+    // Initial: small box (80x80), shifted left (near buttons)
+    // Final: large card (550x240), centered
+    const width = useTransform(scrollYProgress, [start, end], [80, 550])
+    const height = useTransform(scrollYProgress, [start, end], [80, 240])
+    const x = useTransform(scrollYProgress, [start, end], [-240, 0]) // Moves from "below buttons" area to center
+    const borderRadius = useTransform(scrollYProgress, [start, end], [12, 24])
+    const opacity = useTransform(scrollYProgress, [start, start + 0.05], [0, 1])
+
+    // Number Animation (On the Left side of the card)
+    const numberScale = useTransform(scrollYProgress, [start, end], [1, 2.5])
+    const numberOpacity = useTransform(scrollYProgress, [start, start + 0.1], [0.2, 0.1])
+
+    // Content Reveal (Fades in right-side content)
+    const contentOpacity = useTransform(scrollYProgress, [start + 0.1, end], [0, 1])
+
+    // Curtain Effect (Slide up when NEXT step begins)
+    const nextStepStart = (index + 1) * 0.22
+    const nextStepEnd = nextStepStart + 0.18
+    const yTranslation = useTransform(scrollYProgress, [nextStepStart, nextStepEnd], [0, -60])
+
+    // Dim cards as they get buried
+    const stackingOpacity = useTransform(scrollYProgress, [nextStepStart + 0.1, nextStepEnd + 0.2], [1, 0.5])
+
+    return (
+        <motion.div
+            style={{
+                x,
+                y: yTranslation,
+                opacity: index === 0 ? stackingOpacity : useTransform(scrollYProgress, [start, start + 0.05], [0, 1]), // Simple fix for first card opacity
+                zIndex: index,
+                width,
+                height,
+                borderRadius,
+            }}
+            className="absolute left-1/2 -translate-x-1/2 bg-white border border-gray-100 shadow-[0_30px_60px_rgba(0,0,0,0.06)] overflow-hidden flex items-center p-0"
+        >
+            {/* LEFT SIDE: Large Number */}
+            <div className="relative h-full w-[160px] flex items-center justify-center bg-gray-50/50 border-r border-gray-100/50 shrink-0 overflow-hidden">
+                <motion.span
+                    style={{
+                        scale: numberScale,
+                        opacity: numberOpacity
+                    }}
+                    className="text-6xl font-black text-[#000024] select-none"
+                >
+                    {process.id}
+                </motion.span>
+
+                {/* Fallback small number for initial "small box" state */}
+                <motion.span
+                    style={{ opacity: useTransform(scrollYProgress, [start, start + 0.08], [0.8, 0]) }}
+                    className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-[#000024]"
+                >
+                    {process.id}
+                </motion.span>
+            </div>
+
+            {/* RIGHT SIDE: Content */}
+            <motion.div
+                style={{ opacity: contentOpacity }}
+                className="flex-1 p-8 flex flex-col gap-4 min-w-0"
+            >
+                <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center border border-gray-100 shadow-sm shrink-0">
+                        {process.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-[#000024] truncate">{process.title}</h3>
+                </div>
+                <p className="text-sm font-normal text-gray-500 leading-relaxed max-w-[320px]">
+                    {process.description}
+                </p>
+            </motion.div>
+        </motion.div>
+    )
+}
+
 export function ProcessSection() {
     const containerRef = useRef<HTMLDivElement>(null)
 
@@ -59,134 +147,46 @@ export function ProcessSection() {
         offset: ["start start", "end end"],
     })
 
-    // Animation Strategy: Envelope Stack
-    // Cards are essentially moving UP to reduce the vertical gap between them.
-    // We want to reduce the space to something like 20px (just the top edge visible).
-
-    // Total Scroll Distance: 0 -> 1
-    // We can map range [0, 1] to the 'gap' reduction.
-
-    // Card 1: Static (or moves slightly up to stay in view?) -> Actually pinned container handles view. Card 1 stays at top.
-    // Card 2: Initial Y = gap (e.g. 220px). Final Y = small offset (e.g. 20px).
-    // Card 3: Initial Y = 2 * gap. Final Y = 2 * small offset (40px).
-    // Card 4: Initial Y = 3 * gap. Final Y = 3 * small offset (60px).
-
-    const gap = 240 // Approx height of card + margin
-    const collapsedGap = 20
-
-    // We use `gap * index` as initial position (CSS).
-    // We animate `y` from 0 to -(gap - collapsedGap) * index?
-    // Let's us useTransform directly on `y` offset.
-
-    // Easing: use linear map for direct scroll control? Or easeOut for 'smooth'?
-    // Direct scroll map usually feels best for "scroll-controlled".
-
-    const c1y = useTransform(scrollYProgress, [0, 1], [0, 0])
-    const c2y = useTransform(scrollYProgress, [0, 1], [0, -(gap - collapsedGap)])
-    const c3y = useTransform(scrollYProgress, [0, 1], [0, -(gap - collapsedGap) * 2])
-    const c4y = useTransform(scrollYProgress, [0, 1], [0, -(gap - collapsedGap) * 3])
-
-    // Scale effect? "Top card moves upward slightly and compresses"
-    // Maybe scale down the cards that are *behind*?
-    // User said "The top card moves upward slightly and compresses."
-    // Let's try scaling down top cards as new ones come up?
-    // Or just simply stacking. Let's start with clean Stacking.
-
     return (
-        <div id="process" ref={containerRef} className="relative h-[250vh] bg-[#fbfbfb]">
-            <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-
-                <div className="max-w-7xl w-full mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-start h-full pt-32">
+        <div id="process" ref={containerRef} className="relative h-[450vh] bg-[#fbfbfb]">
+            <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
+                <div className="max-w-7xl w-full mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-24 items-start pt-32 md:pt-40">
 
                     {/* LEFT: Static Content */}
-                    <div className="flex flex-col gap-8 md:sticky md:top-32 self-start">
+                    <div className="flex flex-col gap-12">
                         <div>
-                            <span className="text-sm font-semibold text-gray-900">Process</span>
-                            <h2 className="mt-2 text-2xl md:text-3xl font-bold text-[#000024] tracking-tight">How we build leads</h2>
-                            <p className="mt-4 text-sm font-normal text-gray-500 max-w-md">Four phases. One clear path to results.</p>
+                            <span className="text-sm font-semibold text-gray-900 uppercase tracking-widest">Process</span>
+                            <h2 className="mt-2 text-4xl md:text-6xl font-black text-[#000024] tracking-tight leading-[1.1]">
+                                How we <br />
+                                <span className="text-gray-400">build leads</span>
+                            </h2>
+                            <p className="mt-8 text-lg font-normal text-gray-500 max-w-sm">
+                                Four phases. One clear path to results. Our methodology is built for speed and engineered for scale.
+                            </p>
                         </div>
 
-                        <div className="flex items-center gap-4">
-                            <button className="px-6 py-3 bg-white border border-gray-200 rounded-md font-medium text-[#000024] shadow-sm hover:bg-gray-50 transition-all hover:-translate-y-1">
-                                Learn
+                        <div className="flex items-center gap-10">
+                            <button className="px-10 py-5 bg-[#000024] text-white rounded-full font-bold shadow-2xl shadow-blue-900/30 hover:scale-105 transition-transform shrink-0">
+                                Book a Call
                             </button>
-                            <a href="#" className="text-sm font-semibold flex items-center gap-2 group text-gray-600 hover:text-[#000024] transition-colors">
-                                Build and launch the solution <span className="group-hover:translate-x-1 transition-transform">→</span>
+                            <a href="#" className="hidden sm:flex text-sm font-bold items-center gap-2 group text-gray-400 hover:text-[#000024] transition-colors whitespace-nowrap">
+                                THE JOURNEY <span className="group-hover:translate-x-2 transition-transform">→</span>
                             </a>
                         </div>
                     </div>
 
                     {/* RIGHT: Animated Stack */}
-                    <div className="relative w-full h-full flex flex-col items-center">
-                        <div className="relative w-full max-w-md flex flex-col" style={{ gap: gap + 'px' }}>
-                            {/* style gap is fake here, we positioned them absolutely or use static?
-                      If we use static with gap, transform Y will overlap them. 
-                      Let's use absolute positioning relative to a container to be precise.
-                  */}
-
+                    <div className="relative w-full flex items-start justify-center pt-2">
+                        <div className="relative w-full h-[320px] flex items-center justify-center">
+                            {processes.map((process, index) => (
+                                <StepCard
+                                    key={process.id}
+                                    process={process}
+                                    index={index}
+                                    scrollYProgress={scrollYProgress}
+                                />
+                            ))}
                         </div>
-
-                        {/* Re-doing Right Col as Absolute Stack */}
-                        <div className="relative w-full max-w-md h-[400px]"> {/* Height doesn't matter much as they float */}
-
-                            {/* Card 1 */}
-                            <motion.div
-                                style={{ y: c1y, zIndex: 1 }}
-                                className="absolute top-0 w-full bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col gap-4 h-[220px]"
-                            >
-                                <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100">
-                                    {processes[0].icon}
-                                </div>
-                                <div>
-                                    <h3 className="text-lg font-bold text-[#000024]">{processes[0].title}</h3>
-                                    <p className="mt-2 text-sm font-normal text-gray-500 leading-relaxed">{processes[0].description}</p>
-                                </div>
-                            </motion.div>
-
-                            {/* Card 2 */}
-                            <motion.div
-                                style={{ y: c2y, top: gap + 'px', zIndex: 2 }} // Start at gap position
-                                className="absolute w-full bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col gap-4 h-[220px]"
-                            >
-                                <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100">
-                                    {processes[1].icon}
-                                </div>
-                                <div>
-                                    <h3 className="text-lg font-bold text-[#000024]">{processes[1].title}</h3>
-                                    <p className="mt-2 text-sm font-normal text-gray-500 leading-relaxed">{processes[1].description}</p>
-                                </div>
-                            </motion.div>
-
-                            {/* Card 3 */}
-                            <motion.div
-                                style={{ y: c3y, top: (gap * 2) + 'px', zIndex: 3 }}
-                                className="absolute w-full bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col gap-4 h-[220px]"
-                            >
-                                <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100">
-                                    {processes[2].icon}
-                                </div>
-                                <div>
-                                    <h3 className="text-lg font-bold text-[#000024]">{processes[2].title}</h3>
-                                    <p className="mt-2 text-sm font-normal text-gray-500 leading-relaxed">{processes[2].description}</p>
-                                </div>
-                            </motion.div>
-
-                            {/* Card 4 */}
-                            <motion.div
-                                style={{ y: c4y, top: (gap * 3) + 'px', zIndex: 4 }}
-                                className="absolute w-full bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col gap-4 h-[220px]"
-                            >
-                                <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100">
-                                    {processes[3].icon}
-                                </div>
-                                <div>
-                                    <h3 className="text-lg font-bold text-[#000024]">{processes[3].title}</h3>
-                                    <p className="mt-2 text-sm font-normal text-gray-500 leading-relaxed">{processes[3].description}</p>
-                                </div>
-                            </motion.div>
-
-                        </div>
-
                     </div>
 
                 </div>
