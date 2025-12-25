@@ -47,7 +47,7 @@ export function ProblemSection() {
 
 
     return (
-        <section className="bg-white py-24 sm:py-32">
+        <section id="problem" className="bg-white py-24 sm:py-32">
             <div className="mx-auto w-full px-6 lg:px-8">
 
                 {/* Centered Header */}
@@ -65,9 +65,7 @@ export function ProblemSection() {
                         <button className="rounded-md border border-gray-200 bg-white px-6 py-2.5 text-sm font-medium text-gray-900 shadow-sm hover:bg-gray-50 transition-all hover:-translate-y-1">
                             Explore
                         </button>
-                        <a href="#" className="text-sm font-semibold leading-6 text-gray-900 flex items-center gap-2 group">
-                            Arrow <span aria-hidden="true" className="group-hover:translate-x-1 transition-transform">→</span>
-                        </a>
+
                     </div>
                 </div>
 
