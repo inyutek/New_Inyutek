@@ -1,7 +1,7 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useScroll, useTransform, MotionValue, useSpring } from "framer-motion"
+import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 
 const processes = [
     {
@@ -51,154 +51,94 @@ const processes = [
     }
 ]
 
-interface AnimationProps {
-    process: typeof processes[0]
-    index: number
-    scrollYProgress: MotionValue<number>
-}
-
-// Shared animation config
-const springConfig = { stiffness: 90, damping: 22, mass: 0.8 }
-
-function StepNumber({ process, index, scrollYProgress }: AnimationProps) {
-    const stepDuration = 1 / processes.length
-    const start = index * stepDuration
-    const end = (index + 1) * stepDuration
-    const handoffStart = start + stepDuration * 0.75
-
-    // STABLE POSITION (No horizontal movement)
-    const x = 0
-
-    // NUMBER OPACITY (Simple fade transition)
-    const opacity = useTransform(scrollYProgress, [start, handoffStart, end], [1, 1, 0])
-
-    // VERTICAL STACKING (Y) - Shared with Card
-    const initialY = index === 0 ? 0 : 800
-    const rawY = useTransform(scrollYProgress, [start - 0.05, start, end, end + 0.05], [initialY, 0, -30, -60])
-    const y = useSpring(rawY, springConfig)
-
-    return (
-        <motion.div
-            style={{ x, y, opacity, zIndex: index }}
-            className="absolute inset-0 flex items-center justify-center p-4"
-        >
-            <span
-                className="text-8xl md:text-[140px] font-black tracking-widest leading-none select-none"
-                style={{
-                    WebkitTextStroke: "2px #000024",
-                    color: "#000024"
-                }}
-            >
-                {String(process.id).padStart(2, '0')}
-            </span>
-        </motion.div>
-    )
-}
-
-function StepCard({ process, index, scrollYProgress }: AnimationProps) {
-    const stepDuration = 1 / processes.length
-    const start = index * stepDuration
-    const end = (index + 1) * stepDuration
-
-    // VERTICAL STACKING (Y) - Shared with Number
-    const initialY = index === 0 ? 0 : 800
-    // Move up a little (-50) then vanish
-    const rawY = useTransform(scrollYProgress, [start - 0.05, start, end, end + 0.05], [initialY, 0, -50, -100])
-    const y = useSpring(rawY, springConfig)
-
-    // CARD OPACITY (Curtain effect visibility)
-    // Fade out completely at the end
-    const opacity = useTransform(scrollYProgress, [start - 0.05, start, end, end + 0.05], [index === 0 ? 1 : 0, 1, 1, 0])
-
-    return (
-        <motion.div
-            style={{ y, opacity, zIndex: index }}
-            className="absolute inset-0 w-full"
-        >
-            <div className="bg-white border border-gray-100 rounded-[40px] p-10 md:p-14 flex flex-col items-start gap-8 shadow-[0_20px_50px_rgba(0,0,0,0.03)] h-full">
-                <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center border border-gray-100 shrink-0">
-                    {process.icon}
-                </div>
-
-                <div className="space-y-4">
-                    <h3 className="text-lg font-bold text-[#000024] tracking-tight">{process.title}</h3>
-                    <p className="text-lg md:text-xl text-gray-400 leading-relaxed font-medium">
-                        {process.description}
-                    </p>
-
-                </div>
-            </div>
-        </motion.div>
-    )
-}
-
 export function ProcessSection() {
-    const containerRef = useRef<HTMLDivElement>(null)
-
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"],
-    })
+    const [activeIndex, setActiveIndex] = useState(0)
 
     return (
-        <div id="process" ref={containerRef} className="relative h-[450vh] bg-[#fbfbfb]">
-            <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
-                {/* Adjusted grid for higher top-alignment of the left content */}
-                <div className="max-w-7xl w-full mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 items-center md:items-start">
+        <section id="process" className="bg-[#fbfbfb] py-24 sm:py-32">
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
-                    {/* LEFT Column - Styled for higher positioning and proper spacing */}
-                    <div className="md:col-span-12 lg:col-span-5 flex flex-col gap-12">
-                        <div>
-                            <span className="text-xs font-bold text-[#000024] opacity-50 uppercase tracking-[0.2em] font-mono">Process</span>
-                            <h2 className="mt-4 text-2xl md:text-3xl font-sans font-bold text-[#000024] tracking-tight leading-[1.0]">
-                                How we <br />
-                                build leads
-                            </h2>
-                            <p className="mt-8 text-xl font-normal text-gray-400 max-w-sm leading-relaxed">
-                                Four phases. One clear path to results.
-                            </p>
-                        </div>
+                {/* Header */}
+                <div className="max-w-2xl mb-24">
+                    <span className="text-xs font-bold text-[#000024] opacity-50 uppercase tracking-[0.2em] font-mono">Process</span>
+                    <h2 className="mt-4 text-3xl md:text-5xl font-sans font-bold text-[#000024] tracking-tight leading-[1.1]">
+                        How we build leads
+                    </h2>
+                    <p className="mt-6 text-xl text-gray-400 font-normal max-w-md leading-relaxed">
+                        Four phases. One clear path to results.
+                    </p>
+                </div>
 
-                        {/* Perfectly Aligned Link Structure */}
-                        <div className="flex items-start gap-16">
-                            {/* Learn + Numbers Column (Centered) */}
-                            <div className="flex flex-col items-center gap-8">
+                {/* Horizontal Steps Container */}
+                <div className="flex flex-col md:flex-row items-stretch">
+                    {processes.map((process, index) => (
+                        <div
+                            key={process.id}
+                            onMouseEnter={() => setActiveIndex(index)}
+                            className={`
+                                relative flex-1 pt-12 md:pt-16 px-4 pb-12 
+                                transition-all duration-300 cursor-pointer group flex flex-col items-center text-center
+                            `}
+                        >
+                            {/* Horizontal Line */}
+                            <motion.div
+                                className="absolute top-0 left-1/2 -translate-x-1/2 h-[2px]"
+                                initial={{ width: "3.5rem" }}
+                                animate={{
+                                    width: "3.5rem",
+                                    backgroundColor: activeIndex === index ? "#000024" : "#e5e7eb"
+                                }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                            />
 
-                                {/* FIXED size container - Number stays stationary horizontally */}
-                                <div className="relative w-40 h-44 flex items-center justify-center -ml-2">
-                                    {processes.map((process, index) => (
-                                        <StepNumber
-                                            key={process.id}
-                                            process={process}
-                                            index={index}
-                                            scrollYProgress={scrollYProgress}
-                                        />
-                                    ))}
+                            <div className="relative z-10 flex flex-col gap-6 items-center w-full">
+                                {/* Number */}
+                                <span
+                                    className={`
+                                        text-6xl md:text-8xl font-black tracking-tighter leading-none transition-all duration-300
+                                        ${activeIndex === index
+                                            ? "text-[#000024]"
+                                            : "text-transparent"
+                                        }
+                                    `}
+                                    style={activeIndex !== index ? {
+                                        WebkitTextStroke: "1px #d1d5db"
+                                    } : {}}
+                                >
+                                    {String(process.id).padStart(2, '0')}
+                                </span>
+
+                                {/* Title */}
+                                <h3 className={`
+                                    text-lg font-bold transition-colors duration-300
+                                    ${activeIndex === index ? "text-[#000024]" : "text-gray-400"}
+                                `}>
+                                    {process.title}
+                                </h3>
+
+                                {/* Description - Animated Reveal */}
+                                <div className="relative overflow-hidden w-full flex justify-center">
+                                    <AnimatePresence initial={false} mode="wait">
+                                        {activeIndex === index && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: "auto", opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                                            >
+                                                <p className="text-sm font-normal text-gray-500 leading-relaxed max-w-xs mx-auto">
+                                                    {process.description}
+                                                </p>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
                                 </div>
                             </div>
-
-                            {/* Build Link - Aligned with Learn */}
-
                         </div>
-                    </div>
-
-                    {/* RIGHT Column: Animated Cards */}
-                    <div className="md:col-span-12 lg:col-span-7 relative flex items-center md:items-start md:mt-[15vh]">
-                        <div className="relative w-full h-[540px]">
-                            {processes.map((process, index) => (
-                                <StepCard
-                                    key={process.id}
-                                    process={process}
-                                    index={index}
-                                    scrollYProgress={scrollYProgress}
-                                />
-                            ))}
-                        </div>
-                    </div>
-
+                    ))}
                 </div>
+
             </div>
-        </div>
+        </section>
     )
 }
-
