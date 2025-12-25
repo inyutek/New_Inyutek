@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef } from "react"
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion"
+import { motion, useScroll, useTransform, MotionValue, useSpring } from "framer-motion"
 
 const processes = [
     {
@@ -51,90 +51,77 @@ const processes = [
     }
 ]
 
-interface StepCardProps {
+interface AnimationProps {
     process: typeof processes[0]
     index: number
     scrollYProgress: MotionValue<number>
 }
 
-function StepCard({ process, index, scrollYProgress }: StepCardProps) {
-    // Each step takes about 22% of the scroll space
-    const start = index * 0.22
-    const end = start + 0.18
+// Shared animation config
+const springConfig = { stiffness: 90, damping: 22, mass: 0.8 }
 
-    // Horizontal Expansion & Positional Movement
-    // Initial: small box (80x80), shifted left (near buttons)
-    // Final: large card (550x240), centered
-    const width = useTransform(scrollYProgress, [start, end], [80, 550])
-    const height = useTransform(scrollYProgress, [start, end], [80, 240])
-    const x = useTransform(scrollYProgress, [start, end], [-240, 0]) // Moves from "below buttons" area to center
-    const borderRadius = useTransform(scrollYProgress, [start, end], [12, 24])
-    const opacity = useTransform(scrollYProgress, [start, start + 0.05], [0, 1])
+function StepNumber({ process, index, scrollYProgress }: AnimationProps) {
+    const stepDuration = 1 / processes.length
+    const start = index * stepDuration
+    const end = (index + 1) * stepDuration
+    const handoffStart = start + stepDuration * 0.75
 
-    // Number Animation (On the Left side of the card)
-    const numberScale = useTransform(scrollYProgress, [start, end], [1, 2.5])
-    const numberOpacity = useTransform(scrollYProgress, [start, start + 0.1], [0.2, 0.1])
+    // STABLE POSITION (No horizontal movement)
+    const x = 0
 
-    // Content Reveal (Fades in right-side content)
-    const contentOpacity = useTransform(scrollYProgress, [start + 0.1, end], [0, 1])
+    // NUMBER OPACITY (Simple fade transition)
+    const opacity = useTransform(scrollYProgress, [start, handoffStart, end], [1, 1, 0])
 
-    // Curtain Effect (Slide up when NEXT step begins)
-    const nextStepStart = (index + 1) * 0.22
-    const nextStepEnd = nextStepStart + 0.18
-    const yTranslation = useTransform(scrollYProgress, [nextStepStart, nextStepEnd], [0, -60])
-
-    // Dim cards as they get buried
-    const stackingOpacity = useTransform(scrollYProgress, [nextStepStart + 0.1, nextStepEnd + 0.2], [1, 0.5])
+    // VERTICAL STACKING (Y) - Shared with Card
+    const initialY = index === 0 ? 0 : 800
+    const rawY = useTransform(scrollYProgress, [start - 0.1, start, end, end + 0.1], [initialY, 0, -30, -60])
+    const y = useSpring(rawY, springConfig)
 
     return (
         <motion.div
-            style={{
-                x,
-                y: yTranslation,
-                opacity: index === 0 ? stackingOpacity : useTransform(scrollYProgress, [start, start + 0.05], [0, 1]), // Simple fix for first card opacity
-                zIndex: index,
-                width,
-                height,
-                borderRadius,
-            }}
-            className="absolute left-1/2 -translate-x-1/2 bg-white border border-gray-100 shadow-[0_30px_60px_rgba(0,0,0,0.06)] overflow-hidden flex items-center p-0"
+            style={{ x, y, opacity, zIndex: index }}
+            className="absolute inset-0 flex items-center justify-center p-4"
         >
-            {/* LEFT SIDE: Large Number */}
-            <div className="relative h-full w-[160px] flex items-center justify-center bg-gray-50/50 border-r border-gray-100/50 shrink-0 overflow-hidden">
-                <motion.span
-                    style={{
-                        scale: numberScale,
-                        opacity: numberOpacity
-                    }}
-                    className="text-6xl font-black text-[#000024] select-none"
-                >
-                    {process.id}
-                </motion.span>
+            <span className="text-8xl md:text-[140px] font-black text-[#000024] tracking-tighter leading-none select-none">
+                {process.id}
+            </span>
+        </motion.div>
+    )
+}
 
-                {/* Fallback small number for initial "small box" state */}
-                <motion.span
-                    style={{ opacity: useTransform(scrollYProgress, [start, start + 0.08], [0.8, 0]) }}
-                    className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-[#000024]"
-                >
-                    {process.id}
-                </motion.span>
-            </div>
+function StepCard({ process, index, scrollYProgress }: AnimationProps) {
+    const stepDuration = 1 / processes.length
+    const start = index * stepDuration
+    const end = (index + 1) * stepDuration
 
-            {/* RIGHT SIDE: Content */}
-            <motion.div
-                style={{ opacity: contentOpacity }}
-                className="flex-1 p-8 flex flex-col gap-4 min-w-0"
-            >
-                <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center border border-gray-100 shadow-sm shrink-0">
-                        {process.icon}
-                    </div>
-                    <h3 className="text-xl font-bold text-[#000024] truncate">{process.title}</h3>
+    // VERTICAL STACKING (Y) - Shared with Number
+    const initialY = index === 0 ? 0 : 800
+    const rawY = useTransform(scrollYProgress, [start - 0.1, start, end, end + 0.1], [initialY, 0, -30, -60])
+    const y = useSpring(rawY, springConfig)
+
+    // CARD OPACITY (Curtain effect visibility)
+    const opacity = useTransform(scrollYProgress, [start - 0.05, start, end, end + 0.1], [index === 0 ? 1 : 0, 1, 1, 0.7])
+
+    return (
+        <motion.div
+            style={{ y, opacity, zIndex: index }}
+            className="absolute inset-0 w-full"
+        >
+            <div className="bg-white border border-gray-100 rounded-[40px] p-10 md:p-14 flex flex-col items-start gap-8 shadow-[0_20px_50px_rgba(0,0,0,0.03)] h-full">
+                <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center border border-gray-100 shrink-0">
+                    {process.icon}
                 </div>
-                <p className="text-sm font-normal text-gray-500 leading-relaxed max-w-[320px]">
-                    {process.description}
-                </p>
-            </motion.div>
+
+                <div className="space-y-4">
+                    <h3 className="text-3xl md:text-4xl font-black text-[#000024] tracking-tight">{process.title}</h3>
+                    <p className="text-lg md:text-xl text-gray-400 leading-relaxed font-medium">
+                        {process.description}
+                    </p>
+                    <div className="pt-4">
+                        <span className="text-sm font-bold text-gray-300 uppercase tracking-widest cursor-pointer hover:text-[#000024] transition-colors">Explore</span>
+                    </div>
+                </div>
+            </div>
         </motion.div>
     )
 }
@@ -148,36 +135,56 @@ export function ProcessSection() {
     })
 
     return (
-        <div id="process" ref={containerRef} className="relative h-[450vh] bg-[#fbfbfb]">
+        <div id="process" ref={containerRef} className="relative h-[600vh] bg-[#fbfbfb]">
             <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
-                <div className="max-w-7xl w-full mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-24 items-start pt-32 md:pt-40">
+                {/* Adjusted grid for higher top-alignment of the left content */}
+                <div className="max-w-7xl w-full mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 items-center md:items-start md:pt-[15vh]">
 
-                    {/* LEFT: Static Content */}
-                    <div className="flex flex-col gap-12">
+                    {/* LEFT Column - Styled for higher positioning and proper spacing */}
+                    <div className="md:col-span-12 lg:col-span-5 flex flex-col gap-12">
                         <div>
-                            <span className="text-sm font-semibold text-gray-900 uppercase tracking-widest">Process</span>
-                            <h2 className="mt-2 text-4xl md:text-6xl font-black text-[#000024] tracking-tight leading-[1.1]">
+                            <span className="text-xs font-bold text-[#000024] opacity-50 uppercase tracking-[0.2em] font-mono">Process</span>
+                            <h2 className="mt-4 text-5xl md:text-7xl font-black text-[#000024] tracking-tight leading-[1.0]">
                                 How we <br />
-                                <span className="text-gray-400">build leads</span>
+                                build leads
                             </h2>
-                            <p className="mt-8 text-lg font-normal text-gray-500 max-w-sm">
-                                Four phases. One clear path to results. Our methodology is built for speed and engineered for scale.
+                            <p className="mt-8 text-xl font-normal text-gray-400 max-w-sm leading-relaxed">
+                                Four phases. One clear path to results.
                             </p>
                         </div>
 
-                        <div className="flex items-center gap-10">
-                            <button className="px-10 py-5 bg-[#000024] text-white rounded-full font-bold shadow-2xl shadow-blue-900/30 hover:scale-105 transition-transform shrink-0">
-                                Book a Call
-                            </button>
-                            <a href="#" className="hidden sm:flex text-sm font-bold items-center gap-2 group text-gray-400 hover:text-[#000024] transition-colors whitespace-nowrap">
-                                THE JOURNEY <span className="group-hover:translate-x-2 transition-transform">→</span>
-                            </a>
+                        {/* Perfectly Aligned Link Structure */}
+                        <div className="flex items-start gap-16">
+                            {/* Learn + Numbers Column (Centered) */}
+                            <div className="flex flex-col items-center gap-8">
+                                <a href="#" className="text-lg font-bold text-[#000024] hover:opacity-70 transition-opacity whitespace-nowrap">
+                                    Learn
+                                </a>
+                                {/* FIXED size container - Number stays stationary horizontally */}
+                                <div className="relative w-40 h-44 flex items-center justify-center -ml-2">
+                                    {processes.map((process, index) => (
+                                        <StepNumber
+                                            key={process.id}
+                                            process={process}
+                                            index={index}
+                                            scrollYProgress={scrollYProgress}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Build Link - Aligned with Learn */}
+                            <div className="pt-0">
+                                <a href="#" className="text-lg font-bold text-gray-400 group hover:text-[#000024] transition-colors flex items-center gap-2">
+                                    Build and launch the solution <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
-                    {/* RIGHT: Animated Stack */}
-                    <div className="relative w-full flex items-start justify-center pt-2">
-                        <div className="relative w-full h-[320px] flex items-center justify-center">
+                    {/* RIGHT Column: Animated Cards */}
+                    <div className="md:col-span-12 lg:col-span-7 relative flex items-center md:items-start">
+                        <div className="relative w-full h-[540px]">
                             {processes.map((process, index) => (
                                 <StepCard
                                     key={process.id}
@@ -194,3 +201,4 @@ export function ProcessSection() {
         </div>
     )
 }
+
