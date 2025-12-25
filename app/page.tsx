@@ -1,9 +1,9 @@
-
 import { Hero } from "@/components/sections/Hero"
 import { ProblemSection } from "@/components/sections/ProblemSection"
 import { ServicesSection } from "@/components/sections/ServicesSection"
 import { ProcessSection } from "@/components/sections/ProcessSection"
 import { ResultsSection } from "@/components/sections/ResultsSection"
+import { LogoMarquee } from "@/components/sections/LogoMarquee"
 import { WhySection } from "@/components/sections/WhySection"
 import { CTASection } from "@/components/sections/CTASection"
 import Footer from "@/components/sections/Footer"
@@ -11,8 +11,6 @@ import Footer from "@/components/sections/Footer"
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#fbfbfb]">
-
-
       {/* Scroll Scene (Hero) */}
       <Hero />
 
@@ -27,6 +25,9 @@ export default function Home() {
 
       {/* Results Section (Window Stack) */}
       <ResultsSection />
+
+      {/* Trusted By (Marquee) */}
+      <LogoMarquee />
 
       {/* Why Section (Basic Reveal) */}
       <WhySection />
