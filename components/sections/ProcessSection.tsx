@@ -74,7 +74,7 @@ function StepNumber({ process, index, scrollYProgress }: AnimationProps) {
 
     // VERTICAL STACKING (Y) - Shared with Card
     const initialY = index === 0 ? 0 : 800
-    const rawY = useTransform(scrollYProgress, [start - 0.1, start, end, end + 0.1], [initialY, 0, -30, -60])
+    const rawY = useTransform(scrollYProgress, [start - 0.05, start, end, end + 0.05], [initialY, 0, -30, -60])
     const y = useSpring(rawY, springConfig)
 
     return (
@@ -96,11 +96,13 @@ function StepCard({ process, index, scrollYProgress }: AnimationProps) {
 
     // VERTICAL STACKING (Y) - Shared with Number
     const initialY = index === 0 ? 0 : 800
-    const rawY = useTransform(scrollYProgress, [start - 0.1, start, end, end + 0.1], [initialY, 0, -30, -60])
+    // Move up a little (-50) then vanish
+    const rawY = useTransform(scrollYProgress, [start - 0.05, start, end, end + 0.05], [initialY, 0, -50, -100])
     const y = useSpring(rawY, springConfig)
 
     // CARD OPACITY (Curtain effect visibility)
-    const opacity = useTransform(scrollYProgress, [start - 0.05, start, end, end + 0.1], [index === 0 ? 1 : 0, 1, 1, 0.7])
+    // Fade out completely at the end
+    const opacity = useTransform(scrollYProgress, [start - 0.05, start, end, end + 0.05], [index === 0 ? 1 : 0, 1, 1, 0])
 
     return (
         <motion.div
@@ -113,7 +115,7 @@ function StepCard({ process, index, scrollYProgress }: AnimationProps) {
                 </div>
 
                 <div className="space-y-4">
-                    <h3 className="text-3xl md:text-4xl font-black text-[#000024] tracking-tight">{process.title}</h3>
+                    <h3 className="text-lg font-bold text-[#000024] tracking-tight">{process.title}</h3>
                     <p className="text-lg md:text-xl text-gray-400 leading-relaxed font-medium">
                         {process.description}
                     </p>
@@ -135,16 +137,16 @@ export function ProcessSection() {
     })
 
     return (
-        <div id="process" ref={containerRef} className="relative h-[600vh] bg-[#fbfbfb]">
+        <div id="process" ref={containerRef} className="relative h-[450vh] bg-[#fbfbfb]">
             <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
                 {/* Adjusted grid for higher top-alignment of the left content */}
-                <div className="max-w-7xl w-full mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 items-center md:items-start md:pt-[15vh]">
+                <div className="max-w-7xl w-full mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 items-center md:items-start">
 
                     {/* LEFT Column - Styled for higher positioning and proper spacing */}
                     <div className="md:col-span-12 lg:col-span-5 flex flex-col gap-12">
                         <div>
                             <span className="text-xs font-bold text-[#000024] opacity-50 uppercase tracking-[0.2em] font-mono">Process</span>
-                            <h2 className="mt-4 text-5xl md:text-7xl font-black text-[#000024] tracking-tight leading-[1.0]">
+                            <h2 className="mt-4 text-2xl md:text-3xl font-sans font-bold text-[#000024] tracking-tight leading-[1.0]">
                                 How we <br />
                                 build leads
                             </h2>
@@ -157,9 +159,7 @@ export function ProcessSection() {
                         <div className="flex items-start gap-16">
                             {/* Learn + Numbers Column (Centered) */}
                             <div className="flex flex-col items-center gap-8">
-                                <a href="#" className="text-lg font-bold text-[#000024] hover:opacity-70 transition-opacity whitespace-nowrap">
-                                    Learn
-                                </a>
+
                                 {/* FIXED size container - Number stays stationary horizontally */}
                                 <div className="relative w-40 h-44 flex items-center justify-center -ml-2">
                                     {processes.map((process, index) => (
@@ -174,16 +174,12 @@ export function ProcessSection() {
                             </div>
 
                             {/* Build Link - Aligned with Learn */}
-                            <div className="pt-0">
-                                <a href="#" className="text-lg font-bold text-gray-400 group hover:text-[#000024] transition-colors flex items-center gap-2">
-                                    Build and launch the solution <span className="group-hover:translate-x-1 transition-transform">→</span>
-                                </a>
-                            </div>
+
                         </div>
                     </div>
 
                     {/* RIGHT Column: Animated Cards */}
-                    <div className="md:col-span-12 lg:col-span-7 relative flex items-center md:items-start">
+                    <div className="md:col-span-12 lg:col-span-7 relative flex items-center md:items-start md:mt-[15vh]">
                         <div className="relative w-full h-[540px]">
                             {processes.map((process, index) => (
                                 <StepCard
