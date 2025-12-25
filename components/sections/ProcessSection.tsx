@@ -82,8 +82,14 @@ function StepNumber({ process, index, scrollYProgress }: AnimationProps) {
             style={{ x, y, opacity, zIndex: index }}
             className="absolute inset-0 flex items-center justify-center p-4"
         >
-            <span className="text-8xl md:text-[140px] font-black text-[#000024] tracking-tighter leading-none select-none">
-                {process.id}
+            <span
+                className="text-8xl md:text-[140px] font-black tracking-widest leading-none select-none"
+                style={{
+                    WebkitTextStroke: "2px #000024",
+                    color: "#000024"
+                }}
+            >
+                {String(process.id).padStart(2, '0')}
             </span>
         </motion.div>
     )
