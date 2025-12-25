@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence, useInView } from "framer-motion"
+import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 
 const problems = [
     {
@@ -43,21 +43,11 @@ const problems = [
 
 export function ProblemSection() {
     const [activeIndex, setActiveIndex] = useState(0)
-    const containerRef = useRef(null)
-    const isInView = useInView(containerRef, { amount: 0.3, once: false })
 
-    useEffect(() => {
-        if (!isInView) return
 
-        const interval = setInterval(() => {
-            setActiveIndex((prev) => (prev + 1) % problems.length)
-        }, 2000)
-
-        return () => clearInterval(interval)
-    }, [isInView])
 
     return (
-        <section ref={containerRef} className="bg-white py-24 sm:py-32">
+        <section className="bg-white py-24 sm:py-32">
             <div className="mx-auto w-full px-6 lg:px-8">
 
                 {/* Centered Header */}

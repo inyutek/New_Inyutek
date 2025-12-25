@@ -125,9 +125,7 @@ function StepCard({ process, index, scrollYProgress }: AnimationProps) {
                     <p className="text-lg md:text-xl text-gray-400 leading-relaxed font-medium">
                         {process.description}
                     </p>
-                    <div className="pt-4">
-                        <span className="text-sm font-bold text-gray-300 uppercase tracking-widest cursor-pointer hover:text-[#000024] transition-colors">Explore</span>
-                    </div>
+
                 </div>
             </div>
         </motion.div>

@@ -23,8 +23,22 @@ export function Navbar() {
     const [resourcesOpen, setResourcesOpen] = useState(false)
     const ref = useRef<HTMLDivElement | null>(null)
     const resourcesRef = useRef<HTMLDivElement | null>(null)
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null)
     const pathname = usePathname()
     const router = useRouter()
+
+    const handleMouseEnter = () => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current)
+        }
+        setResourcesOpen(true)
+    }
+
+    const handleMouseLeave = () => {
+        timeoutRef.current = setTimeout(() => {
+            setResourcesOpen(false)
+        }, 150)
+    }
 
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
         e.preventDefault()
@@ -48,7 +62,10 @@ export function Navbar() {
             }
         }
         document.addEventListener("mousedown", handleClickOutside)
-        return () => document.removeEventListener("mousedown", handleClickOutside)
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+            if (timeoutRef.current) clearTimeout(timeoutRef.current)
+        }
     }, [])
 
     return (
@@ -92,7 +109,12 @@ export function Navbar() {
                     </Link>
 
                     {/* Resources Dropdown */}
-                    <div className="relative" ref={resourcesRef}>
+                    <div
+                        className="relative"
+                        ref={resourcesRef}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
                         <button
                             onClick={() => setResourcesOpen(!resourcesOpen)}
                             className="flex items-center gap-1 hover:text-[#000024] transition-colors"
