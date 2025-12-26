@@ -82,7 +82,7 @@ export function Navbar() {
                                 window.scrollTo({ top: 0, behavior: "smooth" })
                             }
                         }}
-                        className="font-bold text-xl uppercase tracking-wider text-[#000024]"
+                        className="font-bold italic text-xl uppercase tracking-wider text-[#000024]"
                     >
                         INYUTEK
                     </Link>
@@ -183,6 +183,19 @@ export function Navbar() {
                                 Call
                                 <div className="text-xs text-black/50 mt-0.5">
                                     {PHONE_NUMBER}
+                                </div>
+                            </a>
+
+                            <a
+                                href="https://calendar.app.google/8HF9LdQVVndKzWC7A"
+                                target="_blank"
+                                rel="noreferrer"
+                                onClick={() => setOpen(false)}
+                                className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5 border-t border-black/5"
+                            >
+                                Schedule a meeting
+                                <div className="text-xs text-black/50 mt-0.5">
+                                    Book a time on our calendar
                                 </div>
                             </a>
                         </div>

@@ -146,6 +146,19 @@ export function Hero() {
                                             {PHONE_NUMBER}
                                         </div>
                                     </a>
+
+                                    <a
+                                        href="https://calendar.app.google/8HF9LdQVVndKzWC7A"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        onClick={() => setBookOpen(false)}
+                                        className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5 border-t border-black/5"
+                                    >
+                                        Schedule a meeting
+                                        <div className="text-xs text-black/50 mt-0.5">
+                                            Book a time on our calendar
+                                        </div>
+                                    </a>
                                 </div>
                             )}
                         </div>
