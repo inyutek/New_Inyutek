@@ -2,8 +2,34 @@
 
 import { motion } from "framer-motion"
 import { ease } from "@/components/motion-presets"
+import { useState, useRef, useEffect } from "react"
+
+const PHONE_NUMBER = "9112235551"
+const WHATSAPP_NUMBER = "919112235551"
+
+const WHATSAPP_TEXT = encodeURIComponent(
+    "Hi Inyutek team, I want to schedule a meeting."
+)
+
+const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_TEXT}`
+const CALL_LINK = `tel:${PHONE_NUMBER}`
 
 export function CTASection() {
+    const [open, setOpen] = useState(false)
+    const ref = useRef<HTMLDivElement | null>(null)
+
+    useEffect(() => {
+        function handleClickOutside(e: MouseEvent) {
+            if (ref.current && !ref.current.contains(e.target as Node)) {
+                setOpen(false)
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [])
+
     return (
         <section className="py-32 md:py-48 bg-white overflow-hidden">
             <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
@@ -55,14 +81,58 @@ export function CTASection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, ease, delay: 0.55 }}
-                    className="mt-10 flex items-center justify-center gap-4"
+                    className="mt-10 flex items-center justify-center gap-4 relative"
+                    style={{ zIndex: 40 }}
                 >
-                    <button className="px-8 py-3 bg-[#000024] text-white rounded-md font-medium shadow-lg hover:bg-[#000024]/90 transition-all hover:-translate-y-1">
-                        Book
-                    </button>
-                    <button className="px-8 py-3 bg-white border border-gray-200 text-[#000024] rounded-md font-medium shadow-sm hover:bg-gray-50 transition-all hover:-translate-y-1">
-                        Learn
-                    </button>
+                    <div className="relative" ref={ref}>
+                        <button
+                            onClick={() => setOpen((v) => !v)}
+                            className="px-8 py-3 bg-[#000024] text-white rounded-md font-medium shadow-lg hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
+                        >
+                            Schedule a free call
+                        </button>
+
+                        {open && (
+                            <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56 rounded-xl border border-black/10 bg-white shadow-lg overflow-hidden z-50 text-left">
+                                <a
+                                    href={WHATSAPP_LINK}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    onClick={() => setOpen(false)}
+                                    className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
+                                >
+                                    WhatsApp
+                                    <div className="text-xs text-black/50 mt-0.5">
+                                        Message us directly
+                                    </div>
+                                </a>
+
+                                <a
+                                    href={CALL_LINK}
+                                    onClick={() => setOpen(false)}
+                                    className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
+                                >
+                                    Call
+                                    <div className="text-xs text-black/50 mt-0.5">
+                                        {PHONE_NUMBER}
+                                    </div>
+                                </a>
+
+                                <a
+                                    href="https://calendar.app.google/8HF9LdQVVndKzWC7A"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    onClick={() => setOpen(false)}
+                                    className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5 border-t border-black/5"
+                                >
+                                    Schedule a meeting
+                                    <div className="text-xs text-black/50 mt-0.5">
+                                        Book a time on our calendar
+                                    </div>
+                                </a>
+                            </div>
+                        )}
+                    </div>
                 </motion.div>
 
             </div>

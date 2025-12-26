@@ -57,16 +57,7 @@ export function WhySection() {
                             ))}
                         </div>
 
-                        <Reveal delay={0.6}>
-                            <div className="flex items-center gap-4 mt-4">
-                                <button className="px-6 py-3 bg-white border border-gray-200 rounded-md font-medium text-[#000024] shadow-sm hover:bg-gray-50 transition-colors">
-                                    Explore
-                                </button>
-                                <a href="#" className="text-sm font-semibold flex items-center gap-2 group text-gray-600 hover:text-[#000024] transition-colors">
-                                    Learn <span className="group-hover:translate-x-1 transition-transform">→</span>
-                                </a>
-                            </div>
-                        </Reveal>
+
                     </div>
 
                     {/* RIGHT: Image Placeholder */}
