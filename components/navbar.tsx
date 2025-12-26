@@ -82,7 +82,7 @@ export function Navbar() {
                                 window.scrollTo({ top: 0, behavior: "smooth" })
                             }
                         }}
-                        className="font-bold italic text-xl uppercase tracking-wider text-[#000024]"
+                        className="font-bold text-xl uppercase tracking-wider text-[#000024]"
                     >
                         INYUTEK
                     </Link>
