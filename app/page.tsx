@@ -7,6 +7,7 @@ import { LogoMarquee } from "@/components/sections/LogoMarquee"
 import { WhySection } from "@/components/sections/WhySection"
 import { CTASection } from "@/components/sections/CTASection"
 import Footer from "@/components/sections/Footer"
+import ScrollToTop from "@/components/ScrollToTop"
 
 export default function Home() {
   return (
@@ -37,6 +38,9 @@ export default function Home() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Scroll to Top */}
+      <ScrollToTop />
     </main>
   )
 }

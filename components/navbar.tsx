@@ -125,13 +125,6 @@ export function Navbar() {
                                     Case Studies
                                 </Link>
                                 <Link
-                                    href="/portfolio"
-                                    className="px-4 py-2 hover:bg-gray-50 text-left transition-colors text-gray-600 hover:text-[#000024]"
-                                    onClick={() => setResourcesOpen(false)}
-                                >
-                                    Portfolio
-                                </Link>
-                                <Link
                                     href="/newsletter"
                                     className="px-4 py-2 hover:bg-gray-50 text-left transition-colors text-gray-600 hover:text-[#000024]"
                                     onClick={() => setResourcesOpen(false)}
@@ -228,7 +221,6 @@ export function Navbar() {
                         <div className="text-sm font-medium text-gray-400 mb-2">Resources</div>
                         <div className="pl-4 flex flex-col gap-3">
                             <Link href="/case-studies" className="text-base text-gray-700" onClick={() => setOpen(false)}>Case Studies</Link>
-                            <Link href="/portfolio" className="text-base text-gray-700" onClick={() => setOpen(false)}>Portfolio</Link>
                             <Link href="/newsletter" className="text-base text-gray-700" onClick={() => setOpen(false)}>Newsletter</Link>
                         </div>
                     </div>
