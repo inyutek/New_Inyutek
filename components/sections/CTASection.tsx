@@ -70,7 +70,7 @@ export function CTASection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, ease, delay: 0.4 }}
-                    className="mt-6 text-sm font-normal text-gray-500 max-w-lg mx-auto"
+                    className="mt-6 text-base md:text-sm font-normal text-gray-500 max-w-lg mx-auto"
                 >
                     A strategy call is 30 minutes. We listen, diagnose, and show you what's possible.
                 </motion.p>
@@ -81,13 +81,13 @@ export function CTASection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, ease, delay: 0.55 }}
-                    className="mt-10 flex items-center justify-center gap-4 relative"
+                    className="mt-10 flex flex-col md:flex-row items-center justify-center gap-4 relative"
                     style={{ zIndex: 40 }}
                 >
-                    <div className="relative" ref={ref}>
+                    <div className="relative w-full md:w-auto" ref={ref}>
                         <button
                             onClick={() => setOpen((v) => !v)}
-                            className="px-8 py-3 bg-[#000024] text-white rounded-md font-medium shadow-lg hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
+                            className="w-full md:w-auto px-8 py-3 bg-[#000024] text-white rounded-md font-medium shadow-lg hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
                         >
                             Schedule a free call
                         </button>
@@ -136,6 +136,6 @@ export function CTASection() {
                 </motion.div>
 
             </div>
-        </section>
+        </section >
     )
 }

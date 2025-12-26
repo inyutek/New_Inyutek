@@ -107,16 +107,16 @@ export function Hero() {
                         Turn website traffic into
                         <br className="hidden sm:block" /> qualified leads
                     </h1>
-                    <p className="text-sm font-normal text-gray-600 max-w-2xl mx-auto leading-relaxed mb-10">
+                    <p className="text-base md:text-sm font-normal text-gray-600 max-w-2xl mx-auto leading-relaxed mb-10">
                         Most SMBs waste money on traffic that never converts. We build funnels
                         that turn visitors into customers.
                     </p>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto">
                         {/* Book Call Button with Dropdown */}
-                        <div className="relative" ref={bookRef}>
+                        <div className="relative w-full sm:w-auto" ref={bookRef}>
                             <button
                                 onClick={() => setBookOpen(!bookOpen)}
-                                className="px-6 py-3 bg-[#000024] text-white text-sm rounded-lg font-medium shadow-lg hover:opacity-90 transition-all hover:-translate-y-1 flex items-center justify-center min-w-[140px]"
+                                className="w-full sm:w-auto px-6 py-3 bg-[#000024] text-white text-sm rounded-lg font-medium shadow-lg hover:opacity-90 transition-all hover:-translate-y-1 flex items-center justify-center min-w-[140px]"
                             >
                                 Book a call
                             </button>
@@ -168,7 +168,7 @@ export function Hero() {
                                 e.preventDefault();
                                 document.getElementById("problem")?.scrollIntoView({ behavior: "smooth" });
                             }}
-                            className="px-6 py-3 bg-white text-[#000024] text-sm border border-[#000024]/20 rounded-lg font-medium hover:bg-gray-50 transition-all hover:-translate-y-1"
+                            className="w-full sm:w-auto px-6 py-3 bg-white text-[#000024] text-sm border border-[#000024]/20 rounded-lg font-medium hover:bg-gray-50 transition-all hover:-translate-y-1 flex items-center justify-center"
                         >
                             Learn More
                         </Link>

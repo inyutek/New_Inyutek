@@ -90,10 +90,10 @@ export function ResultsSection() {
                 {/* LEFT: Static Header */}
                 <div className="flex flex-col gap-6 max-w-lg">
                     <h2 className="text-2xl md:text-3xl font-bold text-[#000024] tracking-tight">Real results</h2>
-                    <p className="text-sm font-normal text-gray-500">Companies that trusted us grew their lead flow</p>
+                    <p className="text-base md:text-sm font-normal text-gray-500">Companies that trusted us grew their lead flow</p>
 
-                    <div className="flex items-center gap-4 mt-4">
-                        <Link href="/case-studies" className="text-sm font-semibold flex items-center gap-2 group text-gray-600 hover:text-[#000024] transition-colors">
+                    <div className="flex items-center gap-4 mt-4 w-full md:w-auto">
+                        <Link href="/case-studies" className="w-full md:w-auto justify-center bg-gray-100 py-4 rounded-xl md:bg-transparent md:p-0 md:text-sm font-semibold flex items-center gap-2 group text-gray-600 hover:text-[#000024] transition-colors">
                             Read case study <span className="group-hover:translate-x-1 transition-transform">→</span>
                         </Link>
                     </div>

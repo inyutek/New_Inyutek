@@ -144,56 +144,99 @@ export function Navbar() {
                 </div>
 
                 {/* Right: Book Call Dropdown */}
-                <div className="w-[140px] flex justify-end relative" ref={ref}>
+                {/* Right: Book Call Dropdown */}
+                <div className="flex items-center gap-4">
+                    <div className="hidden md:block w-[140px] flex justify-end relative" ref={ref}>
+                        <button
+                            onClick={() => setOpen((v) => !v)}
+                            className="bg-[#000024] text-white px-6 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-all hover:-translate-y-1"
+                        >
+                            Book a call
+                        </button>
+
+                        {open && (
+                            <div className="absolute right-0 top-12 w-56 rounded-xl border border-black/10 bg-white shadow-lg overflow-hidden">
+                                <a
+                                    href={WHATSAPP_LINK}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    onClick={() => setOpen(false)}
+                                    className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
+                                >
+                                    WhatsApp
+                                    <div className="text-xs text-black/50 mt-0.5">
+                                        Message us directly
+                                    </div>
+                                </a>
+
+                                <a
+                                    href={CALL_LINK}
+                                    onClick={() => setOpen(false)}
+                                    className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
+                                >
+                                    Call
+                                    <div className="text-xs text-black/50 mt-0.5">
+                                        {PHONE_NUMBER}
+                                    </div>
+                                </a>
+
+                                <a
+                                    href="https://calendar.app.google/8HF9LdQVVndKzWC7A"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    onClick={() => setOpen(false)}
+                                    className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5 border-t border-black/5"
+                                >
+                                    Schedule a meeting
+                                    <div className="text-xs text-black/50 mt-0.5">
+                                        Book a time on our calendar
+                                    </div>
+                                </a>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Mobile Menu Button */}
                     <button
-                        onClick={() => setOpen((v) => !v)}
-                        className="bg-[#000024] text-white px-6 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-all hover:-translate-y-1"
+                        className="md:hidden p-2 text-[#000024]"
+                        onClick={() => setOpen(!open)}
                     >
-                        Book a call
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            {open ? (
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            ) : (
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                            )}
+                        </svg>
                     </button>
-
-                    {open && (
-                        <div className="absolute right-0 top-12 w-56 rounded-xl border border-black/10 bg-white shadow-lg overflow-hidden">
-                            <a
-                                href={WHATSAPP_LINK}
-                                target="_blank"
-                                rel="noreferrer"
-                                onClick={() => setOpen(false)}
-                                className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
-                            >
-                                WhatsApp
-                                <div className="text-xs text-black/50 mt-0.5">
-                                    Message us directly
-                                </div>
-                            </a>
-
-                            <a
-                                href={CALL_LINK}
-                                onClick={() => setOpen(false)}
-                                className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
-                            >
-                                Call
-                                <div className="text-xs text-black/50 mt-0.5">
-                                    {PHONE_NUMBER}
-                                </div>
-                            </a>
-
-                            <a
-                                href="https://calendar.app.google/8HF9LdQVVndKzWC7A"
-                                target="_blank"
-                                rel="noreferrer"
-                                onClick={() => setOpen(false)}
-                                className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5 border-t border-black/5"
-                            >
-                                Schedule a meeting
-                                <div className="text-xs text-black/50 mt-0.5">
-                                    Book a time on our calendar
-                                </div>
-                            </a>
-                        </div>
-                    )}
                 </div>
             </div>
+
+            {/* Mobile Menu Overlay */}
+            {open && (
+                <div className="md:hidden absolute top-16 left-0 w-full bg-white border-b border-gray-100 shadow-lg p-4 flex flex-col gap-4 animate-in slide-in-from-top-2">
+                    <Link href="/what-we-do" className="text-base font-medium text-gray-700 py-2 border-b border-gray-50" onClick={() => setOpen(false)}>
+                        Services
+                    </Link>
+                    <Link href="/how-we-work" className="text-base font-medium text-gray-700 py-2 border-b border-gray-50" onClick={() => setOpen(false)}>
+                        Process
+                    </Link>
+                    <Link href="/about" className="text-base font-medium text-gray-700 py-2 border-b border-gray-50" onClick={() => setOpen(false)}>
+                        About
+                    </Link>
+                    <div className="py-2">
+                        <div className="text-sm font-medium text-gray-400 mb-2">Resources</div>
+                        <div className="pl-4 flex flex-col gap-3">
+                            <Link href="/case-studies" className="text-base text-gray-700" onClick={() => setOpen(false)}>Case Studies</Link>
+                            <Link href="/portfolio" className="text-base text-gray-700" onClick={() => setOpen(false)}>Portfolio</Link>
+                            <Link href="/newsletter" className="text-base text-gray-700" onClick={() => setOpen(false)}>Newsletter</Link>
+                        </div>
+                    </div>
+                    <a href={WHATSAPP_LINK} target="_blank" className="w-full bg-[#000024] text-white text-center py-3 rounded-lg font-medium mt-2">
+                        Book a call
+                    </a>
+                </div>
+            )}
         </nav>
     )
 }

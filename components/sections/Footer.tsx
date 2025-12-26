@@ -45,11 +45,11 @@ export default function Footer() {
                             Inyutek@gmail.com
                         </a>
 
-                        <p className="mt-3 text-sm text-black/70 max-w-sm">
+                        <p className="mt-3 text-base md:text-sm text-black/70 max-w-sm">
                             Get insights on growth and strategy
                         </p>
 
-                        <div className="mt-8 flex gap-2">
+                        <div className="mt-8 flex flex-col md:flex-row gap-2">
                             <input
                                 type="email"
                                 placeholder="Your email"
@@ -57,7 +57,7 @@ export default function Footer() {
                             />
 
                             <button
-                                className="rounded-md px-4 py-2.5 text-sm border transition-all hover:-translate-y-1"
+                                className="w-full md:w-auto rounded-md px-4 py-2.5 text-sm border transition-all hover:-translate-y-1"
                                 style={{
                                     borderColor: BRAND_COLOR,
                                     color: BRAND_COLOR,
@@ -143,7 +143,7 @@ function FooterColumn({
             <h4 className="text-sm font-semibold mb-3 text-[#000024]">{title}</h4>
             <ul className="space-y-2 text-sm text-black/70">
                 {items.map((item) => (
-                    <li key={item} className="hover:opacity-70 cursor-pointer">
+                    <li key={item} className="hover:opacity-70 cursor-pointer text-base md:text-sm">
                         {item}
                     </li>
                 ))}
