@@ -1,8 +1,8 @@
 "use client"
 
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 import Link from "next/link"
-import { motion, useTransform, useMotionValue } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 
 const testimonials = [
     {
@@ -11,7 +11,6 @@ const testimonials = [
         author: "Rajesh Kumar",
         role: "Founder, SaaS startup",
         initials: "RK",
-        color: "bg-gray-100"
     },
     {
         id: 2,
@@ -19,7 +18,6 @@ const testimonials = [
         author: "Priya Sharma",
         role: "Marketing director, B2B",
         initials: "PS",
-        color: "bg-gray-100"
     },
     {
         id: 3,
@@ -27,7 +25,6 @@ const testimonials = [
         author: "Marcus Chen",
         role: "CEO, Digital agency",
         initials: "MC",
-        color: "bg-gray-100"
     },
     {
         id: 4,
@@ -35,54 +32,56 @@ const testimonials = [
         author: "Vikram Patel",
         role: "Founder, B2B SaaS",
         initials: "VP",
-        color: "bg-gray-100"
     }
 ]
 
 export function ResultsSection() {
-    // scrollYProgress: 0 to 1
-    const scrollYProgress = useMotionValue(0)
+    const [activeIndex, setActiveIndex] = useState(0)
+    const [isAutoScrolling, setIsAutoScrolling] = useState(true)
 
+    // Auto-scroll effect
+    useEffect(() => {
+        if (!isAutoScrolling) return
+
+        const interval = setInterval(() => {
+            setActiveIndex((prev) => (prev + 1) % testimonials.length)
+        }, 3000)
+
+        return () => clearInterval(interval)
+    }, [isAutoScrolling])
+
+    // Manual scroll handler
     const containerRef = useRef<HTMLDivElement>(null)
+    const lastScrollTime = useRef(0)
 
-    // Use native event listener for non-passive behavior (required to prevent default scroll)
     useEffect(() => {
         const container = containerRef.current
         if (!container) return
 
         const onWheel = (e: WheelEvent) => {
             e.preventDefault()
-            e.stopPropagation() // Ensure event doesn't bubble to Lenis or other handlers
+            const now = Date.now()
+            if (now - lastScrollTime.current < 500) return // Debounce
 
-            const delta = e.deltaY * 0.001
-            let newProgress = scrollYProgress.get() + delta
-            newProgress = Math.max(0, Math.min(newProgress, 1))
-            scrollYProgress.set(newProgress)
+            if (Math.abs(e.deltaY) > 20) {
+                lastScrollTime.current = now
+                setIsAutoScrolling(false) // Pause auto-scroll on interaction
+
+                // Resume auto-scroll after 5 seconds of inactivity
+                setTimeout(() => setIsAutoScrolling(true), 5000)
+
+                const direction = e.deltaY > 0 ? 1 : -1
+                setActiveIndex((prev) => {
+                    const next = prev + direction
+                    // Handle modulo for negative numbers correctly
+                    return (next % testimonials.length + testimonials.length) % testimonials.length
+                })
+            }
         }
 
         container.addEventListener("wheel", onWheel, { passive: false })
         return () => container.removeEventListener("wheel", onWheel)
-    }, [scrollYProgress])
-
-    // Animation Strategy: Internal Window Scroll
-    // scrollYProgress 0-1 drives the stack.
-
-    // Transforms for entering cards (Y axis):
-    // Start slightly visible (peeking)
-    // 95% -> 0%
-    const y2 = useTransform(scrollYProgress, [0, 0.33], ["95%", "0%"])
-    const y3 = useTransform(scrollYProgress, [0.33, 0.66], ["92%", "0%"])
-    const y4 = useTransform(scrollYProgress, [0.66, 1.0], ["92%", "0%"])
-
-    // Scale to look like a stack
-    const s1 = useTransform(scrollYProgress, [0, 0.33], [1, 0.9])
-    const s2 = useTransform(scrollYProgress, [0.33, 0.66], [1, 0.9])
-    const s3 = useTransform(scrollYProgress, [0.66, 1.0], [1, 0.9])
-
-    // Opacity
-    const o1 = useTransform(scrollYProgress, [0, 0.33], [1, 0])
-    const o2 = useTransform(scrollYProgress, [0.33, 0.66], [1, 0])
-    const o3 = useTransform(scrollYProgress, [0.66, 1.0], [1, 0])
+    }, [])
 
     return (
         <section className="bg-white py-12 sm:py-20">
@@ -103,63 +102,96 @@ export function ResultsSection() {
                 {/* RIGHT: The "Window" */}
                 <div className="relative w-full flex justify-center md:justify-end">
 
-                    {/* Event Listener Container */}
+                    {/* Container */}
                     <div
                         ref={containerRef}
                         data-lenis-prevent
-                        className="relative w-full max-w-md h-[320px] bg-gray-50 rounded-2xl border border-gray-200 shadow-xl overflow-hidden cursor-default"
+                        className="relative w-full max-w-md h-[320px] bg-gray-50 rounded-2xl border border-gray-200 shadow-xl overflow-hidden cursor-default hover:shadow-2xl transition-shadow duration-300"
+                        onMouseEnter={() => setIsAutoScrolling(false)}
+                        onMouseLeave={() => setIsAutoScrolling(true)}
                     >
 
                         {/* Decoration: Window Controls */}
-                        <div className="absolute top-0 left-0 w-full h-8 bg-gray-100 border-b border-gray-200 flex items-center gap-2 px-4 z-20 pointer-events-none">
+                        <div className="absolute top-0 left-0 w-full h-8 bg-gray-100 border-b border-gray-200 flex items-center gap-2 px-4 z-30 pointer-events-none">
                             <div className="w-2.5 h-2.5 rounded-full bg-red-300"></div>
                             <div className="w-2.5 h-2.5 rounded-full bg-amber-300"></div>
                             <div className="w-2.5 h-2.5 rounded-full bg-green-300"></div>
                         </div>
 
-                        {/* Cards Container - Visual Layer */}
+                        {/* Cards Container */}
                         <div className="absolute inset-0 top-8 p-6 flex items-center justify-center">
+                            {testimonials.map((item, index) => {
+                                // Calculate position relative to active index
+                                // dist 0: Active
+                                // dist 1: Next (Waiting at bottom)
+                                // dist 2: Back hidden
+                                // dist 3: Prev (Behind active)
+                                const dist = (index - activeIndex + testimonials.length) % testimonials.length
 
-                            {/* Card 1 */}
-                            <motion.div
-                                style={{ scale: s1, opacity: o1, zIndex: 1 }}
-                                className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between origin-top"
-                            >
-                                <Stars />
-                                <p className="text-lg text-gray-700 leading-relaxed">"{testimonials[0].quote}"</p>
-                                <AuthorInfo item={testimonials[0]} />
-                            </motion.div>
+                                let zIndex = 0
+                                let y = "0%"
+                                let scale = 1
+                                let opacity = 1
+                                let transitionDuration = 0.5
 
-                            {/* Card 2 */}
-                            <motion.div
-                                style={{ y: y2, scale: s2, opacity: o2, zIndex: 2 }}
-                                className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between origin-top"
-                            >
-                                <Stars />
-                                <p className="text-lg text-gray-700 leading-relaxed">"{testimonials[1].quote}"</p>
-                                <AuthorInfo item={testimonials[1]} />
-                            </motion.div>
+                                if (dist === 0) {
+                                    // Active Card
+                                    zIndex = 10
+                                    y = "0%"
+                                    scale = 1
+                                    opacity = 1
+                                } else if (dist === 1) {
+                                    // Next Card (Waiting)
+                                    zIndex = 20 // Must be higher than active to slide over
+                                    y = "100%"
+                                    scale = 1
+                                    opacity = 1
+                                    transitionDuration = 0 // Instant reset to bottom when becoming 'Next'
+                                } else if (dist === 3) {
+                                    // Previous Card (Just covered)
+                                    zIndex = 5
+                                    y = "0%"
+                                    scale = 0.95
+                                    opacity = 1
+                                } else {
+                                    // Dist 2 (Way back)
+                                    zIndex = 1
+                                    y = "0%"
+                                    scale = 0.9
+                                    opacity = 0.5
+                                    // When transitioning from Prev (3) -> Hidden (2), animate smooth
+                                }
 
-                            {/* Card 3 */}
-                            <motion.div
-                                style={{ y: y3, scale: s3, opacity: o3, zIndex: 3 }}
-                                className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between origin-top"
-                            >
-                                <Stars />
-                                <p className="text-lg text-gray-700 leading-relaxed">"{testimonials[2].quote}"</p>
-                                <AuthorInfo item={testimonials[2]} />
-                            </motion.div>
-
-                            {/* Card 4 */}
-                            <motion.div
-                                style={{ y: y4, zIndex: 4 }}
-                                className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between origin-top"
-                            >
-                                <Stars />
-                                <p className="text-lg text-gray-700 leading-relaxed">"{testimonials[3].quote}"</p>
-                                <AuthorInfo item={testimonials[3]} />
-                            </motion.div>
-
+                                return (
+                                    <motion.div
+                                        key={item.id}
+                                        initial={false}
+                                        animate={{
+                                            y,
+                                            scale,
+                                            opacity: dist === 2 ? 0 : 1, // Hide the backmost card to avoid z-fighting visual glitches
+                                            zIndex
+                                        }}
+                                        transition={{
+                                            duration: dist === 1 ? 0 : 0.5, // Instant reset for 'Next' position
+                                            ease: "easeInOut"
+                                        }}
+                                        className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between origin-top"
+                                    >
+                                        <Stars />
+                                        <p className="text-lg text-gray-700 leading-relaxed">"{item.quote}"</p>
+                                        <div className="flex items-center gap-3 mt-4">
+                                            <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">
+                                                {item.initials}
+                                            </div>
+                                            <div>
+                                                <p className="text-sm font-bold text-[#000024]">{item.author}</p>
+                                                <p className="text-xs text-gray-500">{item.role}</p>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                )
+                            })}
                         </div>
 
                     </div>
@@ -178,20 +210,6 @@ function Stars() {
                     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                 </svg>
             ))}
-        </div>
-    )
-}
-
-function AuthorInfo({ item }: { item: any }) {
-    return (
-        <div className="flex items-center gap-3 mt-4">
-            <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">
-                {item.initials}
-            </div>
-            <div>
-                <p className="text-sm font-bold text-[#000024]">{item.author}</p>
-                <p className="text-xs text-gray-500">{item.role}</p>
-            </div>
         </div>
     )
 }
