@@ -60,7 +60,7 @@ export function ProcessSection() {
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
                 {/* Header */}
-                <div className="max-w-2xl mb-24">
+                <div className="max-w-2xl mb-12 md:mb-24">
                     <span className="text-xs font-bold text-[#000024] opacity-50 uppercase tracking-[0.2em] font-mono">Process</span>
                     <h2 className="mt-4 text-3xl md:text-5xl font-sans font-bold text-[#000024] tracking-tight leading-[1.1]">
                         How we build leads
@@ -82,9 +82,10 @@ export function ProcessSection() {
                     {processes.map((process, index) => (
                         <div
                             key={process.id}
+                            onClick={() => setActiveIndex(index)}
                             onMouseEnter={() => setActiveIndex(index)}
                             className={`
-                                relative flex-1 pt-12 md:pt-16 px-4 pb-12 
+                                relative flex-1 py-8 md:pt-16 md:pb-12 px-4 
                                 transition-all duration-300 cursor-pointer group flex flex-col items-center text-center
                             `}
                         >
