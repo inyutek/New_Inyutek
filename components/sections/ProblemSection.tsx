@@ -61,12 +61,7 @@ export function ProblemSection() {
                         need, and your funnel leaks money at every stage.
                     </p>
 
-                    <div className="flex items-center justify-center gap-x-6">
-                        <button className="rounded-md border border-gray-200 bg-white px-6 py-2.5 text-sm font-medium text-gray-900 shadow-sm hover:bg-gray-50 transition-all hover:-translate-y-1">
-                            Explore
-                        </button>
 
-                    </div>
                 </div>
 
                 {/* Two Column Feature Block */}
