@@ -90,20 +90,12 @@ export function Navbar() {
 
                 {/* Center: Links */}
                 <div className="hidden md:flex flex-1 justify-center gap-8 text-sm font-medium text-gray-600 items-center">
-                    <a
-                        href="/#services"
-                        onClick={(e) => handleScroll(e, "services")}
-                        className="hover:text-[#000024] transition-colors cursor-pointer"
-                    >
+                    <Link href="/what-we-do" className="hover:text-[#000024] transition-colors">
                         Services
-                    </a>
-                    <a
-                        href="/#process"
-                        onClick={(e) => handleScroll(e, "process")}
-                        className="hover:text-[#000024] transition-colors cursor-pointer"
-                    >
+                    </Link>
+                    <Link href="/how-we-work" className="hover:text-[#000024] transition-colors">
                         Process
-                    </a>
+                    </Link>
                     <Link href="/about" className="hover:text-[#000024] transition-colors">
                         About
                     </Link>

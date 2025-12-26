@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import Link from "next/link"
 
 const processes = [
     {
@@ -67,6 +68,13 @@ export function ProcessSection() {
                     <p className="mt-6 text-xl text-gray-400 font-normal max-w-md leading-relaxed">
                         Four phases. One clear path to results.
                     </p>
+
+                    <Link href="/how-we-work" className="group flex items-center gap-2 mt-8 text-[#000024] font-medium hover:opacity-70 transition-all inline-flex w-fit">
+                        How we work
+                        <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </Link>
                 </div>
 
                 {/* Horizontal Steps Container */}

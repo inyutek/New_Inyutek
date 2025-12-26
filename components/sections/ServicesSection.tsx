@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef } from "react"
+import Link from "next/link"
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion"
 
 // Data for the Right Side Cards
@@ -143,9 +144,11 @@ export function ServicesSection() {
                             <h3 className="text-2xl md:text-3xl font-bold mb-4">Lead generation <br /> strategy and funnel <br /> design</h3>
                             <p className="text-sm font-normal opacity-80 max-w-md mb-8">Solve the core problems killing your lead flow</p>
                             <div className="flex gap-4">
-                                <button className="px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-1">
-                                    Explore
-                                </button>
+                                <Link href="/what-we-do">
+                                    <button className="px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-1">
+                                        Explore
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     </motion.div>
