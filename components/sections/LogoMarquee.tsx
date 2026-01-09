@@ -15,7 +15,7 @@ const logos = Array(10).fill({
 
 export function LogoMarquee() {
     return (
-        <div className="bg-white py-16 overflow-hidden">
+        <div className="relative bg-white py-16 overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center mb-10">
                 <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest">
                     Trusted by growth leaders across industries
