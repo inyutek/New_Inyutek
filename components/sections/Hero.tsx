@@ -93,15 +93,15 @@ export function Hero() {
 
     return (
         // Height 300vh -> Faster scroll (less distance to cover)
-        <div id="hero" ref={containerRef} className="relative h-[300vh]">
+        <div id="hero" ref={containerRef} className="relative h-auto lg:h-[300vh]">
 
             {/* Sticky Viewport: This stays fixed while measuring the parent's height for scroll progress */}
-            <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#fbfbfb] flex flex-col items-center justify-center perspective-1000">
+            <div className="relative h-auto py-24 lg:py-0 lg:sticky lg:top-0 lg:h-screen w-full overflow-hidden bg-[#fbfbfb] flex flex-col items-center justify-center perspective-1000">
 
                 {/* Main Text Content */}
                 <motion.div
                     style={{ opacity: textOpacity, scale: textScale, y: textY }}
-                    className="relative z-40 max-w-4xl mx-auto px-4 text-center -mt-20"
+                    className="relative z-40 max-w-4xl mx-auto px-4 text-center mt-0 lg:-mt-20"
                 >
                     <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#000024] leading-[1.1] mb-8">
                         Turn website traffic into
@@ -177,7 +177,7 @@ export function Hero() {
 
 
                 {/* The 6 Cards - Positioned for 3D Overlap */}
-                <div className="absolute inset-0 z-20 pointer-events-none w-full mx-auto max-w-[1400px]">
+                <div className="hidden lg:block absolute inset-0 z-20 pointer-events-none w-full mx-auto max-w-[1400px]">
 
                     {/* LAYER 1: BACK (Starts at 500, Reaches top first) */}
                     {/* Top Left */}
