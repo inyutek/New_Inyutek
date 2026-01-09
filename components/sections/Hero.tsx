@@ -96,7 +96,7 @@ export function Hero() {
         <div id="hero" ref={containerRef} className="relative h-auto lg:h-[300vh]">
 
             {/* Sticky Viewport: This stays fixed while measuring the parent's height for scroll progress */}
-            <div className="relative h-auto py-24 lg:py-0 lg:sticky lg:top-0 lg:h-screen w-full overflow-hidden bg-[#fbfbfb] flex flex-col items-center justify-center perspective-1000">
+            <div className="relative h-auto pt-24 pb-35 lg:py-0 lg:sticky lg:top-0 lg:h-screen w-full overflow-hidden bg-[#fbfbfb] flex flex-col items-center justify-center perspective-1000">
 
                 {/* Main Text Content */}
                 <motion.div
