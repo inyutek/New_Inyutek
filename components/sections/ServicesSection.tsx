@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import Link from "next/link"
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 
 // Data for the Right Side Cards
 const services = [
@@ -82,7 +82,50 @@ function ServiceCard({
     )
 }
 
-export function ServicesSection() {
+function MobileServices() {
+    return (
+        <div id="services-mobile" className="block md:hidden py-20 px-6 bg-[#fbfbfb]">
+            <div className="flex flex-col gap-6">
+                {/* Featured Card */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="w-full bg-black rounded-3xl overflow-hidden shadow-xl p-8 text-white min-h-[400px] flex flex-col justify-center text-center"
+                >
+                    <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80">Services</div>
+                    <h3 className="text-2xl font-bold mb-4">Lead generation <br /> strategy and funnel <br /> design</h3>
+                    <p className="text-base font-normal opacity-80 mb-8">Solve the core problems killing your lead flow</p>
+                    <div className="flex justify-center">
+                        <Link href="/what-we-do" className="w-full">
+                            <button className="w-full px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 transition-all">
+                                Explore
+                            </button>
+                        </Link>
+                    </div>
+                </motion.div>
+
+                {/* Service Cards Stack */}
+                <div className="flex flex-col gap-4">
+                    {services.map((service, index) => (
+                        <motion.div
+                            key={service.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                        >
+                            <ServiceCard data={service} />
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+function DesktopServices() {
     const containerRef = useRef<HTMLDivElement>(null)
 
     // Use a very tall container to make the scroll sequence feel slow and "smooth/effective"
@@ -104,17 +147,12 @@ export function ServicesSection() {
     const rightOpacity = useTransform(scrollYProgress, [0.20, 0.30], [0, 1])
 
     // 3. Group Animations
-    // Group 1: Slide UP and Fade OUT
-    // Start later (0.35) and finish at 0.80 per user request
     const groupOneY = useTransform(scrollYProgress, [0.35, 0.80], ["0%", "-100%"])
-    // Method 2: Extend opacity to match movement (fade out only at the end)
     const groupOneOpacity = useTransform(scrollYProgress, [0.60, 0.80], [1, 0])
-
-    // Group 2: Slide UP from bottom
     const groupTwoY = useTransform(scrollYProgress, [0.35, 0.80], ["100%", "0%"])
 
     return (
-        <div id="services" ref={containerRef} className="relative h-[300vh] bg-[#fbfbfb]">
+        <div id="services" ref={containerRef} className="hidden md:block relative h-[300vh] bg-[#fbfbfb]">
             <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
 
                 <div className="w-full mx-auto px-6 lg:px-8 relative h-full flex items-center justify-between">
@@ -159,12 +197,6 @@ export function ServicesSection() {
                         style={{ opacity: rightOpacity }}
                         className="absolute right-0 top-1/2 -translate-y-1/2 w-full md:w-[48%] h-[50vh] md:h-[60vh] rounded-2xl"
                     >
-                        {/* 
-                           Container is fixed size.
-                           Use overflow-hidden if we want to crop the exiting cards, 
-                           but for "Slide Up" effect, maybe we want to see them leave?
-                           Usually "overflow-hidden" on the container is cleaner.
-                        */}
                         <div className="relative w-full h-full overflow-hidden">
 
                             {/* GROUP 1 (Base Layer) - Services 1 & 2 */}
@@ -199,5 +231,14 @@ export function ServicesSection() {
                 </div>
             </div>
         </div>
+    )
+}
+
+export function ServicesSection() {
+    return (
+        <>
+            <MobileServices />
+            <DesktopServices />
+        </>
     )
 }
