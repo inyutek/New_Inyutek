@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { ChevronDown } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 
 const BRAND_COLOR = "#000024"
 
@@ -19,7 +20,8 @@ const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_TEXT}`
 const CALL_LINK = `tel:${PHONE_NUMBER}`
 
 export function Navbar() {
-    const [open, setOpen] = useState(false)
+    const [isBookOpen, setIsBookOpen] = useState(false)
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [resourcesOpen, setResourcesOpen] = useState(false)
     const ref = useRef<HTMLDivElement | null>(null)
     const resourcesRef = useRef<HTMLDivElement | null>(null)
@@ -55,7 +57,7 @@ export function Navbar() {
     useEffect(() => {
         function handleClickOutside(e: MouseEvent) {
             if (ref.current && !ref.current.contains(e.target as Node)) {
-                setOpen(false)
+                setIsBookOpen(false)
             }
             if (resourcesRef.current && !resourcesRef.current.contains(e.target as Node)) {
                 setResourcesOpen(false)
@@ -141,19 +143,19 @@ export function Navbar() {
                 <div className="flex items-center gap-4">
                     <div className="hidden md:block w-[140px] flex justify-end relative" ref={ref}>
                         <button
-                            onClick={() => setOpen((v) => !v)}
+                            onClick={() => setIsBookOpen((v) => !v)}
                             className="bg-[#000024] text-white px-6 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-all hover:-translate-y-1"
                         >
                             Book a call
                         </button>
 
-                        {open && (
+                        {isBookOpen && (
                             <div className="absolute right-0 top-12 w-56 rounded-xl border border-black/10 bg-white shadow-lg overflow-hidden">
                                 <a
                                     href={WHATSAPP_LINK}
                                     target="_blank"
                                     rel="noreferrer"
-                                    onClick={() => setOpen(false)}
+                                    onClick={() => setIsBookOpen(false)}
                                     className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
                                 >
                                     WhatsApp
@@ -164,7 +166,7 @@ export function Navbar() {
 
                                 <a
                                     href={CALL_LINK}
-                                    onClick={() => setOpen(false)}
+                                    onClick={() => setIsBookOpen(false)}
                                     className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
                                 >
                                     Call
@@ -177,7 +179,7 @@ export function Navbar() {
                                     href="https://calendar.app.google/8HF9LdQVVndKzWC7A"
                                     target="_blank"
                                     rel="noreferrer"
-                                    onClick={() => setOpen(false)}
+                                    onClick={() => setIsBookOpen(false)}
                                     className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5 border-t border-black/5"
                                 >
                                     Schedule a meeting
@@ -192,10 +194,10 @@ export function Navbar() {
                     {/* Mobile Menu Button */}
                     <button
                         className="md:hidden p-2 text-[#000024]"
-                        onClick={() => setOpen(!open)}
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            {open ? (
+                            {isMobileMenuOpen ? (
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                             ) : (
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -206,29 +208,37 @@ export function Navbar() {
             </div>
 
             {/* Mobile Menu Overlay */}
-            {open && (
-                <div className="md:hidden absolute top-16 left-0 w-full bg-white border-b border-gray-100 shadow-lg p-4 flex flex-col gap-4 animate-in slide-in-from-top-2">
-                    <Link href="/what-we-do" className="text-base font-medium text-gray-700 py-2 border-b border-gray-50" onClick={() => setOpen(false)}>
-                        Services
-                    </Link>
-                    <Link href="/how-we-work" className="text-base font-medium text-gray-700 py-2 border-b border-gray-50" onClick={() => setOpen(false)}>
-                        Process
-                    </Link>
-                    <Link href="/about" className="text-base font-medium text-gray-700 py-2 border-b border-gray-50" onClick={() => setOpen(false)}>
-                        About
-                    </Link>
-                    <div className="py-2">
-                        <div className="text-sm font-medium text-gray-400 mb-2">Resources</div>
-                        <div className="pl-4 flex flex-col gap-3">
-                            <Link href="/case-studies" className="text-base text-gray-700" onClick={() => setOpen(false)}>Case Studies</Link>
-                            <Link href="/newsletter" className="text-base text-gray-700" onClick={() => setOpen(false)}>Newsletter</Link>
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.2 }}
+                        className="md:hidden absolute top-16 left-0 w-full bg-white border-b border-gray-100 shadow-lg p-4 flex flex-col gap-4 overflow-hidden"
+                    >
+                        <Link href="/what-we-do" className="text-base font-medium text-gray-700 py-2 border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>
+                            Services
+                        </Link>
+                        <Link href="/how-we-work" className="text-base font-medium text-gray-700 py-2 border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>
+                            Process
+                        </Link>
+                        <Link href="/about" className="text-base font-medium text-gray-700 py-2 border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>
+                            About
+                        </Link>
+                        <div className="py-2">
+                            <div className="text-sm font-medium text-gray-400 mb-2">Resources</div>
+                            <div className="pl-4 flex flex-col gap-3">
+                                <Link href="/case-studies" className="text-base text-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Case Studies</Link>
+                                <Link href="/newsletter" className="text-base text-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Newsletter</Link>
+                            </div>
                         </div>
-                    </div>
-                    <a href={WHATSAPP_LINK} target="_blank" className="w-full bg-[#000024] text-white text-center py-3 rounded-lg font-medium mt-2">
-                        Book a call
-                    </a>
-                </div>
-            )}
+                        <a href={WHATSAPP_LINK} target="_blank" className="w-full bg-[#000024] text-white text-center py-3 rounded-lg font-medium mt-2">
+                            Book a call
+                        </a>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     )
 }
