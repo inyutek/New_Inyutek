@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { ScrollReveal } from "@/components/ui/scroll-reveal"
 
 const BRAND_COLOR = "#000024"
 
@@ -24,13 +25,7 @@ export default function Footer() {
     return (
         <footer className="bg-[#fbfbfb] pt-28 pb-12">
             {/* Main Footer Box */}
-            <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="max-w-7xl mx-auto rounded-2xl border border-black/5 bg-white px-10 py-16 md:px-14 md:py-20"
-            >
+            <ScrollReveal enableDesktop={false} className="max-w-7xl mx-auto rounded-2xl border border-black/5 bg-white px-10 py-16 md:px-14 md:py-20">
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
 
                     {/* Left */}
@@ -117,7 +112,7 @@ export default function Footer() {
                         </ul>
                     </div>
                 </div>
-            </motion.div>
+            </ScrollReveal>
 
             {/* Bottom */}
             <div className="max-w-7xl mx-auto mt-10 flex flex-col md:flex-row items-center justify-between px-6 text-xs text-black/60">

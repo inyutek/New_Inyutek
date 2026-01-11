@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ScrollReveal } from "@/components/ui/scroll-reveal"
 
 // Repeat the logo multiple times to ensure seamless infinite scroll
 const logos = Array(10).fill({
@@ -15,7 +16,7 @@ const logos = Array(10).fill({
 
 export function LogoMarquee() {
     return (
-        <div className="relative bg-white py-16 overflow-hidden">
+        <ScrollReveal enableDesktop={false} className="relative bg-white py-16 overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center mb-10">
                 <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest">
                     Trusted by growth leaders across industries
@@ -58,6 +59,6 @@ export function LogoMarquee() {
             {/* Gradient Fade Edges */}
             <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent" />
-        </div>
+        </ScrollReveal>
     )
 }

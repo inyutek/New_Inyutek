@@ -2,6 +2,7 @@
 
 import { Reveal } from "@/components/motion-presets"
 import { LucideIcon, LayoutTemplate, GitMerge, Hash } from "lucide-react"
+import { ScrollReveal } from "@/components/ui/scroll-reveal"
 
 const features = [
     {
@@ -21,7 +22,7 @@ const features = [
 export function WhySection() {
     return (
         <section className="py-32 bg-[#fbfbfb]">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <ScrollReveal enableDesktop={false} className="max-w-7xl mx-auto px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
                     {/* LEFT: Content */}
@@ -73,7 +74,7 @@ export function WhySection() {
                     </Reveal>
 
                 </div>
-            </div>
+            </ScrollReveal>
         </section>
     )
 }

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
+import { ScrollReveal } from "@/components/ui/scroll-reveal"
 
 const processes = [
     {
@@ -80,70 +81,71 @@ export function ProcessSection() {
                 {/* Horizontal Steps Container */}
                 <div className="flex flex-col md:flex-row items-stretch">
                     {processes.map((process, index) => (
-                        <div
-                            key={process.id}
-                            onClick={() => setActiveIndex(index)}
-                            onMouseEnter={() => setActiveIndex(index)}
-                            className={`
-                                relative flex-1 py-8 md:pt-16 md:pb-12 px-4 
-                                transition-all duration-300 cursor-pointer group flex flex-col items-center text-center
-                            `}
-                        >
-                            {/* Horizontal Line */}
-                            <motion.div
-                                className="absolute top-0 left-1/2 -translate-x-1/2 h-[2px]"
-                                initial={{ width: "3.5rem" }}
-                                animate={{
-                                    width: "3.5rem",
-                                    backgroundColor: activeIndex === index ? "#000024" : "#e5e7eb"
-                                }}
-                                transition={{ duration: 0.3, ease: "easeInOut" }}
-                            />
+                        <ScrollReveal key={process.id} enableDesktop={false} className="flex-1 flex flex-col items-center text-center">
+                            <div
+                                onClick={() => setActiveIndex(index)}
+                                onMouseEnter={() => setActiveIndex(index)}
+                                className={`
+                                    relative w-full py-8 md:pt-16 md:pb-12 px-4 
+                                    transition-all duration-300 cursor-pointer group flex flex-col items-center text-center
+                                `}
+                            >
+                                {/* Horizontal Line */}
+                                <motion.div
+                                    className="absolute top-0 left-1/2 -translate-x-1/2 h-[2px]"
+                                    initial={{ width: "3.5rem" }}
+                                    animate={{
+                                        width: "3.5rem",
+                                        backgroundColor: activeIndex === index ? "#000024" : "#e5e7eb"
+                                    }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                />
 
-                            <div className="relative z-10 flex flex-col gap-6 items-center w-full">
-                                {/* Number */}
-                                <span
-                                    className={`
+                                <div className="relative z-10 flex flex-col gap-6 items-center w-full">
+                                    {/* Number */}
+                                    <span
+                                        className={`
                                         text-6xl md:text-8xl font-black tracking-tighter leading-none transition-all duration-300
                                         ${activeIndex === index
-                                            ? "text-[#000024]"
-                                            : "text-transparent"
-                                        }
+                                                ? "text-[#000024]"
+                                                : "text-transparent"
+                                            }
                                     `}
-                                    style={activeIndex !== index ? {
-                                        WebkitTextStroke: "1px #d1d5db"
-                                    } : {}}
-                                >
-                                    {String(process.id).padStart(2, '0')}
-                                </span>
+                                        style={activeIndex !== index ? {
+                                            WebkitTextStroke: "1px #d1d5db"
+                                        } : {}}
+                                    >
+                                        {String(process.id).padStart(2, '0')}
+                                    </span>
 
-                                {/* Title */}
-                                <h3 className={`
+                                    {/* Title */}
+                                    <h3 className={`
                                     text-lg font-bold transition-colors duration-300
                                     ${activeIndex === index ? "text-[#000024]" : "text-gray-400"}
                                 `}>
-                                    {process.title}
-                                </h3>
+                                        {process.title}
+                                    </h3>
 
-                                {/* Description - Animated Reveal */}
-                                <div className="relative overflow-hidden w-full flex justify-center">
-                                    <AnimatePresence initial={false} mode="wait">
-                                        {activeIndex === index && (
-                                            <motion.div
-                                                initial={{ height: 0, opacity: 0 }}
-                                                animate={{ height: "auto", opacity: 1 }}
-                                                exit={{ height: 0, opacity: 0 }}
-                                                transition={{ duration: 0.3, ease: "easeInOut" }}
-                                            >
-                                                <p className="text-sm font-normal text-gray-500 leading-relaxed max-w-xs mx-auto">
-                                                    {process.description}
-                                                </p>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
+                                    {/* Description - Animated Reveal */}
+                                    <div className="relative overflow-hidden w-full flex justify-center">
+                                        <AnimatePresence initial={false} mode="wait">
+                                            {activeIndex === index && (
+                                                <motion.div
+                                                    initial={{ height: 0, opacity: 0 }}
+                                                    animate={{ height: "auto", opacity: 1 }}
+                                                    exit={{ height: 0, opacity: 0 }}
+                                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                                >
+                                                    <p className="text-sm font-normal text-gray-500 leading-relaxed max-w-xs mx-auto">
+                                                        {process.description}
+                                                    </p>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </ScrollReveal>
                     ))}
                 </div>
 

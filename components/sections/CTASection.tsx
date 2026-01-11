@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ease } from "@/components/motion-presets"
 import { useState, useRef, useEffect } from "react"
+import { ScrollReveal } from "@/components/ui/scroll-reveal"
 
 const PHONE_NUMBER = "9112235551"
 const WHATSAPP_NUMBER = "919112235551"
@@ -35,7 +36,7 @@ export function CTASection() {
             <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
 
                 {/* Headline Container */}
-                <div className="flex flex-col items-center justify-center gap-1 md:gap-2">
+                <ScrollReveal enableDesktop={false} className="flex flex-col items-center justify-center gap-1 md:gap-2">
 
                     {/* Line 1: From Down-Left, Rotate Clockwise */
                         /* Starts at -6deg, moves to 0 */
@@ -62,7 +63,7 @@ export function CTASection() {
                     >
                         Not the right fit
                     </motion.h2>
-                </div>
+                </ScrollReveal>
 
                 {/* Subtext */}
                 <motion.p

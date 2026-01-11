@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
+import { ScrollReveal } from "@/components/ui/scroll-reveal"
 
 const testimonials = [
     {
@@ -103,98 +104,100 @@ export function ResultsSection() {
                 <div className="relative w-full flex justify-center md:justify-end">
 
                     {/* Container */}
-                    <div
-                        ref={containerRef}
-                        data-lenis-prevent
-                        className="relative w-full max-w-md h-[320px] bg-gray-50 rounded-2xl border border-gray-200 shadow-xl overflow-hidden cursor-default hover:shadow-2xl transition-shadow duration-300"
-                        onMouseEnter={() => setIsAutoScrolling(false)}
-                        onMouseLeave={() => setIsAutoScrolling(true)}
-                    >
+                    <ScrollReveal enableDesktop={false} className="w-full max-w-md">
+                        <div
+                            ref={containerRef}
+                            data-lenis-prevent
+                            className="relative w-full h-[320px] bg-gray-50 rounded-2xl border border-gray-200 shadow-xl overflow-hidden cursor-default hover:shadow-2xl transition-shadow duration-300"
+                            onMouseEnter={() => setIsAutoScrolling(false)}
+                            onMouseLeave={() => setIsAutoScrolling(true)}
+                        >
 
-                        {/* Decoration: Window Controls */}
-                        <div className="absolute top-0 left-0 w-full h-8 bg-gray-100 border-b border-gray-200 flex items-center gap-2 px-4 z-30 pointer-events-none">
-                            <div className="w-2.5 h-2.5 rounded-full bg-red-300"></div>
-                            <div className="w-2.5 h-2.5 rounded-full bg-amber-300"></div>
-                            <div className="w-2.5 h-2.5 rounded-full bg-green-300"></div>
-                        </div>
+                            {/* Decoration: Window Controls */}
+                            <div className="absolute top-0 left-0 w-full h-8 bg-gray-100 border-b border-gray-200 flex items-center gap-2 px-4 z-30 pointer-events-none">
+                                <div className="w-2.5 h-2.5 rounded-full bg-red-300"></div>
+                                <div className="w-2.5 h-2.5 rounded-full bg-amber-300"></div>
+                                <div className="w-2.5 h-2.5 rounded-full bg-green-300"></div>
+                            </div>
 
-                        {/* Cards Container */}
-                        <div className="absolute inset-0 top-8 p-6 flex items-center justify-center">
-                            {testimonials.map((item, index) => {
-                                // Calculate position relative to active index
-                                // dist 0: Active
-                                // dist 1: Next (Waiting at bottom)
-                                // dist 2: Back hidden
-                                // dist 3: Prev (Behind active)
-                                const dist = (index - activeIndex + testimonials.length) % testimonials.length
+                            {/* Cards Container */}
+                            <div className="absolute inset-0 top-8 p-6 flex items-center justify-center">
+                                {testimonials.map((item, index) => {
+                                    // Calculate position relative to active index
+                                    // dist 0: Active
+                                    // dist 1: Next (Waiting at bottom)
+                                    // dist 2: Back hidden
+                                    // dist 3: Prev (Behind active)
+                                    const dist = (index - activeIndex + testimonials.length) % testimonials.length
 
-                                let zIndex = 0
-                                let y = "0%"
-                                let scale = 1
-                                let opacity = 1
-                                let transitionDuration = 0.5
+                                    let zIndex = 0
+                                    let y = "0%"
+                                    let scale = 1
+                                    let opacity = 1
+                                    let transitionDuration = 0.5
 
-                                if (dist === 0) {
-                                    // Active Card
-                                    zIndex = 10
-                                    y = "0%"
-                                    scale = 1
-                                    opacity = 1
-                                } else if (dist === 1) {
-                                    // Next Card (Waiting)
-                                    zIndex = 20 // Must be higher than active to slide over
-                                    y = "100%"
-                                    scale = 1
-                                    opacity = 1
-                                    transitionDuration = 0 // Instant reset to bottom when becoming 'Next'
-                                } else if (dist === 3) {
-                                    // Previous Card (Just covered)
-                                    zIndex = 5
-                                    y = "0%"
-                                    scale = 0.95
-                                    opacity = 1
-                                } else {
-                                    // Dist 2 (Way back)
-                                    zIndex = 1
-                                    y = "0%"
-                                    scale = 0.9
-                                    opacity = 0.5
-                                    // When transitioning from Prev (3) -> Hidden (2), animate smooth
-                                }
+                                    if (dist === 0) {
+                                        // Active Card
+                                        zIndex = 10
+                                        y = "0%"
+                                        scale = 1
+                                        opacity = 1
+                                    } else if (dist === 1) {
+                                        // Next Card (Waiting)
+                                        zIndex = 20 // Must be higher than active to slide over
+                                        y = "100%"
+                                        scale = 1
+                                        opacity = 1
+                                        transitionDuration = 0 // Instant reset to bottom when becoming 'Next'
+                                    } else if (dist === 3) {
+                                        // Previous Card (Just covered)
+                                        zIndex = 5
+                                        y = "0%"
+                                        scale = 0.95
+                                        opacity = 1
+                                    } else {
+                                        // Dist 2 (Way back)
+                                        zIndex = 1
+                                        y = "0%"
+                                        scale = 0.9
+                                        opacity = 0.5
+                                        // When transitioning from Prev (3) -> Hidden (2), animate smooth
+                                    }
 
-                                return (
-                                    <motion.div
-                                        key={item.id}
-                                        initial={false}
-                                        animate={{
-                                            y,
-                                            scale,
-                                            opacity: dist === 2 ? 0 : 1, // Hide the backmost card to avoid z-fighting visual glitches
-                                            zIndex
-                                        }}
-                                        transition={{
-                                            duration: dist === 1 ? 0 : 0.5, // Instant reset for 'Next' position
-                                            ease: "easeInOut"
-                                        }}
-                                        className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between origin-top"
-                                    >
-                                        <Stars />
-                                        <p className="text-lg text-gray-700 leading-relaxed">"{item.quote}"</p>
-                                        <div className="flex items-center gap-3 mt-4">
-                                            <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">
-                                                {item.initials}
+                                    return (
+                                        <motion.div
+                                            key={item.id}
+                                            initial={false}
+                                            animate={{
+                                                y,
+                                                scale,
+                                                opacity: dist === 2 ? 0 : 1, // Hide the backmost card to avoid z-fighting visual glitches
+                                                zIndex
+                                            }}
+                                            transition={{
+                                                duration: dist === 1 ? 0 : 0.5, // Instant reset for 'Next' position
+                                                ease: "easeInOut"
+                                            }}
+                                            className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between origin-top"
+                                        >
+                                            <Stars />
+                                            <p className="text-lg text-gray-700 leading-relaxed">"{item.quote}"</p>
+                                            <div className="flex items-center gap-3 mt-4">
+                                                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">
+                                                    {item.initials}
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm font-bold text-[#000024]">{item.author}</p>
+                                                    <p className="text-xs text-gray-500">{item.role}</p>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <p className="text-sm font-bold text-[#000024]">{item.author}</p>
-                                                <p className="text-xs text-gray-500">{item.role}</p>
-                                            </div>
-                                        </div>
-                                    </motion.div>
-                                )
-                            })}
-                        </div>
+                                        </motion.div>
+                                    )
+                                })}
+                            </div>
 
-                    </div>
+                        </div>
+                    </ScrollReveal>
                 </div>
 
             </div>

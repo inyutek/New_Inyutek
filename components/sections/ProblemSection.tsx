@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { ScrollReveal } from "@/components/ui/scroll-reveal"
 
 const problems = [
     {
@@ -51,44 +52,45 @@ function MobileProblem() {
     return (
         <div className="flex flex-col gap-6 md:hidden">
             {problems.map((item, index) => (
-                <div
+                <ScrollReveal
                     key={item.id}
-                    onClick={() => handleToggle(index)}
                     className={`
                         bg-gray-50 rounded-xl overflow-hidden transition-all duration-300 cursor-pointer
                         ${activeIndex === index ? "shadow-md ring-1 ring-gray-200" : "border border-transparent"}
                     `}
                 >
-                    {/* Header / Trigger */}
-                    <div className="p-6 text-center">
-                        <h3 className={`text-xl font-bold tracking-tight transition-colors duration-300 ${activeIndex === index ? "text-[#000024]" : "text-gray-400"}`}>
-                            {item.title}
-                        </h3>
-                    </div>
+                    <div onClick={() => handleToggle(index)}>
+                        {/* Header / Trigger */}
+                        <div className="p-6 text-center">
+                            <h3 className={`text-xl font-bold tracking-tight transition-colors duration-300 ${activeIndex === index ? "text-[#000024]" : "text-gray-400"}`}>
+                                {item.title}
+                            </h3>
+                        </div>
 
-                    {/* Expandable Content */}
-                    <AnimatePresence initial={false}>
-                        {activeIndex === index && (
-                            <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.3, ease: "easeInOut" }}
-                            >
-                                <div className="px-6 pb-8 pt-0 flex flex-col items-center gap-6">
-                                    <p className="text-sm font-normal text-gray-600 leading-relaxed text-center">
-                                        {item.description}
-                                    </p>
+                        {/* Expandable Content */}
+                        <AnimatePresence initial={false}>
+                            {activeIndex === index && (
+                                <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                >
+                                    <div className="px-6 pb-8 pt-0 flex flex-col items-center gap-6">
+                                        <p className="text-sm font-normal text-gray-600 leading-relaxed text-center">
+                                            {item.description}
+                                        </p>
 
-                                    {/* Inline Image Display */}
-                                    <div className={`w-full aspect-square rounded-lg flex items-center justify-center text-gray-400 ${item.imageColor}`}>
-                                        {item.icon}
+                                        {/* Inline Image Display */}
+                                        <div className={`w-full aspect-square rounded-lg flex items-center justify-center text-gray-400 ${item.imageColor}`}>
+                                            {item.icon}
+                                        </div>
                                     </div>
-                                </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                </ScrollReveal>
             ))}
         </div>
     )
