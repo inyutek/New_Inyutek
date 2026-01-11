@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Link from "next/link"
 
 const BRAND_COLOR = "#000024"
 
@@ -122,9 +123,9 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto mt-10 flex flex-col md:flex-row items-center justify-between px-6 text-xs text-black/60">
                 <p>© 2025 Inyutek Enterprises. All rights reserved.</p>
                 <div className="flex gap-5 mt-3 md:mt-0">
-                    <span className="hover:opacity-70 cursor-pointer">Privacy policy</span>
-                    <span className="hover:opacity-70 cursor-pointer">Terms of service</span>
-                    <span className="hover:opacity-70 cursor-pointer">Cookie settings</span>
+                    <Link href="/privacy-policy" className="hover:opacity-70 cursor-pointer">Privacy policy</Link>
+                    <Link href="/terms-of-service" className="hover:opacity-70 cursor-pointer">Terms of service</Link>
+                    <Link href="/cookie-settings" className="hover:opacity-70 cursor-pointer">Cookie settings</Link>
                 </div>
             </div>
         </footer>
