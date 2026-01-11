@@ -92,6 +92,11 @@ export function Navbar() {
 
                 {/* Center: Links */}
                 <div className="hidden md:flex flex-1 justify-center gap-8 text-sm font-medium text-gray-600 items-center">
+                    {pathname !== "/" && (
+                        <Link href="/" className="hover:text-[#000024] transition-colors">
+                            Home
+                        </Link>
+                    )}
                     <Link href="/what-we-do" className="hover:text-[#000024] transition-colors">
                         Services
                     </Link>
@@ -217,6 +222,11 @@ export function Navbar() {
                         transition={{ duration: 0.2 }}
                         className="md:hidden absolute top-16 left-0 w-full bg-white border-b border-gray-100 shadow-lg p-4 flex flex-col gap-4 overflow-hidden"
                     >
+                        {pathname !== "/" && (
+                            <Link href="/" className="text-base font-medium text-gray-700 py-2 border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>
+                                Home
+                            </Link>
+                        )}
                         <Link href="/what-we-do" className="text-base font-medium text-gray-700 py-2 border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>
                             Services
                         </Link>
