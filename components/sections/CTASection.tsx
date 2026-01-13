@@ -38,27 +38,23 @@ export function CTASection() {
                 {/* Headline Container */}
                 <ScrollReveal enableDesktop={false} className="flex flex-col items-center justify-center gap-1 md:gap-2">
 
-                    {/* Line 1: From Down-Left, Rotate Clockwise */
-                        /* Starts at -6deg, moves to 0 */
-                    }
+                    {/* Line 1 */}
                     <motion.h2
-                        initial={{ opacity: 0, x: -150, y: 80, rotate: -8 }}
-                        whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
+                        initial={{ opacity: 0, y: 40, x: 0, rotate: 0 }}
+                        whileInView={{ opacity: 1, y: 0, x: 0, rotate: 0 }}
                         viewport={{ once: false, margin: "-100px" }}
-                        transition={{ duration: 1.1, ease: [0.25, 1, 0.5, 1] }}
+                        transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
                         className="text-3xl md:text-5xl font-bold text-[#000024] tracking-tight leading-tight"
                     >
                         Ready to talk
                     </motion.h2>
 
-                    {/* Line 2: From Down-Right, Rotate Anti-Clockwise */
-                        /* Starts at 6deg, moves to 0 */
-                    }
+                    {/* Line 2 */}
                     <motion.h2
-                        initial={{ opacity: 0, x: 150, y: 80, rotate: 8 }}
-                        whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
+                        initial={{ opacity: 0, y: 40, x: 0, rotate: 0 }}
+                        whileInView={{ opacity: 1, y: 0, x: 0, rotate: 0 }}
                         viewport={{ once: false, margin: "-100px" }}
-                        transition={{ duration: 1.1, ease: [0.25, 1, 0.5, 1], delay: 0.15 }}
+                        transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1], delay: 0.15 }}
                         className="text-3xl md:text-5xl font-bold text-[#000024] tracking-tight leading-tight"
                     >
                         Not the right fit

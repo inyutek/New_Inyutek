@@ -97,13 +97,22 @@ export function Navbar() {
                             Home
                         </Link>
                     )}
-                    <Link href="/what-we-do" className="hover:text-[#000024] transition-colors">
+                    <Link
+                        href="/what-we-do"
+                        className={`transition-colors ${pathname === "/what-we-do" ? "text-[#010B13] font-bold" : "hover:text-[#000024]"}`}
+                    >
                         Services
                     </Link>
-                    <Link href="/how-we-work" className="hover:text-[#000024] transition-colors">
+                    <Link
+                        href="/how-we-work"
+                        className={`transition-colors ${pathname === "/how-we-work" ? "text-[#010B13] font-bold" : "hover:text-[#000024]"}`}
+                    >
                         Process
                     </Link>
-                    <Link href="/about" className="hover:text-[#000024] transition-colors">
+                    <Link
+                        href="/about"
+                        className={`transition-colors ${pathname === "/about" ? "text-[#010B13] font-bold" : "hover:text-[#000024]"}`}
+                    >
                         About
                     </Link>
 
@@ -116,7 +125,10 @@ export function Navbar() {
                     >
                         <button
                             onClick={() => setResourcesOpen(!resourcesOpen)}
-                            className="flex items-center gap-1 hover:text-[#000024] transition-colors"
+                            className={`flex items-center gap-1 transition-colors ${pathname === "/case-studies" || pathname === "/newsletter" || pathname === "/blog"
+                                ? "text-[#010B13] font-bold"
+                                : "hover:text-[#000024]"
+                                }`}
                         >
                             Resources
                             <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${resourcesOpen ? "rotate-180" : ""}`} />
@@ -130,6 +142,13 @@ export function Navbar() {
                                     onClick={() => setResourcesOpen(false)}
                                 >
                                     Case Studies
+                                </Link>
+                                <Link
+                                    href="/blog"
+                                    className="px-4 py-2 hover:bg-gray-50 text-left transition-colors text-gray-600 hover:text-[#000024]"
+                                    onClick={() => setResourcesOpen(false)}
+                                >
+                                    Blog
                                 </Link>
                                 <Link
                                     href="/newsletter"
@@ -240,6 +259,7 @@ export function Navbar() {
                             <div className="text-sm font-medium text-gray-400 mb-2">Resources</div>
                             <div className="pl-4 flex flex-col gap-3">
                                 <Link href="/case-studies" className="text-base text-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Case Studies</Link>
+                                <Link href="/blog" className="text-base text-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
                                 <Link href="/newsletter" className="text-base text-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Newsletter</Link>
                             </div>
                         </div>
