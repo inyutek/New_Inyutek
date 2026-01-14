@@ -91,6 +91,16 @@ export function CTASection() {
 
                         {open && (
                             <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56 rounded-xl border border-black/10 bg-white shadow-lg overflow-hidden z-50 text-left">
+                                <div
+                                    onClick={() => setOpen(false)}
+                                    className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5 cursor-pointer"
+                                >
+                                    Contact us
+                                    <div className="text-xs text-black/50 mt-0.5">
+                                        Send us an email
+                                    </div>
+                                </div>
+
                                 <a
                                     href={WHATSAPP_LINK}
                                     target="_blank"
