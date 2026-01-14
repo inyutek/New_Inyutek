@@ -4,6 +4,8 @@ import { motion } from "framer-motion"
 import { ease } from "@/components/motion-presets"
 import { useState, useRef, useEffect } from "react"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
+import { Modal } from "@/components/ui/modal"
+import { HubSpotContactForm } from "@/components/ui/hubspot-contact-form"
 
 const PHONE_NUMBER = "9112235551"
 const WHATSAPP_NUMBER = "919112235551"
@@ -17,6 +19,7 @@ const CALL_LINK = `tel:${PHONE_NUMBER}`
 
 export function CTASection() {
     const [open, setOpen] = useState(false)
+    const [showHubSpotForm, setShowHubSpotForm] = useState(false)
     const ref = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
@@ -92,7 +95,10 @@ export function CTASection() {
                         {open && (
                             <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56 rounded-xl border border-black/10 bg-white shadow-lg overflow-hidden z-50 text-left">
                                 <div
-                                    onClick={() => setOpen(false)}
+                                    onClick={() => {
+                                        setOpen(false)
+                                        setShowHubSpotForm(true)
+                                    }}
                                     className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5 cursor-pointer"
                                 >
                                     Contact us
@@ -141,6 +147,10 @@ export function CTASection() {
                         )}
                     </div>
                 </motion.div>
+
+                <Modal isOpen={showHubSpotForm} onClose={() => setShowHubSpotForm(false)}>
+                    <HubSpotContactForm />
+                </Modal>
 
             </div>
         </section >
