@@ -148,7 +148,7 @@ export function Navbar() {
                                     className="px-4 py-2 hover:bg-gray-50 text-left transition-colors text-gray-600 hover:text-[#000024]"
                                     onClick={() => setResourcesOpen(false)}
                                 >
-                                    Blogs
+                                    Blog
                                 </Link>
                                 <Link
                                     href="/newsletter"
