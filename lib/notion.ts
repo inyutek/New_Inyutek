@@ -84,11 +84,12 @@ export async function getPosts(): Promise<BlogPost[]> {
                     const dateData = props[datePropId][0][1][0][1]
                     date = dateData.start_date
                 } catch (e) {
-                    console.log('Error parsing date', e)
+                    // Error parsing date, date remains empty
                 }
             }
 
-            if (status === 'Published' && slug) {
+            // Only include published posts with a slug
+            if (status?.toLowerCase() === 'published' && slug) {
                 posts.push({
                     id: blockId,
                     slug,
