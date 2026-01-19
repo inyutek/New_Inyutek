@@ -80,7 +80,7 @@ export function LogoMarquee() {
             <div className="relative flex overflow-x-hidden group">
                 {/* Marquee Container */}
                 <motion.div
-                    className="flex flex-nowrap gap-16 items-center"
+                    className="flex flex-nowrap items-center"
                     animate={{ x: [0, -1000] }}
                     transition={{
                         x: {
@@ -93,7 +93,7 @@ export function LogoMarquee() {
                 >
                     {/* Triple the logos for smoother infinite loop */}
                     {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
-                        <div key={index} className="flex flex-col items-center gap-2 text-[#000024] font-bold text-lg select-none shrink-0 transition-opacity hover:opacity-100 opacity-90">
+                        <div key={index} className="w-[200px] flex flex-col items-center gap-2 text-[#000024] font-bold text-lg select-none shrink-0 transition-opacity hover:opacity-100 opacity-90">
                             {logo.icon}
                             <span className="text-sm hidden md:block">{logo.name}</span>
                         </div>
