@@ -10,8 +10,8 @@ import { Navbar } from "@/components/navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Inyutek",
-  description: "Inyutek – Your company tagline here",
+  title: "Lead Generation & Digital Marketing Agency | Inyutek",
+  description: "Lead generation agency for local businesses & e-commerce. Funnels, ads, SEO and automation that turn traffic into qualified leads. Book a call.",
 };
 
 export default function RootLayout({
