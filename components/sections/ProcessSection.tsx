@@ -8,8 +8,8 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal"
 const processes = [
     {
         id: 1,
-        title: "Audit & diagnose",
-        description: "We find where money leaks: tracking gaps, offer clarity issues, page drop-offs, and conversion blockers.",
+        title: "Audit & Goals",
+        description: "We review your offer, funnel, tracking, and competitors—then define the KPI that matters: calls, bookings, or sales.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="12" cy="12" r="10" />
@@ -19,8 +19,8 @@ const processes = [
     },
     {
         id: 2,
-        title: "Funnel + offer plan",
-        description: "We map the buyer journey and design the pages, messages, and follow-up required to convert.",
+        title: "Funnel & Offer Strategy",
+        description: "Messaging, landing page structure, CTAs, follow-up flow, and a channel plan (Google, social, ads) based on intent.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M2 12h20"></path>
@@ -33,8 +33,8 @@ const processes = [
     },
     {
         id: 3,
-        title: "Build & launch",
-        description: "Landing pages, tracking, CRM, and campaigns — shipped fast with measurable KPIs.",
+        title: "Build & Launch",
+        description: "Landing pages, tracking, CRM automation, and ad/SEO execution—so leads can start coming in.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
@@ -43,8 +43,8 @@ const processes = [
     },
     {
         id: 4,
-        title: "Optimize & scale",
-        description: "Weekly iteration: improve conversion rate, lower CPL, and raise lead quality.",
+        title: "Optimize & Scale",
+        description: "We test creatives, keywords, pages, and follow-up to increase conversion rate and lower CPL—then scale what works.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
@@ -64,14 +64,14 @@ export function ProcessSection() {
                 <div className="max-w-2xl mb-12 md:mb-24">
                     <span className="text-xs font-bold text-[#000024] opacity-50 uppercase tracking-[0.2em] font-mono">Process</span>
                     <h2 className="mt-4 text-3xl md:text-5xl font-sans font-bold text-[#000024] tracking-tight leading-[1.1]">
-                        How we generate leads (without guessing)
+                        How we generate calls, bookings, and sales
                     </h2>
                     <p className="mt-6 text-xl text-gray-400 font-normal max-w-lg leading-relaxed">
-                        Four phases. One clear path from traffic → lead → booked call.
+                        A simple 4-step system: diagnose → build → launch → optimize. No guesswork, just measurable growth.
                     </p>
 
                     <Link href="/how-we-work" className="group flex items-center gap-2 mt-8 text-[#000024] font-medium hover:opacity-70 transition-all inline-flex w-fit">
-                        How we work
+                        How we Work
                         <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
@@ -139,6 +139,7 @@ export function ProcessSection() {
                                                     <p className="text-sm font-normal text-gray-500 leading-relaxed max-w-xs mx-auto">
                                                         {process.description}
                                                     </p>
+                                                    {/* Added subtitle for step if needed, or just keeping the single desc */}
                                                 </motion.div>
                                             )}
                                         </AnimatePresence>

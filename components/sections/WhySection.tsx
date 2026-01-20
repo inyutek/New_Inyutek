@@ -7,19 +7,28 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal"
 const features = [
     {
         icon: LayoutTemplate,
-        text: "Founder-led execution — no handoff to juniors after you sign"
+        title: "Conversion-first, not channel-first",
+        text: "We start with your offer + landing flow. Channels come second—because clicks don’t pay bills."
     },
     {
         icon: GitMerge,
-        text: "Conversion-first mindset — traffic is useless if it doesn’t convert"
+        title: "Full-funnel ownership",
+        text: "Ads/SEO + landing pages + tracking + follow-up. No silos, no finger-pointing."
     },
     {
         icon: Hash,
-        text: "Full-funnel ownership — landing page + ads + follow-up, not siloed work"
+        title: "Speed and execution",
+        text: "We build fast, launch early, and improve weekly—so you get momentum instead of long timelines."
     },
     {
         icon: Hash,
-        text: "Radical transparency — tracking, reporting, and what we changed"
+        title: "Transparent reporting",
+        text: "You’ll see what we changed, what improved, and what we’re testing next."
+    },
+    {
+        icon: Hash,
+        title: "Built for local + e-commerce",
+        text: "Calls, bookings, and lead quality for local services. Conversion and revenue metrics for e-commerce."
     }
 ]
 
@@ -43,7 +52,7 @@ export function WhySection() {
 
                         <Reveal delay={0.2}>
                             <p className="text-base md:text-sm font-normal text-gray-500 max-w-md leading-relaxed">
-                                Most agencies sell tasks. We build a lead system you can measure, improve, and scale.
+                                You’re not hiring us for “posts” or “ads.” You’re hiring a system that produces measurable leads and sales.
                             </p>
                         </Reveal>
 
@@ -54,9 +63,12 @@ export function WhySection() {
                                         <div className="flex-shrink-0 w-6 h-6 mt-1 text-gray-400 group-hover:text-[#000024] transition-colors">
                                             <item.icon className="w-full h-full" strokeWidth={1.5} />
                                         </div>
-                                        <p className="text-base md:text-sm font-medium text-gray-700">
-                                            {item.text}
-                                        </p>
+                                        <div>
+                                            <h3 className="font-bold text-[#000024] mb-1 text-sm md:text-base">{item.title}</h3>
+                                            <p className="text-sm text-gray-700 font-normal">
+                                                {item.text}
+                                            </p>
+                                        </div>
                                     </div>
                                 </Reveal>
                             ))}
@@ -65,7 +77,7 @@ export function WhySection() {
                         <Reveal delay={0.6}>
                             <div className="mt-8 p-6 bg-blue-50 border border-blue-100 rounded-lg">
                                 <p className="text-sm text-gray-700 font-medium">
-                                    <span className="font-bold text-[#000024]">No-Risk:</span> If we can’t identify clear conversion leaks + a practical action plan in the audit, you don’t move forward.
+                                    <span className="font-bold text-[#000024]">Our rule:</span> if we can’t identify clear conversion leaks and a practical action plan in the first audit, you don’t move forward.
                                 </p>
                             </div>
                         </Reveal>

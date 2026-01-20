@@ -21,9 +21,9 @@ const results = [
     },
     {
         id: 2,
-        title: "Cost per Lead (CPL)",
+        title: "Cost Per Lead (CPL) / CPA",
         metric: "Paid Efficiency",
-        description: "How much you pay for a qualified booking, tracked to revenue.",
+        description: "What you pay to generate a lead or sale—and how we reduce it over time.",
         icon: (
             <svg className="w-6 h-6 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="12" cy="12" r="10"></circle>
@@ -36,7 +36,7 @@ const results = [
         id: 3,
         title: "Lead Quality",
         metric: "Qualified vs Junk",
-        description: "We filter out bad fits so your sales team only talks to buyers.",
+        description: "Not just volume—are they qualified, ready-to-buy, and in your service area/budget?",
         icon: (
             <svg className="w-6 h-6 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -46,9 +46,9 @@ const results = [
     },
     {
         id: 4,
-        title: "Speed-to-Lead",
+        title: "Speed-to-Lead & Follow-Up Rate",
         metric: "Response Time",
-        description: "Automated follow-ups that engage leads within seconds.",
+        description: "Most local leads choose whoever responds first. We build systems that respond fast.",
         icon: (
             <svg className="w-6 h-6 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="12" cy="12" r="10"></circle>
@@ -58,9 +58,21 @@ const results = [
     },
     {
         id: 5,
+        title: "Funnel Drop-Offs",
+        metric: "Leaks",
+        description: "Where people abandon: landing page, form, checkout, or booking step—then we fix the leak.",
+        icon: (
+            <svg className="w-6 h-6 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+        )
+    },
+    {
+        id: 6,
         title: "Pipeline Visibility",
         metric: "CRM Tracking",
-        description: "See every lead's source and status in your CRM.",
+        description: "You can see where leads came from and what happened next—no blind spending.",
         icon: (
             <svg className="w-6 h-6 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
@@ -130,6 +142,7 @@ export function ResultsSection() {
                     </p>
 
                     <div className="flex flex-col gap-3 mt-2">
+                        <p className="font-semibold text-sm">Every engagement includes:</p>
                         {[
                             "A funnel map (your exact path to booked calls)",
                             "A conversion audit scorecard (top leaks + fixes)",
@@ -142,9 +155,10 @@ export function ResultsSection() {
                         ))}
                     </div>
 
-                    <div className="flex items-center gap-4 mt-4 w-full md:w-auto">
-                        <Link href="/case-studies" className="w-full md:w-auto justify-center bg-gray-100 py-4 rounded-xl md:bg-transparent md:p-0 md:text-sm font-semibold flex items-center gap-2 group text-gray-600 hover:text-[#000024] transition-colors">
-                            Read case study <span className="group-hover:translate-x-1 transition-transform">→</span>
+                    <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mt-4 w-full md:w-auto">
+                        <p className="font-bold text-[#000024] text-sm">Want an audit of your funnel?</p>
+                        <Link href="/contact" className="w-full md:w-auto justify-center bg-[#000024] text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 group transition-all hover:-translate-y-1">
+                            Get your free growth audit <span className="group-hover:translate-x-1 transition-transform">→</span>
                         </Link>
                     </div>
                 </div>

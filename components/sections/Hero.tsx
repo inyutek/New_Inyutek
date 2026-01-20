@@ -105,20 +105,19 @@ export function Hero() {
                         style={{ opacity: textOpacity, scale: textScale, y: textY }}
                     >
                         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#000024] leading-[1.1] mb-8 mx-auto">
-                            Lead generation that turns website traffic into qualified leads
+                            Lead generation that drives calls for local businesses and sales for e-commerce
                         </h1>
 
                         <div className="max-w-6xl mx-auto mb-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center text-left">
                             <p className="text-base md:text-lg font-normal text-gray-600 leading-relaxed">
-                                For local service businesses, ecommerce stores, and early-stage founders. We build
-                                conversion-first funnels, run performance marketing, and track every lead end-to-end.
+                                We build conversion-focused landing pages, run Google/Meta campaigns + SEO, and set up tracking + follow-up so leads don’t get lost.
                             </p>
 
                             <ul className="space-y-3 text-left">
                                 {[
-                                    "Fix your messaging so the right buyers instantly “get it”",
-                                    "Build landing pages & funnels designed to convert, not just look good",
-                                    "Launch + optimize campaigns across Google/Meta with clear reporting"
+                                    "More calls & bookings for service businesses Google + ads + local SEO",
+                                    "More purchases for e-commerce paid social + CRO + SEO",
+                                    "Clear tracking so you know what’s working and what’s wasting money"
                                 ].map((item, i) => (
                                     <li key={i} className="flex items-start text-gray-700 text-sm sm:text-base">
                                         <span className="mr-3 text-[#000024] font-bold">•</span>
@@ -134,7 +133,7 @@ export function Hero() {
                                     onClick={() => setBookOpen(!bookOpen)}
                                     className="w-full sm:w-auto px-6 py-3 bg-[#000024] text-white text-sm rounded-lg font-medium shadow-lg hover:opacity-90 transition-all hover:-translate-y-1 flex items-center justify-center min-w-[140px]"
                                 >
-                                    Book a free growth audit
+                                    Book a Free Growth Audit
                                 </button>
 
                                 {bookOpen && (
@@ -186,10 +185,10 @@ export function Hero() {
                                 }}
                                 className="w-full sm:w-auto px-6 py-3 bg-white text-[#000024] text-sm border border-[#000024]/20 rounded-lg font-medium hover:bg-gray-50 transition-all hover:-translate-y-1 flex items-center justify-center"
                             >
-                                See how we work
+                                See Our Process
                             </Link>
                         </div>
-                        30 minutes • practical diagnosis • no fluff
+                        30 minutes • practical action plan • no fluff
                     </motion.div>
                 </ScrollReveal>
 

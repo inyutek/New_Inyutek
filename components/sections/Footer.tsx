@@ -31,64 +31,37 @@ export default function Footer() {
                     {/* Left */}
                     <div className="md:col-span-2">
                         <h3 className="text-xl font-bold text-[#000024]">
-                            Inyutek
+                            Inyutek — Lead Generation & Digital Marketing
                         </h3>
 
                         <a
-                            href="mailto:Inyutek@gmail.com"
+                            href="mailto:hello@inyutek.com"
                             className="mt-2 block text-sm text-black/70 hover:opacity-70"
                         >
-                            Inyutek@gmail.com
+                            hello@inyutek.com
                         </a>
 
                         <p className="mt-3 text-base md:text-sm text-black/70 max-w-sm">
-                            Get insights on growth and strategy
+                            We help local service businesses and e-commerce brands generate more calls, bookings, and sales through funnels, ads, SEO, and automation.
                         </p>
 
-                        <div className="mt-8 flex flex-col md:flex-row gap-2">
-                            <input
-                                type="email"
-                                placeholder="Your email"
-                                className="w-full rounded-md border border-black/10 px-4 py-2.5 text-sm outline-none"
-                            />
 
-                            <button
-                                className="w-full md:w-auto rounded-md px-4 py-2.5 text-sm border transition-all hover:-translate-y-1"
-                                style={{
-                                    borderColor: BRAND_COLOR,
-                                    color: BRAND_COLOR,
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.backgroundColor = BRAND_COLOR
-                                    e.currentTarget.style.color = "#fff"
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.backgroundColor = "transparent"
-                                    e.currentTarget.style.color = BRAND_COLOR
-                                }}
-                            >
-                                Subscribe
-                            </button>
-                        </div>
-
-                        <p className="mt-2 text-xs text-black/50">
-                            We respect your privacy. Unsubscribe anytime.
-                        </p>
                     </div>
 
                     <FooterColumn
-                        title="Stay in the loop"
-                        items={["About us", "Our process", "Case studies", "Contact us", "Book a call"]}
+                        title="Quick Links"
+                        items={["Home", "Services", "Process", "About", "Contact / Book a Call"]}
                     />
 
                     <FooterColumn
-                        title="Company"
+                        title="Services"
                         items={[
-                            "Lead generation",
-                            "Growth marketing",
-                            "Web strategy",
-                            "Conversion audit",
-                            "Digital consulting",
+                            "Local SEO Services",
+                            "Google Ads Management",
+                            "Social Media Marketing",
+                            "Ecommerce Marketing",
+                            "Conversion Rate Optimization (CRO)",
+                            "CRM & Marketing Automation"
                         ]}
                     />
 
@@ -116,7 +89,7 @@ export default function Footer() {
 
             {/* Bottom */}
             <div className="max-w-7xl mx-auto mt-10 flex flex-col md:flex-row items-center justify-between px-6 text-xs text-black/60">
-                <p>© 2025 Inyutek Enterprises. All rights reserved.</p>
+                <p>© 2026 Inyutek. All rights reserved.</p>
                 <div className="flex gap-5 mt-3 md:mt-0">
                     <Link href="/privacy-policy" className="hover:opacity-70 cursor-pointer">Privacy policy</Link>
                     <Link href="/terms-of-service" className="hover:opacity-70 cursor-pointer">Terms of service</Link>

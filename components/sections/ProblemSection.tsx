@@ -7,8 +7,8 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal"
 const problems = [
     {
         id: 0,
-        title: "Traffic without conversion",
-        description: "Clicks come in, customers don’t.",
+        title: "You’re getting views, not customers",
+        description: "People land on your site, scroll, and leave because the offer isn’t instantly clear or compelling.",
         imageColor: "bg-gray-200", // Placeholder for different images
         icon: (
             <svg className="w-24 h-24 opacity-30" viewBox="0 0 24 24" fill="currentColor">
@@ -19,8 +19,8 @@ const problems = [
     },
     {
         id: 1,
-        title: "Messaging that misses",
-        description: "Your offer doesn’t match how buyers decide.",
+        title: "Your funnel has friction",
+        description: "Too many steps, slow pages, confusing forms, no WhatsApp/call-first path — leads drop before they convert.",
         imageColor: "bg-blue-100", // Just to differentiate visually for now
         icon: (
             <svg className="w-24 h-24 opacity-30" viewBox="0 0 24 24" fill="currentColor">
@@ -30,8 +30,8 @@ const problems = [
     },
     {
         id: 2,
-        title: "Funnels that leak",
-        description: "Leads drop because the next step isn’t obvious.",
+        title: "You can’t track what’s working",
+        description: "If you don’t know which channel, keyword, or ad created the lead, you can’t scale profitably.",
         imageColor: "bg-red-100", // Just to differentiate visually for now
         icon: (
             <svg className="w-24 h-24 opacity-30" viewBox="0 0 24 24" fill="currentColor">
@@ -155,11 +155,13 @@ export function ProblemSection() {
                 <div className="mx-auto max-w-3xl text-center mb-16 md:mb-24">
 
                     <h2 className="text-3xl font-bold tracking-tight text-[#000024] sm:text-3xl mb-6">
-                        Your website isn&apos;t built to sell
+                        Most businesses don’t have a traffic problem — they have a conversion problem
                     </h2>
-                    <p className="text-base md:text-sm font-normal leading-relaxed text-gray-600 max-w-2xl mx-auto mb-8">
-                        If you’re getting traffic but not leads, you don’t have a traffic problem — you have a
-                        conversion and clarity problem.
+                    <p className="text-base md:text-sm font-normal leading-relaxed text-gray-600 max-w-2xl mx-auto mb-2">
+                        You can get attention from Google, ads, or social — but if your message is unclear and your funnel is weak, visitors don’t become calls, bookings, or purchases. We fix the leaks that kill conversion.
+                    </p>
+                    <p className="text-sm font-bold text-[#000024] max-w-2xl mx-auto mb-8">
+                        Result: wasted ad spend, inconsistent lead flow, and low-quality inquiries.
                     </p>
                 </div>
 

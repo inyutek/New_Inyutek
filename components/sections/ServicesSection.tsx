@@ -8,8 +8,8 @@ import { motion, useScroll, useTransform } from "framer-motion"
 const services = [
     {
         id: 1,
-        title: "Conversion-first websites & landing pages",
-        description: "Pages designed around buyer intent, not aesthetics. Clear offer, proof blocks, and frictionless booking.",
+        title: "Conversion-Focused Websites & Landing Pages (CRO)",
+        description: "Turn visitors into calls, WhatsApp chats, bookings, and purchases with clear messaging, fast pages, and strong CTAs.",
         icon: (
             <svg className="w-8 h-8 md:w-10 md:h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="12" cy="12" r="10" />
@@ -19,8 +19,8 @@ const services = [
     },
     {
         id: 2,
-        title: "Paid ads (Google + Meta) & performance marketing",
-        description: "Campaigns built for qualified leads — with tight targeting, fast testing, and CPL tracked to revenue signals.",
+        title: "Paid Ads Management (Google + Meta)",
+        description: "Launch and optimize campaigns built for qualified leads, not vanity metrics—tracking CPL and lead quality from day one.",
         icon: (
             <svg className="w-8 h-8 md:w-10 md:h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
@@ -31,8 +31,8 @@ const services = [
     },
     {
         id: 3,
-        title: "SEO & content for high-intent search",
-        description: "Rank for “ready-to-buy” keywords that bring leads without paying for every click.",
+        title: "SEO That Brings Ready-to-Buy Customers",
+        description: "Target high-intent keywords like “near me”, “best + service”, and product/category searches to drive consistent inbound leads.",
         icon: (
             <svg className="w-8 h-8 md:w-10 md:h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -45,13 +45,34 @@ const services = [
     },
     {
         id: 4,
-        title: "CRM setup + automation (nurture + follow-up)",
-        description: "Stop losing leads after the form fill. Automations that book calls, recover drop-offs, and follow up consistently.",
+        title: "Social Media Marketing (Organic + Paid Social)",
+        description: "Content + campaigns that earn attention and move people to action—DMs, inquiries, and site conversions.",
+        icon: (
+            <svg className="w-8 h-8 md:w-10 md:h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+        )
+    },
+    {
+        id: 5,
+        title: "CRM Setup & Automation",
+        description: "Stop losing leads after the form fill. Automations for speed-to-lead, reminders, nurturing, and reactivation.",
         icon: (
             <svg className="w-8 h-8 md:w-10 md:h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
                 <line x1="8" y1="21" x2="16" y2="21"></line>
                 <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+        )
+    },
+    {
+        id: 6,
+        title: "Tracking & Analytics",
+        description: "GA4, pixels, conversion events, dashboards—so every channel is measurable and scalable.",
+        icon: (
+            <svg className="w-8 h-8 md:w-10 md:h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M3 3v18h18"></path>
+                <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path>
             </svg>
         )
     }
@@ -96,7 +117,11 @@ function MobileServices() {
                 >
                     <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80">Services</div>
                     <h3 className="text-2xl font-bold mb-4">Services built to create <br /> consistent lead flow</h3>
-                    <p className="text-base font-normal opacity-80 mb-8">Pick one growth lever or let us build the full lead system.</p>
+                    <p className="text-base font-normal opacity-80 mb-2">Pick one growth lever—or let us build the full lead system end-to-end (strategy → execution → optimization).</p>
+                    <p className="text-xs font-normal opacity-60 mb-8">
+                        • Local services: Local SEO + Google Ads + booking/WhatsApp funnels<br />
+                        • E-commerce: Product/category SEO + paid social + conversion rate optimization
+                    </p>
                     <div className="flex justify-center">
                         <Link href="/services" className="w-full">
                             <button className="w-full px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 transition-all">
@@ -180,7 +205,11 @@ function DesktopServices() {
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 text-white">
                             <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80">Services</div>
                             <h3 className="text-2xl md:text-3xl font-bold mb-4">Services built to create <br /> consistent lead flow</h3>
-                            <p className="text-base md:text-sm font-normal opacity-80 max-w-md mb-8">Pick one growth lever or let us build the full lead system.</p>
+                            <p className="text-base md:text-sm font-normal opacity-80 max-w-md mb-2">Pick one growth lever—or let us build the full lead system end-to-end (strategy → execution → optimization).</p>
+                            <p className="text-xs font-normal opacity-60 max-w-md mb-8">
+                                • Local services: Local SEO + Google Ads + booking/WhatsApp funnels<br />
+                                • E-commerce: Product/category SEO + paid social + conversion rate optimization
+                            </p>
                             <div className="flex gap-4 w-full md:w-auto">
                                 <Link href="/services" className="w-full md:w-auto">
                                     <button className="w-full md:w-auto px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-1">
@@ -199,29 +228,41 @@ function DesktopServices() {
                     >
                         <div className="relative w-full h-full overflow-hidden">
 
-                            {/* GROUP 1 (Base Layer) - Services 1 & 2 */}
+                            {/* GROUP 1 (Base Layer) - Services 1, 2, 3 */}
                             <motion.div
                                 style={{ y: groupOneY, opacity: groupOneOpacity }}
-                                className="absolute inset-0 w-full h-full flex flex-col gap-6"
+                                className="absolute inset-0 w-full h-full flex flex-col gap-4 p-4 md:p-0"
                             >
                                 <ServiceCard
                                     data={services[0]}
+                                    className="scale-90"
                                 />
                                 <ServiceCard
                                     data={services[1]}
+                                    className="scale-90"
+                                />
+                                <ServiceCard
+                                    data={services[2]}
+                                    className="scale-90"
                                 />
                             </motion.div>
 
-                            {/* GROUP 2 (Slide Layer) - Services 3 & 4 */}
+                            {/* GROUP 2 (Slide Layer) - Services 4, 5, 6 */}
                             <motion.div
                                 style={{ y: groupTwoY }}
-                                className="absolute inset-0 w-full h-full flex flex-col gap-6"
+                                className="absolute inset-0 w-full h-full flex flex-col gap-4 p-4 md:p-0"
                             >
                                 <ServiceCard
-                                    data={services[2]}
+                                    data={services[3]}
+                                    className="scale-90"
                                 />
                                 <ServiceCard
-                                    data={services[3]}
+                                    data={services[4]}
+                                    className="scale-90"
+                                />
+                                <ServiceCard
+                                    data={services[5]}
+                                    className="scale-90"
                                 />
                             </motion.div>
 

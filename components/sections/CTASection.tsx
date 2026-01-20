@@ -47,7 +47,7 @@ export function CTASection() {
                         transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
                         className="text-3xl md:text-5xl font-bold text-[#000024] tracking-tight leading-tight"
                     >
-                        Ready to turn traffic into leads?
+                        Ready for more calls, bookings, and sales?
                     </motion.h2>
                 </ScrollReveal>
 
@@ -59,7 +59,7 @@ export function CTASection() {
                     transition={{ duration: 0.6, ease, delay: 0.4 }}
                     className="mt-6 text-base md:text-sm font-normal text-gray-500 max-w-lg mx-auto"
                 >
-                    Book a 30-minute strategy call. We’ll diagnose your funnel and give you the next 3 highest impact moves.
+                    Book a free 30-minute growth audit. We’ll diagnose your funnel and give you the next 3 highest impact moves.
                 </motion.p>
 
                 {/* Buttons */}
@@ -76,7 +76,7 @@ export function CTASection() {
                             onClick={() => setOpen((v) => !v)}
                             className="w-full md:w-auto px-8 py-3 bg-[#000024] text-white rounded-md font-medium shadow-lg hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
                         >
-                            Schedule a free call
+                            Book a free growth audit
                         </button>
 
                         {open && (
@@ -143,7 +143,8 @@ export function CTASection() {
                     transition={{ duration: 0.6, ease, delay: 0.7 }}
                     className="mt-8 text-xs text-gray-400 max-w-md mx-auto italic"
                 >
-                    Not a fit if you want vanity metrics, “brand awareness only,” or you’re not ready to track leads properly.
+                    Limited slots weekly • 30 minutes • real recommendations <br />
+                    <span className="opacity-70 mt-4 block">Not a fit if you want vanity metrics, overnight miracles, or you’re not ready to track leads properly</span>
                 </motion.p>
 
                 <Modal isOpen={showHubSpotForm} onClose={() => setShowHubSpotForm(false)}>
