@@ -6,16 +6,20 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal"
 
 const features = [
     {
-        icon: LayoutTemplate, // Placeholder for "Leads come first"
-        text: "Leads come first. Everything else serves that."
+        icon: LayoutTemplate,
+        text: "Founder-led execution — no handoff to juniors after you sign"
     },
     {
-        icon: GitMerge, // Placeholder for "Strategy and execution"
-        text: "Strategy and execution happen together, not in silos."
+        icon: GitMerge,
+        text: "Conversion-first mindset — traffic is useless if it doesn’t convert"
     },
     {
-        icon: Hash, // Placeholder for "We show you the numbers"
-        text: "We show you the numbers. No smoke, no spin."
+        icon: Hash,
+        text: "Full-funnel ownership — landing page + ads + follow-up, not siloed work"
+    },
+    {
+        icon: Hash,
+        text: "Radical transparency — tracking, reporting, and what we changed"
     }
 ]
 
@@ -28,18 +32,18 @@ export function WhySection() {
                     {/* LEFT: Content */}
                     <div className="flex flex-col gap-8">
                         <Reveal>
-                            <span className="text-sm font-semibold text-gray-900">Why</span>
+                            <span className="text-sm font-semibold text-gray-900">Why Inyutek</span>
                         </Reveal>
 
                         <Reveal delay={0.1}>
                             <h2 className="text-2xl md:text-3xl font-bold text-[#000024] tracking-tight leading-[1.1]">
-                                We think differently about growth
+                                Why Inyutek
                             </h2>
                         </Reveal>
 
                         <Reveal delay={0.2}>
                             <p className="text-base md:text-sm font-normal text-gray-500 max-w-md leading-relaxed">
-                                Most agencies sell services. We sell results. We don't move on until your leads move the needle.
+                                Most agencies sell tasks. We build a lead system you can measure, improve, and scale.
                             </p>
                         </Reveal>
 
@@ -57,6 +61,14 @@ export function WhySection() {
                                 </Reveal>
                             ))}
                         </div>
+
+                        <Reveal delay={0.6}>
+                            <div className="mt-8 p-6 bg-blue-50 border border-blue-100 rounded-lg">
+                                <p className="text-sm text-gray-700 font-medium">
+                                    <span className="font-bold text-[#000024]">No-Risk:</span> If we can’t identify clear conversion leaks + a practical action plan in the audit, you don’t move forward.
+                                </p>
+                            </div>
+                        </Reveal>
 
 
                     </div>

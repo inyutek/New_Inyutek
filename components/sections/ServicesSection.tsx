@@ -8,8 +8,8 @@ import { motion, useScroll, useTransform } from "framer-motion"
 const services = [
     {
         id: 1,
-        title: "Website design built for conversion",
-        description: "Map your buyer journey and fix the leaks.",
+        title: "Conversion-first websites & landing pages",
+        description: "Pages designed around buyer intent, not aesthetics. Clear offer, proof blocks, and frictionless booking.",
         icon: (
             <svg className="w-8 h-8 md:w-10 md:h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="12" cy="12" r="10" />
@@ -19,8 +19,8 @@ const services = [
     },
     {
         id: 2,
-        title: "Paid traffic and performance marketing",
-        description: "Build a site that turns visitors into leads.",
+        title: "Paid ads (Google + Meta) & performance marketing",
+        description: "Campaigns built for qualified leads — with tight targeting, fast testing, and CPL tracked to revenue signals.",
         icon: (
             <svg className="w-8 h-8 md:w-10 md:h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
@@ -31,20 +31,8 @@ const services = [
     },
     {
         id: 3,
-        title: "CRM Integration & Automation",
-        description: "Systems that nurture leads while you sleep.",
-        icon: (
-            <svg className="w-8 h-8 md:w-10 md:h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                <line x1="8" y1="21" x2="16" y2="21"></line>
-                <line x1="12" y1="17" x2="12" y2="21"></line>
-            </svg>
-        )
-    },
-    {
-        id: 4,
-        title: "Content Strategy & SEO",
-        description: "Drive organic traffic that is ready to buy.",
+        title: "SEO & content for high-intent search",
+        description: "Rank for “ready-to-buy” keywords that bring leads without paying for every click.",
         icon: (
             <svg className="w-8 h-8 md:w-10 md:h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -52,6 +40,18 @@ const services = [
                 <line x1="16" y1="13" x2="8" y2="13"></line>
                 <line x1="16" y1="17" x2="8" y2="17"></line>
                 <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+        )
+    },
+    {
+        id: 4,
+        title: "CRM setup + automation (nurture + follow-up)",
+        description: "Stop losing leads after the form fill. Automations that book calls, recover drop-offs, and follow up consistently.",
+        icon: (
+            <svg className="w-8 h-8 md:w-10 md:h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
             </svg>
         )
     }
@@ -95,12 +95,12 @@ function MobileServices() {
                     className="w-full bg-black rounded-3xl overflow-hidden shadow-xl p-8 text-white min-h-[400px] flex flex-col justify-center text-center"
                 >
                     <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80">Services</div>
-                    <h3 className="text-2xl font-bold mb-4">Lead generation <br /> strategy and funnel <br /> design</h3>
-                    <p className="text-base font-normal opacity-80 mb-8">Solve the core problems killing your lead flow</p>
+                    <h3 className="text-2xl font-bold mb-4">Services built to create <br /> consistent lead flow</h3>
+                    <p className="text-base font-normal opacity-80 mb-8">Pick one growth lever or let us build the full lead system.</p>
                     <div className="flex justify-center">
-                        <Link href="/what-we-do" className="w-full">
+                        <Link href="/services" className="w-full">
                             <button className="w-full px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 transition-all">
-                                Explore
+                                Explore services →
                             </button>
                         </Link>
                     </div>
@@ -179,12 +179,12 @@ function DesktopServices() {
                         </div>
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 text-white">
                             <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80">Services</div>
-                            <h3 className="text-2xl md:text-3xl font-bold mb-4">Lead generation <br /> strategy and funnel <br /> design</h3>
-                            <p className="text-base md:text-sm font-normal opacity-80 max-w-md mb-8">Solve the core problems killing your lead flow</p>
+                            <h3 className="text-2xl md:text-3xl font-bold mb-4">Services built to create <br /> consistent lead flow</h3>
+                            <p className="text-base md:text-sm font-normal opacity-80 max-w-md mb-8">Pick one growth lever or let us build the full lead system.</p>
                             <div className="flex gap-4 w-full md:w-auto">
-                                <Link href="/what-we-do" className="w-full md:w-auto">
+                                <Link href="/services" className="w-full md:w-auto">
                                     <button className="w-full md:w-auto px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-1">
-                                        Explore
+                                        Explore services →
                                     </button>
                                 </Link>
                             </div>

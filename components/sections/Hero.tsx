@@ -104,14 +104,29 @@ export function Hero() {
                     <motion.div
                         style={{ opacity: textOpacity, scale: textScale, y: textY }}
                     >
-                        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#000024] leading-[1.1] mb-8">
-                            Turn website traffic into
-                            <br className="hidden sm:block" /> qualified leads
+                        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#000024] leading-[1.1] mb-8 mx-auto">
+                            Lead generation that drives calls for local businesses and sales for ecommerce
                         </h1>
-                        <p className="text-base md:text-sm font-normal text-gray-600 max-w-2xl mx-auto leading-relaxed mb-10">
-                            Most SMBs waste money on traffic that never converts. We build funnels
-                            that turn visitors into customers.
-                        </p>
+
+                        <div className="max-w-4xl mx-auto mb-10 text-center">
+                            <p className="text-base md:text-lg font-normal text-gray-600 leading-relaxed max-w-2xl mx-auto">
+                                For local service businesses, ecommerce stores, and early-stage founders. We build
+                                conversion-first funnels, run performance marketing, and track every lead end-to-end.
+                            </p>
+
+                            {/* <ul className="space-y-3">
+                                {[
+                                    "Fix your messaging so the right buyers instantly “get it”",
+                                    "Build landing pages & funnels designed to convert, not just look good",
+                                    "Launch + optimize campaigns across Google/Meta with clear reporting"
+                                ].map((item, i) => (
+                                    <li key={i} className="flex items-start text-gray-700 text-sm sm:text-base">
+                                        <span className="mr-3 text-[#000024] font-bold">•</span>
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul> */}
+                        </div>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto">
                             {/* Book Call Button with Dropdown */}
                             <div className="relative w-full sm:w-auto" ref={bookRef}>
@@ -119,7 +134,7 @@ export function Hero() {
                                     onClick={() => setBookOpen(!bookOpen)}
                                     className="w-full sm:w-auto px-6 py-3 bg-[#000024] text-white text-sm rounded-lg font-medium shadow-lg hover:opacity-90 transition-all hover:-translate-y-1 flex items-center justify-center min-w-[140px]"
                                 >
-                                    Book a call
+                                    Book a free growth audit
                                 </button>
 
                                 {bookOpen && (
@@ -171,9 +186,12 @@ export function Hero() {
                                 }}
                                 className="w-full sm:w-auto px-6 py-3 bg-white text-[#000024] text-sm border border-[#000024]/20 rounded-lg font-medium hover:bg-gray-50 transition-all hover:-translate-y-1 flex items-center justify-center"
                             >
-                                Learn More
+                                See how we work
                             </Link>
                         </div>
+                        <p className="mt-4 text-xs text-gray-500 font-medium">
+                            30 minutes • practical diagnosis • no fluff
+                        </p>
                     </motion.div>
                 </ScrollReveal>
 

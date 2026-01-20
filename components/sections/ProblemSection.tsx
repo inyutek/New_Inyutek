@@ -8,7 +8,7 @@ const problems = [
     {
         id: 0,
         title: "Traffic without conversion",
-        description: "You're paying for clicks that don't move the needle. Visitors land, scroll, and leave without taking action.",
+        description: "Clicks come in, customers don’t.",
         imageColor: "bg-gray-200", // Placeholder for different images
         icon: (
             <svg className="w-24 h-24 opacity-30" viewBox="0 0 24 24" fill="currentColor">
@@ -20,7 +20,7 @@ const problems = [
     {
         id: 1,
         title: "Messaging that misses",
-        description: "Your value proposition doesn't land with the right buyers. The words on your site don't match how your customers think.",
+        description: "Your offer doesn’t match how buyers decide.",
         imageColor: "bg-blue-100", // Just to differentiate visually for now
         icon: (
             <svg className="w-24 h-24 opacity-30" viewBox="0 0 24 24" fill="currentColor">
@@ -31,7 +31,7 @@ const problems = [
     {
         id: 2,
         title: "Funnels that leak",
-        description: "Even good leads drop off because your process is unclear. There's no clear path from awareness to decision.",
+        description: "Leads drop because the next step isn’t obvious.",
         imageColor: "bg-red-100", // Just to differentiate visually for now
         icon: (
             <svg className="w-24 h-24 opacity-30" viewBox="0 0 24 24" fill="currentColor">
@@ -153,13 +153,13 @@ export function ProblemSection() {
 
                 {/* Shared Header */}
                 <div className="mx-auto max-w-3xl text-center mb-16 md:mb-24">
-                    <div className="text-sm font-semibold leading-7 text-gray-900 mb-4">Problem</div>
+
                     <h2 className="text-3xl font-bold tracking-tight text-[#000024] sm:text-3xl mb-6">
                         Your website isn&apos;t built to sell
                     </h2>
                     <p className="text-base md:text-sm font-normal leading-relaxed text-gray-600 max-w-2xl mx-auto mb-8">
-                        You&apos;re getting traffic but no leads. Your messaging doesn&apos;t speak to what buyers actually
-                        need, and your funnel leaks money at every stage.
+                        If you’re getting traffic but not leads, you don’t have a traffic problem — you have a
+                        conversion and clarity problem.
                     </p>
                 </div>
 

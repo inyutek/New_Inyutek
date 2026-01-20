@@ -5,34 +5,68 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
 
-const testimonials = [
+const results = [
     {
         id: 1,
-        quote: "We went from 12 leads a month to 200 in six months. Inyutek didn't just build a site, they rebuilt how we sell.",
-        author: "Rajesh Kumar",
-        role: "Founder, SaaS startup",
-        initials: "RK",
+        title: "Conversion Rate (CVR)",
+        metric: "Visitor → Lead",
+        description: "The % of traffic that actually turns into a qualified lead.",
+        icon: (
+            <svg className="w-6 h-6 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M12 20V10"></path>
+                <path d="M18 20V4"></path>
+                <path d="M6 20v-4"></path>
+            </svg>
+        )
     },
     {
         id: 2,
-        quote: "Our conversion rate tripled. They understood our market better than we did and proved it with numbers.",
-        author: "Priya Sharma",
-        role: "Marketing director, B2B",
-        initials: "PS",
+        title: "Cost per Lead (CPL)",
+        metric: "Paid Efficiency",
+        description: "How much you pay for a qualified booking, tracked to revenue.",
+        icon: (
+            <svg className="w-6 h-6 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        )
     },
     {
         id: 3,
-        quote: "No fluff. No promises. Just a clear plan and execution that moved the dial on our revenue.",
-        author: "Marcus Chen",
-        role: "CEO, Digital agency",
-        initials: "MC",
+        title: "Lead Quality",
+        metric: "Qualified vs Junk",
+        description: "We filter out bad fits so your sales team only talks to buyers.",
+        icon: (
+            <svg className="w-6 h-6 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+        )
     },
     {
         id: 4,
-        quote: "They mapped our entire buyer journey and found where we were losing deals. Six months later, our pipeline doubled.",
-        author: "Vikram Patel",
-        role: "Founder, B2B SaaS",
-        initials: "VP",
+        title: "Speed-to-Lead",
+        metric: "Response Time",
+        description: "Automated follow-ups that engage leads within seconds.",
+        icon: (
+            <svg className="w-6 h-6 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+        )
+    },
+    {
+        id: 5,
+        title: "Pipeline Visibility",
+        metric: "CRM Tracking",
+        description: "See every lead's source and status in your CRM.",
+        icon: (
+            <svg className="w-6 h-6 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+        )
     }
 ]
 
@@ -45,7 +79,7 @@ export function ResultsSection() {
         if (!isAutoScrolling) return
 
         const interval = setInterval(() => {
-            setActiveIndex((prev) => (prev + 1) % testimonials.length)
+            setActiveIndex((prev) => (prev + 1) % results.length)
         }, 3000)
 
         return () => clearInterval(interval)
@@ -75,7 +109,7 @@ export function ResultsSection() {
                 setActiveIndex((prev) => {
                     const next = prev + direction
                     // Handle modulo for negative numbers correctly
-                    return (next % testimonials.length + testimonials.length) % testimonials.length
+                    return (next % results.length + results.length) % results.length
                 })
             }
         }
@@ -90,8 +124,23 @@ export function ResultsSection() {
 
                 {/* LEFT: Static Header */}
                 <div className="flex flex-col gap-6 max-w-lg">
-                    <h2 className="text-2xl md:text-3xl font-bold text-[#000024] tracking-tight">Real results</h2>
-                    <p className="text-base md:text-sm font-normal text-gray-500">Companies that trusted us grew their lead flow</p>
+                    <h2 className="text-2xl md:text-3xl font-bold text-[#000024] tracking-tight">What we measure and improve</h2>
+                    <p className="text-base md:text-sm font-normal text-gray-500">
+                        No inflated promises — just the metrics that decide whether marketing is profitable.
+                    </p>
+
+                    <div className="flex flex-col gap-3 mt-2">
+                        {[
+                            "A funnel map (your exact path to booked calls)",
+                            "A conversion audit scorecard (top leaks + fixes)",
+                            "A simple dashboard (traffic, leads, CPL, bookings)"
+                        ].map((item, i) => (
+                            <div key={i} className="flex items-center gap-3 text-sm text-gray-700">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#000024]"></span>
+                                {item}
+                            </div>
+                        ))}
+                    </div>
 
                     <div className="flex items-center gap-4 mt-4 w-full md:w-auto">
                         <Link href="/case-studies" className="w-full md:w-auto justify-center bg-gray-100 py-4 rounded-xl md:bg-transparent md:p-0 md:text-sm font-semibold flex items-center gap-2 group text-gray-600 hover:text-[#000024] transition-colors">
@@ -122,13 +171,13 @@ export function ResultsSection() {
 
                             {/* Cards Container */}
                             <div className="absolute inset-0 top-8 p-6 flex items-center justify-center">
-                                {testimonials.map((item, index) => {
+                                {results.map((item, index) => {
                                     // Calculate position relative to active index
                                     // dist 0: Active
                                     // dist 1: Next (Waiting at bottom)
                                     // dist 2: Back hidden
                                     // dist 3: Prev (Behind active)
-                                    const dist = (index - activeIndex + testimonials.length) % testimonials.length
+                                    const dist = (index - activeIndex + results.length) % results.length
 
                                     let zIndex = 0
                                     let y = "0%"
@@ -178,19 +227,21 @@ export function ResultsSection() {
                                                 duration: dist === 1 ? 0 : 0.5, // Instant reset for 'Next' position
                                                 ease: "easeInOut"
                                             }}
-                                            className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between origin-top"
+                                            className="absolute w-full h-full bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col justify-start gap-4 origin-top"
                                         >
-                                            <Stars />
-                                            <p className="text-lg text-gray-700 leading-relaxed">"{item.quote}"</p>
-                                            <div className="flex items-center gap-3 mt-4">
-                                                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">
-                                                    {item.initials}
+                                            <div className="flex items-center gap-3 mb-2">
+                                                <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">
+                                                    {item.icon}
                                                 </div>
                                                 <div>
-                                                    <p className="text-sm font-bold text-[#000024]">{item.author}</p>
-                                                    <p className="text-xs text-gray-500">{item.role}</p>
+                                                    <h4 className="font-bold text-[#000024] text-lg">{item.title}</h4>
+                                                    <div className="text-xs font-mono uppercase tracking-wide text-gray-400">{item.metric}</div>
                                                 </div>
                                             </div>
+
+                                            <p className="text-base text-gray-600 leading-relaxed">
+                                                {item.description}
+                                            </p>
                                         </motion.div>
                                     )
                                 })}
@@ -205,14 +256,4 @@ export function ResultsSection() {
     )
 }
 
-function Stars() {
-    return (
-        <div className="flex gap-1">
-            {[1, 2, 3, 4, 5].map(i => (
-                <svg key={i} className="w-5 h-5 text-[#000024] fill-current" viewBox="0 0 24 24">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                </svg>
-            ))}
-        </div>
-    )
-}
+

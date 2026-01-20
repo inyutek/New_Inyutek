@@ -40,8 +40,6 @@ export function CTASection() {
 
                 {/* Headline Container */}
                 <ScrollReveal enableDesktop={false} className="flex flex-col items-center justify-center gap-1 md:gap-2">
-
-                    {/* Line 1 */}
                     <motion.h2
                         initial={{ opacity: 0, y: 40, x: 0, rotate: 0 }}
                         whileInView={{ opacity: 1, y: 0, x: 0, rotate: 0 }}
@@ -49,18 +47,7 @@ export function CTASection() {
                         transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
                         className="text-3xl md:text-5xl font-bold text-[#000024] tracking-tight leading-tight"
                     >
-                        Ready to talk
-                    </motion.h2>
-
-                    {/* Line 2 */}
-                    <motion.h2
-                        initial={{ opacity: 0, y: 40, x: 0, rotate: 0 }}
-                        whileInView={{ opacity: 1, y: 0, x: 0, rotate: 0 }}
-                        viewport={{ once: false, margin: "-100px" }}
-                        transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1], delay: 0.15 }}
-                        className="text-3xl md:text-5xl font-bold text-[#000024] tracking-tight leading-tight"
-                    >
-                        Not the right fit
+                        Ready to turn traffic into leads?
                     </motion.h2>
                 </ScrollReveal>
 
@@ -72,7 +59,7 @@ export function CTASection() {
                     transition={{ duration: 0.6, ease, delay: 0.4 }}
                     className="mt-6 text-base md:text-sm font-normal text-gray-500 max-w-lg mx-auto"
                 >
-                    A strategy call is 30 minutes. We listen, diagnose, and show you what's possible.
+                    Book a 30-minute strategy call. We’ll diagnose your funnel and give you the next 3 highest impact moves.
                 </motion.p>
 
                 {/* Buttons */}
@@ -147,6 +134,17 @@ export function CTASection() {
                         )}
                     </div>
                 </motion.div>
+
+                {/* Disclaimer */}
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, ease, delay: 0.7 }}
+                    className="mt-8 text-xs text-gray-400 max-w-md mx-auto italic"
+                >
+                    Not a fit if you want vanity metrics, “brand awareness only,” or you’re not ready to track leads properly.
+                </motion.p>
 
                 <Modal isOpen={showHubSpotForm} onClose={() => setShowHubSpotForm(false)}>
                     <HubSpotContactForm />
