@@ -101,13 +101,13 @@ export function Navbar() {
                         href="/what-we-do"
                         className={`transition-colors ${pathname === "/what-we-do" ? "text-[#010B13] font-bold" : "hover:text-[#000024]"}`}
                     >
-                        Services
+                        What We Do
                     </Link>
                     <Link
                         href="/how-we-work"
                         className={`transition-colors ${pathname === "/how-we-work" ? "text-[#010B13] font-bold" : "hover:text-[#000024]"}`}
                     >
-                        Process
+                        How We Work
                     </Link>
                     <Link
                         href="/about"
@@ -247,10 +247,10 @@ export function Navbar() {
                             </Link>
                         )}
                         <Link href="/what-we-do" className="text-base font-medium text-gray-700 py-2 border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>
-                            Services
+                            What We Do
                         </Link>
                         <Link href="/how-we-work" className="text-base font-medium text-gray-700 py-2 border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>
-                            Process
+                            How We Work
                         </Link>
                         <Link href="/about" className="text-base font-medium text-gray-700 py-2 border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>
                             About

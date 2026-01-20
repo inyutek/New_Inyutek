@@ -105,16 +105,16 @@ export function Hero() {
                         style={{ opacity: textOpacity, scale: textScale, y: textY }}
                     >
                         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#000024] leading-[1.1] mb-8 mx-auto">
-                            Lead generation that drives calls for local businesses and sales for ecommerce
+                            Lead generation that turns website traffic into qualified leads
                         </h1>
 
-                        <div className="max-w-4xl mx-auto mb-10 text-center">
-                            <p className="text-base md:text-lg font-normal text-gray-600 leading-relaxed max-w-2xl mx-auto">
+                        <div className="max-w-6xl mx-auto mb-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center text-left">
+                            <p className="text-base md:text-lg font-normal text-gray-600 leading-relaxed">
                                 For local service businesses, ecommerce stores, and early-stage founders. We build
                                 conversion-first funnels, run performance marketing, and track every lead end-to-end.
                             </p>
 
-                            {/* <ul className="space-y-3">
+                            <ul className="space-y-3 text-left">
                                 {[
                                     "Fix your messaging so the right buyers instantly “get it”",
                                     "Build landing pages & funnels designed to convert, not just look good",
@@ -125,7 +125,7 @@ export function Hero() {
                                         {item}
                                     </li>
                                 ))}
-                            </ul> */}
+                            </ul>
                         </div>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto">
                             {/* Book Call Button with Dropdown */}
@@ -189,9 +189,7 @@ export function Hero() {
                                 See how we work
                             </Link>
                         </div>
-                        <p className="mt-4 text-xs text-gray-500 font-medium">
-                            30 minutes • practical diagnosis • no fluff
-                        </p>
+                        30 minutes • practical diagnosis • no fluff
                     </motion.div>
                 </ScrollReveal>
 
