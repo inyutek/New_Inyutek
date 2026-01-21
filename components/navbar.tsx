@@ -125,7 +125,7 @@ export function Navbar() {
                     >
                         <button
                             onClick={() => setResourcesOpen(!resourcesOpen)}
-                            className={`flex items-center gap-1 transition-colors ${pathname === "/case-studies" || pathname === "/newsletter" || pathname === "/blog"
+                            className={`flex items-center gap-1 transition-colors ${pathname === "/case-studies" || pathname === "/blog"
                                 ? "text-[#010B13] font-bold"
                                 : "hover:text-[#000024]"
                                 }`}
@@ -150,13 +150,7 @@ export function Navbar() {
                                 >
                                     Blog
                                 </Link>
-                                <Link
-                                    href="/newsletter"
-                                    className="px-4 py-2 hover:bg-gray-50 text-left transition-colors text-gray-600 hover:text-[#000024]"
-                                    onClick={() => setResourcesOpen(false)}
-                                >
-                                    Newsletter
-                                </Link>
+
                             </div>
                         )}
                     </div>
@@ -260,7 +254,7 @@ export function Navbar() {
                             <div className="pl-4 flex flex-col gap-3">
                                 <Link href="/case-studies" className="text-base text-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Case Studies</Link>
                                 <Link href="/blog" className="text-base text-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
-                                <Link href="/newsletter" className="text-base text-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Newsletter</Link>
+
                             </div>
                         </div>
                         <a href={WHATSAPP_LINK} target="_blank" className="w-full bg-[#000024] text-white text-center py-3 rounded-lg font-medium mt-2">

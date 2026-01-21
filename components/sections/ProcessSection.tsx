@@ -4,6 +4,8 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
+import { Modal } from "@/components/ui/modal"
+import { BlueprintForm } from "@/components/ui/blueprint-form"
 
 const processes = [
     {
@@ -55,6 +57,10 @@ const processes = [
 
 export function ProcessSection() {
     const [activeIndex, setActiveIndex] = useState(0)
+    const [isBlueprintOpen, setIsBlueprintOpen] = useState(false)
+
+    // Inlined BlueprintForm function
+
 
     return (
         <section id="process" className="bg-[#fbfbfb] py-24 sm:py-32">
@@ -149,6 +155,23 @@ export function ProcessSection() {
                         </ScrollReveal>
                     ))}
                 </div>
+
+                {/* Blueprint CTA */}
+                <div className="mt-20 flex justify-center">
+                    <button
+                        onClick={() => setIsBlueprintOpen(true)}
+                        className="w-full md:w-auto px-10 py-4 bg-[#000024] text-white rounded-lg font-bold text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1 flex items-center justify-center gap-2"
+                    >
+                        See the Blueprint
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+
+                <Modal isOpen={isBlueprintOpen} onClose={() => setIsBlueprintOpen(false)}>
+                    <BlueprintForm onClose={() => setIsBlueprintOpen(false)} />
+                </Modal>
 
             </div>
         </section>
