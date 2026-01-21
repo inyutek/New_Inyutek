@@ -88,7 +88,7 @@ function ServiceCard({
 }) {
     return (
         <div
-            className={`relative w-full flex-1 bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col justify-center gap-4 ${className}`}
+            className={`relative w-full flex-1 bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col justify-center gap-4 ${className}`}
         >
             <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center mb-2 text-[#000024]">
                 {data.icon}
@@ -132,7 +132,7 @@ function MobileServices() {
                 </motion.div>
 
                 {/* Service Cards Stack */}
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-6">
                     {services.map((service, index) => (
                         <motion.div
                             key={service.id}
@@ -172,9 +172,11 @@ function DesktopServices() {
     const rightOpacity = useTransform(scrollYProgress, [0.20, 0.30], [0, 1])
 
     // 3. Group Animations
-    const groupOneY = useTransform(scrollYProgress, [0.35, 0.80], ["0%", "-100%"])
     const groupOneOpacity = useTransform(scrollYProgress, [0.60, 0.80], [1, 0])
-    const groupTwoY = useTransform(scrollYProgress, [0.35, 0.80], ["100%", "0%"])
+
+    // Single continuous scroll for all cards
+    // Increased to -55% to ensure the last card comes into view, but doesn't scroll too far up
+    const scrollingListY = useTransform(scrollYProgress, [0.25, 0.90], ["0%", "-58%"])
 
     return (
         <div id="services" ref={containerRef} className="hidden md:block relative h-[300vh] bg-[#fbfbfb]">
@@ -228,42 +230,18 @@ function DesktopServices() {
                     >
                         <div className="relative w-full h-full overflow-hidden">
 
-                            {/* GROUP 1 (Base Layer) - Services 1, 2, 3 */}
+                            {/* CONTINUOUS LIST OF ALL SERVICES */}
                             <motion.div
-                                style={{ y: groupOneY, opacity: groupOneOpacity }}
-                                className="absolute inset-0 w-full h-full flex flex-col gap-4 p-4 md:p-0"
+                                style={{ y: scrollingListY }}
+                                className="absolute top-0 left-0 w-full flex flex-col gap-8 p-4 md:p-0"
                             >
-                                <ServiceCard
-                                    data={services[0]}
-                                    className="scale-90"
-                                />
-                                <ServiceCard
-                                    data={services[1]}
-                                    className="scale-90"
-                                />
-                                <ServiceCard
-                                    data={services[2]}
-                                    className="scale-90"
-                                />
-                            </motion.div>
-
-                            {/* GROUP 2 (Slide Layer) - Services 4, 5, 6 */}
-                            <motion.div
-                                style={{ y: groupTwoY }}
-                                className="absolute inset-0 w-full h-full flex flex-col gap-4 p-4 md:p-0"
-                            >
-                                <ServiceCard
-                                    data={services[3]}
-                                    className="scale-90"
-                                />
-                                <ServiceCard
-                                    data={services[4]}
-                                    className="scale-90"
-                                />
-                                <ServiceCard
-                                    data={services[5]}
-                                    className="scale-90"
-                                />
+                                {services.map((service) => (
+                                    <ServiceCard
+                                        key={service.id}
+                                        data={service}
+                                        className=""
+                                    />
+                                ))}
                             </motion.div>
 
                         </div>

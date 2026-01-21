@@ -36,7 +36,7 @@ export function WhySection() {
     return (
         <section className="py-32 bg-[#fbfbfb]">
             <ScrollReveal enableDesktop={false} className="max-w-7xl mx-auto px-6 lg:px-8">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
                     {/* LEFT: Content */}
                     <div className="flex flex-col gap-8">
@@ -85,8 +85,8 @@ export function WhySection() {
 
                     </div>
 
-                    {/* RIGHT: Image Placeholder */}
-                    <Reveal delay={0.2} className="w-full h-full">
+                    {/* RIGHT: Image Placeholder - Deep alignment with list (pushed way down) */}
+                    <Reveal delay={0.2} className="w-full h-full md:mt-52">
                         <div className="relative aspect-square md:aspect-[4/3] bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200 shadow-sm overflow-hidden">
                             {/* Placeholder Icon */}
                             <div className="w-24 h-24 text-gray-300">
