@@ -104,27 +104,18 @@ export function Hero() {
                     <motion.div
                         style={{ opacity: textOpacity, scale: textScale, y: textY }}
                     >
-                        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#000024] leading-[1.1] mb-8 mx-auto">
+                        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#000024] leading-[1.1] mb-8 mx-auto">
                             Lead generation that drives calls for local businesses and sales for e-commerce
                         </h1>
 
-                        <div className="max-w-6xl mx-auto mb-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center text-left">
+                        <div className="max-w-4xl mx-auto mb-10 flex flex-col gap-6 items-center justify-center">
                             <p className="text-base md:text-lg font-normal text-gray-600 leading-relaxed">
-                                We build conversion-focused landing pages, run Google/Meta campaigns + SEO, and set up tracking + follow-up so leads don’t get lost.
+                                We build conversion-focused funnels and run Google/Meta + SEO to generate calls, bookings, and sales—with tracking that shows exactly what’s working.
                             </p>
 
-                            <ul className="space-y-3 text-left">
-                                {[
-                                    "More calls & bookings for service businesses Google + ads + local SEO",
-                                    "More purchases for e-commerce paid social + CRO + SEO",
-                                    "Clear tracking so you know what’s working and what’s wasting money"
-                                ].map((item, i) => (
-                                    <li key={i} className="flex items-start text-gray-700 text-sm sm:text-base">
-                                        <span className="mr-3 text-[#000024] font-bold">•</span>
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
+                            <p className="text-sm font-semibold text-[#000024] mt-6">
+                                Landing Pages • Ads • SEO • CRO • CRM Automation • Reporting
+                            </p>
                         </div>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto">
                             {/* Book Call Button with Dropdown */}
@@ -188,7 +179,9 @@ export function Hero() {
                                 See Our Process
                             </Link>
                         </div>
-                        30 minutes • practical action plan • no fluff
+                        <div className="mt-4 text-xs text-gray-500 font-medium tracking-wide uppercase">
+                            30 minutes • Practical action plan • Clear priorities
+                        </div>
                     </motion.div>
                 </ScrollReveal>
 
