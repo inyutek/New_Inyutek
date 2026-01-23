@@ -79,7 +79,7 @@ export default function HowWeWorkClient() {
                             </p>
                         </div>
 
-                        <div className="bg-[#fbfbfb] rounded-2xl p-8 border border-gray-100">
+                        <div className="rounded-2xl ">
                             <div className="flex flex-wrap gap-3 justify-center">
                                 {["Clear offer", "Conversion-first pages", "Qualified leads", "Fast follow-up", "Weekly optimization"].map((item, i) => (
                                     <span key={i} className="px-4 py-2 bg-white rounded-full text-sm font-semibold text-[#000024] shadow-sm border border-gray-100">
@@ -99,91 +99,64 @@ export default function HowWeWorkClient() {
                         Our lead generation process
                     </h2>
 
-                    <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-                        {/* Step 1 */}
-                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100/50 hover:shadow-md transition-shadow relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-4 opacity-5">
-                                <span className="text-9xl font-black">1</span>
-                            </div>
-                            <h3 className="text-2xl font-bold mb-4 relative z-10">Step 1 — Audit & Diagnose</h3>
-                            <div className="space-y-4 relative z-10">
-                                <div>
-                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What we do</span>
-                                    <p className="text-gray-700 mt-1">Review your offer, website/landing page, ads/SEO, tracking, and competitors.</p>
-                                </div>
-                                <div>
-                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What you get</span>
-                                    <p className="text-[#000024] font-medium mt-1">A short action plan with the top 3 bottlenecks blocking growth.</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
+                        {[
+                            {
+                                title: "Step 1 — Audit & Diagnose",
+                                do: "Review your offer, website/landing page, ads/SEO, tracking, and competitors.",
+                                get: "A short action plan with the top 3 bottlenecks blocking growth."
+                            },
+                            {
+                                title: "Step 2 — Funnel Plan",
+                                do: "Clarify your positioning, craft the core message, and map the conversion path.",
+                                get: "Funnel map + page outline + KPI targets (calls/bookings/sales)."
+                            },
+                            {
+                                title: "Step 3 — Build & Launch",
+                                do: "Build/upgrade landing pages, set up tracking, implement CRM follow-up, and launch campaigns.",
+                                get: "A working system that can generate leads—not a “strategy doc.”"
+                            },
+                            {
+                                title: "Step 4 — Optimize & Scale",
+                                do: "Weekly iteration: improve conversion rate, reduce CPL/CPA, and increase lead quality.",
+                                get: "Ongoing testing + reporting + scaling plan."
+                            }
+                        ].map((step, index) => (
+                            <div
+                                key={index}
+                                className="group bg-white p-8 rounded-2xl shadow-sm border border-gray-100/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden"
+                            >
+                                <h3 className="text-2xl font-bold relative z-10 text-[#000024] group-hover:mb-4 transition-all duration-300">
+                                    {step.title}
+                                </h3>
 
-                        {/* Step 2 */}
-                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100/50 hover:shadow-md transition-shadow relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-4 opacity-5">
-                                <span className="text-9xl font-black">2</span>
-                            </div>
-                            <h3 className="text-2xl font-bold mb-4 relative z-10">Step 2 — Funnel Plan</h3>
-                            <div className="space-y-4 relative z-10">
-                                <div>
-                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What we do</span>
-                                    <p className="text-gray-700 mt-1">Clarify your positioning, craft the core message, and map the conversion path.</p>
-                                </div>
-                                <div>
-                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What you get</span>
-                                    <p className="text-[#000024] font-medium mt-1">Funnel map + page outline + KPI targets (calls/bookings/sales).</p>
+                                <div className="grid grid-rows-[0fr] opacity-0 group-hover:grid-rows-[1fr] group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                                    <div className="overflow-hidden space-y-4 pt-2">
+                                        <div>
+                                            <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What we do</span>
+                                            <p className="text-gray-700 mt-1">{step.do}</p>
+                                        </div>
+                                        <div>
+                                            <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What you get</span>
+                                            <p className="text-[#000024] font-medium mt-1">{step.get}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        {/* Step 3 */}
-                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100/50 hover:shadow-md transition-shadow relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-4 opacity-5">
-                                <span className="text-9xl font-black">3</span>
-                            </div>
-                            <h3 className="text-2xl font-bold mb-4 relative z-10">Step 3 — Build & Launch</h3>
-                            <div className="space-y-4 relative z-10">
-                                <div>
-                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What we do</span>
-                                    <p className="text-gray-700 mt-1">Build/upgrade landing pages, set up tracking, implement CRM follow-up, and launch campaigns.</p>
-                                </div>
-                                <div>
-                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What you get</span>
-                                    <p className="text-[#000024] font-medium mt-1">A working system that can generate leads—not a “strategy doc.”</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Step 4 */}
-                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100/50 hover:shadow-md transition-shadow relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-4 opacity-5">
-                                <span className="text-9xl font-black">4</span>
-                            </div>
-                            <h3 className="text-2xl font-bold mb-4 relative z-10">Step 4 — Optimize & Scale</h3>
-                            <div className="space-y-4 relative z-10">
-                                <div>
-                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What we do</span>
-                                    <p className="text-gray-700 mt-1">Weekly iteration: improve conversion rate, reduce CPL/CPA, and increase lead quality.</p>
-                                </div>
-                                <div>
-                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What you get</span>
-                                    <p className="text-[#000024] font-medium mt-1">Ongoing testing + reporting + scaling plan.</p>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
             {/* WHAT YOU GET IN 14 DAYS */}
-            <section className="py-24 bg-[#000024] text-white">
+            <section className="py-24 bg-white text-[#000024]">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="grid lg:grid-cols-2 gap-16">
                         <div>
-                            <h2 className="text-3xl md:text-5xl font-bold mb-8">
+                            <h2 className="text-3xl md:text-5xl font-bold mb-8 text-[#000024]">
                                 What you’ll receive in the first 14 days
                             </h2>
-                            <p className="text-white/60 text-lg leading-relaxed">
+                            <p className="text-gray-600 text-lg leading-relaxed">
                                 We move fast to get your foundation solid so we can start generating data and results.
                             </p>
                         </div>
@@ -195,13 +168,13 @@ export default function HowWeWorkClient() {
                                 { title: "Tracking setup", desc: "forms, calls, WhatsApp, purchases—based on your model" },
                                 { title: "Follow-up system", desc: "auto-replies + reminders + basic nurturing" }
                             ].map((item, i) => (
-                                <div key={i} className="flex items-start gap-4 pb-6 border-b border-white/10 last:border-0 last:pb-0">
-                                    <svg className="w-6 h-6 text-green-400 mt-1 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <div key={i} className="flex items-start gap-4 pb-6 border-b border-gray-100 last:border-0 last:pb-0">
+                                    <svg className="w-6 h-6 text-green-500 mt-1 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                     </svg>
                                     <div>
-                                        <h3 className="text-xl font-bold">{item.title}</h3>
-                                        <p className="text-white/60 mt-1">{item.desc}</p>
+                                        <h3 className="text-xl font-bold text-[#000024]">{item.title}</h3>
+                                        <p className="text-gray-600 mt-1">{item.desc}</p>
                                     </div>
                                 </div>
                             ))}

@@ -96,11 +96,12 @@ function ServiceCard({
                 </h4>
             </div>
 
-            {/* Description - Hidden by default, shown on hover (desktop) or always visible if needed */}
-            <div className="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-300 ease-in-out">
-                <p className="text-gray-600 text-sm font-normal leading-relaxed pt-2">
-                    {data.description}
-                </p>
+            <div className="grid grid-rows-[0fr] opacity-0 group-hover:grid-rows-[1fr] group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                <div className="overflow-hidden">
+                    <p className="text-gray-600 text-sm font-normal leading-relaxed pt-2">
+                        {data.description}
+                    </p>
+                </div>
             </div>
         </div>
     )
@@ -124,7 +125,7 @@ export function ServicesSection() {
                 </div>
 
                 {/* Grid Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
                     {services.map((service, index) => (
                         <div key={service.id} className="h-auto">
                             <ServiceCard data={service} className="h-full min-h-[280px]" />
