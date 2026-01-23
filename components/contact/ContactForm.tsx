@@ -4,18 +4,32 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { Loader2, CheckCircle2 } from "lucide-react"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
+import { submitContactForm } from "@/app/actions/contact"
 
 export function ContactForm() {
-    const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle")
+    const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
+    const [errorMessage, setErrorMessage] = useState("")
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setStatus("submitting")
+        setErrorMessage("")
 
-        // Simulate API call
-        setTimeout(() => {
-            setStatus("success")
-        }, 1500)
+        const formData = new FormData(e.currentTarget)
+
+        try {
+            const result = await submitContactForm(null, formData)
+
+            if (result.success) {
+                setStatus("success")
+            } else {
+                setStatus("error")
+                setErrorMessage(result.message || "Something went wrong. Please try again.")
+            }
+        } catch (error) {
+            setStatus("error")
+            setErrorMessage("An unexpected error occurred. Please try again.")
+        }
     }
 
     if (status === "success") {
@@ -52,6 +66,11 @@ export function ContactForm() {
 
                 <div className="bg-white rounded-2xl border border-gray-200 p-6 md:p-10 shadow-sm">
                     <form onSubmit={handleSubmit} className="space-y-6">
+                        {status === "error" && (
+                            <div className="p-4 bg-red-50 text-red-600 text-sm rounded-lg border border-red-100">
+                                {errorMessage}
+                            </div>
+                        )}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label className="block text-sm font-medium text-[#000024] mb-2">Name</label>
