@@ -36,10 +36,10 @@ export default function HowWeWorkClient() {
             {/* HERO SECTION */}
             <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 overflow-hidden">
                 <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <h1 className="text-4xl md:text-6xl font-black tracking-tighter leading-[1.1] mb-8">
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-[1.1] mb-8">
                         How we turn clicks into calls, bookings, and sales
                     </h1>
-                    <p className="text-lg md:text-xl text-gray-600 font-medium leading-relaxed max-w-2xl mx-auto mb-10">
+                    <p className="text-base md:text-lg text-gray-600 font-normal leading-relaxed max-w-2xl mx-auto mb-10">
                         A simple, repeatable system: we diagnose what’s leaking, build the funnel, launch fast, then optimize weekly based on real conversion data.
                     </p>
 

@@ -26,12 +26,12 @@ export function Hero() {
     return (
         <div id="hero" className="relative bg-[#fbfbfb] pt-32 pb-20 lg:pt-48 lg:pb-32 flex flex-col items-center justify-center overflow-hidden">
             <div className="relative z-40 max-w-4xl mx-auto px-4 text-center">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#000024] leading-[1.1] mb-8 mx-auto">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#000024] leading-[1.1] mb-8 mx-auto">
                     Digital marketing services that drive calls, bookings, and sales
                 </h1>
 
                 <div className="max-w-4xl mx-auto mb-10 flex flex-col gap-6 items-center justify-center">
-                    <p className="text-lg md:text-xl font-normal text-gray-600 leading-relaxed max-w-2xl">
+                    <p className="text-base md:text-lg font-normal text-gray-600 leading-relaxed max-w-2xl">
                         We build conversion-focused landing pages, run Google/Meta campaigns + SEO, and set up tracking and follow up so growth is measurable not guessed.
                     </p>
                 </div>
