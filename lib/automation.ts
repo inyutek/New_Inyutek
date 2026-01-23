@@ -77,6 +77,8 @@ This email alone should already give you clarity.
 Inyutek`;
 
 export async function processLeads() {
+    console.log("🚀 AUTOMATION EXECUTED");
+
     if (!process.env.notion_id || !process.env.Leads_database_id) {
         throw new Error("Missing Notion configuration env vars");
     }

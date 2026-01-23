@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { env } from '@/lib/env'
+import { processLeads } from '@/lib/automation';
 
 export async function POST(request: Request) {
     try {
@@ -70,7 +71,22 @@ export async function POST(request: Request) {
         }
 
         console.log('Notion submission successful:', data.id)
-        return NextResponse.json({ success: true, id: data.id })
+
+        // Trigger automation immediately
+        let automationResult = null;
+        try {
+            automationResult = await processLeads();
+            console.log("Automation Triggered:", automationResult);
+        } catch (autoError) {
+            console.error("Automation Trigger Failed:", autoError);
+            // We do not fail the request if automation fails, as the primary submission succeeded
+        }
+
+        return NextResponse.json({
+            success: true,
+            id: data.id,
+            automation: automationResult
+        })
 
     } catch (error) {
         console.error('Internal Error:', error)
