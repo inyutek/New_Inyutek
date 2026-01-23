@@ -138,7 +138,7 @@ export function Hero() {
                                         >
                                             WhatsApp
                                             <div className="text-xs text-black/50 mt-0.5">
-                                                Message us directly
+                                                Message usdirectly
                                             </div>
                                         </a>
 
