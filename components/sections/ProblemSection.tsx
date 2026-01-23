@@ -82,7 +82,7 @@ function MobileProblem() {
                                         </p>
 
                                         {/* Inline Image Display */}
-                                        <div className={`w-full aspect-square rounded-lg flex items-center justify-center text-gray-400 ${item.imageColor}`}>
+                                        <div className={`w-full max-w-xs mx-auto aspect-square rounded-lg flex items-center justify-center text-gray-400 ${item.imageColor}`}>
                                             {item.icon}
                                         </div>
                                     </div>
@@ -126,7 +126,7 @@ function DesktopProblem() {
                 </div>
 
                 {/* Right Column: Image Display */}
-                <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-gray-50">
+                <div className="relative aspect-square w-full max-w-md mx-auto rounded-2xl overflow-hidden bg-gray-50">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeIndex}

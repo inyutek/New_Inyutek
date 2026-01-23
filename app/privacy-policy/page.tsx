@@ -1,134 +1,153 @@
 import { LegalLayout } from "@/components/LegalLayout"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: "Privacy Policy | Inyutek",
+    description: "Inyutek’s Privacy Policy explains what data we collect, how we use it, cookies, analytics, advertising pixels, and how to request access or deletion.",
+}
 
 export default function PrivacyPolicy() {
-    const currentDate = new Date().toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    })
-
     return (
         <LegalLayout
             title="Privacy Policy"
-            description="How we collect, use, and protect your information."
-            lastUpdated={currentDate}
+            // The wireframe mentions "Effective date: [01/01/2026]" in the header, 
+            // but LegalLayout takes a lastUpdated prop. We can use that.
+            lastUpdated="January 1, 2026"
         >
-            <p className="lead">
-                At <strong>Inyutek</strong>, privacy is treated as part of trust—not a checkbox.
-                This policy explains how we collect, use, and protect information when you interact with our website or services.
+            <p className="mb-8">
+                This Privacy Policy explains how Inyutek (“we,” “us,” “our”) collects, uses, and protects information when you use our website and services.
             </p>
 
-            <p>
-                By using this site, you agree to the practices described below.
-            </p>
+            <div className="mb-12">
+                <p><strong>Contact:</strong> <a href="mailto:hello@inyutek.com" className="hover:underline">hello@inyutek.com</a></p>
+                <p><strong>Business location:</strong> Amravati Maharashtra India</p>
+            </div>
 
-            <hr className="border-gray-100 my-10" />
+            <section className="mb-12">
+                <h2>Information we collect</h2>
+                <p className="mb-4">We may collect the following types of information:</p>
 
-            <h3>1. Information We Collect</h3>
-            <p>
-                We collect information in two ways: information you provide directly and information collected automatically.
-            </p>
+                <h3 className="text-xl font-bold mt-6 mb-3">A) Information you provide</h3>
+                <ul className="list-disc pl-5 space-y-2 mb-6">
+                    <li>Name, email, phone/WhatsApp number</li>
+                    <li>Business name, website/store URL, social links</li>
+                    <li>Messages you send via forms, email, or WhatsApp</li>
+                    <li>Information submitted in booking or audit forms – goals, budget ranges, challenges</li>
+                </ul>
 
-            <h4>Information you provide</h4>
-            <ul className="list-disc pl-5 space-y-2 mb-6">
-                <li>Name</li>
-                <li>Email address</li>
-                <li>Company name</li>
-                <li>Phone number</li>
-                <li>Any information you submit via forms or communication</li>
-            </ul>
+                <h3 className="text-xl font-bold mt-6 mb-3">B) Information collected automatically</h3>
+                <ul className="list-disc pl-5 space-y-2 mb-6">
+                    <li>IP address, device type, browser, pages visited, time on site, referral source</li>
+                    <li>Cookies or similar technologies used for analytics and advertising measurement</li>
+                </ul>
 
-            <h4>Information collected automatically</h4>
-            <ul className="list-disc pl-5 space-y-2">
-                <li>IP address</li>
-                <li>Browser and device type</li>
-                <li>Pages visited and time spent</li>
-                <li>Referral source</li>
-            </ul>
-            <p className="mt-4">
-                This data helps us understand how our website performs and how users interact with it.
-            </p>
+                <h3 className="text-xl font-bold mt-6 mb-3">C) Information from third parties</h3>
+                <ul className="list-disc pl-5 space-y-2 mb-6">
+                    <li>Advertising/analytics platforms may provide aggregated reporting – e.g., ad clicks, conversions</li>
+                </ul>
+            </section>
 
-            <hr className="border-gray-100 my-10" />
+            <section className="mb-12">
+                <h2>How we use your information</h2>
+                <p className="mb-4">We use collected information to:</p>
+                <ul className="list-disc pl-5 space-y-2 mb-6">
+                    <li>Respond to inquiries and schedule calls/audits</li>
+                    <li>Provide services and deliver proposals or reports</li>
+                    <li>Improve website performance, conversion rate, and user experience</li>
+                    <li>Measure marketing effectiveness (analytics and conversion tracking)</li>
+                    <li>Send service-related updates (e.g., booking confirmations, follow-ups)</li>
+                </ul>
+                <p>We do not sell your personal data.</p>
+            </section>
 
-            <h3>2. How We Use Your Information</h3>
-            <p>Your information is used to:</p>
-            <ul className="list-disc pl-5 space-y-2">
-                <li>Respond to inquiries and consultation requests</li>
-                <li>Deliver services and proposals</li>
-                <li>Improve website experience and performance</li>
-                <li>Analyze traffic, conversions, and funnel behavior</li>
-                <li>Communicate relevant updates (only if opted in)</li>
-            </ul>
-            <p className="mt-6 font-medium">
-                We <strong>do not sell, rent, or trade personal data</strong>.
-            </p>
+            <section className="mb-12">
+                <h2>Legal basis for processing (where applicable)</h2>
+                <p className="mb-4">Depending on your location, we process data based on:</p>
+                <ul className="list-disc pl-5 space-y-2">
+                    <li><strong>Consent</strong> – e.g., marketing cookies, pixels where required</li>
+                    <li><strong>Contract</strong> – to provide services you request</li>
+                    <li><strong>Legitimate interests</strong> – website security, improving performance, basic analytics</li>
+                    <li><strong>Legal obligations</strong> – compliance requests</li>
+                </ul>
+            </section>
 
-            <hr className="border-gray-100 my-10" />
+            <section className="mb-12">
+                <h2>Cookies, analytics, and advertising</h2>
+                <p className="mb-4">We may use cookies and similar technologies for:</p>
+                <ul className="list-disc pl-5 space-y-2 mb-6">
+                    <li><strong>Website functionality</strong> – essential cookies</li>
+                    <li><strong>Analytics</strong> – e.g., Google Analytics</li>
+                    <li><strong>Advertising measurement and retargeting</strong> – e.g., Meta Pixel, Google Ads tags</li>
+                </ul>
+                <p className="mb-4">You can control cookies via:</p>
+                <ul className="list-disc pl-5 space-y-2 mb-6">
+                    <li>Your browser settings</li>
+                    <li>Our cookie banner/settings (if enabled)</li>
+                </ul>
+                <p>For details, see our Cookie Policy: <a href="/cookie-policy" className="text-blue-600 hover:underline">/cookie-policy</a></p>
+            </section>
 
-            <h3>3. Cookies & Tracking</h3>
-            <p>We use cookies and similar technologies to:</p>
-            <ul className="list-disc pl-5 space-y-2">
-                <li>Measure site performance</li>
-                <li>Understand user behavior</li>
-                <li>Optimize conversion paths</li>
-            </ul>
-            <p className="mt-4">
-                You can control or disable cookies via your browser or cookie settings page.
-            </p>
+            <section className="mb-12">
+                <h2>Who we share data with</h2>
+                <p className="mb-4">We may share information with trusted service providers who help us run our business, such as:</p>
+                <ul className="list-disc pl-5 space-y-2 mb-6">
+                    <li>Website hosting and analytics providers</li>
+                    <li>Form/booking tools (e.g., scheduling software)</li>
+                    <li>CRM/email tools used for lead management and follow-up</li>
+                    <li>Advertising platforms for conversion measurement</li>
+                </ul>
+                <p>We may also disclose information if required by law, to protect rights/safety, or to prevent fraud.</p>
+            </section>
 
-            <hr className="border-gray-100 my-10" />
+            <section className="mb-12">
+                <h2>How long we keep data</h2>
+                <p className="mb-4">We retain personal information only as long as needed for:</p>
+                <ul className="list-disc pl-5 space-y-2 mb-6">
+                    <li>Providing services and support</li>
+                    <li>Maintaining business records</li>
+                    <li>Legal, tax, or compliance requirements</li>
+                </ul>
+                <p>You may request deletion – see “Your rights” below.</p>
+            </section>
 
-            <h3>4. Third-Party Services</h3>
-            <p>We may use trusted third-party tools such as:</p>
-            <ul className="list-disc pl-5 space-y-2">
-                <li>Analytics platforms</li>
-                <li>CRM systems</li>
-                <li>Automation and marketing tools</li>
-            </ul>
-            <p className="mt-4">
-                These providers only access data necessary for their function and are required to safeguard it.
-            </p>
+            <section className="mb-12">
+                <h2>How we protect your data</h2>
+                <p>We use reasonable administrative, technical, and organizational safeguards to protect information. However, no online system is 100% secure.</p>
+            </section>
 
-            <hr className="border-gray-100 my-10" />
+            <section className="mb-12">
+                <h2>Your rights</h2>
+                <p className="mb-4">Depending on your location, you may have the right to:</p>
+                <ul className="list-disc pl-5 space-y-2 mb-6">
+                    <li>Request access to the personal data we hold about you</li>
+                    <li>Request correction or deletion</li>
+                    <li>Object to certain processing</li>
+                    <li>Withdraw consent (where consent is the basis)</li>
+                </ul>
+                <p>To make a request, email <a href="mailto:hello@inyutek.com" className="text-blue-600 hover:underline">hello@inyutek.com</a> with the subject line: “Privacy Request.”</p>
+            </section>
 
-            <h3>5. Data Security</h3>
-            <p>
-                We apply reasonable technical and organizational measures to protect your data.
-                However, no digital system is completely secure.
-            </p>
+            <section className="mb-12">
+                <h2>International data transfers</h2>
+                <p>Your information may be processed in countries where our service providers operate. We take steps to work with reputable providers and protect data appropriately.</p>
+            </section>
 
-            <hr className="border-gray-100 my-10" />
+            <section className="mb-12">
+                <h2>Children’s privacy</h2>
+                <p>Our website and services are not intended for children under 13 (or the age required in your jurisdiction). We do not knowingly collect data from children.</p>
+            </section>
 
-            <h3>6. Data Retention</h3>
-            <p>We retain data only as long as necessary to:</p>
-            <ul className="list-disc pl-5 space-y-2">
-                <li>Fulfill business purposes</li>
-                <li>Meet legal obligations</li>
-                <li>Maintain operational records</li>
-            </ul>
+            <section className="mb-12">
+                <h2>Changes to this Privacy Policy</h2>
+                <p>We may update this policy from time to time. The latest version will always be posted here with an updated effective date.</p>
+            </section>
 
-            <hr className="border-gray-100 my-10" />
-
-            <h3>7. Your Rights</h3>
-            <p>You may request to:</p>
-            <ul className="list-disc pl-5 space-y-2">
-                <li>Access your personal data</li>
-                <li>Correct or delete your information</li>
-                <li>Withdraw consent for communications</li>
-            </ul>
-            <p className="mt-4">
-                Requests can be sent to the contact details below.
-            </p>
-
-            <hr className="border-gray-100 my-10" />
-
-            <h3>8. Contact</h3>
-            <p>For privacy-related questions, contact:</p>
-            <p>
-                <strong>Email:</strong> <a href="mailto:your-email@inyutek.com" className="text-[#000024] underline underline-offset-4 hover:opacity-70">your-email@inyutek.com</a><br />
-                <strong>Company:</strong> Inyutek
-            </p>
+            <section className="mb-12">
+                <h2>Contact</h2>
+                <p className="mb-4">If you have questions about this policy:</p>
+                <p className="mb-2"><strong>Email:</strong> <a href="mailto:hello@inyutek.com" className="text-blue-600 hover:underline">hello@inyutek.com</a></p>
+                <p><strong>Address:</strong> Ganpati nagar, Old bypass Road Amravati Maharashtra India</p>
+            </section>
         </LegalLayout>
     )
 }

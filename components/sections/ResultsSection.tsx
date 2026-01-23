@@ -4,6 +4,8 @@ import { useRef, useEffect, useState } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
+import { Modal } from "@/components/ui/modal"
+import { BlueprintForm } from "@/components/ui/blueprint-form"
 
 const results = [
     {
@@ -85,6 +87,7 @@ const results = [
 export function ResultsSection() {
     const [activeIndex, setActiveIndex] = useState(0)
     const [isAutoScrolling, setIsAutoScrolling] = useState(true)
+    const [isBlueprintOpen, setIsBlueprintOpen] = useState(false)
 
     // Auto-scroll effect
     useEffect(() => {
@@ -97,38 +100,7 @@ export function ResultsSection() {
         return () => clearInterval(interval)
     }, [isAutoScrolling])
 
-    // Manual scroll handler
-    const containerRef = useRef<HTMLDivElement>(null)
-    const lastScrollTime = useRef(0)
 
-    useEffect(() => {
-        const container = containerRef.current
-        if (!container) return
-
-        const onWheel = (e: WheelEvent) => {
-            e.preventDefault()
-            const now = Date.now()
-            if (now - lastScrollTime.current < 500) return // Debounce
-
-            if (Math.abs(e.deltaY) > 20) {
-                lastScrollTime.current = now
-                setIsAutoScrolling(false) // Pause auto-scroll on interaction
-
-                // Resume auto-scroll after 5 seconds of inactivity
-                setTimeout(() => setIsAutoScrolling(true), 5000)
-
-                const direction = e.deltaY > 0 ? 1 : -1
-                setActiveIndex((prev) => {
-                    const next = prev + direction
-                    // Handle modulo for negative numbers correctly
-                    return (next % results.length + results.length) % results.length
-                })
-            }
-        }
-
-        container.addEventListener("wheel", onWheel, { passive: false })
-        return () => container.removeEventListener("wheel", onWheel)
-    }, [])
 
     return (
         <section className="bg-white py-12 sm:py-20">
@@ -157,9 +129,12 @@ export function ResultsSection() {
 
                     <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mt-4 w-full md:w-auto">
                         <p className="font-bold text-[#000024] text-sm">Want an audit of your funnel?</p>
-                        <Link href="/contact" className="w-full md:w-auto justify-center bg-[#000024] text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 group transition-all hover:-translate-y-1">
+                        <button
+                            onClick={() => setIsBlueprintOpen(true)}
+                            className="w-full md:w-auto justify-center bg-[#000024] text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 group transition-all hover:-translate-y-1"
+                        >
                             Get your free growth audit <span className="group-hover:translate-x-1 transition-transform">→</span>
-                        </Link>
+                        </button>
                     </div>
                 </div>
 
@@ -169,8 +144,6 @@ export function ResultsSection() {
                     {/* Container */}
                     <ScrollReveal enableDesktop={false} className="w-full max-w-md">
                         <div
-                            ref={containerRef}
-                            data-lenis-prevent
                             className="relative w-full h-[320px] bg-gray-50 rounded-2xl border border-gray-200 shadow-xl overflow-hidden cursor-default hover:shadow-2xl transition-shadow duration-300"
                             onMouseEnter={() => setIsAutoScrolling(false)}
                             onMouseLeave={() => setIsAutoScrolling(true)}
@@ -266,6 +239,10 @@ export function ResultsSection() {
                 </div>
 
             </div>
+
+            <Modal isOpen={isBlueprintOpen} onClose={() => setIsBlueprintOpen(false)}>
+                <BlueprintForm onClose={() => setIsBlueprintOpen(false)} />
+            </Modal>
         </section>
     )
 }

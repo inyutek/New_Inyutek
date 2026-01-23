@@ -86,7 +86,7 @@ export function WhySection() {
                     </div>
 
                     {/* RIGHT: Image Placeholder */}
-                    <Reveal delay={0.2} className="w-full h-full">
+                    <Reveal delay={0.2} className="w-full">
                         <div className="relative aspect-square md:aspect-[4/3] bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200 shadow-sm overflow-hidden">
                             {/* Placeholder Icon */}
                             <div className="w-24 h-24 text-gray-300">

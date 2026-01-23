@@ -184,7 +184,7 @@ function DesktopServices() {
     // Unified List Animation
     // Scroll the entire list up as the user scrolls down the page.
     // Adjust the output range (e.g., "-50%") based on how many cards need to be revealed.
-    const listY = useTransform(scrollYProgress, [0.35, 0.9], ["0%", "-60%"])
+    const listY = useTransform(scrollYProgress, [0.35, 0.9], ["0%", "-55%"])
 
     return (
         <div id="services" ref={containerRef} className="hidden md:block relative h-[300vh] bg-[#fbfbfb]">
