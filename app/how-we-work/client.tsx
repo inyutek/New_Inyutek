@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Modal } from "@/components/ui/modal"
 import { BlueprintForm } from "@/components/ui/blueprint-form"
 import Footer from "@/components/sections/Footer"
+import { FAQ } from "@/components/sections/FAQ"
 
 // FAQ Data
 const faqs = [
@@ -27,9 +28,10 @@ const faqs = [
     }
 ]
 
+
 export default function HowWeWorkClient() {
     const [isBlueprintOpen, setIsBlueprintOpen] = useState(false)
-    const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
+
 
     return (
         <div className="bg-[#fbfbfb] text-[#000024]">
@@ -268,44 +270,7 @@ export default function HowWeWorkClient() {
             </section>
 
             {/* FAQ */}
-            <section className="py-24 bg-[#fbfbfb]">
-                <div className="max-w-3xl mx-auto px-6">
-                    <h2 className="text-3xl font-bold mb-12 text-center text-[#000024]">Common questions</h2>
-                    <div className="space-y-4">
-                        {faqs.map((faq, index) => (
-                            <div
-                                key={index}
-                                className="bg-white rounded-xl border border-gray-200 overflow-hidden cursor-pointer hover:border-gray-300 transition-colors"
-                                onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
-                            >
-                                <div className="p-6 flex justify-between items-center gap-4">
-                                    <h3 className="font-bold text-lg text-[#000024]">{faq.question}</h3>
-                                    <svg
-                                        className={`w-5 h-5 text-gray-400 transition-transform ${openFaqIndex === index ? "rotate-180" : ""}`}
-                                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                    >
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
-                                <AnimatePresence>
-                                    {openFaqIndex === index && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            <div className="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                                                {faq.answer}
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <FAQ items={faqs} />
 
             {/* FINAL CTA */}
             <section className="py-24 bg-white text-center">

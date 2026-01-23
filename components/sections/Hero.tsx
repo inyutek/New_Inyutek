@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState, useEffect } from "react"
+import { useRef } from "react"
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion"
 import Link from "next/link"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
@@ -39,19 +39,6 @@ const CALL_LINK = `tel:${PHONE_NUMBER}`
 
 export function Hero() {
     const containerRef = useRef<HTMLDivElement>(null)
-    const [bookOpen, setBookOpen] = useState(false)
-    const bookRef = useRef<HTMLDivElement>(null)
-
-    // Close dropdown on click outside
-    useEffect(() => {
-        function handleClickOutside(e: MouseEvent) {
-            if (bookRef.current && !bookRef.current.contains(e.target as Node)) {
-                setBookOpen(false)
-            }
-        }
-        document.addEventListener("mousedown", handleClickOutside)
-        return () => document.removeEventListener("mousedown", handleClickOutside)
-    }, [])
 
     // Create a tall scroll container to "pin" the hero while scrolling
     const { scrollYProgress } = useScroll({
@@ -118,56 +105,12 @@ export function Hero() {
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto">
-                            {/* Book Call Button with Dropdown */}
-                            <div className="relative w-full sm:w-auto" ref={bookRef}>
-                                <button
-                                    onClick={() => setBookOpen(!bookOpen)}
-                                    className="w-full sm:w-auto px-6 py-3 bg-[#000024] text-white text-sm rounded-lg font-medium shadow-lg hover:opacity-90 transition-all hover:-translate-y-1 flex items-center justify-center min-w-[140px]"
-                                >
-                                    Book a Free Growth Audit
-                                </button>
-
-                                {bookOpen && (
-                                    <div className="absolute left-1/2 -translate-x-1/2 top-14 w-56 rounded-xl border border-black/10 bg-white shadow-lg overflow-hidden text-left z-50">
-                                        <a
-                                            href={WHATSAPP_LINK}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            onClick={() => setBookOpen(false)}
-                                            className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
-                                        >
-                                            WhatsApp
-                                            <div className="text-xs text-black/50 mt-0.5">
-                                                Message usdirectly
-                                            </div>
-                                        </a>
-
-                                        <a
-                                            href={CALL_LINK}
-                                            onClick={() => setBookOpen(false)}
-                                            className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
-                                        >
-                                            Call
-                                            <div className="text-xs text-black/50 mt-0.5">
-                                                {PHONE_NUMBER}
-                                            </div>
-                                        </a>
-
-                                        <a
-                                            href="https://calendar.app.google/8HF9LdQVVndKzWC7A"
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            onClick={() => setBookOpen(false)}
-                                            className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5 border-t border-black/5"
-                                        >
-                                            Schedule a meeting
-                                            <div className="text-xs text-black/50 mt-0.5">
-                                                Book a time on our calendar
-                                            </div>
-                                        </a>
-                                    </div>
-                                )}
-                            </div>
+                            <Link
+                                href="/contact"
+                                className="w-full sm:w-auto px-6 py-3 bg-[#000024] text-white text-sm rounded-lg font-medium shadow-lg hover:opacity-90 transition-all hover:-translate-y-1 flex items-center justify-center min-w-[140px]"
+                            >
+                                Book a Free Growth Audit
+                            </Link>
                             <Link
                                 href="/#problem"
                                 onClick={(e) => {

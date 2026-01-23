@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ease } from "@/components/motion-presets"
 import { useState, useRef, useEffect } from "react"
+import Link from "next/link"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
 import { Modal } from "@/components/ui/modal"
 import { HubSpotContactForm } from "@/components/ui/hubspot-contact-form"
@@ -72,16 +73,14 @@ export function CTASection() {
                     style={{ zIndex: 40 }}
                 >
                     <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
-                        <a
-                            href="https://calendar.app.google/8HF9LdQVVndKzWC7A"
-                            target="_blank"
-                            rel="noreferrer"
+                        <Link
+                            href="/contact"
                             className="w-full sm:w-auto"
                         >
                             <button className="w-full sm:w-auto px-8 py-3 bg-[#000024] text-white rounded-md font-medium shadow-lg hover:bg-[#000024]/90 transition-all hover:-translate-y-1">
                                 Book a free growth audit
                             </button>
-                        </a>
+                        </Link>
                         <a
                             href={WHATSAPP_LINK}
                             target="_blank"

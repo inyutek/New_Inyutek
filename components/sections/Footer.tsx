@@ -53,24 +53,34 @@ export default function Footer() {
 
                     <FooterColumn
                         title="Quick Links"
-                        items={["Home", "Services", "Process", "About", "Contact / Book a Call"]}
+                        items={[
+                            { label: "Home", href: "/" },
+                            { label: "Services", href: "/what-we-do#services" },
+                            { label: "Process", href: "/how-we-work" },
+                            { label: "About", href: "/about" },
+                            { label: "Contact / Book a Call", href: "/contact" }
+                        ]}
                     />
 
                     <FooterColumn
                         title="Services"
                         items={[
-                            "Local SEO Services",
-                            "Google Ads Management",
-                            "Social Media Marketing",
-                            "Ecommerce Marketing",
-                            "Conversion Rate Optimization (CRO)",
-                            "CRM & Marketing Automation"
+                            { label: "Local SEO Services", href: "/what-we-do#services" },
+                            { label: "Google Ads Management", href: "/what-we-do#services" },
+                            { label: "Social Media Marketing", href: "/what-we-do#services" },
+                            { label: "Ecommerce Marketing", href: "/what-we-do#services" },
+                            { label: "Conversion Rate Optimization (CRO)", href: "/what-we-do#services" },
+                            { label: "CRM & Marketing Automation", href: "/what-we-do#services" }
                         ]}
                     />
 
                     <FooterColumn
                         title="Legal"
-                        items={["Privacy Policy", "Terms & Conditions", "Cookie Policy"]}
+                        items={[
+                            { label: "Privacy Policy", href: "/privacy-policy" },
+                            { label: "Terms & Conditions", href: "/terms-of-service" },
+                            { label: "Cookie Policy", href: "/cookie-policy" }
+                        ]}
                     />
                 </div>
             </ScrollReveal>
@@ -91,15 +101,17 @@ function FooterColumn({
     items,
 }: {
     title: string
-    items: string[]
+    items: { label: string; href: string }[]
 }) {
     return (
         <div>
             <h4 className="text-sm font-semibold mb-3 text-[#000024]">{title}</h4>
             <ul className="space-y-2 text-sm text-black/70">
                 {items.map((item) => (
-                    <li key={item} className="hover:opacity-70 cursor-pointer text-base md:text-sm">
-                        {item}
+                    <li key={item.label}>
+                        <Link href={item.href} className="hover:opacity-70 cursor-pointer text-base md:text-sm">
+                            {item.label}
+                        </Link>
                     </li>
                 ))}
             </ul>

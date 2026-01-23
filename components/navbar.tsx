@@ -20,10 +20,8 @@ const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_TEXT}`
 const CALL_LINK = `tel:${PHONE_NUMBER}`
 
 export function Navbar() {
-    const [isBookOpen, setIsBookOpen] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [resourcesOpen, setResourcesOpen] = useState(false)
-    const ref = useRef<HTMLDivElement | null>(null)
     const resourcesRef = useRef<HTMLDivElement | null>(null)
     const timeoutRef = useRef<NodeJS.Timeout | null>(null)
     const pathname = usePathname()
@@ -56,9 +54,6 @@ export function Navbar() {
 
     useEffect(() => {
         function handleClickOutside(e: MouseEvent) {
-            if (ref.current && !ref.current.contains(e.target as Node)) {
-                setIsBookOpen(false)
-            }
             if (resourcesRef.current && !resourcesRef.current.contains(e.target as Node)) {
                 setResourcesOpen(false)
             }
@@ -125,7 +120,7 @@ export function Navbar() {
                     >
                         <button
                             onClick={() => setResourcesOpen(!resourcesOpen)}
-                            className={`flex items-center gap-1 transition-colors ${pathname === "/case-studies" || pathname === "/blog"
+                            className={`flex items-center gap-1 transition-colors ${pathname === "/case-studies" || pathname === "/blog" || pathname === "/contact"
                                 ? "text-[#010B13] font-bold"
                                 : "hover:text-[#000024]"
                                 }`}
@@ -150,63 +145,27 @@ export function Navbar() {
                                 >
                                     Blog
                                 </Link>
-
+                                <Link
+                                    href="/contact"
+                                    className="px-4 py-2 hover:bg-gray-50 text-left transition-colors text-gray-600 hover:text-[#000024]"
+                                    onClick={() => setResourcesOpen(false)}
+                                >
+                                    Contact Us
+                                </Link>
                             </div>
                         )}
                     </div>
                 </div>
 
-                {/* Right: Book Call Dropdown */}
-                {/* Right: Book Call Dropdown */}
+                {/* Right: Book Call Button */}
                 <div className="flex items-center gap-4">
-                    <div className="hidden md:block w-[140px] flex justify-end relative" ref={ref}>
-                        <button
-                            onClick={() => setIsBookOpen((v) => !v)}
+                    <div className="hidden md:block w-[140px] flex justify-end">
+                        <Link
+                            href="/contact"
                             className="bg-[#000024] text-white px-6 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-all hover:-translate-y-1"
                         >
                             Book a call
-                        </button>
-
-                        {isBookOpen && (
-                            <div className="absolute right-0 top-12 w-56 rounded-xl border border-black/10 bg-white shadow-lg overflow-hidden">
-                                <a
-                                    href={WHATSAPP_LINK}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    onClick={() => setIsBookOpen(false)}
-                                    className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
-                                >
-                                    WhatsApp
-                                    <div className="text-xs text-black/50 mt-0.5">
-                                        Message us directly
-                                    </div>
-                                </a>
-
-                                <a
-                                    href={CALL_LINK}
-                                    onClick={() => setIsBookOpen(false)}
-                                    className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
-                                >
-                                    Call
-                                    <div className="text-xs text-black/50 mt-0.5">
-                                        {PHONE_NUMBER}
-                                    </div>
-                                </a>
-
-                                <a
-                                    href="https://calendar.app.google/8HF9LdQVVndKzWC7A"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    onClick={() => setIsBookOpen(false)}
-                                    className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5 border-t border-black/5"
-                                >
-                                    Schedule a meeting
-                                    <div className="text-xs text-black/50 mt-0.5">
-                                        Book a time on our calendar
-                                    </div>
-                                </a>
-                            </div>
-                        )}
+                        </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -254,12 +213,12 @@ export function Navbar() {
                             <div className="pl-4 flex flex-col gap-3">
                                 <Link href="/case-studies" className="text-base text-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Case Studies</Link>
                                 <Link href="/blog" className="text-base text-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
-
+                                <Link href="/contact" className="text-base text-gray-700" onClick={() => setIsMobileMenuOpen(false)}>Contact Us</Link>
                             </div>
                         </div>
-                        <a href={WHATSAPP_LINK} target="_blank" className="w-full bg-[#000024] text-white text-center py-3 rounded-lg font-medium mt-2">
+                        <Link href="/contact" className="w-full bg-[#000024] text-white text-center py-3 rounded-lg font-medium mt-2" onClick={() => setIsMobileMenuOpen(false)}>
                             Book a call
-                        </a>
+                        </Link>
                     </motion.div>
                 )}
             </AnimatePresence>

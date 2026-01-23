@@ -129,11 +129,11 @@ function MobileServices() {
                                     Explore all services →
                                 </button>
                             </Link>
-                            <a href="https://calendar.app.google/8HF9LdQVVndKzWC7A" target="_blank" rel="noreferrer" className="w-full flex-1">
+                            <Link href="/contact" className="w-full flex-1">
                                 <button className="w-full px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 transition-all hover:bg-white/20 text-white">
                                     Book a free growth audit
                                 </button>
-                            </a>
+                            </Link>
                         </div>
                         <p className="text-xs text-white/60">
                             We’ll identify the top 3 leaks blocking calls, bookings, or sales.
@@ -227,11 +227,11 @@ function DesktopServices() {
                                             Explore all services →
                                         </button>
                                     </Link>
-                                    <a href="https://calendar.app.google/8HF9LdQVVndKzWC7A" target="_blank" rel="noreferrer" className="w-full md:w-auto">
+                                    <Link href="/contact" className="w-full md:w-auto">
                                         <button className="w-full md:w-auto px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-1 text-white">
                                             Book a free growth audit
                                         </button>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <p className="text-xs text-center md:text-left text-white/60">
                                     We’ll identify the top 3 leaks blocking calls, bookings, or sales.
