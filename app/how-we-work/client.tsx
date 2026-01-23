@@ -29,6 +29,35 @@ const faqs = [
 ]
 
 
+function ProcessStepCard({ step }: { step: any }) {
+    const [isExpanded, setIsExpanded] = useState(false)
+
+    return (
+        <div
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="group bg-white p-8 rounded-2xl shadow-sm border border-gray-100/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden cursor-pointer"
+        >
+            <h3 className={`text-2xl font-bold relative z-10 text-[#000024] transition-all duration-300 ${isExpanded ? "mb-4" : ""} md:group-hover:mb-4`}>
+                {step.title}
+            </h3>
+
+            <div className={`grid transition-all duration-500 ease-in-out ${isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"} md:grid-rows-[0fr] md:opacity-0 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100`}>
+                <div className="overflow-hidden space-y-4 pt-2">
+                    <div>
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What we do</span>
+                        <p className="text-gray-700 mt-1">{step.do}</p>
+                    </div>
+                    <div>
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What you get</span>
+                        <p className="text-[#000024] font-medium mt-1">{step.get}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
 export default function HowWeWorkClient() {
     const [isBlueprintOpen, setIsBlueprintOpen] = useState(false)
 
@@ -122,27 +151,7 @@ export default function HowWeWorkClient() {
                                 get: "Ongoing testing + reporting + scaling plan."
                             }
                         ].map((step, index) => (
-                            <div
-                                key={index}
-                                className="group bg-white p-8 rounded-2xl shadow-sm border border-gray-100/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden"
-                            >
-                                <h3 className="text-2xl font-bold relative z-10 text-[#000024] group-hover:mb-4 transition-all duration-300">
-                                    {step.title}
-                                </h3>
-
-                                <div className="grid grid-rows-[0fr] opacity-0 group-hover:grid-rows-[1fr] group-hover:opacity-100 transition-all duration-500 ease-in-out">
-                                    <div className="overflow-hidden space-y-4 pt-2">
-                                        <div>
-                                            <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What we do</span>
-                                            <p className="text-gray-700 mt-1">{step.do}</p>
-                                        </div>
-                                        <div>
-                                            <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What you get</span>
-                                            <p className="text-[#000024] font-medium mt-1">{step.get}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <ProcessStepCard key={index} step={step} />
                         ))}
                     </div>
                 </div>

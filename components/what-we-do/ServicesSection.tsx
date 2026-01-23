@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import Link from "next/link"
 
 // Data for the Cards
@@ -82,9 +82,12 @@ function ServiceCard({
     data: any;
     className?: string;
 }) {
+    const [isExpanded, setIsExpanded] = useState(false)
+
     return (
         <div
-            className={`group relative overflow-hidden bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-start gap-6 h-full ${className}`}
+            onClick={() => setIsExpanded(!isExpanded)}
+            className={`group relative overflow-hidden bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-start gap-6 h-full cursor-pointer ${className}`}
         >
             <div className="w-16 h-16 rounded-full bg-gray-50 flex items-center justify-center text-[#000024] group-hover:scale-110 transition-transform duration-300">
                 {data.icon}
@@ -96,7 +99,7 @@ function ServiceCard({
                 </h4>
             </div>
 
-            <div className="grid grid-rows-[0fr] opacity-0 group-hover:grid-rows-[1fr] group-hover:opacity-100 transition-all duration-500 ease-in-out">
+            <div className={`grid transition-all duration-500 ease-in-out ${isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"} md:grid-rows-[0fr] md:opacity-0 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100`}>
                 <div className="overflow-hidden">
                     <p className="text-gray-600 text-sm font-normal leading-relaxed pt-2">
                         {data.description}
