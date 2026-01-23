@@ -10,6 +10,7 @@ const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_TEXT}`
 const CALL_LINK = `tel:${PHONE_NUMBER}`
 const EMAIL = "hello@inyutek.com"
 const LOCATION = "Amravati Maharashtra India"
+const MAP_LINK = "https://www.google.com/maps/place/Chintamani+Palace+%26+Lawn/@20.8949487,77.7597515,19z/data=!4m6!3m5!1s0x3bd6a57e736b5bcd:0x490ac6552597296c!8m2!3d20.8953027!4d77.7598843!16s%2Fg%2F11fkr2hbys?entry=ttu&g_ep=EgoyMDI2MDEyMS4wIKXMDSoASAFQAw%3D%3D"
 
 export function QuickContact() {
     return (
@@ -44,13 +45,13 @@ export function QuickContact() {
                         <p className="text-gray-500 text-sm">{EMAIL}</p>
                     </a>
 
-                    <div className="flex flex-col items-center p-8 bg-white rounded-xl border border-gray-100 group">
-                        <div className="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mb-4 transition-colors">
+                    <a href={MAP_LINK} target="_blank" rel="noreferrer" className="flex flex-col items-center p-8 bg-white rounded-xl border border-gray-100 hover:shadow-lg transition-all hover:-translate-y-1 group">
+                        <div className="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#000024]/5 transition-colors">
                             <MapPin className="w-6 h-6 text-[#000024]" />
                         </div>
                         <h3 className="text-lg font-bold text-[#000024] mb-1">Location</h3>
                         <p className="text-gray-500 text-sm text-center">{LOCATION}</p>
-                    </div>
+                    </a>
                 </div>
             </ScrollReveal>
         </section>
