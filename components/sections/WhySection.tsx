@@ -41,7 +41,7 @@ export function WhySection() {
                     {/* LEFT: Content */}
                     <div className="flex flex-col gap-8">
                         <Reveal>
-                            <span className="text-sm font-semibold text-gray-900">Why Inyutek</span>
+                            <span className="text-sm font-semibold text-gray-900"></span>
                         </Reveal>
 
                         <Reveal delay={0.1}>

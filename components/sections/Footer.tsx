@@ -34,18 +34,21 @@ export default function Footer() {
                             Inyutek — Lead Generation & Digital Marketing
                         </h3>
 
-                        <a
-                            href="mailto:hello@inyutek.com"
-                            className="mt-2 block text-sm text-black/70 hover:opacity-70"
-                        >
-                            hello@inyutek.com
-                        </a>
-
-                        <p className="mt-3 text-base md:text-sm text-black/70 max-w-sm">
+                        <p className="mt-3 text-base md:text-sm text-black/70 max-w-sm mb-6">
                             We help local service businesses and e-commerce brands generate more calls, bookings, and sales through funnels, ads, SEO, and automation.
                         </p>
 
-
+                        <div className="flex flex-col gap-2 text-sm text-black/70">
+                            <a href="mailto:hello@inyutek.com" className="hover:opacity-70">
+                                Email: hello@inyutek.com
+                            </a>
+                            <a href="https://wa.me/919112235551" className="hover:opacity-70">
+                                WhatsApp: +91 9112235551
+                            </a>
+                            <p>
+                                Location: Amravati, Maharastra, India
+                            </p>
+                        </div>
                     </div>
 
                     <FooterColumn
@@ -65,25 +68,10 @@ export default function Footer() {
                         ]}
                     />
 
-                    <div>
-                        <h4 className="text-sm font-semibold mb-3 text-[#000024]">
-                            Social
-                        </h4>
-                        <ul className="space-y-2 text-sm text-black/70">
-                            {SOCIAL_LINKS.map((s) => (
-                                <li key={s.label}>
-                                    <a
-                                        href={s.href}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="hover:opacity-70"
-                                    >
-                                        {s.label}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    <FooterColumn
+                        title="Legal"
+                        items={["Privacy Policy", "Terms & Conditions", "Cookie Policy"]}
+                    />
                 </div>
             </ScrollReveal>
 
@@ -91,9 +79,7 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto mt-10 flex flex-col md:flex-row items-center justify-between px-6 text-xs text-black/60">
                 <p>© 2026 Inyutek. All rights reserved.</p>
                 <div className="flex gap-5 mt-3 md:mt-0">
-                    <Link href="/privacy-policy" className="hover:opacity-70 cursor-pointer">Privacy policy</Link>
-                    <Link href="/terms-of-service" className="hover:opacity-70 cursor-pointer">Terms of service</Link>
-                    <Link href="/cookie-settings" className="hover:opacity-70 cursor-pointer">Cookie settings</Link>
+                    {/* Legal links moved to column but keeping simplified bottom links or removing if redundant */}
                 </div>
             </div>
         </footer>

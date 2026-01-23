@@ -11,6 +11,7 @@ const processes = [
     {
         id: 1,
         title: "Audit & Goals",
+        subtitle: "We identify what’s blocking conversions",
         description: "We review your offer, funnel, tracking, and competitors—then define the KPI that matters: calls, bookings, or sales.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -22,6 +23,7 @@ const processes = [
     {
         id: 2,
         title: "Funnel & Offer Strategy",
+        subtitle: "We design the path from click → customer",
         description: "Messaging, landing page structure, CTAs, follow-up flow, and a channel plan (Google, social, ads) based on intent.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -36,6 +38,7 @@ const processes = [
     {
         id: 3,
         title: "Build & Launch",
+        subtitle: "We ship the assets and campaigns fast",
         description: "Landing pages, tracking, CRM automation, and ad/SEO execution—so leads can start coming in.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -46,6 +49,7 @@ const processes = [
     {
         id: 4,
         title: "Optimize & Scale",
+        subtitle: "We improve performance every week",
         description: "We test creatives, keywords, pages, and follow-up to increase conversion rate and lower CPL—then scale what works.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -68,7 +72,7 @@ export function ProcessSection() {
 
                 {/* Header */}
                 <div className="max-w-2xl mb-12 md:mb-24">
-                    <span className="text-xs font-bold text-[#000024] opacity-50 uppercase tracking-[0.2em] font-mono">Process</span>
+                    <span className="text-xs font-bold text-[#000024] opacity-50 uppercase tracking-[0.2em] font-mono"></span>
                     <h2 className="mt-4 text-3xl md:text-5xl font-sans font-bold text-[#000024] tracking-tight leading-[1.1]">
                         How we generate calls, bookings, and sales
                     </h2>
@@ -142,6 +146,10 @@ export function ProcessSection() {
                                                     exit={{ height: 0, opacity: 0 }}
                                                     transition={{ duration: 0.3, ease: "easeInOut" }}
                                                 >
+                                                    <p className="text-sm font-semibold text-[#000024] leading-relaxed max-w-xs mx-auto mb-2">
+                                                        {// @ts-ignore
+                                                            process.subtitle}
+                                                    </p>
                                                     <p className="text-sm font-normal text-gray-500 leading-relaxed max-w-xs mx-auto">
                                                         {process.description}
                                                     </p>
@@ -158,15 +166,16 @@ export function ProcessSection() {
 
                 {/* Blueprint CTA */}
                 <div className="mt-20 flex justify-center">
-                    <button
-                        onClick={() => setIsBlueprintOpen(true)}
-                        className="w-full md:w-auto px-10 py-4 bg-[#000024] text-white rounded-lg font-bold text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1 flex items-center justify-center gap-2"
-                    >
-                        See the Blueprint
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
+                    <Link href="/how-we-work">
+                        <button
+                            className="w-full md:w-auto px-10 py-4 bg-[#000024] text-white rounded-lg font-bold text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1 flex items-center justify-center gap-2"
+                        >
+                            How we Work
+                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </Link>
                 </div>
 
                 <Modal isOpen={isBlueprintOpen} onClose={() => setIsBlueprintOpen(false)}>

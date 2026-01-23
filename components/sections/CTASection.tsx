@@ -71,67 +71,27 @@ export function CTASection() {
                     className="mt-10 flex flex-col md:flex-row items-center justify-center gap-4 relative"
                     style={{ zIndex: 40 }}
                 >
-                    <div className="relative w-full md:w-auto" ref={ref}>
-                        <button
-                            onClick={() => setOpen((v) => !v)}
-                            className="w-full md:w-auto px-8 py-3 bg-[#000024] text-white rounded-md font-medium shadow-lg hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
+                    <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
+                        <a
+                            href="https://calendar.app.google/8HF9LdQVVndKzWC7A"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="w-full sm:w-auto"
                         >
-                            Book a free growth audit
-                        </button>
-
-                        {open && (
-                            <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56 rounded-xl border border-black/10 bg-white shadow-lg overflow-hidden z-50 text-left">
-                                <div
-                                    onClick={() => {
-                                        setOpen(false)
-                                        setShowHubSpotForm(true)
-                                    }}
-                                    className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5 cursor-pointer"
-                                >
-                                    Contact us
-                                    <div className="text-xs text-black/50 mt-0.5">
-                                        Send us an email
-                                    </div>
-                                </div>
-
-                                <a
-                                    href={WHATSAPP_LINK}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    onClick={() => setOpen(false)}
-                                    className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
-                                >
-                                    WhatsApp
-                                    <div className="text-xs text-black/50 mt-0.5">
-                                        Message us directly
-                                    </div>
-                                </a>
-
-                                <a
-                                    href={CALL_LINK}
-                                    onClick={() => setOpen(false)}
-                                    className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5"
-                                >
-                                    Call
-                                    <div className="text-xs text-black/50 mt-0.5">
-                                        {PHONE_NUMBER}
-                                    </div>
-                                </a>
-
-                                <a
-                                    href="https://calendar.app.google/8HF9LdQVVndKzWC7A"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    onClick={() => setOpen(false)}
-                                    className="block px-4 py-3 text-sm text-black/80 hover:bg-black/5 border-t border-black/5"
-                                >
-                                    Schedule a meeting
-                                    <div className="text-xs text-black/50 mt-0.5">
-                                        Book a time on our calendar
-                                    </div>
-                                </a>
-                            </div>
-                        )}
+                            <button className="w-full sm:w-auto px-8 py-3 bg-[#000024] text-white rounded-md font-medium shadow-lg hover:bg-[#000024]/90 transition-all hover:-translate-y-1">
+                                Book a free growth audit
+                            </button>
+                        </a>
+                        <a
+                            href={WHATSAPP_LINK}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="w-full sm:w-auto"
+                        >
+                            <button className="w-full sm:w-auto px-8 py-3 bg-white text-[#000024] border border-[#000024]/20 rounded-md font-medium hover:bg-gray-50 transition-all hover:-translate-y-1">
+                                Message us on WhatsApp
+                            </button>
+                        </a>
                     </div>
                 </motion.div>
 

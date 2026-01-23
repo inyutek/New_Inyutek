@@ -21,7 +21,7 @@ const results = [
     },
     {
         id: 2,
-        title: "Cost Per Lead (CPL) / CPA",
+        title: "Cost Per Lead (CPL) / Cost Per Acquisition (CPA)",
         metric: "Paid Efficiency",
         description: "What you pay to generate a lead or sale—and how we reduce it over time.",
         icon: (

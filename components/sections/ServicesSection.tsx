@@ -88,7 +88,7 @@ function ServiceCard({
 }) {
     return (
         <div
-            className={`relative w-full flex-1 bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col justify-center gap-4 ${className}`}
+            className={`relative w-full bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col justify-center gap-4 ${className}`}
         >
             <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center mb-2 text-[#000024]">
                 {data.icon}
@@ -122,12 +122,22 @@ function MobileServices() {
                         • Local services: Local SEO + Google Ads + booking/WhatsApp funnels<br />
                         • E-commerce: Product/category SEO + paid social + conversion rate optimization
                     </p>
-                    <div className="flex justify-center">
-                        <Link href="/services" className="w-full">
-                            <button className="w-full px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 transition-all">
-                                Explore services →
-                            </button>
-                        </Link>
+                    <div className="flex flex-col items-center gap-3 w-full">
+                        <div className="flex flex-col sm:flex-row gap-3 w-full">
+                            <Link href="/services" className="w-full flex-1">
+                                <button className="w-full px-6 py-3 bg-white text-black rounded-lg font-medium transition-all hover:bg-gray-100">
+                                    Explore all services →
+                                </button>
+                            </Link>
+                            <a href="https://calendar.app.google/8HF9LdQVVndKzWC7A" target="_blank" rel="noreferrer" className="w-full flex-1">
+                                <button className="w-full px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 transition-all hover:bg-white/20 text-white">
+                                    Book a free growth audit
+                                </button>
+                            </a>
+                        </div>
+                        <p className="text-xs text-white/60">
+                            We’ll identify the top 3 leaks blocking calls, bookings, or sales.
+                        </p>
                     </div>
                 </motion.div>
 
@@ -171,10 +181,10 @@ function DesktopServices() {
     // 2. Right Column Container Appearance
     const rightOpacity = useTransform(scrollYProgress, [0.20, 0.30], [0, 1])
 
-    // 3. Group Animations
-    const groupOneY = useTransform(scrollYProgress, [0.35, 0.80], ["0%", "-100%"])
-    const groupOneOpacity = useTransform(scrollYProgress, [0.60, 0.80], [1, 0])
-    const groupTwoY = useTransform(scrollYProgress, [0.35, 0.80], ["100%", "0%"])
+    // Unified List Animation
+    // Scroll the entire list up as the user scrolls down the page.
+    // Adjust the output range (e.g., "-50%") based on how many cards need to be revealed.
+    const listY = useTransform(scrollYProgress, [0.35, 0.9], ["0%", "-60%"])
 
     return (
         <div id="services" ref={containerRef} className="hidden md:block relative h-[300vh] bg-[#fbfbfb]">
@@ -205,68 +215,50 @@ function DesktopServices() {
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 text-white">
                             <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80"></div>
                             <h3 className="text-2xl md:text-3xl font-bold mb-4">Services built to create <br /> consistent lead flow</h3>
-                            <p className="text-base md:text-sm font-normal opacity-80 max-w-md mb-2">Pick one growth lever or let us build the full lead system end-to-end <br/>strategy → execution → optimization .</p>
+                            <p className="text-base md:text-sm font-normal opacity-80 max-w-2xl mb-2">Pick one growth lever or let us build the full lead system end-to-end <br />strategy → execution → optimization .</p>
                             <p className="text-xs font-normal opacity-60 max-w-md mb-8">
                                 • Local services: Local SEO + Google Ads + booking/WhatsApp funnels<br />
                                 • E-commerce: Product/category SEO + paid social + conversion rate optimization
                             </p>
-                            <div className="flex gap-4 w-full md:w-auto">
-                                <Link href="/services" className="w-full md:w-auto">
-                                    <button className="w-full md:w-auto px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-1">
-                                        Explore services →
-                                    </button>
-                                </Link>
+                            <div className="flex flex-col gap-3 w-full md:w-auto">
+                                <div className="flex gap-4 w-full md:w-auto">
+                                    <Link href="/services" className="w-full md:w-auto">
+                                        <button className="w-full md:w-auto px-6 py-3 bg-white text-black rounded-lg font-medium hover:bg-gray-100 transition-all hover:-translate-y-1">
+                                            Explore all services →
+                                        </button>
+                                    </Link>
+                                    <a href="https://calendar.app.google/8HF9LdQVVndKzWC7A" target="_blank" rel="noreferrer" className="w-full md:w-auto">
+                                        <button className="w-full md:w-auto px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-1 text-white">
+                                            Book a free growth audit
+                                        </button>
+                                    </a>
+                                </div>
+                                <p className="text-xs text-center md:text-left text-white/60">
+                                    We’ll identify the top 3 leaks blocking calls, bookings, or sales.
+                                </p>
                             </div>
                         </div>
                     </motion.div>
 
 
                     {/* RIGHT SIDE CARDS STACK */}
+                    {/* Visual window for the list */}
                     <motion.div
                         style={{ opacity: rightOpacity }}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 w-full md:w-[48%] h-[50vh] md:h-[60vh] rounded-2xl"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 w-full md:w-[48%] max-h-[60vh] overflow-hidden rounded-2xl"
                     >
-                        <div className="relative w-full h-full overflow-hidden">
-
-                            {/* GROUP 1 (Base Layer) - Services 1, 2, 3 */}
-                            <motion.div
-                                style={{ y: groupOneY, opacity: groupOneOpacity }}
-                                className="absolute inset-0 w-full h-full flex flex-col gap-4 p-4 md:p-0"
-                            >
+                        {/* Scrolling Container */}
+                        <motion.div
+                            style={{ y: listY }}
+                            className="flex flex-col gap-4 p-4 md:p-0"
+                        >
+                            {services.map((service) => (
                                 <ServiceCard
-                                    data={services[0]}
-                                    className="scale-90"
+                                    key={service.id}
+                                    data={service}
                                 />
-                                <ServiceCard
-                                    data={services[1]}
-                                    className="scale-90"
-                                />
-                                <ServiceCard
-                                    data={services[2]}
-                                    className="scale-90"
-                                />
-                            </motion.div>
-
-                            {/* GROUP 2 (Slide Layer) - Services 4, 5, 6 */}
-                            <motion.div
-                                style={{ y: groupTwoY }}
-                                className="absolute inset-0 w-full h-full flex flex-col gap-4 p-4 md:p-0"
-                            >
-                                <ServiceCard
-                                    data={services[3]}
-                                    className="scale-90"
-                                />
-                                <ServiceCard
-                                    data={services[4]}
-                                    className="scale-90"
-                                />
-                                <ServiceCard
-                                    data={services[5]}
-                                    className="scale-90"
-                                />
-                            </motion.div>
-
-                        </div>
+                            ))}
+                        </motion.div>
                     </motion.div>
 
                 </div>
