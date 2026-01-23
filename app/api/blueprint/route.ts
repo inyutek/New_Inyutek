@@ -1,31 +1,32 @@
 import { NextResponse } from 'next/server'
+import { env } from '@/lib/env'
 
 export async function POST(request: Request) {
     try {
         const body = await request.json()
         const { name, email, website } = body
 
-        // Log the attempt
-        console.log('Attempty to submit to Notion:', { name, email, website })
+        // Log the attempt (exclude sensitive data)
+        console.log('Attempting to submit to Notion Leads DB:', { name, email })
 
-        if (!process.env.notion_id || !process.env.Leads_database_id) {
-            console.error('Missing Notion environment variables')
+        // Validate required fields
+        if (!name || !email) {
             return NextResponse.json(
-                { error: 'Server configuration error' },
-                { status: 500 }
+                { error: 'Name and Email are required' },
+                { status: 400 }
             )
         }
 
         const response = await fetch('https://api.notion.com/v1/pages', {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${process.env.notion_id}`,
+                'Authorization': `Bearer ${env.NOTION_TOKEN}`,
                 'Notion-Version': '2022-06-28',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 parent: {
-                    database_id: process.env.Leads_database_id,
+                    database_id: env.NOTION_LEADS_DATABASE_ID,
                 },
                 properties: {
                     Name: {
@@ -73,6 +74,8 @@ export async function POST(request: Request) {
 
     } catch (error) {
         console.error('Internal Error:', error)
+        // If it's our custom env error, strictly surface it in dev, generic in prod? 
+        // For now, general error to avoid leaking details in responses.
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }

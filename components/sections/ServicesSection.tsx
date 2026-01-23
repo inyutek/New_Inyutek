@@ -203,9 +203,9 @@ function DesktopServices() {
                             {/* Gradient removed for pure black look */}
                         </div>
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 text-white">
-                            <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80">Services</div>
+                            <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80"></div>
                             <h3 className="text-2xl md:text-3xl font-bold mb-4">Services built to create <br /> consistent lead flow</h3>
-                            <p className="text-base md:text-sm font-normal opacity-80 max-w-md mb-2">Pick one growth lever—or let us build the full lead system end-to-end (strategy → execution → optimization).</p>
+                            <p className="text-base md:text-sm font-normal opacity-80 max-w-md mb-2">Pick one growth lever or let us build the full lead system end-to-end <br/>strategy → execution → optimization .</p>
                             <p className="text-xs font-normal opacity-60 max-w-md mb-8">
                                 • Local services: Local SEO + Google Ads + booking/WhatsApp funnels<br />
                                 • E-commerce: Product/category SEO + paid social + conversion rate optimization

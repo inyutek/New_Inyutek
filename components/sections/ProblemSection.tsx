@@ -160,13 +160,19 @@ export function ProblemSection() {
                     <p className="text-base md:text-sm font-normal leading-relaxed text-gray-600 max-w-2xl mx-auto mb-2">
                         You can get attention from Google, ads, or social — but if your message is unclear and your funnel is weak, visitors don’t become calls, bookings, or purchases. We fix the leaks that kill conversion.
                     </p>
-                    <p className="text-sm font-bold text-[#000024] max-w-2xl mx-auto mb-8">
-                        Result: wasted ad spend, inconsistent lead flow, and low-quality inquiries.
-                    </p>
+
                 </div>
 
                 <MobileProblem />
                 <DesktopProblem />
+
+                <div className="mt-16 flex justify-center">
+                    <div className=" border-gray-00 rounded-lg px-8 py-3 3shadow-sm">
+                        <p className="text-base font-medium text-[#000024]">
+                            <span className="font-bold">Result:</span> Wasted ad spend, inconsistent lead flow, and low-quality inquiries.
+                        </p>
+                    </div>
+                </div>
 
             </div>
         </section>
