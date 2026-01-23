@@ -1,47 +1,62 @@
 'use client'
 
-import { ReactNode, useEffect, useRef } from 'react'
+import { ReactNode, useEffect, useRef, Suspense, useState } from 'react'
 import Lenis from 'lenis'
 import { usePathname, useSearchParams } from 'next/navigation'
 
-export default function SmoothScroll({ children }: { children: ReactNode }) {
-    const lenisRef = useRef<Lenis | null>(null)
+function HashScrollHandler({ lenis }: { lenis: Lenis | null }) {
     const pathname = usePathname()
     const searchParams = useSearchParams()
 
     useEffect(() => {
-        const lenis = new Lenis({
+        if (lenis && window.location.hash) {
+            const target = document.querySelector(window.location.hash) as HTMLElement | null
+            if (target) {
+                // Small delay to ensure render
+                setTimeout(() => {
+                    lenis.scrollTo(target)
+                }, 100)
+            }
+        }
+    }, [pathname, searchParams, lenis])
+
+    return null
+}
+
+export default function SmoothScroll({ children }: { children: ReactNode }) {
+    const lenisRef = useRef<Lenis | null>(null)
+    // Force re-render when lenis is ready
+    const [lenis, setLenis] = useState<Lenis | null>(null)
+
+    useEffect(() => {
+        const newLenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            // removed invalid options
             touchMultiplier: 2,
         })
-        lenisRef.current = lenis
+        lenisRef.current = newLenis
+        setLenis(newLenis)
 
         function raf(time: number) {
-            lenis.raf(time)
+            newLenis.raf(time)
             requestAnimationFrame(raf)
         }
 
         requestAnimationFrame(raf)
 
         return () => {
-            lenis.destroy()
+            newLenis.destroy()
             lenisRef.current = null
+            setLenis(null)
         }
     }, [])
 
-    useEffect(() => {
-        if (lenisRef.current && window.location.hash) {
-            const target = document.querySelector(window.location.hash) as HTMLElement | null
-            if (target) {
-                // Small delay to ensure render
-                setTimeout(() => {
-                    lenisRef.current?.scrollTo(target)
-                }, 100)
-            }
-        }
-    }, [pathname, searchParams])
-
-    return <>{children}</>
+    return (
+        <>
+            <Suspense fallback={null}>
+                <HashScrollHandler lenis={lenisRef.current} />
+            </Suspense>
+            {children}
+        </>
+    )
 }
