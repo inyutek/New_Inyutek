@@ -23,7 +23,7 @@ const SOCIAL_LINKS = [
 
 export default function Footer() {
     return (
-        <footer className="bg-[#fbfbfb] pt-28 pb-12">
+        <footer className="bg-[#fbfbfb] pt-28 pb-12 relative z-20">
             {/* Main Footer Box */}
             <ScrollReveal enableDesktop={false} className="max-w-7xl mx-auto rounded-2xl border border-black/5 bg-white px-10 py-16 md:px-14 md:py-20">
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
