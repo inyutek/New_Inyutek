@@ -239,12 +239,12 @@ function DesktopServices() {
                     {/* Visual window for the list */}
                     <motion.div
                         style={{ opacity: rightOpacity }}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 w-full lg:w-[48%] max-h-[60vh] overflow-hidden rounded-2xl"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 w-full lg:w-[48%] h-[60vh] overflow-hidden rounded-2xl [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
                     >
                         {/* Scrolling Container */}
                         <motion.div
                             style={{ y: listY }}
-                            className="flex flex-col gap-4 p-4 md:p-0"
+                            className="flex flex-col gap-4 p-4 md:p-0 pb-20"
                         >
                             {services.map((service) => (
                                 <ServiceCard

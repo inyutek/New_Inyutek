@@ -73,8 +73,8 @@ export function ProcessSection() {
                     <h2 className="mt-4 text-3xl md:text-5xl font-sans font-bold text-[#000024] tracking-tight leading-[1.1]">
                         How we generate calls, bookings, and sales
                     </h2>
-                    <p className="mt-6 text-xl text-gray-400 font-normal max-w-lg leading-relaxed">
-                        A simple 4-step system: diagnose → build → launch → optimize. No guesswork, just measurable growth.
+                    <p className="mt-6 text-xl text-gray-400 font-normal max-w-2xl leading-relaxed">
+                        A simple 4-step system: diagnose → build → launch → optimize.<br /> No guesswork, just measurable growth.
                     </p>
 
                     <Link href="/how-we-work" className="group flex items-center gap-2 mt-8 text-[#000024] font-medium hover:opacity-70 transition-all inline-flex w-fit">
