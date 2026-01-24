@@ -105,7 +105,7 @@ function ServiceCard({
 
 function MobileServices() {
     return (
-        <div id="services-mobile" className="block md:hidden py-20 px-6 bg-[#fbfbfb]">
+        <div id="services-mobile" className="block lg:hidden py-20 px-6 bg-[#fbfbfb]">
             <div className="flex flex-col gap-6">
                 {/* Featured Card */}
                 <motion.div
@@ -117,11 +117,8 @@ function MobileServices() {
                 >
                     <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80">Services</div>
                     <h3 className="text-2xl font-bold mb-4">Services built to create <br /> consistent lead flow</h3>
-                    <p className="text-base font-normal opacity-80 mb-2">Pick one growth lever—or let us build the full lead system end-to-end (strategy → execution → optimization).</p>
-                    <p className="text-xs font-normal opacity-60 mb-8">
-                        • Local services: Local SEO + Google Ads + booking/WhatsApp funnels<br />
-                        • E-commerce: Product/category SEO + paid social + conversion rate optimization
-                    </p>
+                    <p className="text-base font-normal opacity-80 mb-8">Pick one growth lever—or let us build the full lead system end-to-end (strategy → execution → optimization).</p>
+
                     <div className="flex flex-col items-center gap-3 w-full">
                         <div className="flex flex-col sm:flex-row gap-3 w-full">
                             <Link href="/services" className="w-full flex-1">
@@ -135,7 +132,7 @@ function MobileServices() {
                                 </button>
                             </Link>
                         </div>
-                        <p className="text-xs text-white/60">
+                        <p className="text-xs text-center text-white/60">
                             We’ll identify the top 3 leaks blocking calls, bookings, or sales.
                         </p>
                     </div>
@@ -187,14 +184,14 @@ function DesktopServices() {
     const listY = useTransform(scrollYProgress, [0.35, 0.9], ["0%", "-55%"])
 
     return (
-        <div id="services" ref={containerRef} className="hidden md:block relative h-[300vh] bg-[#fbfbfb]">
+        <div id="services" ref={containerRef} className="hidden lg:block relative h-[300vh] bg-[#fbfbfb]">
             <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
 
                 <div className="w-full mx-auto px-6 lg:px-8 relative h-full flex items-center justify-between">
 
                     {/* Grid Layout Helper */}
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full h-[60vh]">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full h-[60vh]">
                             <div className="" />
                             <div className="" />
                         </div>
@@ -207,19 +204,16 @@ function DesktopServices() {
                             x: cardX,
                             width: useTransform(scrollYProgress, [0.05, 0.25], ["100%", "48%"])
                         }}
-                        className="absolute top-1/2 -translate-y-1/2 z-20 h-[50vh] md:h-[60vh] bg-black rounded-3xl overflow-hidden shadow-2xl"
+                        className="absolute top-1/2 -translate-y-1/2 z-20 h-[50vh] lg:h-[60vh] bg-black rounded-3xl overflow-hidden shadow-2xl"
                     >
                         <div className="absolute inset-0 bg-black">
                             {/* Gradient removed for pure black look */}
                         </div>
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 text-white">
                             <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80"></div>
-                            <h3 className="text-2xl md:text-3xl font-bold mb-4">Services built to create <br /> consistent lead flow</h3>
-                            <p className="text-base md:text-sm font-normal opacity-80 max-w-2xl mb-2">Pick one growth lever or let us build the full lead system end-to-end <br />strategy → execution → optimization .</p>
-                            <p className="text-xs font-normal opacity-60 max-w-md mb-8">
-                                • Local services: Local SEO + Google Ads + booking/WhatsApp funnels<br />
-                                • E-commerce: Product/category SEO + paid social + conversion rate optimization
-                            </p>
+                            <h3 className="text-2xl lg:text-3xl font-bold mb-4">Services built to create <br /> consistent lead flow</h3>
+                            <p className="text-base md:text-sm font-normal opacity-80 max-w-2xl mb-8">Pick one growth lever or let us build the full lead system end-to-end <br />strategy → execution → optimization .</p>
+
                             <div className="flex flex-col gap-3 w-full md:w-auto">
                                 <div className="flex gap-4 w-full md:w-auto">
                                     <Link href="/services" className="w-full md:w-auto">
@@ -233,7 +227,7 @@ function DesktopServices() {
                                         </button>
                                     </Link>
                                 </div>
-                                <p className="text-xs text-center md:text-left text-white/60">
+                                <p className="text-xs text-center text-white/60">
                                     We’ll identify the top 3 leaks blocking calls, bookings, or sales.
                                 </p>
                             </div>
@@ -245,7 +239,7 @@ function DesktopServices() {
                     {/* Visual window for the list */}
                     <motion.div
                         style={{ opacity: rightOpacity }}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 w-full md:w-[48%] max-h-[60vh] overflow-hidden rounded-2xl"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 w-full lg:w-[48%] max-h-[60vh] overflow-hidden rounded-2xl"
                     >
                         {/* Scrolling Container */}
                         <motion.div

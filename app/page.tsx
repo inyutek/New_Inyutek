@@ -5,7 +5,7 @@ import { ProcessSection } from "@/components/sections/ProcessSection"
 import { ResultsSection } from "@/components/sections/ResultsSection"
 import { LogoMarquee } from "@/components/sections/LogoMarquee"
 import { WhySection } from "@/components/sections/WhySection"
-import { FAQSection } from "@/components/sections/FAQSection"
+
 import { CTASection } from "@/components/sections/CTASection"
 import Footer from "@/components/sections/Footer"
 import ScrollToTop from "@/components/ScrollToTop"
@@ -34,8 +34,7 @@ export default function Home() {
       {/* Why Section (Basic Reveal) */}
       <WhySection />
 
-      {/* FAQ Section */}
-      <FAQSection />
+
 
       {/* CTA Section (Rotational Text) */}
       <CTASection />
