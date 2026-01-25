@@ -9,3 +9,32 @@
   --color-line: #E5E7EB;
   --color-soft: #F3F4F6;
 }
+
+@layer utilities {
+  .type-h1 {
+    @apply text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-[1.1];
+    color: var(--color-ink);
+  }
+
+  .type-h2 {
+    @apply text-xl md:text-2xl lg:text-3xl font-bold tracking-tight leading-[1.1];
+    color: var(--color-ink);
+  }
+
+  .type-lead-hero {
+    @apply text-xl md:text-2xl font-normal leading-relaxed text-gray-600;
+  }
+
+  .type-lead {
+    @apply text-lg md:text-xl font-normal leading-relaxed text-gray-600;
+  }
+
+  .type-card-title {
+    @apply text-lg md:text-xl font-bold tracking-tight leading-tight;
+    color: var(--color-ink);
+  }
+
+  .type-body {
+    @apply text-base md:text-lg font-normal leading-relaxed text-gray-600;
+  }
+}

@@ -37,7 +37,7 @@ function ProcessStepCard({ step }: { step: any }) {
             onClick={() => setIsExpanded(!isExpanded)}
             className="group bg-white p-8 rounded-2xl shadow-sm border border-gray-100/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden cursor-pointer"
         >
-            <h3 className={`text-2xl font-bold relative z-10 text-[#000024] transition-all duration-300 ${isExpanded ? "mb-4" : ""} md:group-hover:mb-4`}>
+            <h3 className={`type-card-title relative z-10 transition-all duration-300 ${isExpanded ? "mb-4" : ""} md:group-hover:mb-4`}>
                 {step.title}
             </h3>
 
@@ -67,10 +67,10 @@ export default function HowWeWorkClient() {
             {/* HERO SECTION */}
             <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 overflow-hidden">
                 <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-[1.1] mb-8">
+                    <h1 className="type-h1 mb-8">
                         How we turn clicks into calls, bookings, and sales
                     </h1>
-                    <p className="text-base md:text-lg text-gray-600 font-normal leading-relaxed max-w-2xl mx-auto mb-10">
+                    <p className="type-body max-w-2xl mx-auto mb-10">
                         A simple, repeatable system: we diagnose what’s leaking, build the funnel, launch fast, then optimize weekly based on real conversion data.
                     </p>
 
@@ -100,10 +100,10 @@ export default function HowWeWorkClient() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <div className="max-w-xl">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
+                            <h2 className="type-h2 mb-6">
                                 Marketing works when the funnel is measurable
                             </h2>
-                            <p className="text-lg text-gray-600 leading-relaxed">
+                            <p className="type-lead">
                                 Most businesses try random tactics. We focus on the full path: traffic → landing page → conversion → follow-up → revenue, with tracking at every step.
                             </p>
                         </div>
@@ -124,7 +124,7 @@ export default function HowWeWorkClient() {
             {/* OUR 4-STEP PROCESS */}
             <section className="py-24 md:py-32 bg-[#fbfbfb]">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 md:mb-24 tracking-tight">
+                    <h2 className="type-h1 text-center mb-16 md:mb-24">
                         Our lead generation process
                     </h2>
 
@@ -162,7 +162,7 @@ export default function HowWeWorkClient() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="grid lg:grid-cols-2 gap-16">
                         <div>
-                            <h2 className="text-3xl md:text-5xl font-bold mb-8 text-[#000024]">
+                            <h2 className="type-h2 mb-8">
                                 What you’ll receive in the first 14 days
                             </h2>
                             <p className="text-gray-600 text-lg leading-relaxed">
@@ -257,10 +257,10 @@ export default function HowWeWorkClient() {
             {/* FINAL CTA */}
             <section className="py-24 bg-white text-center">
                 <div className="max-w-4xl mx-auto px-6">
-                    <h2 className="text-3xl md:text-5xl font-bold text-[#000024] mb-8 tracking-tight">
+                    <h2 className="type-h2 mb-8">
                         Want a clear plan to get more leads or sales?
                     </h2>
-                    <p className="text-xl text-gray-500 mb-10 max-w-2xl mx-auto">
+                    <p className="type-body mb-10 max-w-2xl mx-auto">
                         Book a free growth audit. You’ll leave with the top 3 fixes to improve conversions and lead quality.
                     </p>
 

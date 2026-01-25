@@ -28,7 +28,7 @@ export function DifferentiationSection() {
             <ScrollReveal className="max-w-7xl mx-auto px-6 lg:px-8">
                 <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
                     <Reveal>
-                        <h2 className="text-3xl md:text-4xl font-bold text-[#000024] tracking-tight">
+                        <h2 className="type-h2">
                             What makes Inyutek different
                         </h2>
                     </Reveal>
@@ -37,10 +37,10 @@ export function DifferentiationSection() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {differentiators.map((item, i) => (
                         <Reveal key={i} delay={i * 0.1} className="bg-gray-50 p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300">
-                            <h3 className="text-xl font-bold text-[#000024] mb-4">
+                            <h3 className="type-card-title mb-4">
                                 {item.title}
                             </h3>
-                            <p className="text-base text-gray-600 leading-relaxed">
+                            <p className="type-body">
                                 {item.description}
                             </p>
                         </Reveal>

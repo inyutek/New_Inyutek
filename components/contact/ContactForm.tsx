@@ -39,7 +39,7 @@ export function ContactForm() {
                     <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <CheckCircle2 className="w-8 h-8 text-green-600" />
                     </div>
-                    <h3 className="text-2xl font-bold text-[#000024] mb-2">Request Received!</h3>
+                    <h3 className="type-card-title mb-2">Request Received!</h3>
                     <p className="text-gray-600 mb-8 max-w-sm mx-auto">
                         Thanks for booking an audit. We'll review your details and confirm the time shortly.
                     </p>
@@ -58,7 +58,7 @@ export function ContactForm() {
         <section id="booking-form" className="bg-white py-24 px-6 lg:px-8 scroll-mt-20">
             <ScrollReveal className="max-w-3xl mx-auto">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#000024] tracking-tight mb-4">
+                    <h2 className="type-h2 mb-4">
                         Answer 4 quick questions so we can make the call useful
                     </h2>
 

@@ -7,11 +7,11 @@ export function Hero() {
     return (
         <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-[#fbfbfb] overflow-hidden">
             <ScrollReveal className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#000024] leading-[1.1] mb-8">
+                <h1 className="type-h1 mb-8">
                     A lead generation agency built for measurable growth
                 </h1>
 
-                <p className="text-base md:text-lg font-normal text-gray-600 leading-relaxed mb-10 max-w-3xl mx-auto">
+                <p className="type-body mb-10 max-w-3xl mx-auto">
                     Inyutek helps local service businesses and ecommerce brands generate more calls, bookings, and sales through conversion-focused funnels, performance marketing, and tracking that proves what’s working.
                 </p>
 

@@ -62,7 +62,7 @@ function MobileProblem() {
                     <div onClick={() => handleToggle(index)}>
                         {/* Header / Trigger */}
                         <div className="p-6 text-center">
-                            <h3 className={`text-xl font-bold tracking-tight transition-colors duration-300 ${activeIndex === index ? "text-[#000024]" : "text-gray-400"}`}>
+                            <h3 className={`type-card-title transition-colors duration-300 ${activeIndex === index ? "text-[#000024]" : "text-gray-400"}`}>
                                 {item.title}
                             </h3>
                         </div>
@@ -77,7 +77,7 @@ function MobileProblem() {
                                     transition={{ duration: 0.3, ease: "easeInOut" }}
                                 >
                                     <div className="px-6 pb-8 pt-0 flex flex-col items-center gap-6">
-                                        <p className="text-sm font-normal text-gray-600 leading-relaxed text-center">
+                                        <p className="type-body text-center">
                                             {item.description}
                                         </p>
 
@@ -113,11 +113,11 @@ function DesktopProblem() {
                             className={`cursor-pointer transition-all duration-300 ${index !== problems.length - 1 ? "border-b border-gray-100 pb-10" : ""
                                 }`}
                         >
-                            <h3 className={`text-lg font-bold tracking-tight transition-colors duration-300 mb-3 ${activeIndex === index ? "text-[#000024]" : "text-gray-300"
+                            <h3 className={`type-card-title transition-colors duration-300 mb-3 ${activeIndex === index ? "!text-[#000024]" : "!text-gray-300"
                                 }`}>
                                 {item.title}
                             </h3>
-                            <p className={`text-base md:text-sm font-normal leading-relaxed transition-colors duration-300 ${activeIndex === index ? "text-gray-600" : "text-gray-300"
+                            <p className={`type-body transition-colors duration-300 ${activeIndex === index ? "!text-gray-600" : "!text-gray-300"
                                 }`}>
                                 {item.description}
                             </p>
@@ -154,10 +154,10 @@ export function ProblemSection() {
                 {/* Shared Header */}
                 <div className="mx-auto max-w-3xl text-center mb-16 md:mb-24">
 
-                    <h2 className="text-3xl font-bold tracking-tight text-[#000024] sm:text-3xl mb-6">
+                    <h2 className="type-h2 mb-6">
                         Most businesses don’t have a traffic problem — they have a conversion problem
                     </h2>
-                    <p className="text-base md:text-sm font-normal leading-relaxed text-gray-600 max-w-2xl mx-auto mb-2">
+                    <p className="type-body max-w-2xl mx-auto mb-2">
                         You can get attention from Google, ads, or social — but if your message is unclear and your funnel is weak, visitors don’t become calls, bookings, or purchases. We fix the leaks that kill conversion.
                     </p>
 
@@ -168,7 +168,7 @@ export function ProblemSection() {
 
                 <div className="mt-16 flex justify-center">
                     <div className=" border-gray-00 rounded-lg px-8 py-3 3shadow-sm">
-                        <p className="text-base font-medium text-[#000024]">
+                        <p className="type-body">
                             <span className="font-bold">Result:</span> Wasted ad spend, inconsistent lead flow, and low-quality inquiries.
                         </p>
                     </div>

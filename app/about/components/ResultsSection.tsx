@@ -45,7 +45,7 @@ export function ResultsSection() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div>
                         <Reveal>
-                            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-8 leading-tight text-[#000024]">
+                            <h2 className="type-h2 mb-8">
                                 How we create results without guessing
                             </h2>
                             <p className="text-lg text-gray-500 leading-relaxed mb-6">

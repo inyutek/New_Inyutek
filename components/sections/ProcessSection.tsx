@@ -70,10 +70,10 @@ export function ProcessSection() {
                 {/* Header */}
                 <div className="max-w-2xl mb-12 md:mb-24">
                     <span className="text-xs font-bold text-[#000024] opacity-50 uppercase tracking-[0.2em] font-mono"></span>
-                    <h2 className="mt-4 text-3xl md:text-5xl font-sans font-bold text-[#000024] tracking-tight leading-[1.1]">
+                    <h2 className="type-h2 mt-4">
                         How we generate calls, bookings, and sales
                     </h2>
-                    <p className="mt-6 text-xl text-gray-400 font-normal max-w-2xl leading-relaxed">
+                    <p className="type-lead mt-6 max-w-2xl">
                         A simple 4-step system: diagnose → build → launch → optimize.<br /> No guesswork, just measurable growth.
                     </p>
 
@@ -127,7 +127,7 @@ export function ProcessSection() {
 
                                     {/* Title */}
                                     <h3 className={`
-                                    text-lg font-bold transition-colors duration-300
+                                    type-card-title transition-colors duration-300
                                     ${activeIndex === index ? "text-[#000024]" : "text-gray-400"}
                                 `}>
                                         {process.title}
@@ -143,11 +143,11 @@ export function ProcessSection() {
                                                     exit={{ height: 0, opacity: 0 }}
                                                     transition={{ duration: 0.3, ease: "easeInOut" }}
                                                 >
-                                                    <p className="text-sm font-semibold text-[#000024] leading-relaxed max-w-xs mx-auto mb-2">
+                                                    <p className="type-body max-w-xs mx-auto mb-2">
                                                         {// @ts-ignore
                                                             process.subtitle}
                                                     </p>
-                                                    <p className="text-sm font-normal text-gray-500 leading-relaxed max-w-xs mx-auto">
+                                                    <p className="type-body max-w-xs mx-auto">
                                                         {process.description}
                                                     </p>
                                                     {/* Added subtitle for step if needed, or just keeping the single desc */}

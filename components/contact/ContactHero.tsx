@@ -26,11 +26,11 @@ export function ContactHero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#000024] leading-[1.1] mb-6">
+                    <h1 className="type-h1 mb-6">
                         Book your free growth audit
                     </h1>
 
-                    <p className="text-base md:text-lg font-normal text-gray-600 leading-relaxed max-w-2xl mx-auto mb-10">
+                    <p className="type-body max-w-2xl mx-auto mb-10">
                         Walk away with a clear plan to improve calls, bookings, or sales—plus the top conversion leaks holding your funnel back.
                     </p>
 

@@ -29,10 +29,10 @@ export function BeliefsSection() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
                     <div className="lg:col-span-5">
                         <Reveal>
-                            <h2 className="text-3xl md:text-4xl font-bold text-[#000024] tracking-tight mb-6">
+                            <h2 className="type-h2 mb-6">
                                 How we think about growth
                             </h2>
-                            <p className="text-lg text-gray-500 leading-relaxed">
+                            <p className="type-lead">
                                 Our philosophy is simple: cut the fluff and focus on what actually drives revenue.
                             </p>
                         </Reveal>
@@ -42,10 +42,10 @@ export function BeliefsSection() {
                         {beliefs.map((item, i) => (
                             <Reveal key={i} delay={i * 0.1} className="flex flex-col gap-4">
                                 <div className="w-12 h-1 bg-[#000024]"></div>
-                                <h3 className="text-xl font-bold text-[#000024]">
+                                <h3 className="type-card-title">
                                     {item.title}
                                 </h3>
-                                <p className="text-base text-gray-600 leading-relaxed">
+                                <p className="type-body">
                                     {item.description}
                                 </p>
                             </Reveal>

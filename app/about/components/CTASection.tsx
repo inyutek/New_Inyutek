@@ -9,7 +9,7 @@ export function CTASection() {
         <section className="bg-white py-24 md:py-32 relative overflow-hidden">
             <ScrollReveal className="relative z-10 max-w-4xl mx-auto px-6 text-center text-[#000024]">
                 <Reveal>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight mb-8">
+                    <h2 className="type-h2 mb-8">
                         Want a clear plan to grow?
                     </h2>
                     <p className="text-xl text-gray-500 mb-12 max-w-2xl mx-auto leading-relaxed">

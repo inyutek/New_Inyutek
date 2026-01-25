@@ -93,10 +93,10 @@ function ServiceCard({
             <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center mb-2 text-[#000024]">
                 {data.icon}
             </div>
-            <h4 className="text-lg font-bold text-[#000024] leading-tight">
+            <h4 className="type-card-title">
                 {data.title}
             </h4>
-            <p className="text-gray-600 text-base md:text-sm font-normal">
+            <p className="type-body">
                 {data.description}
             </p>
         </div>
@@ -116,8 +116,8 @@ function MobileServices() {
                     className="w-full bg-black rounded-3xl overflow-hidden shadow-xl p-8 text-white min-h-[400px] flex flex-col justify-center text-center"
                 >
                     <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80">Services</div>
-                    <h3 className="text-2xl font-bold mb-4">Services built to create <br /> consistent lead flow</h3>
-                    <p className="text-base font-normal opacity-80 mb-8">Pick one growth lever—or let us build the full lead system end-to-end (strategy → execution → optimization).</p>
+                    <h3 className="type-h2 mb-4 !text-gray-50">Services built to create <br /> consistent lead flow</h3>
+                    <p className="type-body opacity-80 mb-8">Pick one growth lever—or let us build the full lead system end-to-end (strategy → execution → optimization).</p>
 
                     <div className="flex flex-col items-center gap-3 w-full">
                         <div className="flex flex-col sm:flex-row gap-3 w-full">
@@ -211,8 +211,8 @@ function DesktopServices() {
                         </div>
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 text-white">
                             <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80"></div>
-                            <h3 className="text-2xl lg:text-3xl font-bold mb-4">Services built to create <br /> consistent lead flow</h3>
-                            <p className="text-base md:text-sm font-normal opacity-80 max-w-2xl mb-8">Pick one growth lever or let us build the full lead system end-to-end <br />strategy → execution → optimization .</p>
+                            <h3 className="type-h2 mb-4 !text-gray-50">Services built to create <br /> consistent lead flow</h3>
+                            <p className="type-body opacity-80 max-w-2xl mb-8 !text-gray-50">Pick one growth lever or let us build the full lead system end-to-end <br />strategy → execution → optimization .</p>
 
                             <div className="flex flex-col gap-3 w-full md:w-auto">
                                 <div className="flex gap-4 w-full md:w-auto">
@@ -239,12 +239,12 @@ function DesktopServices() {
                     {/* Visual window for the list */}
                     <motion.div
                         style={{ opacity: rightOpacity }}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 w-full lg:w-[48%] h-[60vh] overflow-hidden rounded-2xl [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 w-[48%] h-[60vh] overflow-hidden rounded-2xl [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] pr-[2%]"
                     >
                         {/* Scrolling Container */}
                         <motion.div
                             style={{ y: listY }}
-                            className="flex flex-col gap-4 p-4 md:p-0 pb-20"
+                            className="flex flex-col gap-4 pr-[5%] pb-50"
                         >
                             {services.map((service) => (
                                 <ServiceCard

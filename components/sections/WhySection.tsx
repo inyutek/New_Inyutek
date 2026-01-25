@@ -45,13 +45,13 @@ export function WhySection() {
                         </Reveal>
 
                         <Reveal delay={0.1}>
-                            <h2 className="text-2xl md:text-3xl font-bold text-[#000024] tracking-tight leading-[1.1]">
+                            <h2 className="type-h2">
                                 Why Inyutek
                             </h2>
                         </Reveal>
 
                         <Reveal delay={0.2}>
-                            <p className="text-base md:text-sm font-normal text-gray-500 max-w-md leading-relaxed">
+                            <p className="type-body max-w-md">
                                 You’re not hiring us for “posts” or “ads.” You’re hiring a system that produces measurable leads and sales.
                             </p>
                         </Reveal>
@@ -64,8 +64,8 @@ export function WhySection() {
                                             <item.icon className="w-full h-full" strokeWidth={1.5} />
                                         </div>
                                         <div>
-                                            <h3 className="font-bold text-[#000024] mb-1 text-sm md:text-base">{item.title}</h3>
-                                            <p className="text-sm text-gray-700 font-normal">
+                                            <h3 className="type-card-title mb-1">{item.title}</h3>
+                                            <p className="type-body">
                                                 {item.text}
                                             </p>
                                         </div>
@@ -76,7 +76,7 @@ export function WhySection() {
 
                         <Reveal delay={0.6}>
                             <div className="mt-8 p-6 bg-blue-50 border border-blue-100 rounded-lg">
-                                <p className="text-sm text-gray-700 font-medium">
+                                <p className="type-body">
                                     <span className="font-bold text-[#000024]">Our rule:</span> if we can’t identify clear conversion leaks and a practical action plan in the first audit, you don’t move forward.
                                 </p>
                             </div>

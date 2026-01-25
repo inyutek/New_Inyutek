@@ -46,7 +46,7 @@ export function CTASection() {
                         whileInView={{ opacity: 1, y: 0, x: 0, rotate: 0 }}
                         viewport={{ once: false, margin: "-100px" }}
                         transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-                        className="text-3xl md:text-5xl font-bold text-[#000024] tracking-tight leading-tight"
+                        className="type-h2"
                     >
                         Ready for more calls, bookings, and sales?
                     </motion.h2>

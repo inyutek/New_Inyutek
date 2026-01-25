@@ -39,10 +39,10 @@ export function FAQSection() {
                     <div className="lg:col-span-5">
                         <Reveal>
                             <span className="text-xs font-bold text-[#000024] opacity-50 uppercase tracking-[0.2em] font-mono">FAQ</span>
-                            <h2 className="mt-4 text-3xl md:text-5xl font-sans font-bold text-[#000024] tracking-tight leading-[1.1]">
+                            <h2 className="type-h2 mt-4">
                                 Common Questions
                             </h2>
-                            <p className="mt-6 text-xl text-gray-400 font-normal leading-relaxed">
+                            <p className="type-lead mt-6">
                                 Everything you need to know about how we work and what to expect.
                             </p>
                         </Reveal>

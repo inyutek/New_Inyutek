@@ -94,14 +94,14 @@ function ServiceCard({
             </div>
 
             <div className="flex-1">
-                <h4 className="text-xl font-bold text-[#000024] leading-tight mb-2">
+                <h4 className="type-card-title mb-2">
                     {data.title}
                 </h4>
             </div>
 
             <div className={`grid transition-all duration-500 ease-in-out ${isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"} md:grid-rows-[0fr] md:opacity-0 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100`}>
                 <div className="overflow-hidden">
-                    <p className="text-gray-600 text-sm font-normal leading-relaxed pt-2">
+                    <p className="type-body pt-2">
                         {data.description}
                     </p>
                 </div>
@@ -119,10 +119,10 @@ export function ServicesSection() {
                 {/* Centered Header */}
                 <div className="text-center mb-16 lg:mb-24">
                     <span className="text-xs font-bold text-[#000024] opacity-50 uppercase tracking-[0.2em] font-mono"></span>
-                    <h2 className="mt-4 text-3xl md:text-5xl font-bold text-[#000024] tracking-tight leading-[1.1] max-w-4xl mx-auto">
+                    <h2 className="type-h2 mt-4 max-w-4xl mx-auto">
                         Choose the growth lever—or let us build the full lead system
                     </h2>
-                    <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto font-normal">
+                    <p className="type-lead mt-6 max-w-2xl mx-auto">
                         Start with one service or combine them into a complete funnel: <br className="hidden md:block" /> traffic → conversion → follow-up → revenue.
                     </p>
                 </div>

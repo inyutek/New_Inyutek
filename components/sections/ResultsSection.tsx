@@ -108,8 +108,8 @@ export function ResultsSection() {
 
                 {/* LEFT: Static Header */}
                 <div className="flex flex-col gap-6 max-w-lg">
-                    <h2 className="text-2xl md:text-3xl font-bold text-[#000024] tracking-tight">What we measure and improve</h2>
-                    <p className="text-base md:text-sm font-normal text-gray-500">
+                    <h2 className="type-h2">What we measure and improve</h2>
+                    <p className="type-body">
                         No inflated promises — just the metrics that decide whether marketing is profitable.
                     </p>
 
@@ -221,12 +221,12 @@ export function ResultsSection() {
                                                     {item.icon}
                                                 </div>
                                                 <div>
-                                                    <h4 className="font-bold text-[#000024] text-lg">{item.title}</h4>
+                                                    <h4 className="type-card-title">{item.title}</h4>
                                                     <div className="text-xs font-mono uppercase tracking-wide text-gray-400">{item.metric}</div>
                                                 </div>
                                             </div>
 
-                                            <p className="text-base text-gray-600 leading-relaxed">
+                                            <p className="type-body">
                                                 {item.description}
                                             </p>
                                         </motion.div>

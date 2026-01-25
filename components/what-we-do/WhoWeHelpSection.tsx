@@ -61,7 +61,7 @@ function MobileWhoWeHelp() {
                 >
                     <div onClick={() => handleToggle(index)}>
                         <div className="p-6 text-center">
-                            <h3 className={`text-xl font-bold tracking-tight transition-colors duration-300 ${activeIndex === index ? "text-[#000024]" : "text-gray-400"}`}>
+                            <h3 className={`type-card-title transition-colors duration-300 ${activeIndex === index ? "text-[#000024]" : "text-gray-400"}`}>
                                 {item.title}
                             </h3>
                         </div>
@@ -106,10 +106,10 @@ function DesktopWhoWeHelp() {
                             onMouseEnter={() => setActiveIndex(index)}
                             className={`cursor-pointer transition-all duration-300 ${index !== audiences.length - 1 ? "border-b border-gray-100 pb-10" : ""}`}
                         >
-                            <h3 className={`text-lg font-bold tracking-tight transition-colors duration-300 mb-3 ${activeIndex === index ? "text-[#000024]" : "text-gray-300"}`}>
+                            <h3 className={`type-card-title transition-colors duration-300 mb-3 ${activeIndex === index ? "text-[#000024]" : "text-gray-300"}`}>
                                 {item.title}
                             </h3>
-                            <p className={`text-base md:text-sm font-normal leading-relaxed transition-colors duration-300 ${activeIndex === index ? "text-gray-600" : "text-gray-300"}`}>
+                            <p className={`type-body transition-colors duration-300 ${activeIndex === index ? "text-gray-600" : "text-gray-300"}`}>
                                 {item.description}
                             </p>
                         </div>
@@ -140,10 +140,10 @@ export function WhoWeHelpSection() {
         <section id="who-we-help" className="bg-white py-24 sm:py-32">
             <div className="mx-auto w-full px-6 lg:px-8">
                 <div className="mx-auto max-w-3xl text-center mb-16 md:mb-24">
-                    <h2 className="text-3xl font-bold tracking-tight text-[#000024] sm:text-3xl mb-6">
+                    <h2 className="type-h2 mb-6">
                         Built for businesses that need growth, not vanity metrics
                     </h2>
-                    <p className="text-base md:text-sm font-normal leading-relaxed text-gray-600 max-w-2xl mx-auto mb-2">
+                    <p className="type-body max-w-2xl mx-auto mb-2">
                         If you’re serious about generating leads or sales consistently, we’ll build the system and optimize it week by week.
                     </p>
                 </div>

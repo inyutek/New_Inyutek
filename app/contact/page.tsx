@@ -35,7 +35,7 @@ export default function ContactPage() {
 
             <section className="py-32 bg-[#fbfbfb]">
                 <div className="max-w-4xl mx-auto px-6 text-center">
-                    <h2 className="text-3xl md:text-5xl font-bold text-[#000024] mb-8">
+                    <h2 className="type-h2 mb-8">
                         Ready to get a clear plan?
                     </h2>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

@@ -9,10 +9,10 @@ export function CTASection() {
         <section className="py-32 bg-white relative overflow-hidden">
             <ScrollReveal className="relative z-10 mx-auto max-w-4xl px-6 text-center">
                 <Reveal>
-                    <h2 className="text-3xl md:text-5xl font-bold text-[#000024] tracking-tight mb-8">
+                    <h2 className="type-h2 mb-8">
                         Want to know what’s blocking your leads or sales?
                     </h2>
-                    <p className="text-lg text-gray-500 font-normal mb-12 max-w-2xl mx-auto">
+                    <p className="type-body mb-12 max-w-2xl mx-auto">
                         Book a free growth audit and we’ll give you the top 3 fixes to improve conversions and lead quality.
                     </p>
 

@@ -30,11 +30,11 @@ export function LegalLayout({
                         <p className="text-xs font-bold text-[#000024] opacity-50 uppercase tracking-[0.2em] mb-6">
                             Legal
                         </p>
-                        <h1 className="text-4xl md:text-5xl font-black text-[#000024] tracking-tight mb-6">
+                        <h1 className="type-h1 mb-6">
                             {title}
                         </h1>
                         {description && (
-                            <p className="text-lg md:text-xl text-gray-500 font-normal leading-relaxed mb-6 max-w-2xl">
+                            <p className="type-lead mb-6 max-w-2xl">
                                 {description}
                             </p>
                         )}

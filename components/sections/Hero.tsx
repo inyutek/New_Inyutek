@@ -91,16 +91,16 @@ export function Hero() {
                     <motion.div
                         style={{ opacity: textOpacity, scale: textScale, y: textY }}
                     >
-                        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#000024] leading-[1.1] mb-8 mx-auto">
+                        <h1 className="type-h1 mb-8 mx-auto">
                             Lead generation that drives calls for local businesses and sales for e-commerce
                         </h1>
 
                         <div className="max-w-4xl mx-auto mb-10 flex flex-col gap-6 items-center justify-center">
-                            <p className="text-base md:text-lg font-normal text-gray-600 leading-relaxed">
+                            <p className="type-body">
                                 We build conversion-focused funnels and run Google/Meta + SEO to generate calls, bookings, and sales—with tracking that shows exactly what’s working.
                             </p>
 
-                            <p className="text-sm font-semibold text-[#000024] mt-6">
+                            <p className="type-body mt-6">
                                 Landing Pages • Ads • SEO • CRO • CRM Automation • Reporting
                             </p>
                         </div>
