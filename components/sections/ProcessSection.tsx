@@ -58,7 +58,7 @@ const processes = [
 ]
 
 export function ProcessSection() {
-    const [activeIndex, setActiveIndex] = useState(0)
+    const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
     // Inlined BlueprintForm function
 
@@ -90,8 +90,8 @@ export function ProcessSection() {
                     {processes.map((process, index) => (
                         <ScrollReveal key={process.id} enableDesktop={false} className="flex-1 flex flex-col items-center text-center">
                             <div
-                                onClick={() => setActiveIndex(index)}
                                 onMouseEnter={() => setActiveIndex(index)}
+                                onMouseLeave={() => setActiveIndex(null)}
                                 className={`
                                     relative w-full py-8 md:pt-16 md:pb-12 px-4 
                                     transition-all duration-300 cursor-pointer group flex flex-col items-center text-center
