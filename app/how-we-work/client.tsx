@@ -35,7 +35,7 @@ function ProcessStepCard({ step }: { step: any }) {
     return (
         <div
             onClick={() => setIsExpanded(!isExpanded)}
-            className="group bg-white p-8 rounded-2xl shadow-sm border border-gray-100/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden cursor-pointer"
+            className="group bg-white p-8 rounded-2xl shadow-sm border border-gray-100/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden cursor-pointer text-center"
         >
             <h3 className={`type-card-title relative z-10 transition-all duration-300 ${isExpanded ? "mb-4" : ""} md:group-hover:mb-4`}>
                 {step.title}
