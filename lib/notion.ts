@@ -123,3 +123,89 @@ export async function getPostBySlug(slug: string): Promise<BlogPost & { recordMa
     const recordMap = await getPage(post.id)
     return { ...post, recordMap }
 }
+
+export async function getCaseStudies(): Promise<BlogPost[]> {
+    const databaseId = process.env.casestudie_database_id
+
+    if (!databaseId) {
+        console.warn('casestudie_database_id is not defined in environment variables')
+        return []
+    }
+
+    try {
+        const recordMap = await notion.getPage(databaseId)
+        // Simplistic logic repeated:
+        // We really should refactor this, but "Constraint: Do NOT change blog functionality" implies leaving getPosts alone is safer.
+        // So we duplicate the parsing logic but for a different database ID.
+
+        const collection = Object.values(recordMap.collection)[0]?.value
+        const schema = collection?.schema
+
+        const blockIds = recordMap.collection_query?.[Object.keys(recordMap.collection_query)[0]]?.[
+            Object.keys(recordMap.collection_query[Object.keys(recordMap.collection_query)[0]])[0]
+        ]?.collection_group_results?.blockIds || []
+
+        const posts: BlogPost[] = []
+
+        for (const blockId of blockIds) {
+            const block = recordMap.block[blockId]?.value
+            if (!block) continue
+
+            const props = block.properties
+
+            const getText = (propName: string) => {
+                const propId = Object.keys(schema).find(key => schema[key].name === propName)
+                if (!propId || !props?.[propId]) return ''
+                return props[propId][0][0]
+            }
+
+            const getSelect = (propName: string) => {
+                const propId = Object.keys(schema).find(key => schema[key].name === propName)
+                if (!propId || !props?.[propId]) return ''
+                return props[propId][0][0]
+            }
+
+            const title = props?.title?.[0]?.[0] || 'Untitled'
+            const slug = getText('Slug')
+            const status = getSelect('Status')
+            const summary = getText('Summary')
+
+            const datePropId = Object.keys(schema).find(key => schema[key].name === 'Published Date')
+            let date = ''
+            if (datePropId && props?.[datePropId]) {
+                try {
+                    const dateData = props[datePropId][0][1][0][1]
+                    date = dateData.start_date
+                } catch (e) {
+                }
+            }
+
+            if (status?.toLowerCase() === 'published' && slug) {
+                posts.push({
+                    id: blockId,
+                    slug,
+                    title,
+                    date,
+                    status,
+                    summary
+                })
+            }
+        }
+
+        return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+    } catch (error) {
+        console.error('Error fetching case studies:', error)
+        return []
+    }
+}
+
+export async function getCaseStudyBySlug(slug: string): Promise<BlogPost & { recordMap: ExtendedRecordMap } | null> {
+    const posts = await getCaseStudies()
+    const post = posts.find(p => p.slug === slug)
+
+    if (!post) return null
+
+    const recordMap = await getPage(post.id)
+    return { ...post, recordMap }
+}
