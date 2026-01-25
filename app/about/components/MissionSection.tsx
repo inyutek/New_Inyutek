@@ -8,12 +8,12 @@ export function MissionSection() {
         <section className="bg-white py-24 md:py-32 border-t border-gray-100">
             <ScrollReveal className="max-w-4xl mx-auto px-6 text-center">
                 <Reveal>
-                    <span className="text-xs font-bold text-[#000024] opacity-100 uppercase tracking-[0.2em] font-mono">
+                    <h2 className="type-h2">
                         Our Mission
-                    </span>
-                    <h2 className="type-h2 mt-6 font-normal">
-                        To help growing businesses stop wasting time on random tactics and build a <span className="font-bold underline decoration-blue-200 decoration-4 underline-offset-4">simple lead system</span> that’s trackable, repeatable, and scalable.
                     </h2>
+                    <p className="type-body mt-6">
+                        To help growing businesses stop wasting time on random tactics and build a <span className="font-bold underline decoration-blue-200 decoration-4 underline-offset-4">simple lead system</span> that’s trackable, repeatable, and scalable.
+                    </p>
                 </Reveal>
             </ScrollReveal>
         </section>
