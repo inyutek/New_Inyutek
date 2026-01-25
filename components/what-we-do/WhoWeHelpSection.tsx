@@ -78,7 +78,7 @@ function MobileWhoWeHelp() {
                                         <p className="text-sm font-normal text-gray-600 leading-relaxed text-center">
                                             {item.description}
                                         </p>
-                                        <div className={`w-full aspect-square rounded-lg flex items-center justify-center text-gray-400 ${item.imageColor}`}>
+                                        <div className={`w-3/5 aspect-square rounded-lg flex items-center justify-center text-gray-400 mx-auto ${item.imageColor}`}>
                                             {item.icon}
                                         </div>
                                     </div>
@@ -94,6 +94,7 @@ function MobileWhoWeHelp() {
 
 function DesktopWhoWeHelp() {
     const [activeIndex, setActiveIndex] = useState(0)
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
     return (
         <div className="hidden md:block mx-auto max-w-7xl">
@@ -103,20 +104,27 @@ function DesktopWhoWeHelp() {
                         <div
                             key={item.id}
                             onClick={() => setActiveIndex(index)}
-                            onMouseEnter={() => setActiveIndex(index)}
-                            className={`cursor-pointer transition-all duration-300 ${index !== audiences.length - 1 ? "border-b border-gray-100 pb-10" : ""}`}
+                            onMouseEnter={() => {
+                                setActiveIndex(index)
+                                setHoveredIndex(index)
+                            }}
+                            onMouseLeave={() => setHoveredIndex(null)}
+                            className={`cursor-pointer transition-all duration-500 ${index !== audiences.length - 1 ? "border-b border-gray-100 pb-10" : ""}`}
+                            style={{
+                                opacity: hoveredIndex === index ? 1 : 0.4
+                            }}
                         >
-                            <h3 className={`type-card-title transition-colors duration-300 mb-3 ${activeIndex === index ? "text-[#000024]" : "text-gray-300"}`}>
+                            <h3 className={`type-card-title transition-colors duration-500 mb-3 ${hoveredIndex === index ? "text-[#000024]" : "text-gray-400"}`}>
                                 {item.title}
                             </h3>
-                            <p className={`type-body transition-colors duration-300 ${activeIndex === index ? "text-gray-600" : "text-gray-300"}`}>
+                            <p className={`type-body transition-colors duration-500 ${hoveredIndex === index ? "text-gray-600" : "text-gray-400"}`}>
                                 {item.description}
                             </p>
                         </div>
                     ))}
                 </div>
 
-                <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-gray-50">
+                <div className="relative aspect-square w-full max-w-md mx-auto rounded-2xl overflow-hidden bg-gray-50">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeIndex}

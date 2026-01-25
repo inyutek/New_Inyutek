@@ -87,7 +87,7 @@ function ServiceCard({
     return (
         <div
             onClick={() => setIsExpanded(!isExpanded)}
-            className={`group relative overflow-hidden bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-start gap-6 h-full cursor-pointer ${className}`}
+            className={`group relative overflow-hidden bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center gap-6 h-full cursor-pointer text-center ${className}`}
         >
             <div className="w-16 h-16 rounded-full bg-gray-50 flex items-center justify-center text-[#000024] group-hover:scale-110 transition-transform duration-300">
                 {data.icon}
