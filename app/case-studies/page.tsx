@@ -3,6 +3,7 @@ import * as motion from "framer-motion/client"
 import { getCaseStudies } from '@/lib/notion'
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
 import { Reveal, staggerContainer, staggerItem } from "@/components/motion-presets"
+import Footer from "@/components/sections/Footer"
 
 export const revalidate = 60 // revalidate every minute
 
@@ -92,6 +93,7 @@ export default async function CaseStudiesPage() {
                     </motion.div>
                 )}
             </div>
+            <Footer />
         </div>
     )
 }

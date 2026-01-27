@@ -3,6 +3,7 @@ import * as motion from "framer-motion/client"
 import { getPosts } from '@/lib/notion'
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
 import { Reveal, staggerContainer, staggerItem } from "@/components/motion-presets"
+import Footer from "@/components/sections/Footer"
 
 export const revalidate = 60 // revalidate every minute
 
@@ -92,6 +93,7 @@ export default async function BlogPage() {
                     </motion.div>
                 )}
             </div>
+            <Footer />
         </div>
     )
 }
