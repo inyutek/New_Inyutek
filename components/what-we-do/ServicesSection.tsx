@@ -123,7 +123,7 @@ export function ServicesSection() {
                         Choose the growth lever or let us build the full lead system
                     </h2>
                     <p className="type-lead mt-6 max-w-2xl mx-auto">
-                        Start with one service or combine them into a complete funnel: <br className="hidden md:block" /> traffic → conversion → follow-up → revenue.
+                        Start with one service or combine them into a complete funnel: <br className="hidden md:block" /> Traffic → Conversion → Follow-up → Revenue.
                     </p>
                 </div>
 
@@ -136,7 +136,7 @@ export function ServicesSection() {
                     ))}
                 </div>
 
-                {/* Audit CTA below the grid */}
+                
 
 
             </div>

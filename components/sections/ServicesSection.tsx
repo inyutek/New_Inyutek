@@ -117,7 +117,7 @@ function MobileServices() {
                 >
                     <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80">Services</div>
                     <h3 className="type-h2 mb-4 !text-gray-50">Services built to create <br /> consistent lead flow</h3>
-                    <p className="type-body opacity-80 mb-8">Pick one growth lever—or let us build the full lead system end-to-end (strategy → execution → optimization).</p>
+                    <p className="type-body opacity-80 mb-8">Pick one growth lever or let us build the full lead system end-to-end Strategy → Execution → Optimization.</p>
 
                     <div className="flex flex-col items-center gap-3 w-full">
                         <div className="flex flex-col sm:flex-row gap-3 w-full">
@@ -212,7 +212,7 @@ function DesktopServices() {
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 text-white">
                             <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80"></div>
                             <h3 className="type-h2 mb-4 !text-gray-50">Services built to create <br /> consistent lead flow</h3>
-                            <p className="type-body opacity-80 max-w-2xl mb-8 !text-gray-50">Pick one growth lever or let us build the full lead system end-to-end <br />strategy → execution → optimization .</p>
+                            <p className="type-body opacity-80 max-w-2xl mb-8 !text-gray-50">Pick one growth lever or let us build the full lead system end-to-end <br />Strategy → Execution → Optimization .</p>
 
                             <div className="flex flex-col gap-3 w-full md:w-auto">
                                 <div className="flex gap-4 w-full md:w-auto">

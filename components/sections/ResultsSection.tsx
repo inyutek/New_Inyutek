@@ -116,9 +116,9 @@ export function ResultsSection() {
                     <div className="flex flex-col gap-3 mt-2">
                         <p className="font-semibold text-sm">Every engagement includes:</p>
                         {[
-                            "A funnel map your exact path to booked calls",
-                            "A conversion audit scorecard top leaks + fixes",
-                            "A simple dashboard traffic, leads, CPL, bookings"
+                            "A funnel map your exact path to booked calls.",
+                            "A conversion audit scorecard top leaks + fixes.",
+                            "A simple dashboard traffic, leads, CPL, bookings."
                         ].map((item, i) => (
                             <div key={i} className="flex items-center gap-3 text-sm text-gray-700">
                                 <span className="w-1.5 h-1.5 rounded-full bg-[#000024]"></span>

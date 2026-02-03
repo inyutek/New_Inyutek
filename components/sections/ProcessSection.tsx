@@ -9,7 +9,7 @@ const processes = [
     {
         id: 1,
         title: "Audit & Goals",
-        subtitle: "We identify what’s blocking conversions",
+        subtitle: "We identify what’s blocking conversions.",
         description: "We review your offer, funnel, tracking, and competitors then define the KPI that matters: calls, bookings, or sales.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -21,7 +21,7 @@ const processes = [
     {
         id: 2,
         title: "Funnel & Offer Strategy",
-        subtitle: "We design the path from click → customer",
+        subtitle: "We design the path from click to customer.",
         description: "Messaging, landing page structure, CTAs, follow-up flow, and a channel plan (Google, social, ads) based on intent.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -36,7 +36,7 @@ const processes = [
     {
         id: 3,
         title: "Build & Launch",
-        subtitle: "We ship the assets and campaigns fast",
+        subtitle: "We ship the assets and campaigns fast.",
         description: "Landing pages, tracking, CRM automation, and ad/SEO execution so leads can start coming in.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -47,7 +47,7 @@ const processes = [
     {
         id: 4,
         title: "Optimize & Scale",
-        subtitle: "We improve performance every week",
+        subtitle: "We improve performance every week.",
         description: "We test creatives, keywords, pages, and follow-up to increase conversion rate and lower CPL then scale what works.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -74,7 +74,7 @@ export function ProcessSection() {
                         How we generate calls, bookings, and sales
                     </h2>
                     <p className="type-lead mt-6 max-w-2xl">
-                        A simple 4-step system: diagnose → build → launch → optimize.<br /> No guesswork, just measurable growth.
+                        A simple 4-step system: Diagnose → Build → Launch → Optimize.<br /> No guesswork, just measurable growth.
                     </p>
 
                     <Link href="/how-we-work" className="group flex items-center gap-2 mt-8 text-[#000024] font-medium hover:opacity-70 transition-all inline-flex w-fit">

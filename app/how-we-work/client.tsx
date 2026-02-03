@@ -104,7 +104,7 @@ export default function HowWeWorkClient() {
                                 Marketing works when the funnel is measurable
                             </h2>
                             <p className="type-lead">
-                                Most businesses try random tactics. We focus on the full path: traffic → landing page → conversion → follow-up → revenue, with tracking at every step.
+                                Most businesses try random tactics. We focus on the full path: Traffic → Landing page → Conversion → Follow-up → Revenue, with tracking at every step.
                             </p>
                         </div>
 
@@ -171,11 +171,11 @@ export default function HowWeWorkClient() {
                         </div>
                         <div className="space-y-6">
                             {[
-                                { title: "Conversion audit scorecard", desc: "what’s broken + what to fix first" },
-                                { title: "Funnel map", desc: "click → lead → booked call / purchase" },
-                                { title: "Landing page improvements", desc: "copy + structure + CTAs" },
-                                { title: "Tracking setup", desc: "forms, calls, WhatsApp, purchases based on your model" },
-                                { title: "Follow-up system", desc: "auto-replies + reminders + basic nurturing" }
+                                { title: "Conversion audit scorecard", desc: "What’s broken + What to fix first." },
+                                { title: "Funnel map", desc: "Click → Lead → Booked call / Purchase." },
+                                { title: "Landing page improvements", desc: "Copy + Structure + CTAs." },
+                                { title: "Tracking setup", desc: "Forms, Calls, WhatsApp, Purchases based on your model." },
+                                { title: "Follow-up system", desc: "Auto-replies + Reminders + Basic nurturing."}
                             ].map((item, i) => (
                                 <div key={i} className="flex items-start gap-4 pb-6 border-b border-gray-100 last:border-0 last:pb-0">
                                     <svg className="w-6 h-6 text-green-500 mt-1 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -204,10 +204,10 @@ export default function HowWeWorkClient() {
                             </h2>
                             <ul className="space-y-4">
                                 {[
-                                    "Access to your website/landing builder or we build a landing page for you",
-                                    "Access to ad accounts if running ads",
-                                    "Your best offers/services/products + typical customer questions",
-                                    "Fast response to leads especially for local service businesses"
+                                    "Access to your website/landing builder or we build a landing page for you.",
+                                    "Access to ad accounts if running ads.",
+                                    "Your best offers/services/products + typical customer questions.",
+                                    "Fast response to leads especially for local service businesses."
                                 ].map((item, i) => (
                                     <li key={i} className="flex items-start gap-3 text-gray-700">
                                         <div className="w-1.5 h-1.5 rounded-full bg-[#000024] mt-2.5 shrink-0" />
