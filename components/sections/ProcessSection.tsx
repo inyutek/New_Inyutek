@@ -10,7 +10,7 @@ const processes = [
         id: 1,
         title: "Audit & Goals",
         subtitle: "We identify what’s blocking conversions",
-        description: "We review your offer, funnel, tracking, and competitors—then define the KPI that matters: calls, bookings, or sales.",
+        description: "We review your offer, funnel, tracking, and competitors then define the KPI that matters: calls, bookings, or sales.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="12" cy="12" r="10" />
@@ -37,7 +37,7 @@ const processes = [
         id: 3,
         title: "Build & Launch",
         subtitle: "We ship the assets and campaigns fast",
-        description: "Landing pages, tracking, CRM automation, and ad/SEO execution—so leads can start coming in.",
+        description: "Landing pages, tracking, CRM automation, and ad/SEO execution so leads can start coming in.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
@@ -48,7 +48,7 @@ const processes = [
         id: 4,
         title: "Optimize & Scale",
         subtitle: "We improve performance every week",
-        description: "We test creatives, keywords, pages, and follow-up to increase conversion rate and lower CPL—then scale what works.",
+        description: "We test creatives, keywords, pages, and follow-up to increase conversion rate and lower CPL then scale what works.",
         icon: (
             <svg className="w-8 h-8 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>

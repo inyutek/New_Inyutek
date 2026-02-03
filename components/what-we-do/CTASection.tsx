@@ -17,15 +17,11 @@ export function CTASection() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <a
-                            href="https://calendar.app.google/8HF9LdQVVndKzWC7A"
-                            target="_blank"
-                            rel="noreferrer"
-                        >
+                        <Link href="/contact">
                             <button className="px-8 py-4 bg-[#000024] text-white rounded-lg font-bold text-lg hover:bg-[#000024]/90 transition-all hover:-translate-y-1 shadow-lg shadow-gray-200">
                                 Book a Free Growth Audit
                             </button>
-                        </a>
+                        </Link>
                         <Link href="/how-we-work">
                             <button className="px-8 py-4 bg-transparent border border-gray-200 text-[#000024] rounded-lg font-medium text-lg hover:bg-gray-50 transition-all hover:-translate-y-1">
                                 See How We Work

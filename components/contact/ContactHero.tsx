@@ -31,7 +31,7 @@ export function ContactHero() {
                     </h1>
 
                     <p className="type-body max-w-2xl mx-auto mb-10">
-                        Walk away with a clear plan to improve calls, bookings, or sales—plus the top conversion leaks holding your funnel back.
+                        Walk away with a clear plan to improve calls, bookings, or sales plus the top conversion leaks holding your funnel back.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

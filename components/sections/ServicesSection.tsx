@@ -20,7 +20,7 @@ const services = [
     {
         id: 2,
         title: "Paid Ads Management (Google + Meta)",
-        description: "Launch and optimize campaigns built for qualified leads, not vanity metrics—tracking CPL and lead quality from day one.",
+        description: "Launch and optimize campaigns built for qualified leads, not vanity metrics tracking CPL and lead quality from day one.",
         icon: (
             <svg className="w-8 h-8 md:w-10 md:h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
@@ -46,7 +46,7 @@ const services = [
     {
         id: 4,
         title: "Social Media Marketing (Organic + Paid Social)",
-        description: "Content + campaigns that earn attention and move people to action—DMs, inquiries, and site conversions.",
+        description: "Content + campaigns that earn attention and move people to action DMs, inquiries, and site conversions.",
         icon: (
             <svg className="w-8 h-8 md:w-10 md:h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
@@ -68,7 +68,7 @@ const services = [
     {
         id: 6,
         title: "Tracking & Analytics",
-        description: "GA4, pixels, conversion events, dashboards—so every channel is measurable and scalable.",
+        description: "GA4, pixels, conversion events, dashboards so every channel is measurable and scalable.",
         icon: (
             <svg className="w-8 h-8 md:w-10 md:h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M3 3v18h18"></path>

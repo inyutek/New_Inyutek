@@ -10,11 +10,11 @@ const differentiators = [
     },
     {
         title: "Full-funnel ownership",
-        description: "Landing pages, ads/SEO, tracking, and follow-up are connected—so results don’t get lost between tools."
+        description: "Landing pages, ads/SEO, tracking, and follow-up are connected so results don’t get lost between tools."
     },
     {
         title: "Transparent execution",
-        description: "You see what we’re doing, what changed, and what improved—weekly."
+        description: "You see what we’re doing, what changed, and what improved weekly."
     },
     {
         title: "Built for local + ecommerce",

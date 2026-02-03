@@ -120,7 +120,7 @@ export function ServicesSection() {
                 <div className="text-center mb-16 lg:mb-24">
                     <span className="text-xs font-bold text-[#000024] opacity-50 uppercase tracking-[0.2em] font-mono"></span>
                     <h2 className="type-h2 mt-4 max-w-4xl mx-auto">
-                        Choose the growth lever—or let us build the full lead system
+                        Choose the growth lever or let us build the full lead system
                     </h2>
                     <p className="type-lead mt-6 max-w-2xl mx-auto">
                         Start with one service or combine them into a complete funnel: <br className="hidden md:block" /> traffic → conversion → follow-up → revenue.
@@ -137,16 +137,7 @@ export function ServicesSection() {
                 </div>
 
                 {/* Audit CTA below the grid */}
-                <div className="mt-16 text-center">
-                    <a href="https://calendar.app.google/8HF9LdQVVndKzWC7A" target="_blank" rel="noreferrer">
-                        <button className="px-8 py-4 bg-[#000024] text-white rounded-lg font-medium shadow-lg hover:opacity-90 transition-all hover:-translate-y-1">
-                            Book a free growth audit
-                        </button>
-                    </a>
-                    <p className="mt-4 text-sm text-gray-500">
-                        We’ll identify the top 3 leaks blocking calls, bookings, or sales.
-                    </p>
-                </div>
+
 
             </div>
         </section>

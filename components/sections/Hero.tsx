@@ -97,7 +97,7 @@ export function Hero() {
 
                         <div className="max-w-4xl mx-auto mb-10 flex flex-col gap-6 items-center justify-center">
                             <p className="type-body">
-                                We build conversion-focused funnels and run Google/Meta + SEO to generate calls, bookings, and sales—with tracking that shows exactly what’s working.
+                                We build conversion-focused funnels and run Google/Meta + SEO to generate calls, bookings, and sales with tracking that shows exactly what’s working.
                             </p>
 
                             <p className="type-body mt-6">

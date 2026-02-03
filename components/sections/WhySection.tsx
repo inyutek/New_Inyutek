@@ -8,7 +8,7 @@ const features = [
     {
         icon: LayoutTemplate,
         title: "Conversion-first, not channel-first",
-        text: "We start with your offer + landing flow. Channels come second—because clicks don’t pay bills."
+        text: "We start with your offer + landing flow. Channels come second because clicks don’t pay bills."
     },
     {
         icon: GitMerge,
@@ -18,7 +18,7 @@ const features = [
     {
         icon: Hash,
         title: "Speed and execution",
-        text: "We build fast, launch early, and improve weekly—so you get momentum instead of long timelines."
+        text: "We build fast, launch early, and improve weekly so you get momentum instead of long timelines."
     },
     {
         icon: Hash,

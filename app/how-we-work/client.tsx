@@ -85,7 +85,7 @@ export default function HowWeWorkClient() {
                             href="/what-we-do"
                             className="w-full sm:w-auto px-8 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-bold text-lg hover:bg-gray-50 transition-all hover:-translate-y-1"
                         >
-                            View Services
+                            What we do
                         </Link>
                     </div>
 
@@ -131,22 +131,22 @@ export default function HowWeWorkClient() {
                     <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
                         {[
                             {
-                                title: "Step 1 — Audit & Diagnose",
+                                title: "Step 1 - Audit & Diagnose",
                                 do: "Review your offer, website/landing page, ads/SEO, tracking, and competitors.",
                                 get: "A short action plan with the top 3 bottlenecks blocking growth."
                             },
                             {
-                                title: "Step 2 — Funnel Plan",
+                                title: "Step 2 - Funnel Plan",
                                 do: "Clarify your positioning, craft the core message, and map the conversion path.",
                                 get: "Funnel map + page outline + KPI targets (calls/bookings/sales)."
                             },
                             {
-                                title: "Step 3 — Build & Launch",
+                                title: "Step 3 - Build & Launch",
                                 do: "Build/upgrade landing pages, set up tracking, implement CRM follow-up, and launch campaigns.",
-                                get: "A working system that can generate leads—not a “strategy doc.”"
+                                get: "A working system that can generate leads - not a “strategy doc.”"
                             },
                             {
-                                title: "Step 4 — Optimize & Scale",
+                                title: "Step 4 - Optimize & Scale",
                                 do: "Weekly iteration: improve conversion rate, reduce CPL/CPA, and increase lead quality.",
                                 get: "Ongoing testing + reporting + scaling plan."
                             }
@@ -174,7 +174,7 @@ export default function HowWeWorkClient() {
                                 { title: "Conversion audit scorecard", desc: "what’s broken + what to fix first" },
                                 { title: "Funnel map", desc: "click → lead → booked call / purchase" },
                                 { title: "Landing page improvements", desc: "copy + structure + CTAs" },
-                                { title: "Tracking setup", desc: "forms, calls, WhatsApp, purchases—based on your model" },
+                                { title: "Tracking setup", desc: "forms, calls, WhatsApp, purchases based on your model" },
                                 { title: "Follow-up system", desc: "auto-replies + reminders + basic nurturing" }
                             ].map((item, i) => (
                                 <div key={i} className="flex items-start gap-4 pb-6 border-b border-gray-100 last:border-0 last:pb-0">

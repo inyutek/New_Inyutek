@@ -20,7 +20,7 @@ const problems = [
     {
         id: 1,
         title: "Your funnel has friction",
-        description: "Too many steps, slow pages, confusing forms, no WhatsApp/call-first path — leads drop before they convert.",
+        description: "Too many steps, slow pages, confusing forms, no WhatsApp/call-first path  leads drop before they convert.",
         imageColor: "bg-blue-100", // Just to differentiate visually for now
         icon: (
             <svg className="w-24 h-24 opacity-30" viewBox="0 0 24 24" fill="currentColor">
@@ -155,10 +155,10 @@ export function ProblemSection() {
                 <div className="mx-auto max-w-3xl text-center mb-16 md:mb-24">
 
                     <h2 className="type-h2 mb-6">
-                        Most businesses don’t have a traffic problem — they have a conversion problem
+                        Most businesses don’t have a traffic problem  they have a conversion problem
                     </h2>
                     <p className="type-body max-w-2xl mx-auto mb-2">
-                        You can get attention from Google, ads, or social — but if your message is unclear and your funnel is weak, visitors don’t become calls, bookings, or purchases. We fix the leaks that kill conversion.
+                        You can get attention from Google, ads, or social  but if your message is unclear and your funnel is weak, visitors don’t become calls, bookings, or purchases. We fix the leaks that kill conversion.
                     </p>
 
                 </div>
