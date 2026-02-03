@@ -112,11 +112,7 @@ export function Hero() {
                                 Book a Free Growth Audit
                             </Link>
                             <Link
-                                href="/#problem"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    document.getElementById("problem")?.scrollIntoView({ behavior: "smooth" });
-                                }}
+                                href="/how-we-work"
                                 className="w-full sm:w-auto px-6 py-3 bg-white text-[#000024] text-sm border border-[#000024]/20 rounded-lg font-medium hover:bg-gray-50 transition-all hover:-translate-y-1 flex items-center justify-center"
                             >
                                 See Our Process

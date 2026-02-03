@@ -121,7 +121,7 @@ function MobileServices() {
 
                     <div className="flex flex-col items-center gap-3 w-full">
                         <div className="flex flex-col sm:flex-row gap-3 w-full">
-                            <Link href="/services" className="w-full flex-1">
+                            <Link href="/what-we-do#services" className="w-full flex-1">
                                 <button className="w-full px-6 py-3 bg-white text-black rounded-lg font-medium transition-all hover:bg-gray-100">
                                     Explore all services →
                                 </button>
@@ -216,7 +216,7 @@ function DesktopServices() {
 
                             <div className="flex flex-col gap-3 w-full md:w-auto">
                                 <div className="flex gap-4 w-full md:w-auto">
-                                    <Link href="/services" className="w-full md:w-auto">
+                                    <Link href="/what-we-do#services" className="w-full md:w-auto">
                                         <button className="w-full md:w-auto px-6 py-3 bg-white text-black rounded-lg font-medium hover:bg-gray-100 transition-all hover:-translate-y-1">
                                             Explore all services →
                                         </button>
