@@ -42,7 +42,7 @@ export function ResultsSection() {
     return (
         <section className="bg-[#fbfbfb] py-24 md:py-32 text-[#000024]">
             <ScrollReveal className="max-w-7xl mx-auto px-6 lg:px-8">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                     <div>
                         <Reveal>
                             <h2 className="type-h2 mb-8">

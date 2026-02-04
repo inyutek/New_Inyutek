@@ -75,6 +75,8 @@ const services = [
     }
 ]
 
+import { useMediaQuery } from "@/hooks/use-media-query"
+
 function ServiceCard({
     data,
     className
@@ -83,6 +85,9 @@ function ServiceCard({
     className?: string;
 }) {
     const [isExpanded, setIsExpanded] = useState(false)
+    const isMobile = useMediaQuery("(max-width: 768px)")
+
+    const showExpanded = isMobile ? true : isExpanded
 
     return (
         <div
@@ -99,7 +104,7 @@ function ServiceCard({
                 </h4>
             </div>
 
-            <div className={`grid transition-all duration-500 ease-in-out ${isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"} md:grid-rows-[0fr] md:opacity-0 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100`}>
+            <div className={`grid transition-all duration-500 ease-in-out ${showExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"} md:grid-rows-[0fr] md:opacity-0 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100`}>
                 <div className="overflow-hidden">
                     <p className="type-body pt-2">
                         {data.description}
@@ -136,7 +141,7 @@ export function ServicesSection() {
                     ))}
                 </div>
 
-                
+
 
 
             </div>

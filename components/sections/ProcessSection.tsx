@@ -4,6 +4,8 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
+import { useMediaQuery } from "@/hooks/use-media-query"
+import { useEffect } from "react"
 
 const processes = [
     {
@@ -59,6 +61,24 @@ const processes = [
 
 export function ProcessSection() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null)
+    const isMobile = useMediaQuery("(max-width: 768px)")
+
+    // Auto-cycle for mobile
+    useEffect(() => {
+        if (!isMobile) return
+
+        // Set initial active index if null
+        if (activeIndex === null) setActiveIndex(0)
+
+        const interval = setInterval(() => {
+            setActiveIndex((prev) => {
+                const current = prev ?? 0
+                return (current + 1) % processes.length
+            })
+        }, 5000)
+
+        return () => clearInterval(interval)
+    }, [isMobile, activeIndex]) // Reset timer whenever activeIndex changes (auto or manual)
 
     // Inlined BlueprintForm function
 
@@ -90,8 +110,9 @@ export function ProcessSection() {
                     {processes.map((process, index) => (
                         <ScrollReveal key={process.id} enableDesktop={false} className="flex-1 flex flex-col items-center text-center">
                             <div
-                                onMouseEnter={() => setActiveIndex(index)}
-                                onMouseLeave={() => setActiveIndex(null)}
+                                onMouseEnter={() => !isMobile && setActiveIndex(index)}
+                                onMouseLeave={() => !isMobile && setActiveIndex(null)}
+                                onClick={() => isMobile && setActiveIndex(index)}
                                 className={`
                                     relative w-full py-8 md:pt-16 md:pb-12 px-4 
                                     transition-all duration-300 cursor-pointer group flex flex-col items-center text-center

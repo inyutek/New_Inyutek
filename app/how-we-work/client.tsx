@@ -29,19 +29,25 @@ const faqs = [
 ]
 
 
+import { useMediaQuery } from "@/hooks/use-media-query"
+
 function ProcessStepCard({ step }: { step: any }) {
     const [isExpanded, setIsExpanded] = useState(false)
+    const isMobile = useMediaQuery("(max-width: 768px)")
+
+    // Force expanded on mobile, use state on desktop
+    const showExpanded = isMobile ? true : isExpanded
 
     return (
         <div
             onClick={() => setIsExpanded(!isExpanded)}
             className="group bg-white p-8 rounded-2xl shadow-sm border border-gray-100/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden cursor-pointer text-center"
         >
-            <h3 className={`type-card-title relative z-10 transition-all duration-300 ${isExpanded ? "mb-4" : ""} md:group-hover:mb-4`}>
+            <h3 className={`type-card-title relative z-10 transition-all duration-300 ${showExpanded ? "mb-4" : ""} md:group-hover:mb-4`}>
                 {step.title}
             </h3>
 
-            <div className={`grid transition-all duration-500 ease-in-out ${isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"} md:grid-rows-[0fr] md:opacity-0 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100`}>
+            <div className={`grid transition-all duration-500 ease-in-out ${showExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"} md:grid-rows-[0fr] md:opacity-0 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100`}>
                 <div className="overflow-hidden space-y-4 pt-2">
                     <div>
                         <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What we do</span>
@@ -77,15 +83,15 @@ export default function HowWeWorkClient() {
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
                         <button
                             onClick={() => setIsBlueprintOpen(true)}
-                            className="w-full sm:w-auto px-8 py-4 bg-[#000024] text-white rounded-lg font-bold text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
+                            className="w-full sm:w-auto px-8 py-4 bg-[#000024] text-white rounded-lg font-medium text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
                         >
                             Book a Free Growth Audit
                         </button>
                         <Link
                             href="/what-we-do"
-                            className="w-full sm:w-auto px-8 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-bold text-lg hover:bg-gray-50 transition-all hover:-translate-y-1"
+                            className="w-full sm:w-auto px-8 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-medium text-lg hover:bg-gray-50 transition-all hover:-translate-y-1"
                         >
-                            What we do
+                            See what we do
                         </Link>
                     </div>
 
@@ -175,7 +181,7 @@ export default function HowWeWorkClient() {
                                 { title: "Funnel map", desc: "Click → Lead → Booked call / Purchase." },
                                 { title: "Landing page improvements", desc: "Copy + Structure + CTAs." },
                                 { title: "Tracking setup", desc: "Forms, Calls, WhatsApp, Purchases based on your model." },
-                                { title: "Follow-up system", desc: "Auto-replies + Reminders + Basic nurturing."}
+                                { title: "Follow-up system", desc: "Auto-replies + Reminders + Basic nurturing." }
                             ].map((item, i) => (
                                 <div key={i} className="flex items-start gap-4 pb-6 border-b border-gray-100 last:border-0 last:pb-0">
                                     <svg className="w-6 h-6 text-green-500 mt-1 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -267,13 +273,13 @@ export default function HowWeWorkClient() {
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <button
                             onClick={() => setIsBlueprintOpen(true)}
-                            className="w-full sm:w-auto px-10 py-4 bg-[#000024] text-white rounded-lg font-bold text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
+                            className="w-full sm:w-auto px-10 py-4 bg-[#000024] text-white rounded-lg font-medium text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
                         >
                             Book a Free Growth Audit
                         </button>
                         <Link
                             href="/about" // "About Inyutek" - assuming /about exists, checking file list... /about exists.
-                            className="w-full sm:w-auto px-10 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-bold text-lg hover:bg-gray-50 transition-all hover:-translate-y-1"
+                            className="w-full sm:w-auto px-10 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-medium text-lg hover:bg-gray-50 transition-all hover:-translate-y-1"
                         >
                             Learn About Inyutek
                         </Link>
