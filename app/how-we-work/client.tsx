@@ -77,15 +77,15 @@ export default function HowWeWorkClient() {
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
                         <button
                             onClick={() => setIsBlueprintOpen(true)}
-                            className="w-full sm:w-auto px-8 py-4 bg-[#000024] text-white rounded-lg font-bold text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
+                            className="w-full sm:w-auto px-8 py-4 bg-[#000024] text-white rounded-lg font-medium text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
                         >
                             Book a Free Growth Audit
                         </button>
                         <Link
                             href="/what-we-do"
-                            className="w-full sm:w-auto px-8 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-bold text-lg hover:bg-gray-50 transition-all hover:-translate-y-1"
+                            className="w-full sm:w-auto px-8 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-medium text-lg hover:bg-gray-50 transition-all hover:-translate-y-1"
                         >
-                            What we do
+                            See what we do
                         </Link>
                     </div>
 
@@ -175,7 +175,7 @@ export default function HowWeWorkClient() {
                                 { title: "Funnel map", desc: "Click → Lead → Booked call / Purchase." },
                                 { title: "Landing page improvements", desc: "Copy + Structure + CTAs." },
                                 { title: "Tracking setup", desc: "Forms, Calls, WhatsApp, Purchases based on your model." },
-                                { title: "Follow-up system", desc: "Auto-replies + Reminders + Basic nurturing."}
+                                { title: "Follow-up system", desc: "Auto-replies + Reminders + Basic nurturing." }
                             ].map((item, i) => (
                                 <div key={i} className="flex items-start gap-4 pb-6 border-b border-gray-100 last:border-0 last:pb-0">
                                     <svg className="w-6 h-6 text-green-500 mt-1 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -267,13 +267,13 @@ export default function HowWeWorkClient() {
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <button
                             onClick={() => setIsBlueprintOpen(true)}
-                            className="w-full sm:w-auto px-10 py-4 bg-[#000024] text-white rounded-lg font-bold text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
+                            className="w-full sm:w-auto px-10 py-4 bg-[#000024] text-white rounded-lg font-medium text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
                         >
                             Book a Free Growth Audit
                         </button>
                         <Link
                             href="/about" // "About Inyutek" - assuming /about exists, checking file list... /about exists.
-                            className="w-full sm:w-auto px-10 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-bold text-lg hover:bg-gray-50 transition-all hover:-translate-y-1"
+                            className="w-full sm:w-auto px-10 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-medium text-lg hover:bg-gray-50 transition-all hover:-translate-y-1"
                         >
                             Learn About Inyutek
                         </Link>

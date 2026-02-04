@@ -47,7 +47,7 @@ export default function ContactPage() {
                         </a>
                         <a
                             href="/what-we-do"
-                            className="w-full sm:w-auto px-8 py-3 text-[#000024] font-medium hover:bg-gray-100 rounded-lg transition-colors"
+                            className="w-full sm:w-auto px-8 py-3 bg-white text-[#000024] font-medium border border-[#000024]/10 rounded-lg hover:bg-gray-50 transition-all hover:-translate-y-1 flex items-center justify-center"
                         >
                             View Services
                         </a>

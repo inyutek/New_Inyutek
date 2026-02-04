@@ -18,13 +18,13 @@ export function Hero() {
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                     <Link
                         href="/contact"
-                        className="w-full sm:w-auto px-8 py-4 bg-[#000024] text-white text-base rounded-lg font-bold shadow-lg hover:opacity-90 transition-all hover:-translate-y-1 flex items-center justify-center"
+                        className="w-full sm:w-auto px-8 py-4 bg-[#000024] text-white text-base rounded-lg font-medium shadow-lg hover:opacity-90 transition-all hover:-translate-y-1 flex items-center justify-center"
                     >
                         Book a Free Growth Audit
                     </Link>
                     <Link
-                        href="/what-we-do"
-                        className="w-full sm:w-auto px-8 py-4 bg-white text-[#000024] text-base border border-[#000024]/10 rounded-lg font-bold hover:bg-gray-50 transition-all hover:-translate-y-1 flex items-center justify-center"
+                        href="/what-we-do#services"
+                        className="w-full sm:w-auto px-8 py-4 bg-white text-[#000024] text-base border border-[#000024]/10 rounded-lg font-medium hover:bg-gray-50 transition-all hover:-translate-y-1 flex items-center justify-center"
                     >
                         View Services
                     </Link>

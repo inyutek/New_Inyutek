@@ -19,7 +19,7 @@ export function CTASection() {
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
                         <Link
                             href="/contact"
-                            className="w-full sm:w-auto px-8 py-4 bg-[#000024] text-white text-lg rounded-lg font-bold shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1 flex items-center justify-center min-w-[200px]"
+                            className="w-full sm:w-auto px-8 py-4 bg-[#000024] text-white text-lg rounded-lg font-medium shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1 flex items-center justify-center min-w-[200px]"
                         >
                             Book a Free Growth Audit
                         </Link>
