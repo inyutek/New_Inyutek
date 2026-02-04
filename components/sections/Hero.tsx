@@ -3,6 +3,7 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion"
 import Link from "next/link"
+import Image from "next/image"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
 
 // Card component representing the "Image Cards"
@@ -10,22 +11,32 @@ function Card({
     className,
     y,
     opacity,
-    rotate = 0
+    rotate = 0,
+    imageSrc
 }: {
     className: string;
     y: MotionValue<number>;
     opacity: MotionValue<number>;
-    rotate?: number
+    rotate?: number;
+    imageSrc?: string;
 }) {
     return (
         <motion.div
             style={{ y, opacity, rotate }}
             className={`absolute bg-gray-200 rounded-2xl shadow-xl border border-white/60 ${className} overflow-hidden`}
         >
-            {/* Simulating an Image Placeholder */}
-            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-400">
-                <svg className="w-12 h-12 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-            </div>
+            {imageSrc ? (
+                <img
+                    src={imageSrc}
+                    alt="Hero Visual"
+                    className="w-full h-full object-cover"
+                />
+            ) : (
+                /* Simulating an Image Placeholder */
+                <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-400">
+                    <svg className="w-12 h-12 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                </div>
+            )}
         </motion.div>
     )
 }
@@ -48,8 +59,9 @@ export function Hero() {
 
 
     // ANIMATION ORCHESTRATION
-    // We want the cards to come up from the bottom and settle into place.
-    // The user scrolls through the "pinned" section.
+    // - [x] Implement auto-cycling (5s) for Home page Process section [ ]
+    // - [x] Fix Process section auto-cycle logic (reset on interaction) and clickability [ ]
+    // - [x] Replace Home Page Hero placeholder with provided image [ ]"pinned" section.
 
 
 
@@ -134,6 +146,7 @@ export function Hero() {
                         y={yBack}
                         opacity={opacity}
                         rotate={0}
+                        imageSrc="/hero-img-1.jpg"
                         className="left-[2%] top-[15%] w-56 h-64 z-10 opacity-80 scale-90"
                     />
                     {/* Top Right */}
@@ -141,6 +154,7 @@ export function Hero() {
                         y={yBack}
                         opacity={opacity}
                         rotate={0}
+                        imageSrc="/hero-img-2.jpg"
                         className="right-[2%] top-[18%] w-60 h-72 z-10 opacity-80 scale-90"
                     />
 
@@ -151,6 +165,7 @@ export function Hero() {
                         y={yMid}
                         opacity={opacity}
                         rotate={0}
+                        imageSrc="/hero-img-3.jpg"
                         className="left-[20%] top-[38%] w-60 h-72 z-20 shadow-2xl"
                     />
                     {/* Mid Right */}
@@ -158,6 +173,7 @@ export function Hero() {
                         y={yMid}
                         opacity={opacity}
                         rotate={0}
+                        imageSrc="/hero-img-4.jpg"
                         className="right-[20%] top-[35%] w-56 h-64 z-20 shadow-2xl"
                     />
 
@@ -168,6 +184,7 @@ export function Hero() {
                         y={yFront}
                         opacity={opacity}
                         rotate={0}
+                        imageSrc="/hero-visual.jpg"
                         className="left-[1%] bottom-[10%] w-64 h-80 z-30 scale-105 shadow-2xl"
                     />
                     {/* Bottom Right */}
@@ -175,6 +192,7 @@ export function Hero() {
                         y={yFront}
                         opacity={opacity}
                         rotate={0}
+                        imageSrc="/hero-visual.jpg"
                         className="right-[1%] bottom-[12%] w-64 h-80 z-30 scale-105 shadow-2xl"
                     />
 
