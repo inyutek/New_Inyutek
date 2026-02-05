@@ -29,7 +29,7 @@ function Card({
                 <img
                     src={imageSrc}
                     alt="Hero Visual"
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto object-contain"
                 />
             ) : (
                 /* Simulating an Image Placeholder */
@@ -146,16 +146,16 @@ export function Hero() {
                         y={yBack}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/Images-20260205T054721Z-1-001/Images/Local%20Businesses.jpg"
-                        className="left-[2%] top-[15%] w-56 h-64 z-10 opacity-80 scale-90"
+                        imageSrc="/Images-20260205T054721Z-1-001/Images/Website.jpg"
+                        className="left-[2%] top-[15%] w-[16.25rem] h-auto z-10 opacity-80 scale-90"
                     />
                     {/* Top Right */}
                     <Card
                         y={yBack}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/Images-20260205T054721Z-1-001/Images/E-commerce.jpg"
-                        className="right-[2%] top-[18%] w-60 h-72 z-10 opacity-80 scale-90"
+                        imageSrc="/Images-20260205T054721Z-1-001/Images/Automation.jpg"
+                        className="right-[2%] top-[18%] w-[17.5rem] h-auto z-10 opacity-80 scale-90"
                     />
 
                     {/* LAYER 2: MID (Starts at 800) */}
@@ -165,16 +165,16 @@ export function Hero() {
                         y={yMid}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/Images-20260205T054721Z-1-001/Images/Funnel.jpg"
-                        className="left-[20%] top-[38%] w-60 h-72 z-20 shadow-2xl"
+                        imageSrc="/Images-20260205T054721Z-1-001/Images/Social Media.jpg"
+                        className="left-[20%] top-[38%] w-[17.5rem] h-auto z-20 shadow-2xl"
                     />
                     {/* Mid Right */}
                     <Card
                         y={yMid}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/Images-20260205T054721Z-1-001/Images/Seo.jpg"
-                        className="right-[20%] top-[35%] w-56 h-64 z-20 shadow-2xl"
+                        imageSrc="/Images-20260205T054721Z-1-001/Images/seo-search-engine-optimization-internet-digital-concept.jpg"
+                        className="right-[20%] top-[35%] w-[15.5rem] h-auto z-20 shadow-2xl"
                     />
 
                     {/* LAYER 3: FRONT (Starts at 1200, Becomes clear later) */}
@@ -184,16 +184,16 @@ export function Hero() {
                         y={yFront}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/Images-20260205T054721Z-1-001/Images/Tracking.jpg"
-                        className="left-[1%] bottom-[10%] w-64 h-80 z-30 scale-105 shadow-2xl"
+                        imageSrc="/Images-20260205T054721Z-1-001/Images/online-marketing-commercial-connection-technology.jpg"
+                        className="left-[1%] bottom-[10%] w-[19.5rem] h-auto z-30 scale-105 shadow-2xl"
                     />
                     {/* Bottom Right */}
                     <Card
                         y={yFront}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/Images-20260205T054721Z-1-001/Images/Social%20Media.jpg"
-                        className="right-[1%] bottom-[12%] w-64 h-80 z-30 scale-105 shadow-2xl"
+                        imageSrc="/Images-20260205T054721Z-1-001/Images/Reporting.jpg"
+                        className="right-[1%] bottom-[12%] w-[19.5rem] h-auto z-30 scale-105 shadow-2xl"
                     />
 
                 </div>

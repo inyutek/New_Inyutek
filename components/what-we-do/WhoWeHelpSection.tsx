@@ -10,7 +10,7 @@ const audiences = [
         title: "Local service businesses",
         description: "Get more calls, WhatsApp inquiries, and bookings.",
         imageColor: "bg-gray-100",
-        imageSrc: "/Images-20260205T054721Z-1-001/Images/Local%20Businesses.jpg",
+        imageSrc: "/Images-20260205T054721Z-1-001/Images/Local Businesses.jpg",
         icon: (
             <svg className="w-24 h-24 opacity-30 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
