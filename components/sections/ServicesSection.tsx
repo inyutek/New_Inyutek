@@ -1,8 +1,8 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import Link from "next/link"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion"
 
 // Data for the Right Side Cards
 const services = [
@@ -113,28 +113,39 @@ function MobileServices() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    className="w-full bg-black rounded-3xl overflow-hidden shadow-xl p-8 text-white min-h-[400px] flex flex-col justify-center text-center"
+                    className="w-full rounded-3xl overflow-hidden shadow-xl text-white min-h-[400px] relative"
                 >
-                    <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80">Services</div>
-                    <h3 className="type-h2 mb-4 !text-gray-50">Services built to create <br /> consistent lead flow</h3>
-                    <p className="type-body opacity-80 mb-8">Pick one growth lever or let us build the full lead system end-to-end Strategy → Execution → Optimization.</p>
+                    {/* Background Image */}
+                    <div
+                        className="absolute inset-0 z-0 bg-cover bg-left"
+                        style={{
+                            backgroundImage: `url('/Images-20260205T054721Z-1-001/Images/Service Page Background.jpg')`,
+                        }}
+                    />
 
-                    <div className="flex flex-col items-center gap-3 w-full">
-                        <div className="flex flex-col sm:flex-row gap-3 w-full">
-                            <Link href="/what-we-do#services" className="w-full flex-1">
-                                <button className="w-full px-6 py-3 bg-white text-black rounded-lg font-medium transition-all hover:bg-gray-100">
-                                    Explore all services →
-                                </button>
-                            </Link>
-                            <Link href="/contact" className="w-full flex-1">
-                                <button className="w-full px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 transition-all hover:bg-white/20 text-white">
-                                    Book a free growth audit
-                                </button>
-                            </Link>
+                    {/* Content Overlay */}
+                    <div className="relative z-10 p-8 flex flex-col justify-center h-full bg-black/10">
+                        <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80">Services</div>
+                        <h3 className="type-h2 mb-4 !text-gray-50">Services built to create <br /> consistent lead flow</h3>
+                        <p className="type-body opacity-90 mb-8 !text-gray-50 max-w-lg">Pick one growth lever or let us build the full lead system end-to-end Strategy → Execution → Optimization.</p>
+
+                        <div className="flex flex-col items-start gap-4 w-full">
+                            <div className="flex flex-col sm:flex-row gap-3 w-full">
+                                <Link href="/what-we-do#services" className="w-full flex-1">
+                                    <button className="w-full px-6 py-3 bg-white text-black rounded-lg font-medium transition-all hover:bg-gray-100 text-center">
+                                        Explore all services →
+                                    </button>
+                                </Link>
+                                <Link href="/contact" className="w-full flex-1">
+                                    <button className="w-full px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 transition-all hover:bg-white/20 text-white text-center">
+                                        Book a free growth audit
+                                    </button>
+                                </Link>
+                            </div>
+                            <p className="text-xs text-left text-white/60">
+                                We’ll identify the top 3 leaks blocking calls, bookings, or sales.
+                            </p>
                         </div>
-                        <p className="text-xs text-center text-white/60">
-                            We’ll identify the top 3 leaks blocking calls, bookings, or sales.
-                        </p>
                     </div>
                 </motion.div>
 
@@ -183,6 +194,17 @@ function DesktopServices() {
     // Adjust the output range (e.g., "-50%") based on how many cards need to be revealed.
     const listY = useTransform(scrollYProgress, [0.35, 0.9], ["0%", "-55%"])
 
+    // 3. Text Alignment State Trigger
+    const [isCentered, setIsCentered] = useState(false)
+
+    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        if (latest > 0.18 && !isCentered) {
+            setIsCentered(true)
+        } else if (latest <= 0.18 && isCentered) {
+            setIsCentered(false)
+        }
+    })
+
     return (
         <div id="services" ref={containerRef} className="hidden lg:block relative h-[300vh] bg-[#fbfbfb]">
             <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
@@ -199,39 +221,55 @@ function DesktopServices() {
 
                     {/* FEATURED CARD */}
                     <motion.div
+                        layout
                         style={{
                             left: leftX,
                             x: cardX,
                             width: useTransform(scrollYProgress, [0.05, 0.25], ["100%", "48%"])
                         }}
-                        className="absolute top-1/2 -translate-y-1/2 z-20 h-[50vh] lg:h-[60vh] bg-black rounded-3xl overflow-hidden shadow-2xl"
+                        className="absolute top-1/2 -translate-y-1/2 z-20 h-[50vh] lg:h-[60vh] rounded-3xl overflow-hidden shadow-2xl bg-cover bg-no-repeat bg-[position:left_center]"
                     >
-                        <div className="absolute inset-0 bg-black">
-                            {/* Gradient removed for pure black look */}
-                        </div>
-                        <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 text-white">
-                            <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80"></div>
-                            <h3 className="type-h2 mb-4 !text-gray-50">Services built to create <br /> consistent lead flow</h3>
-                            <p className="type-body opacity-80 max-w-2xl mb-8 !text-gray-50">Pick one growth lever or let us build the full lead system end-to-end <br />Strategy → Execution → Optimization .</p>
+                        {/* Background Image */}
+                        <div
+                            className="absolute inset-0 z-0 bg-cover bg-left-center"
+                            style={{
+                                backgroundImage: `url('/Images-20260205T054721Z-1-001/Images/Service Page Background.jpg')`,
+                                backgroundPosition: 'left center'
+                            }}
+                        />
 
-                            <div className="flex flex-col gap-3 w-full md:w-auto">
-                                <div className="flex gap-4 w-full md:w-auto">
-                                    <Link href="/what-we-do#services" className="w-full md:w-auto">
-                                        <button className="w-full md:w-auto px-6 py-3 bg-white text-black rounded-lg font-medium hover:bg-gray-100 transition-all hover:-translate-y-1">
-                                            Explore all services →
-                                        </button>
-                                    </Link>
-                                    <Link href="/contact" className="w-full md:w-auto">
-                                        <button className="w-full md:w-auto px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-1 text-white">
-                                            Book a free growth audit
-                                        </button>
-                                    </Link>
-                                </div>
-                                <p className="text-xs text-center text-white/60">
-                                    We’ll identify the top 3 leaks blocking calls, bookings, or sales.
-                                </p>
-                            </div>
-                        </div>
+                        {/* CONTENT CONTAINER - Layout Animated */}
+                        <motion.div
+                            layout
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                            className={`absolute inset-0 z-10 flex flex-col justify-center p-8 lg:p-12 text-white
+                                ${isCentered ? "items-center text-center" : "items-start text-left lg:pl-24"}
+                            `}
+                        >
+                            <motion.div layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className="max-w-xl w-full">
+                                <motion.div layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className={`text-sm font-medium uppercase tracking-wider mb-4 opacity-80 ${isCentered ? "" : "pl-1"}`}>Services</motion.div>
+                                <motion.h3 layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className="type-h2 mb-6 !text-gray-50 leading-tight">Services built to create <br /> consistent lead flow</motion.h3>
+                                <motion.p layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className={`type-body opacity-90 mb-8 !text-gray-100 max-w-lg ${isCentered ? "mx-auto" : ""}`}>Pick one growth lever or let us build the full lead system end-to-end Strategy → Execution → Optimization.</motion.p>
+
+                                <motion.div layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className={`flex flex-col gap-4 w-full md:w-auto ${isCentered ? "items-center" : ""}`}>
+                                    <motion.div layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className={`flex flex-wrap gap-4 w-full md:w-auto ${isCentered ? "justify-center" : ""}`}>
+                                        <Link href="/what-we-do#services" className="w-full md:w-auto">
+                                            <button className="w-full md:w-auto px-6 py-3 bg-white text-black rounded-lg font-medium hover:bg-gray-100 transition-all hover:-translate-y-1">
+                                                Explore all services →
+                                            </button>
+                                        </Link>
+                                        <Link href="/contact" className="w-full md:w-auto">
+                                            <button className="w-full md:w-auto px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-1 text-white">
+                                                Book a free growth audit
+                                            </button>
+                                        </Link>
+                                    </motion.div>
+                                    <motion.p layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className={`text-sm text-white/70 ${isCentered ? "text-center" : "text-left pl-1"}`}>
+                                        We’ll identify the top 3 leaks blocking calls, bookings, or sales.
+                                    </motion.p>
+                                </motion.div>
+                            </motion.div>
+                        </motion.div>
                     </motion.div>
 
 
