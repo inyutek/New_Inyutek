@@ -146,7 +146,7 @@ export function Hero() {
                         y={yBack}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/hero-img-1.jpg"
+                        imageSrc="/Images-20260205T054721Z-1-001/Images/Local%20Businesses.jpg"
                         className="left-[2%] top-[15%] w-56 h-64 z-10 opacity-80 scale-90"
                     />
                     {/* Top Right */}
@@ -154,7 +154,7 @@ export function Hero() {
                         y={yBack}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/hero-img-2.jpg"
+                        imageSrc="/Images-20260205T054721Z-1-001/Images/E-commerce.jpg"
                         className="right-[2%] top-[18%] w-60 h-72 z-10 opacity-80 scale-90"
                     />
 
@@ -165,7 +165,7 @@ export function Hero() {
                         y={yMid}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/hero-img-3.jpg"
+                        imageSrc="/Images-20260205T054721Z-1-001/Images/Funnel.jpg"
                         className="left-[20%] top-[38%] w-60 h-72 z-20 shadow-2xl"
                     />
                     {/* Mid Right */}
@@ -173,7 +173,7 @@ export function Hero() {
                         y={yMid}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/hero-img-4.jpg"
+                        imageSrc="/Images-20260205T054721Z-1-001/Images/Seo.jpg"
                         className="right-[20%] top-[35%] w-56 h-64 z-20 shadow-2xl"
                     />
 
@@ -184,7 +184,7 @@ export function Hero() {
                         y={yFront}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/hero-visual.jpg"
+                        imageSrc="/Images-20260205T054721Z-1-001/Images/Tracking.jpg"
                         className="left-[1%] bottom-[10%] w-64 h-80 z-30 scale-105 shadow-2xl"
                     />
                     {/* Bottom Right */}
@@ -192,7 +192,7 @@ export function Hero() {
                         y={yFront}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/hero-visual.jpg"
+                        imageSrc="/Images-20260205T054721Z-1-001/Images/Social%20Media.jpg"
                         className="right-[1%] bottom-[12%] w-64 h-80 z-30 scale-105 shadow-2xl"
                     />
 

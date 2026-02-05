@@ -88,12 +88,12 @@ export function WhySection() {
                     {/* RIGHT: Image Placeholder */}
                     <Reveal delay={0.2} className="w-full">
                         <div className="relative aspect-square md:aspect-[4/3] bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200 shadow-sm overflow-hidden">
-                            {/* Placeholder Icon */}
-                            <div className="w-24 h-24 text-gray-300">
-                                <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
-                                </svg>
-                            </div>
+                            {/* Image */}
+                            <img
+                                src="/Images-20260205T054721Z-1-001/Images/Why%20Inyutek.jpg"
+                                alt="Why Inyutek"
+                                className="w-full h-full object-cover"
+                            />
                         </div>
                     </Reveal>
 

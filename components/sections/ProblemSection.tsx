@@ -10,6 +10,7 @@ const problems = [
         title: "You’re getting views, not customers",
         description: "People land on your site, scroll, and leave because the offer isn’t instantly clear or compelling.",
         imageColor: "bg-gray-200", // Placeholder for different images
+        imageSrc: "/Images-20260205T054721Z-1-001/Images/No%20customers.jpg",
         icon: (
             <svg className="w-24 h-24 opacity-30" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19 3H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM5 19V5h14l.002 14H5z"></path>
@@ -22,6 +23,7 @@ const problems = [
         title: "Your funnel has friction",
         description: "Too many steps, slow pages, confusing forms, no WhatsApp/call-first path  leads drop before they convert.",
         imageColor: "bg-blue-100", // Just to differentiate visually for now
+        imageSrc: "/Images-20260205T054721Z-1-001/Images/Website.jpg",
         icon: (
             <svg className="w-24 h-24 opacity-30" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20 2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h3v3.767L13.277 18H20c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm0 14h-7.277L9 18.233V16H4V4h16v12z"></path>
@@ -33,6 +35,7 @@ const problems = [
         title: "You can’t track what’s working",
         description: "If you don’t know which channel, keyword, or ad created the lead, you can’t scale profitably.",
         imageColor: "bg-red-100", // Just to differentiate visually for now
+        imageSrc: "/Images-20260205T054721Z-1-001/Images/data-analytics-tablet.jpg",
         icon: (
             <svg className="w-24 h-24 opacity-30" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M21 4H3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-1 14H4V6h16v12z"></path>
@@ -82,8 +85,16 @@ function MobileProblem() {
                                         </p>
 
                                         {/* Inline Image Display */}
-                                        <div className={`w-full max-w-xs mx-auto aspect-square rounded-lg flex items-center justify-center text-gray-400 ${item.imageColor}`}>
-                                            {item.icon}
+                                        <div className={`w-full max-w-xs mx-auto aspect-square rounded-lg flex items-center justify-center text-gray-400 overflow-hidden ${item.imageColor}`}>
+                                            {item.imageSrc ? (
+                                                <img
+                                                    src={item.imageSrc}
+                                                    alt={item.title}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            ) : (
+                                                item.icon
+                                            )}
                                         </div>
                                     </div>
                                 </motion.div>
@@ -134,9 +145,17 @@ function DesktopProblem() {
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3 }}
-                            className={`absolute inset-0 flex items-center justify-center text-gray-400 ${problems[activeIndex].imageColor}`}
+                            className={`absolute inset-0 flex items-center justify-center text-gray-400 overflow-hidden ${problems[activeIndex].imageColor}`}
                         >
-                            {problems[activeIndex].icon}
+                            {problems[activeIndex].imageSrc ? (
+                                <img
+                                    src={problems[activeIndex].imageSrc}
+                                    alt={problems[activeIndex].title}
+                                    className="w-full h-full object-cover"
+                                />
+                            ) : (
+                                problems[activeIndex].icon
+                            )}
                         </motion.div>
                     </AnimatePresence>
                 </div>
