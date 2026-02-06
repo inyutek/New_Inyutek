@@ -35,3 +35,28 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## Image Optimization
+
+This project includes an automated image optimization pipeline powered by `sharp`.
+
+### How to Run
+Run the following command to generate responsive optimized images:
+```bash
+npm run optimize:images
+```
+
+### Storage Location
+- Source images: `/public/services/`
+- Optimized output: Saved in the SAME folder (`/public/services/`) next to the originals.
+
+### Workflow
+1. **Add Images**: Place high-quality `.jpg`, `.png`, or `.webp` files into `/public/services/`.
+2. **Run Optimizer**: Execute `npm run optimize:images`.
+3. **Resizes**:
+   - Mobile: 800px
+   - Tablet: 1200px
+   - Desktop: 1800px
+4. **Formats**: AVIF (Q50) and WebP (Q70) generated for each size.
+
+**Note:** The script skips existing optimized files and preserves original files. It is safe to run multiple times.
+

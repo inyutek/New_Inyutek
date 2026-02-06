@@ -90,7 +90,7 @@ export function WhySection() {
                         <div className="relative aspect-square md:aspect-[4/3] bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200 shadow-sm overflow-hidden">
                             {/* Image */}
                             <img
-                                src="/Images-20260205T054721Z-1-001/Images/Why Inyutek.jpg"
+                                src="/services/Why Inyutek.jpg"
                                 alt="Why Inyutek"
                                 className="w-full h-full object-cover"
                             />

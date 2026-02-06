@@ -10,7 +10,7 @@ const audiences = [
         title: "Local service businesses",
         description: "Get more calls, WhatsApp inquiries, and bookings.",
         imageColor: "bg-gray-100",
-        imageSrc: "/Images-20260205T054721Z-1-001/Images/Local Businesses.jpg",
+        imageSrc: "/services/Local Businesses.jpg",
         icon: (
             <svg className="w-24 h-24 opacity-30 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
@@ -22,7 +22,7 @@ const audiences = [
         title: "Ecommerce brands",
         description: "Get more purchases, higher conversion rate, and lower CPA.",
         imageColor: "bg-gray-200",
-        imageSrc: "/Images-20260205T054721Z-1-001/Images/E-commerce.jpg",
+        imageSrc: "/services/E-commerce.jpg",
         icon: (
             <svg className="w-24 h-24 opacity-30 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
@@ -36,7 +36,7 @@ const audiences = [
         title: "Early-stage founders",
         description: "Validate offers and build a funnel you can scale.",
         imageColor: "bg-gray-100",
-        imageSrc: "/Images-20260205T054721Z-1-001/Images/Startup.jpg",
+        imageSrc: "/services/Startup.jpg",
         icon: (
             <svg className="w-24 h-24 opacity-30 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>

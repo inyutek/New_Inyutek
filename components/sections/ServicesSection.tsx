@@ -1,8 +1,8 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef } from "react"
 import Link from "next/link"
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 
 // Data for the Right Side Cards
 const services = [
@@ -115,13 +115,19 @@ function MobileServices() {
                     viewport={{ once: true, margin: "-100px" }}
                     className="w-full rounded-3xl overflow-hidden shadow-xl text-white min-h-[400px] relative"
                 >
-                    {/* Background Image */}
-                    <div
-                        className="absolute inset-0 z-0 bg-cover bg-left"
-                        style={{
-                            backgroundImage: `url('/Images-20260205T054721Z-1-001/Images/Service Page Background.jpg')`,
-                        }}
-                    />
+                    {/* Background Image - Optimized */}
+                    <div className="absolute inset-0 z-0 bg-[#000024]">
+                        <picture>
+                            <source srcSet="/services/Service%20Page%20Background-mobile.avif" type="image/avif" />
+                            <source srcSet="/services/Service%20Page%20Background-mobile.webp" type="image/webp" />
+                            <img
+                                src="/services/Service%20Page%20Background.jpg"
+                                alt="Services Background"
+                                className="w-full h-full object-cover object-left"
+                            />
+                        </picture>
+                        <div className="absolute inset-0 bg-black/20" />
+                    </div>
 
                     {/* Content Overlay */}
                     <div className="relative z-10 p-8 flex flex-col justify-center h-full bg-black/10">
@@ -194,16 +200,7 @@ function DesktopServices() {
     // Adjust the output range (e.g., "-50%") based on how many cards need to be revealed.
     const listY = useTransform(scrollYProgress, [0.35, 0.9], ["0%", "-55%"])
 
-    // 3. Text Alignment State Trigger
-    const [isCentered, setIsCentered] = useState(false)
 
-    useMotionValueEvent(scrollYProgress, "change", (latest) => {
-        if (latest > 0.18 && !isCentered) {
-            setIsCentered(true)
-        } else if (latest <= 0.18 && isCentered) {
-            setIsCentered(false)
-        }
-    })
 
     return (
         <div id="services" ref={containerRef} className="hidden lg:block relative h-[300vh] bg-[#fbfbfb]">
@@ -221,38 +218,38 @@ function DesktopServices() {
 
                     {/* FEATURED CARD */}
                     <motion.div
-                        layout
                         style={{
                             left: leftX,
                             x: cardX,
                             width: useTransform(scrollYProgress, [0.05, 0.25], ["100%", "48%"])
                         }}
-                        className="absolute top-1/2 -translate-y-1/2 z-20 h-[50vh] lg:h-[60vh] rounded-3xl overflow-hidden shadow-2xl bg-cover bg-no-repeat bg-[position:left_center]"
+                        className="absolute top-1/2 -translate-y-1/2 z-20 h-[50vh] lg:h-[60vh] rounded-3xl overflow-hidden shadow-2xl bg-[#000024]"
                     >
-                        {/* Background Image */}
+                        {/* Background Image - Optimized */}
+                        <div className="absolute inset-0 z-0">
+                            <picture>
+                                <source srcSet="/services/Service%20Page%20Background-desktop.avif" type="image/avif" />
+                                <source srcSet="/services/Service%20Page%20Background-desktop.webp" type="image/webp" />
+                                <img
+                                    src="/services/Service%20Page%20Background.jpg"
+                                    alt="Services Background"
+                                    className="w-full h-full object-cover object-left"
+                                />
+                            </picture>
+                            <div className="absolute inset-0 bg-black/20" /> {/* Overlay for text readability */}
+                        </div>
+
+                        {/* CONTENT CONTAINER - Simplified Animation (No Layout Thrashing) */}
                         <div
-                            className="absolute inset-0 z-0 bg-cover bg-left-center"
-                            style={{
-                                backgroundImage: `url('/Images-20260205T054721Z-1-001/Images/Service Page Background.jpg')`,
-                                backgroundPosition: 'left center'
-                            }}
-                        />
-
-                        {/* CONTENT CONTAINER - Layout Animated */}
-                        <motion.div
-                            layout
-                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                            className={`absolute inset-0 z-10 flex flex-col justify-center p-8 lg:p-12 text-white
-                                ${isCentered ? "items-center text-center" : "items-start text-left lg:pl-24"}
-                            `}
+                            className="absolute inset-0 z-10 flex flex-col justify-center p-8 lg:p-12 text-white items-start text-left lg:pl-16"
                         >
-                            <motion.div layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className="max-w-xl w-full">
-                                <motion.div layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className={`text-sm font-medium uppercase tracking-wider mb-4 opacity-80 ${isCentered ? "" : "pl-1"}`}>Services</motion.div>
-                                <motion.h3 layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className="type-h2 mb-6 !text-gray-50 leading-tight">Services built to create <br /> consistent lead flow</motion.h3>
-                                <motion.p layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className={`type-body opacity-90 mb-8 !text-gray-100 max-w-lg ${isCentered ? "mx-auto" : ""}`}>Pick one growth lever or let us build the full lead system end-to-end Strategy → Execution → Optimization.</motion.p>
+                            <div className="max-w-xl w-full">
+                                <div className="text-sm font-medium uppercase tracking-wider mb-4 opacity-80 pl-1">Services</div>
+                                <h3 className="type-h2 mb-6 !text-gray-50 leading-tight">Services built to create <br /> consistent lead flow</h3>
+                                <p className="type-body opacity-90 mb-8 !text-gray-100 max-w-lg">Pick one growth lever or let us build the full lead system end-to-end Strategy → Execution → Optimization.</p>
 
-                                <motion.div layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className={`flex flex-col gap-4 w-full md:w-auto ${isCentered ? "items-center" : ""}`}>
-                                    <motion.div layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className={`flex flex-wrap gap-4 w-full md:w-auto ${isCentered ? "justify-center" : ""}`}>
+                                <div className="flex flex-col gap-4 w-full md:w-auto">
+                                    <div className="flex flex-wrap gap-4 w-full md:w-auto">
                                         <Link href="/what-we-do#services" className="w-full md:w-auto">
                                             <button className="w-full md:w-auto px-6 py-3 bg-white text-black rounded-lg font-medium hover:bg-gray-100 transition-all hover:-translate-y-1">
                                                 Explore all services →
@@ -263,13 +260,13 @@ function DesktopServices() {
                                                 Book a free growth audit
                                             </button>
                                         </Link>
-                                    </motion.div>
-                                    <motion.p layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className={`text-sm text-white/70 ${isCentered ? "text-center" : "text-left pl-1"}`}>
+                                    </div>
+                                    <p className="text-sm text-white/70 text-left pl-1">
                                         We’ll identify the top 3 leaks blocking calls, bookings, or sales.
-                                    </motion.p>
-                                </motion.div>
-                            </motion.div>
-                        </motion.div>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </motion.div>
 
 

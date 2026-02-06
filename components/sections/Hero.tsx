@@ -20,17 +20,31 @@ function Card({
     rotate?: number;
     imageSrc?: string;
 }) {
+    const isServiceImage = imageSrc?.startsWith("/services/");
+
     return (
         <motion.div
             style={{ y, opacity, rotate }}
             className={`absolute bg-gray-200 rounded-2xl shadow-xl border border-white/60 ${className} overflow-hidden`}
         >
             {imageSrc ? (
-                <img
-                    src={imageSrc}
-                    alt="Hero Visual"
-                    className="w-full h-auto object-contain"
-                />
+                isServiceImage ? (
+                    <picture>
+                        <source srcSet={imageSrc.replace(/(\.[\w\d]+)$/, "-mobile.avif")} type="image/avif" />
+                        <source srcSet={imageSrc.replace(/(\.[\w\d]+)$/, "-mobile.webp")} type="image/webp" />
+                        <img
+                            src={imageSrc}
+                            alt="Hero Visual"
+                            className="w-full h-auto object-contain"
+                        />
+                    </picture>
+                ) : (
+                    <img
+                        src={imageSrc}
+                        alt="Hero Visual"
+                        className="w-full h-auto object-contain"
+                    />
+                )
             ) : (
                 /* Simulating an Image Placeholder */
                 <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-400">
@@ -146,7 +160,7 @@ export function Hero() {
                         y={yBack}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/Images-20260205T054721Z-1-001/Images/Website.jpg"
+                        imageSrc="/services/Website.jpg"
                         className="left-[2%] top-[15%] w-[16.25rem] h-auto z-10 opacity-80 scale-90"
                     />
                     {/* Top Right */}
@@ -154,7 +168,7 @@ export function Hero() {
                         y={yBack}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/Images-20260205T054721Z-1-001/Images/Automation.jpg"
+                        imageSrc="/services/Automation.jpg"
                         className="right-[2%] top-[18%] w-[17.5rem] h-auto z-10 opacity-80 scale-90"
                     />
 
@@ -165,7 +179,7 @@ export function Hero() {
                         y={yMid}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/Images-20260205T054721Z-1-001/Images/Social Media.jpg"
+                        imageSrc="/services/Social Media.jpg"
                         className="left-[20%] top-[38%] w-[17.5rem] h-auto z-20 shadow-2xl"
                     />
                     {/* Mid Right */}
@@ -173,7 +187,7 @@ export function Hero() {
                         y={yMid}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/Images-20260205T054721Z-1-001/Images/seo-search-engine-optimization-internet-digital-concept.jpg"
+                        imageSrc="/services/seo-search-engine-optimization-internet-digital-concept.jpg"
                         className="right-[20%] top-[35%] w-[15.5rem] h-auto z-20 shadow-2xl"
                     />
 
@@ -184,7 +198,7 @@ export function Hero() {
                         y={yFront}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/Images-20260205T054721Z-1-001/Images/online-marketing-commercial-connection-technology.jpg"
+                        imageSrc="/services/online-marketing-commercial-connection-technology.jpg"
                         className="left-[1%] bottom-[10%] w-[19.5rem] h-auto z-30 scale-105 shadow-2xl"
                     />
                     {/* Bottom Right */}
@@ -192,7 +206,7 @@ export function Hero() {
                         y={yFront}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/Images-20260205T054721Z-1-001/Images/Reporting.jpg"
+                        imageSrc="/services/Reporting.jpg"
                         className="right-[1%] bottom-[12%] w-[19.5rem] h-auto z-30 scale-105 shadow-2xl"
                     />
 
