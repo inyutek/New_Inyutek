@@ -1,100 +1,100 @@
 import { NextResponse } from 'next/server'
-import { env } from '@/lib/env'
-import { processLeads } from '@/lib/automation';
+import { findLeadByToken } from '@/lib/sheets';
+import { sendBlueprintToLead } from '@/lib/automation';
+
+// Simple in-memory rate limiting
+const rateLimits = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
+const RATE_LIMIT_MAX = 5; // 5 requests per hour per IP
+
+function getRateLimitKey(request: Request): string {
+    // Get IP from headers (works with most proxies/hosting)
+    const forwarded = request.headers.get('x-forwarded-for');
+    const ip = forwarded ? forwarded.split(',')[0].trim() : 'unknown';
+    return ip;
+}
+
+function checkRateLimit(key: string): { allowed: boolean; remaining: number } {
+    const now = Date.now();
+    const entry = rateLimits.get(key);
+
+    if (!entry || entry.resetAt < now) {
+        // First request or window expired
+        rateLimits.set(key, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
+        return { allowed: true, remaining: RATE_LIMIT_MAX - 1 };
+    }
+
+    if (entry.count >= RATE_LIMIT_MAX) {
+        return { allowed: false, remaining: 0 };
+    }
+
+    entry.count++;
+    return { allowed: true, remaining: RATE_LIMIT_MAX - entry.count };
+}
 
 export async function POST(request: Request) {
     try {
-        const body = await request.json()
-        const { name, email, website } = body
+        const body = await request.json();
+        const { token } = body;
 
-        // Log the attempt (exclude sensitive data)
-        console.log('Attempting to submit to Notion Leads DB:', { name, email })
-
-        // Validate required fields
-        if (!name || !email) {
+        // Validate token format (UUID v4)
+        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+        if (!token || !uuidRegex.test(token)) {
             return NextResponse.json(
-                { error: 'Name and Email are required' },
+                { error: 'Invalid token format' },
                 { status: 400 }
-            )
+            );
         }
 
-        const response = await fetch('https://api.notion.com/v1/pages', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${env.NOTION_TOKEN}`,
-                'Notion-Version': '2022-06-28',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                parent: {
-                    database_id: env.NOTION_LEADS_DATABASE_ID,
-                },
-                properties: {
-                    Name: {
-                        title: [
-                            {
-                                text: {
-                                    content: name,
-                                },
-                            },
-                        ],
-                    },
-                    Email: {
-                        email: email,
-                    },
-                    Business: {
-                        rich_text: [
-                            {
-                                text: {
-                                    content: website || "N/A",
-                                },
-                            },
-                        ],
-                    },
-                    "Blueprint sent": {
-                        status: {
-                            name: "Not started"
-                        }
-                    }
-                },
-            }),
-        })
+        // Check rate limit
+        const rateLimitKey = getRateLimitKey(request);
+        const { allowed, remaining } = checkRateLimit(rateLimitKey);
 
-        const data = await response.json()
-
-        if (!response.ok) {
-            console.error('Notion API Error:', data)
+        if (!allowed) {
             return NextResponse.json(
-                { error: 'Failed to submit to Notion', details: data },
-                { status: response.status }
-            )
+                { error: 'Too many requests. Please try again later.' },
+                { status: 429 }
+            );
         }
 
-        console.log('Notion submission successful:', data.id)
+        // Find lead by token in Google Sheet
+        const lead = await findLeadByToken(token);
 
-        // Trigger automation immediately
-        let automationResult = null;
-        try {
-            automationResult = await processLeads();
-            console.log("Automation Triggered:", automationResult);
-        } catch (autoError) {
-            console.error("Automation Trigger Failed:", autoError);
-            // We do not fail the request if automation fails, as the primary submission succeeded
+        if (!lead) {
+            return NextResponse.json(
+                { error: 'Token not found' },
+                { status: 404 }
+            );
         }
+
+        // Check if blueprint was already sent
+        if (lead.blueprintSent) {
+            return NextResponse.json({
+                success: true,
+                already_sent: true,
+                sent_at: lead.sentAt,
+                email: lead.email
+            });
+        }
+
+        // Send the blueprint email
+        await sendBlueprintToLead(lead);
 
         return NextResponse.json({
             success: true,
-            id: data.id,
-            automation: automationResult
-        })
+            email: lead.email,
+            sent_at: new Date().toISOString()
+        }, {
+            headers: {
+                'X-RateLimit-Remaining': remaining.toString()
+            }
+        });
 
     } catch (error) {
-        console.error('Internal Error:', error)
-        // If it's our custom env error, strictly surface it in dev, generic in prod? 
-        // For now, general error to avoid leaking details in responses.
+        console.error('Blueprint API Error:', error);
         return NextResponse.json(
-            { error: 'Internal server error' },
+            { error: 'Failed to send blueprint. Please try again.' },
             { status: 500 }
-        )
+        );
     }
 }

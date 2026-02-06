@@ -1,15 +1,38 @@
 import { sendEmail } from "./gmail";
+import { getUnsentLeads, markBlueprintSent, LeadRow } from "./sheets";
 
-// The specific email content requested
+// The specific email content
 const BLUEPRINT_EMAIL_SUBJECT = "Your Process Blueprint — How We Work";
 
-// Use a function to generate the email text to allow dynamic name insertion
-const getBlueprintEmailText = (name: string) => `Hi ${name},
+// Generate personalized email based on lead data
+const getBlueprintEmailText = (lead: LeadRow) => {
+    // Map business type to friendly name
+    const businessTypeMap: Record<string, string> = {
+        'local_service': 'Local Service',
+        'ecommerce': 'E-commerce',
+        'startup': 'Startup',
+        'other': 'Business'
+    };
 
-As promised, here’s a clear look at how we approach problems and execute work.
+    // Map goal to friendly name
+    const goalMap: Record<string, string> = {
+        'more_calls': 'getting more calls',
+        'more_bookings': 'increasing bookings',
+        'more_sales': 'driving more sales',
+        'lower_cpa': 'reducing your cost per acquisition'
+    };
 
-This isn’t a proposal.
-It’s our internal way of thinking, shared with you.
+    const businessType = businessTypeMap[lead.businessType] || lead.businessType || 'business';
+    const goalText = goalMap[lead.primaryGoal] || lead.primaryGoal || 'growing your business';
+
+    return `Hi ${lead.name},
+
+As promised, here's a clear look at how we approach problems and execute work.
+
+This isn't a proposal.
+It's our internal way of thinking, shared with you.
+
+Based on what you shared about ${lead.businessName || 'your business'}, I understand your focus is on ${goalText}. Here's how we'd approach this:
 
 1. We start with clarity, not tactics
 
@@ -33,11 +56,11 @@ Where does friction appear in the user journey?
 
 What is the fastest path to a measurable win?
 
-If we can’t explain why something should work, we don’t do it.
+If we can't explain why something should work, we don't do it.
 
 3. We design systems, not one-off actions
 
-Our focus is on:
+For a ${businessType} like yours, our focus would be on:
 
 Repeatable processes
 
@@ -75,13 +98,35 @@ This email alone should already give you clarity.
 
 —
 Inyutek`;
+};
 
+/**
+ * Send blueprint email to a specific lead
+ */
+export async function sendBlueprintToLead(lead: LeadRow): Promise<void> {
+    if (!lead.email) {
+        throw new Error("No email found for lead");
+    }
+
+    // Send Email
+    await sendEmail({
+        to: lead.email,
+        subject: BLUEPRINT_EMAIL_SUBJECT,
+        text: getBlueprintEmailText(lead),
+    });
+
+    // Mark as sent in Google Sheet
+    await markBlueprintSent(lead.rowIndex);
+
+    console.log(`✅ Blueprint sent to ${lead.name} <${lead.email}>`);
+}
+
+/**
+ * Process all unsent leads and send blueprints
+ * Used for batch processing (e.g., cron job)
+ */
 export async function processLeads() {
     console.log("🚀 AUTOMATION EXECUTED");
-
-    if (!process.env.notion_id || !process.env.Leads_database_id) {
-        throw new Error("Missing Notion configuration env vars");
-    }
 
     const output = {
         processed: 0,
@@ -89,91 +134,23 @@ export async function processLeads() {
     };
 
     try {
-        // 1. Query Notion for rows where "Blueprint sent" is "Not started"
-        const response = await fetch(
-            `https://api.notion.com/v1/databases/${process.env.Leads_database_id}/query`,
-            {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${process.env.notion_id}`,
-                    "Notion-Version": "2022-06-28",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    filter: {
-                        property: "Blueprint sent",
-                        status: {
-                            equals: "Not started",
-                        },
-                    },
-                }),
-            }
-        );
+        // Get all leads where blueprint hasn't been sent
+        const unsentLeads = await getUnsentLeads();
 
-        if (!response.ok) {
-            const err = await response.json();
-            console.error("Notion Query Error:", err);
-            throw new Error(`Notion Query Failed: ${response.statusText}`);
-        }
+        console.log(`Found ${unsentLeads.length} leads to process.`);
 
-        const data = await response.json();
-        const rows = data.results || [];
-
-        console.log(`Found ${rows.length} rows to process.`);
-
-        // 2. Loop through results
-        for (const page of rows) {
+        // Process each lead
+        for (const lead of unsentLeads) {
             try {
-                const props = page.properties;
-                const name = props.Name?.title?.[0]?.text?.content || "there";
-                const email = props.Email?.email;
-                const pageId = page.id;
-
-                if (!email) {
-                    console.warn(`Skipping page ${pageId}: No email found.`);
-                    continue;
-                }
-
-                console.log(`Processing: ${name} <${email}>`);
-
-                // 3. Send Email
-                await sendEmail({
-                    to: email,
-                    subject: BLUEPRINT_EMAIL_SUBJECT,
-                    text: getBlueprintEmailText(name),
-                });
-
-                // 4. Update Notion Status
-                const updateRes = await fetch(`https://api.notion.com/v1/pages/${pageId}`, {
-                    method: "PATCH",
-                    headers: {
-                        Authorization: `Bearer ${process.env.notion_id}`,
-                        "Notion-Version": "2022-06-28",
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        properties: {
-                            "Blueprint sent": {
-                                status: {
-                                    name: "Sent",
-                                },
-                            },
-                        },
-                    }),
-                });
-
-                if (!updateRes.ok) {
-                    const updateErr = await updateRes.json();
-                    console.error(`Failed to update Notion status for ${pageId}`, updateErr);
-                    output.errors.push({ pageId, error: "Failed to update status", details: updateErr });
-                } else {
-                    console.log(`✅ Updated status for ${name}`);
-                    output.processed++;
-                }
-
+                await sendBlueprintToLead(lead);
+                output.processed++;
             } catch (err: any) {
-                console.error(`Error processing page ${page.id}:`, err);
-                output.errors.push({ pageId: page.id, error: err.message });
+                console.error(`Error processing lead ${lead.token}:`, err);
+                output.errors.push({
+                    token: lead.token,
+                    email: lead.email,
+                    error: err.message
+                });
             }
         }
     } catch (err: any) {
