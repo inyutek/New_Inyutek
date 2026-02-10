@@ -2,129 +2,17 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Loader2, CheckCircle2, Sparkles, Mail, AlertCircle } from "lucide-react"
+import { Loader2, CheckCircle2, Link, Mail, Sparkles } from "lucide-react"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
 import { submitContactForm } from "@/app/actions/contact"
 
-// Blueprint Button Component
-function BlueprintButton({ token, userName }: { token: string; userName: string }) {
-    const [state, setState] = useState<'ready' | 'sending' | 'sent' | 'error'>('ready');
-    const [message, setMessage] = useState('');
 
-    async function handleClick() {
-        setState('sending');
 
-        try {
-            const response = await fetch('/api/blueprint', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ token })
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                setState('sent');
-                if (data.already_sent) {
-                    setMessage(`Blueprint was already sent on ${new Date(data.sent_at).toLocaleDateString()}`);
-                } else {
-                    setMessage(`Blueprint sent to ${data.email}!`);
-                }
-            } else {
-                setState('error');
-                setMessage(data.error || 'Failed to send blueprint. Please try again.');
-            }
-        } catch (error) {
-            setState('error');
-            setMessage('Network error. Please check your connection.');
-        }
-    }
-
-    return (
-        <section id="booking-form" className="bg-white py-24 px-6 lg:px-8">
-            <div className="max-w-2xl mx-auto text-center py-12 bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl border border-purple-100 shadow-lg">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                    <CheckCircle2 className="w-8 h-8 text-white" />
-                </div>
-
-                <h3 className="type-card-title mb-2">Thanks, {userName}! 🎉</h3>
-                <p className="text-gray-600 mb-8 max-w-sm mx-auto">
-                    Your information has been saved. Get your personalized AI implementation blueprint:
-                </p>
-
-                <button
-                    onClick={handleClick}
-                    disabled={state === 'sending' || state === 'sent'}
-                    className={`
-                        px-8 py-4 text-lg font-semibold rounded-xl
-                        transition-all duration-300 ease-out
-                        flex items-center justify-center gap-3 mx-auto
-                        min-w-[280px]
-                        ${state === 'ready'
-                            ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:shadow-xl hover:-translate-y-1 cursor-pointer'
-                            : ''
-                        }
-                        ${state === 'sending'
-                            ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white opacity-80 cursor-wait'
-                            : ''
-                        }
-                        ${state === 'sent'
-                            ? 'bg-green-500 text-white cursor-default'
-                            : ''
-                        }
-                        ${state === 'error'
-                            ? 'bg-red-500 text-white hover:bg-red-600 cursor-pointer'
-                            : ''
-                        }
-                    `}
-                >
-                    {state === 'ready' && (
-                        <>
-                            <Sparkles className="w-5 h-5" />
-                            Get Your AI Blueprint
-                        </>
-                    )}
-                    {state === 'sending' && (
-                        <>
-                            <Loader2 className="w-5 h-5 animate-spin" />
-                            Generating your blueprint...
-                        </>
-                    )}
-                    {state === 'sent' && (
-                        <>
-                            <Mail className="w-5 h-5" />
-                            Blueprint Sent!
-                        </>
-                    )}
-                    {state === 'error' && (
-                        <>
-                            <AlertCircle className="w-5 h-5" />
-                            Try Again
-                        </>
-                    )}
-                </button>
-
-                {message && (
-                    <p className={`mt-4 text-sm ${state === 'error' ? 'text-red-600' : 'text-gray-600'}`}>
-                        {message}
-                    </p>
-                )}
-
-                {state === 'sent' && (
-                    <p className="mt-6 text-xs text-gray-400">
-                        Check your inbox (and spam folder) for the email.
-                    </p>
-                )}
-            </div>
-        </section>
-    );
-}
 
 export function ContactForm() {
     const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
     const [errorMessage, setErrorMessage] = useState("")
-    const [token, setToken] = useState("")
-    const [userName, setUserName] = useState("")
+    const [submissionData, setSubmissionData] = useState<{ token: string; name: string } | null>(null)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -138,8 +26,9 @@ export function ContactForm() {
 
             if (result.success) {
                 setStatus("success")
-                setToken(result.token || "")
-                setUserName(result.name || "")
+                if (result.token && result.name) {
+                    setSubmissionData({ token: result.token, name: result.name })
+                }
             } else {
                 setStatus("error")
                 setErrorMessage(result.message || "Something went wrong. Please try again.")
@@ -148,11 +37,6 @@ export function ContactForm() {
             setStatus("error")
             setErrorMessage("An unexpected error occurred. Please try again.")
         }
-    }
-
-    // Show Blueprint button after successful submission
-    if (status === "success" && token) {
-        return <BlueprintButton token={token} userName={userName} />
     }
 
     // Fallback success state (if no token for some reason)
@@ -167,12 +51,26 @@ export function ContactForm() {
                     <p className="text-gray-600 mb-8 max-w-sm mx-auto">
                         Thanks for booking an audit. We'll review your details and confirm the time shortly.
                     </p>
-                    <button
-                        onClick={() => setStatus("idle")}
-                        className="text-[#000024] font-medium underline hover:text-opacity-80"
-                    >
-                        Submit another response
-                    </button>
+
+                    <div className="space-y-6">
+                        {submissionData ? (
+                            <BlueprintButton token={submissionData.token} userName={submissionData.name} />
+                        ) : (
+                            <div className="p-4 bg-yellow-50 text-yellow-800 rounded-lg text-sm">
+                                Blueprint is available via email. To get instant access next time, please ensure your details are correct.
+                            </div>
+                        )}
+
+                        <button
+                            onClick={() => {
+                                setStatus("idle")
+                                setSubmissionData(null)
+                            }}
+                            className="text-[#000024] font-medium underline hover:text-opacity-80 block mx-auto text-sm"
+                        >
+                            Submit another response
+                        </button>
+                    </div>
                 </div>
             </section>
         )
@@ -329,5 +227,71 @@ export function ContactForm() {
                 </div>
             </ScrollReveal>
         </section>
+    )
+}
+
+function BlueprintButton({ token, userName }: { token: string, userName: string }) {
+    const [status, setStatus] = useState<"ready" | "sending" | "sent" | "error">("ready")
+
+    const handleSend = async () => {
+        setStatus("sending")
+        try {
+            const response = await fetch("/api/blueprint", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ token })
+            })
+            if (!response.ok) throw new Error("Failed")
+            setStatus("sent")
+        } catch (e) {
+            setStatus("error")
+        }
+    }
+
+    if (status === "sent") {
+        return (
+            <div className="bg-white rounded-xl border border-green-100 p-6 shadow-sm animate-in fade-in zoom-in duration-300">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Mail className="w-6 h-6 text-green-600" />
+                </div>
+                <h3 className="font-bold text-[#000024] mb-1">Blueprint Sent!</h3>
+                <p className="text-sm text-gray-600">Check your inbox for the AI Blueprint.</p>
+            </div>
+        )
+    }
+
+    return (
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 delay-150">
+            <button
+                onClick={handleSend}
+                disabled={status === "sending"}
+                className="group relative px-8 py-4 bg-[#000024] text-white rounded-xl font-medium shadow-xl hover:bg-[#000024]/90 hover:shadow-2xl hover:-translate-y-0.5 transition-all disabled:opacity-70 disabled:hover:translate-y-0 disabled:shadow-lg w-full sm:w-auto"
+            >
+                <div className="flex items-center justify-center gap-3">
+                    {status === "sending" ? (
+                        <>
+                            <Loader2 className="w-5 h-5 animate-spin text-white/80" />
+                            <span>Sending specific Blueprint...</span>
+                        </>
+                    ) : (
+                        <>
+                            <div className="bg-white/10 p-1.5 rounded-lg group-hover:bg-white/20 transition-colors">
+                                <Sparkles className="w-5 h-5 text-yellow-300" />
+                            </div>
+                            <span className="text-lg">Get Your AI Blueprint</span>
+                        </>
+                    )}
+                </div>
+                {status === "error" && (
+                    <span className="absolute -bottom-8 left-0 right-0 text-xs text-red-500 font-medium">
+                        Failed to send. Please try again.
+                    </span>
+                )}
+            </button>
+            <p className="text-xs text-gray-500 mt-4 max-w-xs mx-auto">
+                <span className="inline-block w-2 h-2 rounded-full bg-green-500 mr-1.5 align-middle"></span>
+                Generated instantly using your provided details.
+            </p>
+        </div>
     )
 }

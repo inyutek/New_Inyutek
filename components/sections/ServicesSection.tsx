@@ -1,8 +1,9 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
+import { Skeleton } from "@/components/ui/skeleton"
 
 // Data for the Right Side Cards
 const services = [
@@ -104,6 +105,15 @@ function ServiceCard({
 }
 
 function MobileServices() {
+    const [isBgLoading, setIsBgLoading] = useState(true);
+    const imgRef = useRef<HTMLImageElement>(null);
+
+    useEffect(() => {
+        if (imgRef.current?.complete) {
+            setIsBgLoading(false);
+        }
+    }, [])
+
     return (
         <div id="services-mobile" className="block lg:hidden py-20 px-6 bg-[#fbfbfb]">
             <div className="flex flex-col gap-6">
@@ -117,13 +127,17 @@ function MobileServices() {
                 >
                     {/* Background Image - Optimized */}
                     <div className="absolute inset-0 z-0 bg-[#000024]">
+                        {isBgLoading && <Skeleton className="absolute inset-0 z-10 w-full h-full rounded-none" />}
                         <picture>
                             <source srcSet="/services/Service%20Page%20Background-mobile.avif" type="image/avif" />
                             <source srcSet="/services/Service%20Page%20Background-mobile.webp" type="image/webp" />
                             <img
+                                ref={imgRef}
                                 src="/services/Service%20Page%20Background.jpg"
                                 alt="Services Background"
-                                className="w-full h-full object-cover object-left"
+                                className={`w-full h-full object-cover object-left transition-opacity duration-500 ${isBgLoading ? 'opacity-0' : 'opacity-100'}`}
+                                onLoad={() => setIsBgLoading(false)}
+                                onError={() => setIsBgLoading(false)}
                             />
                         </picture>
                         <div className="absolute inset-0 bg-black/20" />
@@ -176,6 +190,14 @@ function MobileServices() {
 
 function DesktopServices() {
     const containerRef = useRef<HTMLDivElement>(null)
+    const [isBgLoading, setIsBgLoading] = useState(true);
+    const imgRef = useRef<HTMLImageElement>(null);
+
+    useEffect(() => {
+        if (imgRef.current?.complete) {
+            setIsBgLoading(false);
+        }
+    }, [])
 
     // Use a very tall container to make the scroll sequence feel slow and "smooth/effective"
     const { scrollYProgress } = useScroll({
@@ -227,13 +249,17 @@ function DesktopServices() {
                     >
                         {/* Background Image - Optimized */}
                         <div className="absolute inset-0 z-0">
+                            {isBgLoading && <Skeleton className="absolute inset-0 z-10 w-full h-full rounded-none" />}
                             <picture>
                                 <source srcSet="/services/Service%20Page%20Background-desktop.avif" type="image/avif" />
                                 <source srcSet="/services/Service%20Page%20Background-desktop.webp" type="image/webp" />
                                 <img
+                                    ref={imgRef}
                                     src="/services/Service%20Page%20Background.jpg"
                                     alt="Services Background"
-                                    className="w-full h-full object-cover object-left"
+                                    className={`w-full h-full object-cover object-left transition-opacity duration-500 ${isBgLoading ? 'opacity-0' : 'opacity-100'}`}
+                                    onLoad={() => setIsBgLoading(false)}
+                                    onError={() => setIsBgLoading(false)}
                                 />
                             </picture>
                             <div className="absolute inset-0 bg-black/20" /> {/* Overlay for text readability */}

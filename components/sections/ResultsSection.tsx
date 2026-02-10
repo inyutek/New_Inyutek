@@ -4,8 +4,6 @@ import { useRef, useEffect, useState } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
-import { Modal } from "@/components/ui/modal"
-import { BlueprintForm } from "@/components/ui/blueprint-form"
 
 const results = [
     {
@@ -87,7 +85,6 @@ const results = [
 export function ResultsSection() {
     const [activeIndex, setActiveIndex] = useState(0)
     const [isAutoScrolling, setIsAutoScrolling] = useState(true)
-    const [isBlueprintOpen, setIsBlueprintOpen] = useState(false)
 
     // Auto-scroll effect
     useEffect(() => {
@@ -129,12 +126,12 @@ export function ResultsSection() {
 
                     <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mt-4 w-full md:w-auto">
                         <p className="font-bold text-[#000024] text-sm">Want an audit of your funnel?</p>
-                        <button
-                            onClick={() => setIsBlueprintOpen(true)}
+                        <Link
+                            href="/contact"
                             className="w-full md:w-auto justify-center bg-[#000024] text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 group transition-all hover:-translate-y-1"
                         >
                             Get your free growth audit <span className="group-hover:translate-x-1 transition-transform">→</span>
-                        </button>
+                        </Link>
                     </div>
                 </div>
 
@@ -239,10 +236,6 @@ export function ResultsSection() {
                 </div>
 
             </div>
-
-            <Modal isOpen={isBlueprintOpen} onClose={() => setIsBlueprintOpen(false)}>
-                <BlueprintForm onClose={() => setIsBlueprintOpen(false)} />
-            </Modal>
         </section>
     )
 }

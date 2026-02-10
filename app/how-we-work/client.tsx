@@ -3,8 +3,6 @@
 import { useState } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { Modal } from "@/components/ui/modal"
-import { BlueprintForm } from "@/components/ui/blueprint-form"
 import Footer from "@/components/sections/Footer"
 import { FAQ } from "@/components/sections/FAQ"
 
@@ -65,7 +63,6 @@ function ProcessStepCard({ step }: { step: any }) {
 
 
 export default function HowWeWorkClient() {
-    const [isBlueprintOpen, setIsBlueprintOpen] = useState(false)
 
 
     return (
@@ -81,15 +78,15 @@ export default function HowWeWorkClient() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-                        <button
-                            onClick={() => setIsBlueprintOpen(true)}
-                            className="w-full sm:w-auto px-8 py-4 bg-[#000024] text-white rounded-lg font-medium text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
+                        <Link
+                            href="/contact"
+                            className="w-full sm:w-auto px-8 py-4 bg-[#000024] text-white rounded-lg font-medium text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1 text-center"
                         >
                             Book a Free Growth Audit
-                        </button>
+                        </Link>
                         <Link
                             href="/what-we-do"
-                            className="w-full sm:w-auto px-8 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-medium text-lg hover:bg-gray-50 transition-all hover:-translate-y-1"
+                            className="w-full sm:w-auto px-8 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-medium text-lg hover:bg-gray-50 transition-all hover:-translate-y-1 text-center"
                         >
                             See what we do
                         </Link>
@@ -271,15 +268,15 @@ export default function HowWeWorkClient() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <button
-                            onClick={() => setIsBlueprintOpen(true)}
-                            className="w-full sm:w-auto px-10 py-4 bg-[#000024] text-white rounded-lg font-medium text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1"
+                        <Link
+                            href="/contact"
+                            className="w-full sm:w-auto px-10 py-4 bg-[#000024] text-white rounded-lg font-medium text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1 text-center"
                         >
                             Book a Free Growth Audit
-                        </button>
+                        </Link>
                         <Link
                             href="/about" // "About Inyutek" - assuming /about exists, checking file list... /about exists.
-                            className="w-full sm:w-auto px-10 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-medium text-lg hover:bg-gray-50 transition-all hover:-translate-y-1"
+                            className="w-full sm:w-auto px-10 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-medium text-lg hover:bg-gray-50 transition-all hover:-translate-y-1 text-center"
                         >
                             Learn About Inyutek
                         </Link>
@@ -290,10 +287,6 @@ export default function HowWeWorkClient() {
             {/* Footer */}
             <Footer />
 
-            {/* MODAL */}
-            <Modal isOpen={isBlueprintOpen} onClose={() => setIsBlueprintOpen(false)}>
-                <BlueprintForm onClose={() => setIsBlueprintOpen(false)} />
-            </Modal>
         </div>
     )
 }

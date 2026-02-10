@@ -6,6 +6,7 @@ import { TransitionProvider } from "./transition-provider";
 import SmoothScroll from "@/components/smooth-scroll";
 
 import { Navbar } from "@/components/navbar";
+import { GlobalLoader } from "@/components/ui/global-loader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -47,6 +48,9 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={`${inter.className} bg-white text-[#010B13] font-sans antialiased px-4 sm:px-6 lg:px-8`}>
+        {/* ── INYUTEK Branded Loader (Layer 0 — first paint) ── */}
+        <GlobalLoader />
+        {/* ── Main content (Layer 1+2 — renders behind loader) ── */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-WCMR3RWX"

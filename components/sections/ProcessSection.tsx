@@ -80,8 +80,6 @@ export function ProcessSection() {
         return () => clearInterval(interval)
     }, [isMobile, activeIndex]) // Reset timer whenever activeIndex changes (auto or manual)
 
-    // Inlined BlueprintForm function
-
 
     return (
         <section id="process" className="bg-[#fbfbfb] py-24 sm:py-32">

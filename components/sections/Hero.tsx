@@ -1,10 +1,11 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
+import { Skeleton } from "@/components/ui/skeleton"
 
 // Card component representing the "Image Cards"
 function Card({
@@ -21,6 +22,14 @@ function Card({
     imageSrc?: string;
 }) {
     const isServiceImage = imageSrc?.startsWith("/services/");
+    const [isLoading, setIsLoading] = useState(true);
+    const imgRef = useRef<HTMLImageElement>(null);
+
+    useEffect(() => {
+        if (imgRef.current?.complete) {
+            setIsLoading(false);
+        }
+    }, []);
 
     return (
         <motion.div
@@ -28,23 +37,32 @@ function Card({
             className={`absolute bg-gray-200 rounded-2xl shadow-xl border border-white/60 ${className} overflow-hidden`}
         >
             {imageSrc ? (
-                isServiceImage ? (
-                    <picture>
-                        <source srcSet={imageSrc.replace(/(\.[\w\d]+)$/, "-mobile.avif")} type="image/avif" />
-                        <source srcSet={imageSrc.replace(/(\.[\w\d]+)$/, "-mobile.webp")} type="image/webp" />
+                <div className="relative w-full h-full">
+                    {isLoading && <Skeleton className="absolute inset-0 z-20 w-full h-full rounded-none" />}
+                    {isServiceImage ? (
+                        <picture>
+                            <source srcSet={imageSrc.replace(/(\.[\w\d]+)$/, "-mobile.avif")} type="image/avif" />
+                            <source srcSet={imageSrc.replace(/(\.[\w\d]+)$/, "-mobile.webp")} type="image/webp" />
+                            <img
+                                ref={imgRef}
+                                src={imageSrc}
+                                alt="Hero Visual"
+                                className={`w-full h-full object-contain transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                                onLoad={() => setIsLoading(false)}
+                                onError={() => setIsLoading(false)}
+                            />
+                        </picture>
+                    ) : (
                         <img
+                            ref={imgRef}
                             src={imageSrc}
                             alt="Hero Visual"
-                            className="w-full h-auto object-contain"
+                            className={`w-full h-full object-contain transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                            onLoad={() => setIsLoading(false)}
+                            onError={() => setIsLoading(false)}
                         />
-                    </picture>
-                ) : (
-                    <img
-                        src={imageSrc}
-                        alt="Hero Visual"
-                        className="w-full h-auto object-contain"
-                    />
-                )
+                    )}
+                </div>
             ) : (
                 /* Simulating an Image Placeholder */
                 <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-400">

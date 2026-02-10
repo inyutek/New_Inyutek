@@ -1,8 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
+import { Skeleton } from "@/components/ui/skeleton"
 
 const problems = [
     {
@@ -45,6 +46,33 @@ const problems = [
     }
 ]
 
+function ProblemImageContent({ item }: { item: typeof problems[0] }) {
+    const [isLoading, setIsLoading] = useState(true)
+    const imgRef = useRef<HTMLImageElement>(null)
+
+    useEffect(() => {
+        if (imgRef.current?.complete) {
+            setIsLoading(false);
+        }
+    }, [])
+
+    if (!item.imageSrc) return item.icon
+
+    return (
+        <div className="relative w-full h-full">
+            {isLoading && <Skeleton className="absolute inset-0 z-10 w-full h-full rounded-none" />}
+            <img
+                ref={imgRef}
+                src={item.imageSrc}
+                alt={item.title}
+                className={`w-full h-auto object-contain transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                onLoad={() => setIsLoading(false)}
+                onError={() => setIsLoading(false)}
+            />
+        </div>
+    )
+}
+
 function MobileProblem() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null) // Start closed or 0 if desired
 
@@ -85,16 +113,8 @@ function MobileProblem() {
                                         </p>
 
                                         {/* Inline Image Display */}
-                                        <div className={`w-full max-w-xs mx-auto rounded-lg flex items-center justify-center text-gray-400 ${item.imageColor}`}>
-                                            {item.imageSrc ? (
-                                                <img
-                                                    src={item.imageSrc}
-                                                    alt={item.title}
-                                                    className="w-full h-auto object-contain rounded-lg"
-                                                />
-                                            ) : (
-                                                item.icon
-                                            )}
+                                        <div className={`w-full max-w-xs mx-auto rounded-lg flex items-center justify-center text-gray-400 relative overflow-hidden ${item.imageColor}`}>
+                                            <ProblemImageContent item={item} />
                                         </div>
                                     </div>
                                 </motion.div>
@@ -147,15 +167,7 @@ function DesktopProblem() {
                             transition={{ duration: 0.3 }}
                             className={`relative flex items-center justify-center text-gray-400 overflow-hidden rounded-2xl ${problems[activeIndex].imageColor}`}
                         >
-                            {problems[activeIndex].imageSrc ? (
-                                <img
-                                    src={problems[activeIndex].imageSrc}
-                                    alt={problems[activeIndex].title}
-                                    className="w-full h-auto object-contain"
-                                />
-                            ) : (
-                                problems[activeIndex].icon
-                            )}
+                            <ProblemImageContent item={problems[activeIndex]} />
                         </motion.div>
                     </AnimatePresence>
                 </div>

@@ -31,6 +31,9 @@ export const env = {
     // Specific database for Leads/Blueprints
     NOTION_LEADS_DATABASE_ID: process.env.Leads_database_id || requireEnv('NOTION_LEADS_DATABASE_ID', 'database_id_...'),
 
+    // Email Service (Resend) - Optional, falls back to Gmail
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+
     // Node Environment
     NODE_ENV: process.env.NODE_ENV || 'development',
 } as const;

@@ -1,99 +1,107 @@
-import { NextResponse } from 'next/server'
-import { findLeadByToken } from '@/lib/sheets';
-import { sendBlueprintToLead } from '@/lib/automation';
+import { resend } from '@/lib/resend';
+import { findLeadByToken, markBlueprintSent } from '@/lib/sheets';
+import { env } from '@/lib/env';
 
-// Simple in-memory rate limiting
-const rateLimits = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
-const RATE_LIMIT_MAX = 5; // 5 requests per hour per IP
-
-function getRateLimitKey(request: Request): string {
-    // Get IP from headers (works with most proxies/hosting)
-    const forwarded = request.headers.get('x-forwarded-for');
-    const ip = forwarded ? forwarded.split(',')[0].trim() : 'unknown';
-    return ip;
-}
-
-function checkRateLimit(key: string): { allowed: boolean; remaining: number } {
-    const now = Date.now();
-    const entry = rateLimits.get(key);
-
-    if (!entry || entry.resetAt < now) {
-        // First request or window expired
-        rateLimits.set(key, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
-        return { allowed: true, remaining: RATE_LIMIT_MAX - 1 };
-    }
-
-    if (entry.count >= RATE_LIMIT_MAX) {
-        return { allowed: false, remaining: 0 };
-    }
-
-    entry.count++;
-    return { allowed: true, remaining: RATE_LIMIT_MAX - entry.count };
-}
-
-export async function POST(request: Request) {
+export async function POST(req: Request) {
     try {
-        const body = await request.json();
+        const body = await req.json();
         const { token } = body;
 
-        // Validate token format (UUID v4)
-        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-        if (!token || !uuidRegex.test(token)) {
-            return NextResponse.json(
-                { error: 'Invalid token format' },
+        if (!token) {
+            return Response.json(
+                { success: false, error: "Token is required" },
                 { status: 400 }
             );
         }
 
-        // Check rate limit
-        const rateLimitKey = getRateLimitKey(request);
-        const { allowed, remaining } = checkRateLimit(rateLimitKey);
-
-        if (!allowed) {
-            return NextResponse.json(
-                { error: 'Too many requests. Please try again later.' },
-                { status: 429 }
-            );
-        }
-
-        // Find lead by token in Google Sheet
+        // 1. Find lead data by token
         const lead = await findLeadByToken(token);
 
         if (!lead) {
-            return NextResponse.json(
-                { error: 'Token not found' },
+            return Response.json(
+                { success: false, error: "Lead not found for this token" },
                 { status: 404 }
             );
         }
 
-        // Check if blueprint was already sent
-        if (lead.blueprintSent) {
-            return NextResponse.json({
-                success: true,
-                already_sent: true,
-                sent_at: lead.sentAt,
-                email: lead.email
-            });
+        const { email, name, rowIndex } = lead;
+        let sentVia = 'resend';
+        let emailError = null;
+
+        // 2. Send email (Try Resend first, fallback to Gmail)
+        try {
+            if (env.RESEND_API_KEY) {
+                const { data, error } = await resend.emails.send({
+                    from: 'Inyutek <onboarding@resend.dev>',
+                    to: [email],
+                    subject: 'Your AI Growth Blueprint - Inyutek',
+                    html: `
+                        <div style="font-family: sans-serif; padding: 20px; color: #000024;">
+                            <h2 style="color: #000024;">Hello ${name}!</h2>
+                            <p>Thank you for requesting the Inyutek AI Growth Blueprint.</p>
+                            <p>We've received your request and are excited to help you scale your business.</p>
+                            <div style="padding: 15px; background: #f4f4f4; border-radius: 8px; margin: 20px 0;">
+                                <p><strong>What's Next?</strong></p>
+                                <p>One of our growth specialists will be in touch shortly to walk you through the specifics of this blueprint.</p>
+                            </div>
+                            <p>Best regards,<br /><strong>The Inyutek Team</strong></p>
+                        </div>
+                    `,
+                });
+
+                if (error) throw error;
+                console.log(`✅ Email sent via Resend, ID: ${data?.id}`);
+            } else {
+                throw new Error("Resend API Key missing, falling back to Gmail");
+            }
+        } catch (error: any) {
+            console.warn("⚠️ Resend delivery failed or unconfigured, falling back to Gmail:", error.message || error);
+            sentVia = 'gmail';
+            try {
+                const { sendEmail } = await import('@/lib/gmail');
+                await sendEmail({
+                    to: email,
+                    subject: 'Your AI Growth Blueprint - Inyutek',
+                    html: `
+                        <div style="font-family: sans-serif; padding: 20px; color: #000024;">
+                            <h2 style="color: #000024;">Hello ${name}!</h2>
+                            <p>Thank you for requesting the Inyutek AI Growth Blueprint.</p>
+                            <p>We've received your request and are excited to help you scale your business.</p>
+                            <div style="padding: 15px; background: #f4f4f4; border-radius: 8px; margin: 20px 0;">
+                                <p><strong>What's Next?</strong></p>
+                                <p>One of our growth specialists will be in touch shortly to walk you through the specifics of this blueprint.</p>
+                            </div>
+                            <p>Best regards,<br /><strong>The Inyutek Team</strong></p>
+                        </div>
+                    `,
+                });
+                console.log("✅ Email sent via Gmail fallback");
+            } catch (fallbackError) {
+                console.error("❌ Both Resend and Gmail fallback failed:", fallbackError);
+                emailError = fallbackError;
+            }
         }
 
-        // Send the blueprint email
-        await sendBlueprintToLead(lead);
+        if (emailError) {
+            return Response.json(
+                { success: false, error: "Failed to send email via any provider" },
+                { status: 500 }
+            );
+        }
 
-        return NextResponse.json({
+        // 3. Mark as sent in Google Sheets
+        await markBlueprintSent(rowIndex);
+
+        return Response.json({
             success: true,
-            email: lead.email,
-            sent_at: new Date().toISOString()
-        }, {
-            headers: {
-                'X-RateLimit-Remaining': remaining.toString()
-            }
+            message: `Blueprint sent successfully via ${sentVia}`,
+            sentVia
         });
 
-    } catch (error) {
-        console.error('Blueprint API Error:', error);
-        return NextResponse.json(
-            { error: 'Failed to send blueprint. Please try again.' },
+    } catch (error: any) {
+        console.error("API Route Error:", error);
+        return Response.json(
+            { success: false, error: error.message || "Internal Server Error" },
             { status: 500 }
         );
     }

@@ -24,8 +24,9 @@ const COLUMNS = {
     BIGGEST_PROBLEM: 8,// I
     MONTHLY_BUDGET: 9, // J
     SOURCE: 10,        // K
-    BLUEPRINT_SENT: 11,// L
+    BLUEPRINT_SENT: 11, // L
     SENT_AT: 12,       // M
+
     CREATED_AT: 13,    // N
 } as const;
 
@@ -71,6 +72,7 @@ export interface LeadRow {
     source: string;
     blueprintSent: boolean;
     sentAt: string;
+
     createdAt: string;
 }
 
@@ -97,8 +99,9 @@ export async function appendLead(data: LeadData): Promise<{ token: string }> {
         data.biggestProblem,
         data.monthlyBudget || '',
         data.source,
-        'FALSE',  // blueprint_sent
-        '',       // sent_at
+        false, // BLUEPRINT_SENT
+        '',    // SENT_AT
+
         createdAt,
     ];
 
@@ -115,10 +118,6 @@ export async function appendLead(data: LeadData): Promise<{ token: string }> {
     return { token };
 }
 
-/**
- * Find a lead by token
- * Returns the lead data and row index, or null if not found
- */
 export async function findLeadByToken(token: string): Promise<LeadRow | null> {
     const sheets = getSheetsClient();
 
@@ -127,28 +126,32 @@ export async function findLeadByToken(token: string): Promise<LeadRow | null> {
         range: `${SHEET_NAME}!A:N`,
     });
 
-    const rows = response.data.values || [];
+    const rows = response.data.values;
+    if (!rows || rows.length === 0) {
+        return null;
+    }
 
-    // Skip header row (index 0)
+    // Skip header row usually, but we check all
+    // First column is token
     for (let i = 1; i < rows.length; i++) {
         const row = rows[i];
         if (row[COLUMNS.TOKEN] === token) {
             return {
-                rowIndex: i + 1, // 1-based for Sheets API
-                token: row[COLUMNS.TOKEN] || '',
-                name: row[COLUMNS.NAME] || '',
-                email: row[COLUMNS.EMAIL] || '',
-                phone: row[COLUMNS.PHONE] || '',
-                businessName: row[COLUMNS.BUSINESS_NAME] || '',
-                website: row[COLUMNS.WEBSITE] || '',
-                businessType: row[COLUMNS.BUSINESS_TYPE] || '',
-                primaryGoal: row[COLUMNS.PRIMARY_GOAL] || '',
-                biggestProblem: row[COLUMNS.BIGGEST_PROBLEM] || '',
-                monthlyBudget: row[COLUMNS.MONTHLY_BUDGET] || '',
-                source: row[COLUMNS.SOURCE] || '',
-                blueprintSent: row[COLUMNS.BLUEPRINT_SENT] === 'TRUE',
-                sentAt: row[COLUMNS.SENT_AT] || '',
-                createdAt: row[COLUMNS.CREATED_AT] || '',
+                rowIndex: i + 1, // 1-based index
+                token: row[COLUMNS.TOKEN],
+                name: row[COLUMNS.NAME],
+                email: row[COLUMNS.EMAIL],
+                phone: row[COLUMNS.PHONE],
+                businessName: row[COLUMNS.BUSINESS_NAME],
+                website: row[COLUMNS.WEBSITE],
+                businessType: row[COLUMNS.BUSINESS_TYPE],
+                primaryGoal: row[COLUMNS.PRIMARY_GOAL],
+                biggestProblem: row[COLUMNS.BIGGEST_PROBLEM],
+                monthlyBudget: row[COLUMNS.MONTHLY_BUDGET],
+                source: row[COLUMNS.SOURCE],
+                blueprintSent: row[COLUMNS.BLUEPRINT_SENT] === 'TRUE', // Check how sheet stores bool
+                sentAt: row[COLUMNS.SENT_AT],
+                createdAt: row[COLUMNS.CREATED_AT],
             };
         }
     }
@@ -156,65 +159,24 @@ export async function findLeadByToken(token: string): Promise<LeadRow | null> {
     return null;
 }
 
-/**
- * Mark a lead's blueprint as sent
- * Updates blueprint_sent to TRUE and sets sent_at timestamp
- */
 export async function markBlueprintSent(rowIndex: number): Promise<void> {
     const sheets = getSheetsClient();
     const sentAt = new Date().toISOString();
 
-    // Update columns L (blueprint_sent) and M (sent_at)
+    // BLUEPRINT_SENT is column L (index 11), SENT_AT is column M (index 12)
+    // Range for this row's L and M columns
+    const range = `${SHEET_NAME}!L${rowIndex}:M${rowIndex}`;
+
     await sheets.spreadsheets.values.update({
         spreadsheetId: SHEET_ID,
-        range: `${SHEET_NAME}!L${rowIndex}:M${rowIndex}`,
+        range: range,
         valueInputOption: 'RAW',
         requestBody: {
-            values: [['TRUE', sentAt]],
+            values: [[true, sentAt]],
         },
     });
 
-    console.log(`✅ Blueprint marked as sent for row ${rowIndex}`);
+    console.log(`✅ Marked blueprint sent for row ${rowIndex}`);
 }
 
-/**
- * Get all leads where blueprint has not been sent
- * Used for batch processing
- */
-export async function getUnsentLeads(): Promise<LeadRow[]> {
-    const sheets = getSheetsClient();
 
-    const response = await sheets.spreadsheets.values.get({
-        spreadsheetId: SHEET_ID,
-        range: `${SHEET_NAME}!A:N`,
-    });
-
-    const rows = response.data.values || [];
-    const unsentLeads: LeadRow[] = [];
-
-    // Skip header row (index 0)
-    for (let i = 1; i < rows.length; i++) {
-        const row = rows[i];
-        if (row[COLUMNS.BLUEPRINT_SENT] !== 'TRUE' && row[COLUMNS.EMAIL]) {
-            unsentLeads.push({
-                rowIndex: i + 1, // 1-based for Sheets API
-                token: row[COLUMNS.TOKEN] || '',
-                name: row[COLUMNS.NAME] || '',
-                email: row[COLUMNS.EMAIL] || '',
-                phone: row[COLUMNS.PHONE] || '',
-                businessName: row[COLUMNS.BUSINESS_NAME] || '',
-                website: row[COLUMNS.WEBSITE] || '',
-                businessType: row[COLUMNS.BUSINESS_TYPE] || '',
-                primaryGoal: row[COLUMNS.PRIMARY_GOAL] || '',
-                biggestProblem: row[COLUMNS.BIGGEST_PROBLEM] || '',
-                monthlyBudget: row[COLUMNS.MONTHLY_BUDGET] || '',
-                source: row[COLUMNS.SOURCE] || '',
-                blueprintSent: false,
-                sentAt: '',
-                createdAt: row[COLUMNS.CREATED_AT] || '',
-            });
-        }
-    }
-
-    return unsentLeads;
-}

@@ -38,3 +38,70 @@
     @apply text-base md:text-lg font-normal leading-relaxed text-gray-600;
   }
 }
+
+/* ── INYUTEK Branded Loader ─────────────────────────────── */
+
+#inyutek-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000024;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+#inyutek-loader .loader-text {
+  font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  color: #ffffff;
+  letter-spacing: 0.2em;
+  animation: loader-entrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Entrance: text fades in with expanding letter-spacing */
+@keyframes loader-entrance {
+  0% {
+    opacity: 0;
+    letter-spacing: 0.5em;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    letter-spacing: 0.2em;
+    transform: scale(1);
+  }
+}
+
+/* Exit: loader fades out and lifts slightly */
+#inyutek-loader.loader-hide {
+  opacity: 0;
+  transform: scale(1.02);
+  pointer-events: none;
+}
+
+/* ── Skeleton Loader ─────────────────────────────── */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
