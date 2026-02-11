@@ -190,13 +190,39 @@ function MobileServices() {
 
 function DesktopServices() {
     const containerRef = useRef<HTMLDivElement>(null)
+    const viewportRef = useRef<HTMLDivElement>(null)
+    const listRef = useRef<HTMLDivElement>(null)
     const [isBgLoading, setIsBgLoading] = useState(true);
     const imgRef = useRef<HTMLImageElement>(null);
+    const [scrollDistance, setScrollDistance] = useState(0);
 
     useEffect(() => {
         if (imgRef.current?.complete) {
             setIsBgLoading(false);
         }
+    }, [])
+
+    // Dynamically calculate how far the list needs to scroll
+    // based on actual rendered heights — auto-adapts to any zoom level.
+    useEffect(() => {
+        const calculateScroll = () => {
+            if (viewportRef.current && listRef.current) {
+                const viewportHeight = viewportRef.current.clientHeight;
+                const listHeight = listRef.current.scrollHeight;
+                // How far the list needs to move up so the last card is fully visible
+                const overflow = listHeight - viewportHeight;
+                setScrollDistance(overflow > 0 ? overflow : 0);
+            }
+        };
+
+        calculateScroll();
+
+        // Recalculate on resize/zoom changes
+        const observer = new ResizeObserver(calculateScroll);
+        if (viewportRef.current) observer.observe(viewportRef.current);
+        if (listRef.current) observer.observe(listRef.current);
+
+        return () => observer.disconnect();
     }, [])
 
     // Use a very tall container to make the scroll sequence feel slow and "smooth/effective"
@@ -208,7 +234,7 @@ function DesktopServices() {
     // --- Animation Sequence ---
     // 0.0 -> 0.25 : Featured Card Shrinks & Moves Left.
     // 0.25 -> 0.35 : Right Column Fades In.
-    // 0.35 -> 0.65 : Group 1 moves UP and fades OUT, Group 2 moves UP into view.
+    // 0.35 -> 0.9  : Card list scrolls up to reveal all cards.
 
     // 1. Featured Card Animation
     const leftX = useTransform(scrollYProgress, [0.05, 0.25], ["50%", "0%"])
@@ -217,26 +243,15 @@ function DesktopServices() {
     // 2. Right Column Container Appearance
     const rightOpacity = useTransform(scrollYProgress, [0.20, 0.30], [0, 1])
 
-    // Unified List Animation
-    // Scroll the entire list up as the user scrolls down the page.
-    // Adjust the output range (e.g., "-50%") based on how many cards need to be revealed.
-    const listY = useTransform(scrollYProgress, [0.35, 0.9], ["0%", "-55%"])
-
+    // 3. Auto-calculated list scroll — adapts to any zoom level
+    const listY = useTransform(scrollYProgress, [0.35, 0.9], [0, -scrollDistance])
 
 
     return (
         <div id="services" ref={containerRef} className="hidden lg:block relative h-[300vh] bg-[#fbfbfb]">
             <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
 
-                <div className="w-full mx-auto px-6 lg:px-8 relative h-full flex items-center justify-between">
-
-                    {/* Grid Layout Helper */}
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full h-[60vh]">
-                            <div className="" />
-                            <div className="" />
-                        </div>
-                    </div>
+                <div className="w-full max-w-[1920px] mx-auto px-6 lg:px-8 xl:px-12 relative h-full flex items-center">
 
                     {/* FEATURED CARD */}
                     <motion.div
@@ -288,7 +303,7 @@ function DesktopServices() {
                                         </Link>
                                     </div>
                                     <p className="text-sm text-white/70 text-left pl-1">
-                                        We’ll identify the top 3 leaks blocking calls, bookings, or sales.
+                                        We'll identify the top 3 leaks blocking calls, bookings, or sales.
                                     </p>
                                 </div>
                             </div>
@@ -299,13 +314,15 @@ function DesktopServices() {
                     {/* RIGHT SIDE CARDS STACK */}
                     {/* Visual window for the list */}
                     <motion.div
+                        ref={viewportRef}
                         style={{ opacity: rightOpacity }}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 w-[48%] h-[60vh] overflow-hidden rounded-2xl [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] pr-[2%]"
+                        className="absolute right-6 lg:right-8 xl:right-6 top-1/2 -translate-y-1/2 w-[48%] max-w-[calc(1920px*0.48)] h-[60vh] overflow-hidden rounded-2xl [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
                     >
                         {/* Scrolling Container */}
                         <motion.div
+                            ref={listRef}
                             style={{ y: listY }}
-                            className="flex flex-col gap-4 pr-[5%] pb-50"
+                            className="flex flex-col gap-4 pr-4 lg:pr-6 pb-6"
                         >
                             {services.map((service) => (
                                 <ServiceCard

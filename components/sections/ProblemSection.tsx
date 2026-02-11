@@ -131,7 +131,7 @@ function DesktopProblem() {
     const [activeIndex, setActiveIndex] = useState(0)
 
     return (
-        <div className="hidden md:block mx-auto max-w-7xl">
+        <div className={"hidden md:block mx-auto max-w-7xl"}>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
                 {/* Left Column: Interactive List */}
@@ -183,7 +183,7 @@ export function ProblemSection() {
             <div className="mx-auto w-full px-6 lg:px-8">
 
                 {/* Shared Header */}
-                <div className="mx-auto max-w-3xl text-center mb-16 md:mb-24">
+                <div className={"mx-auto max-w-3xl text-center mb-16 md:mb-24"}>
 
                     <h2 className="type-h2 mb-6">
                         Most businesses don’t have a traffic problem  they have a conversion problem

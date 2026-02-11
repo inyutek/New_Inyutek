@@ -170,7 +170,7 @@ export function Hero() {
 
 
                 {/* The 6 Cards - Positioned for 3D Overlap */}
-                <div className="hidden lg:block absolute inset-0 z-20 pointer-events-none w-full mx-auto max-w-[1400px]">
+                <div className={"hidden lg:block absolute inset-0 z-20 pointer-events-none w-full mx-auto max-w-[1400px]"}>
 
                     {/* LAYER 1: BACK (Starts at 500, Reaches top first) */}
                     {/* Top Left */}
