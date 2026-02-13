@@ -13,6 +13,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Lead Generation & Digital Marketing Agency | Inyutek",
   description: "Lead generation agency for local businesses & e-commerce. Funnels, ads, SEO and automation that turn traffic into qualified leads. Book a call.",
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
+  },
 };
 
 export default function RootLayout({

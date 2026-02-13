@@ -255,13 +255,13 @@ function BlueprintButton({ token, userName }: { token: string, userName: string 
                     <Mail className="w-6 h-6 text-green-600" />
                 </div>
                 <h3 className="font-bold text-[#000024] mb-1">Blueprint Sent!</h3>
-                <p className="text-sm text-gray-600">Check your inbox for the AI Blueprint.</p>
+                <p className="text-sm text-gray-600">Check your inbox for the Blueprint.</p>
             </div>
         )
     }
 
     return (
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 delay-150">
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 delay-150 flex flex-col items-center">
             <button
                 onClick={handleSend}
                 disabled={status === "sending"}
@@ -278,20 +278,22 @@ function BlueprintButton({ token, userName }: { token: string, userName: string 
                             <div className="bg-white/10 p-1.5 rounded-lg group-hover:bg-white/20 transition-colors">
                                 <Sparkles className="w-5 h-5 text-yellow-300" />
                             </div>
-                            <span className="text-lg">Get Your AI Blueprint</span>
+                            <span className="text-lg">Get Your Blueprint</span>
                         </>
                     )}
                 </div>
-                {status === "error" && (
-                    <span className="absolute -bottom-8 left-0 right-0 text-xs text-red-500 font-medium">
-                        Failed to send. Please try again.
-                    </span>
-                )}
             </button>
-            <p className="text-xs text-gray-500 mt-4 max-w-xs mx-auto">
-                <span className="inline-block w-2 h-2 rounded-full bg-green-500 mr-1.5 align-middle"></span>
-                Generated instantly using your provided details.
-            </p>
+
+            {status === "error" ? (
+                <p className="text-xs text-red-500 font-medium mt-3">
+                    Failed to send. Please try again.
+                </p>
+            ) : (
+                <p className="text-xs text-gray-500 mt-4 max-w-xs mx-auto">
+                    <span className="inline-block w-2 h-2 rounded-full bg-green-500 mr-1.5 align-middle"></span>
+                    Generated instantly using your provided details.
+                </p>
+            )}
         </div>
     )
 }

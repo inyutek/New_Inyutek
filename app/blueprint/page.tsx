@@ -1,6 +1,6 @@
 import { BlueprintForm } from "@/components/blueprint/BlueprintForm";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/navbar";
+import Footer from "@/components/sections/Footer";
 
 export default function BlueprintPage() {
     return (
