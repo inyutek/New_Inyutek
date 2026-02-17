@@ -1,11 +1,9 @@
 "use client"
 
-import { useRef, useState, useEffect } from "react"
+import { useRef, useEffect } from "react"
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion"
 import Link from "next/link"
-import Image from "next/image"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
-import { Skeleton } from "@/components/ui/skeleton"
 
 // Card component representing the "Image Cards"
 function Card({
@@ -22,44 +20,33 @@ function Card({
     imageSrc?: string;
 }) {
     const isServiceImage = imageSrc?.startsWith("/services/");
-    const [isLoading, setIsLoading] = useState(true);
-    const imgRef = useRef<HTMLImageElement>(null);
-
-    useEffect(() => {
-        if (imgRef.current?.complete) {
-            setIsLoading(false);
-        }
-    }, []);
 
     return (
         <motion.div
-            style={{ y, opacity, rotate }}
+            style={{ y, opacity, rotate, willChange: 'transform, opacity' }}
             className={`absolute bg-gray-200 rounded-2xl shadow-xl border border-white/60 ${className} overflow-hidden`}
         >
             {imageSrc ? (
                 <div className="relative w-full h-full">
-                    {isLoading && <Skeleton className="absolute inset-0 z-20 w-full h-full rounded-none" />}
                     {isServiceImage ? (
                         <picture>
-                            <source srcSet={imageSrc.replace(/(\.[\w\d]+)$/, "-mobile.avif")} type="image/avif" />
-                            <source srcSet={imageSrc.replace(/(\.[\w\d]+)$/, "-mobile.webp")} type="image/webp" />
+                            <source srcSet={imageSrc.replace(/(\.\w+)$/, "-mobile.avif")} type="image/avif" />
+                            <source srcSet={imageSrc.replace(/(\.\w+)$/, "-mobile.webp")} type="image/webp" />
                             <img
-                                ref={imgRef}
                                 src={imageSrc}
                                 alt="Hero Visual"
-                                className={`w-full h-full object-contain transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
-                                onLoad={() => setIsLoading(false)}
-                                onError={() => setIsLoading(false)}
+                                className="w-full h-full object-contain"
+                                decoding="async"
+                                loading="eager"
                             />
                         </picture>
                     ) : (
                         <img
-                            ref={imgRef}
                             src={imageSrc}
                             alt="Hero Visual"
-                            className={`w-full h-full object-contain transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
-                            onLoad={() => setIsLoading(false)}
-                            onError={() => setIsLoading(false)}
+                            className="w-full h-full object-contain"
+                            decoding="async"
+                            loading="eager"
                         />
                     )}
                 </div>
@@ -80,8 +67,55 @@ const WHATSAPP_TEXT = encodeURIComponent("Hi Inyutek team, I want to schedule a 
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_TEXT}`
 const CALL_LINK = `tel:${PHONE_NUMBER}`
 
+// All hero image sources — preloaded before loader dismisses
+const HERO_IMAGES = [
+    "/services/Website.jpg",
+    "/services/Automation.jpg",
+    "/services/Social Media.jpg",
+    "/services/seo-search-engine-optimization-internet-digital-concept.jpg",
+    "/services/online-marketing-commercial-connection-technology.jpg",
+    "/services/Reporting.jpg",
+]
+
 export function Hero() {
     const containerRef = useRef<HTMLDivElement>(null)
+
+    // Preload all hero images and signal readiness to the global loader
+    useEffect(() => {
+        let dispatched = false
+        const dispatchReady = () => {
+            if (dispatched) return
+            dispatched = true
+            window.dispatchEvent(new CustomEvent("hero-ready"))
+        }
+
+        // Wait for 2 animation frames — guarantees browser has painted
+        const waitForPaint = () => {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(dispatchReady)
+            })
+        }
+
+        // Load all images in parallel
+        const promises = HERO_IMAGES.map(
+            (src) =>
+                new Promise<void>((resolve) => {
+                    const img = new window.Image()
+                    img.onload = () => resolve()
+                    img.onerror = () => resolve() // don't block on failed images
+                    img.src = src
+                })
+        )
+
+        // After images finish, wait for 2 paint frames so framer-motion
+        // and Lenis have fully initialized before the loader fades
+        Promise.all(promises).then(waitForPaint)
+
+        // Safety: if images take too long, dismiss loader anyway after 8s
+        const safety = setTimeout(dispatchReady, 8000)
+
+        return () => clearTimeout(safety)
+    }, [])
 
     // Create a tall scroll container to "pin" the hero while scrolling
     const { scrollYProgress } = useScroll({
@@ -141,7 +175,7 @@ export function Hero() {
 
                         <div className="max-w-4xl mx-auto mb-10 flex flex-col gap-6 items-center justify-center">
                             <p className="type-body">
-                                We build conversion-focused funnels and run Google/Meta + SEO to generate calls, bookings, and sales with tracking that shows exactly what’s working.
+                                We build conversion-focused funnels and run Google/Meta + SEO to generate calls, bookings, and sales with tracking that shows exactly what's working.
                             </p>
 
                             <p className="type-body mt-6">

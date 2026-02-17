@@ -1,24 +1,58 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 export function GlobalLoader() {
     const [show, setShow] = useState(true)
     const [isHiding, setIsHiding] = useState(false)
+    const dismissed = useRef(false)
+    const mountTime = useRef(Date.now())
 
     useEffect(() => {
-        // Determine wait time based on entry animation
-        // The previous script waited 1200ms
-        const timer = setTimeout(() => {
-            setIsHiding(true) // Trigger exit animation
+        // Minimum time the loader must stay visible (ms)
+        // This lets the entrance animation complete gracefully
+        const MIN_DISPLAY_MS = 800
 
-            // Wait for exit animation to finish (e.g., 500ms) before unmounting
+        const dismiss = () => {
+            if (dismissed.current) return
+
+            // Ensure loader has been visible for at least MIN_DISPLAY_MS
+            const elapsed = Date.now() - mountTime.current
+            if (elapsed < MIN_DISPLAY_MS) {
+                setTimeout(dismiss, MIN_DISPLAY_MS - elapsed)
+                return
+            }
+
+            dismissed.current = true
+            setIsHiding(true) // Trigger CSS exit animation
+
+            // Wait for CSS exit animation (400ms transition) before unmounting
             setTimeout(() => {
                 setShow(false)
             }, 500)
-        }, 1200)
+        }
 
-        return () => clearTimeout(timer)
+        // PRIMARY: Listen for hero-ready (hero images loaded + browser painted)
+        const onHeroReady = () => dismiss()
+        window.addEventListener("hero-ready", onHeroReady)
+
+        // SECONDARY: Listen for the browser's load event (covers non-hero pages)
+        const onPageLoad = () => dismiss()
+        window.addEventListener("load", onPageLoad)
+
+        // If the page already loaded before this effect ran (e.g. cached/SPA nav)
+        if (document.readyState === "complete") {
+            dismiss()
+        }
+
+        // SAFETY FALLBACK: 10s max — never leave users stuck on the loader
+        const safety = setTimeout(dismiss, 10000)
+
+        return () => {
+            window.removeEventListener("hero-ready", onHeroReady)
+            window.removeEventListener("load", onPageLoad)
+            clearTimeout(safety)
+        }
     }, [])
 
     if (!show) return null
@@ -36,8 +70,6 @@ export function GlobalLoader() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 background: '#000024',
-                // Common styles from globals.css should apply via ID, 
-                // but we keep inline structure to match original look if needed.
             }}
         >
             <span className="loader-text">INYUTEK</span>
