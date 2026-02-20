@@ -96,7 +96,7 @@ export default function TermsOfService() {
             <h3>9. Contact</h3>
             <p>For questions regarding these Terms:</p>
             <p>
-                <strong>Email:</strong> <a href="mailto:your-email@inyutek.com" className="text-[#000024] underline underline-offset-4 hover:opacity-70">your-email@inyutek.com</a><br />
+                <strong>Email:</strong> <a href="mailto:inyutek@gmail.com" className="text-[#000024] underline underline-offset-4 hover:opacity-70">inyutek@gmail.com</a><br />
                 <strong>Company:</strong> Inyutek
             </p>
         </LegalLayout>

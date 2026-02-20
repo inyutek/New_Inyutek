@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
             </p>
 
             <div className="mb-12">
-                <p><strong>Contact:</strong> <a href="mailto:hello@inyutek.com" className="hover:underline">hello@inyutek.com</a></p>
+                <p><strong>Contact:</strong> <a href="mailto:inyutek@gmail.com" className="hover:underline">inyutek@gmail.com</a></p>
                 <p><strong>Business location:</strong> Amravati Maharashtra India</p>
             </div>
 
@@ -88,6 +88,20 @@ export default function PrivacyPolicy() {
             </section>
 
             <section className="mb-12">
+                <h2>Google API Disclosure</h2>
+                <p className="mb-4">
+                    Our application uses Google APIs to provide core features. We strictly adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy</a>, including the Limited Use requirements.
+                </p>
+                <ul className="list-disc pl-5 space-y-2 mb-6">
+                    <li><strong>Gmail API:</strong> Used solely to send follow-up emails and delivery of requested materials (e.g., blueprints) directly to users who have provided their email address.</li>
+                    <li><strong>Google Sheets API:</strong> Used to securely store lead data collected via our website forms for the purpose of business follow-up and service delivery.</li>
+                </ul>
+                <p>
+                    We do not share, sell, or use this data for any purposes other than those explicitly stated above.
+                </p>
+            </section>
+
+            <section className="mb-12">
                 <h2>Who we share data with</h2>
                 <p className="mb-4">We may share information with trusted service providers who help us run our business, such as:</p>
                 <ul className="list-disc pl-5 space-y-2 mb-6">
@@ -124,7 +138,7 @@ export default function PrivacyPolicy() {
                     <li>Object to certain processing</li>
                     <li>Withdraw consent (where consent is the basis)</li>
                 </ul>
-                <p>To make a request, email <a href="mailto:hello@inyutek.com" className="text-blue-600 hover:underline">hello@inyutek.com</a> with the subject line: “Privacy Request.”</p>
+                <p>To make a request, email <a href="mailto:inyutek@gmail.com" className="text-blue-600 hover:underline">inyutek@gmail.com</a> with the subject line: “Privacy Request.”</p>
             </section>
 
             <section className="mb-12">
@@ -145,7 +159,7 @@ export default function PrivacyPolicy() {
             <section className="mb-12">
                 <h2>Contact</h2>
                 <p className="mb-4">If you have questions about this policy:</p>
-                <p className="mb-2"><strong>Email:</strong> <a href="mailto:hello@inyutek.com" className="text-blue-600 hover:underline">hello@inyutek.com</a></p>
+                <p className="mb-2"><strong>Email:</strong> <a href="mailto:inyutek@gmail.com" className="text-blue-600 hover:underline">inyutek@gmail.com</a></p>
                 <p><strong>Address:</strong> Ganpati nagar, Old bypass Road Amravati Maharashtra India</p>
             </section>
         </LegalLayout>
