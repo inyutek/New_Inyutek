@@ -3,9 +3,13 @@
 const GOOGLE_SHEETS_BASE_URL = "https://sheets.googleapis.com/v4/spreadsheets";
 const GOOGLE_AUTH_URL = "https://oauth2.googleapis.com/token";
 
+// Safe base64url encoding that won't blow the stack on large arrays
 function base64url(data: Uint8Array): string {
-    const base64 = btoa(String.fromCharCode(...data));
-    return base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
+    let binary = "";
+    for (let i = 0; i < data.length; i++) {
+        binary += String.fromCharCode(data[i]);
+    }
+    return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
 }
 
 async function getAccessToken(saJson: string, scopes: string[]): Promise<string> {
@@ -50,7 +54,49 @@ async function getAccessToken(saJson: string, scopes: string[]): Promise<string>
     return data.access_token;
 }
 
-async function sendGmail(accessToken: string, to: string, subject: string, body: string) {
+async function sendGmail(saJson: string, senderEmail: string, to: string, subject: string, body: string) {
+    // Service Accounts need domain-wide delegation to send Gmail.
+    // We use impersonation via the 'sub' claim in the JWT to send as the user.
+    const sa = JSON.parse(saJson);
+    const now = Math.floor(Date.now() / 1000);
+    const enc = new TextEncoder();
+
+    const hdr = base64url(enc.encode(JSON.stringify({ alg: "RS256", typ: "JWT" })));
+    const payload = base64url(enc.encode(JSON.stringify({
+        iss: sa.client_email,
+        sub: senderEmail, // impersonate this user
+        scope: "https://www.googleapis.com/auth/gmail.send",
+        aud: GOOGLE_AUTH_URL,
+        exp: now + 3600,
+        iat: now,
+    })));
+
+    const si = `${hdr}.${payload}`;
+    const pem = sa.private_key
+        .replace("-----BEGIN PRIVATE KEY-----", "")
+        .replace("-----END PRIVATE KEY-----", "")
+        .replace(/\n/g, "");
+
+    const keyBytes = Uint8Array.from(atob(pem), (c: string) => c.charCodeAt(0));
+    const key = await crypto.subtle.importKey(
+        "pkcs8", keyBytes,
+        { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+        false, ["sign"]
+    );
+    const sig = await crypto.subtle.sign("RSASSA-PKCS1-v1_5", key, enc.encode(si));
+    const gmailToken = await fetch(GOOGLE_AUTH_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+            grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            assertion: `${si}.${base64url(new Uint8Array(sig))}`,
+        }),
+    }).then(r => r.json());
+
+    if (!gmailToken.access_token) {
+        throw new Error(`Gmail token error: ${JSON.stringify(gmailToken)}`);
+    }
+
     const message = [
         `To: ${to}`,
         `Subject: ${subject}`,
@@ -59,20 +105,22 @@ async function sendGmail(accessToken: string, to: string, subject: string, body:
         body,
     ].join("\r\n");
 
-    const encodedMessage = btoa(message)
+    let encodedMessage = "";
+    for (let i = 0; i < message.length; i++) {
+        encodedMessage += String.fromCharCode(message.charCodeAt(i));
+    }
+    encodedMessage = btoa(encodedMessage)
         .replace(/\+/g, "-")
         .replace(/\//g, "_")
         .replace(/=+$/, "");
 
-    const res = await fetch("https://gmail.googleapis.com/gmail/v1/users/me/messages/send", {
+    const res = await fetch(`https://gmail.googleapis.com/gmail/v1/users/${senderEmail}/messages/send`, {
         method: "POST",
         headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${gmailToken.access_token}`,
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-            raw: encodedMessage,
-        }),
+        body: JSON.stringify({ raw: encodedMessage }),
     });
 
     if (!res.ok) {
@@ -91,9 +139,9 @@ Deno.serve(async (req: Request) => {
             throw new Error("Missing GOOGLE_SERVICE_ACCOUNT_JSON or GOOGLE_SHEET_ID in secrets");
         }
 
+        // Get access token for Sheets only (gmail uses its own token with impersonation)
         const accessToken = await getAccessToken(saJson, [
-            "https://www.googleapis.com/auth/spreadsheets",
-            "https://www.googleapis.com/auth/gmail.send"
+            "https://www.googleapis.com/auth/spreadsheets"
         ]);
 
         if (type === "INSERT") {
@@ -117,43 +165,54 @@ Deno.serve(async (req: Request) => {
 
             // 2. Append to Sheets
             const sheetsUrl = `${GOOGLE_SHEETS_BASE_URL}/${sheetId}/values/Sheet1!A:N:append?valueInputOption=USER_ENTERED`;
-            await fetch(sheetsUrl, {
+            const sheetsRes = await fetch(sheetsUrl, {
                 method: "POST",
                 headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
                 body: JSON.stringify({ values: [row] }),
             });
+            const sheetsResult = await sheetsRes.json();
+            console.log(`[append_lead_to_sheets] Sheets response:`, JSON.stringify(sheetsResult));
 
-            // 3. Send Notification Email to Admin
-            const adminHtml = `
-                <h2>New Contact Form Submission</h2>
-                <p><b>Name:</b> ${record.name}</p>
-                <p><b>Email:</b> ${record.email}</p>
-                <p><b>Business:</b> ${record.business_name}</p>
-                <p><b>Goal:</b> ${record.primary_goal}</p>
-                <p><b>Problem:</b> ${record.biggest_problem}</p>
-            `;
-            await sendGmail(accessToken, "inyutek@gmail.com", `New Lead: ${record.name}`, adminHtml);
-            console.log(`[append_lead_to_sheets] INSERT handled - Sheets synced + Admin notified.`);
+            // 3. Send Notification Email to Admin (non-blocking — don't crash if this fails)
+            try {
+                await sendGmail(saJson, "inyutek@gmail.com", "inyutek@gmail.com", `New Lead: ${record.name}`, `
+                    <h2>New Contact Form Submission</h2>
+                    <p><b>Name:</b> ${record.name}</p>
+                    <p><b>Email:</b> ${record.email}</p>
+                    <p><b>Business:</b> ${record.business_name}</p>
+                    <p><b>Goal:</b> ${record.primary_goal}</p>
+                    <p><b>Problem:</b> ${record.biggest_problem}</p>
+                `);
+                console.log(`[append_lead_to_sheets] Admin notification email sent.`);
+            } catch (emailErr) {
+                // Don't let email failure crash the whole function
+                console.warn(`[append_lead_to_sheets] Gmail notification failed (non-critical): ${emailErr.message}`);
+            }
+
+            console.log(`[append_lead_to_sheets] INSERT handled successfully.`);
 
         } else if (type === "UPDATE") {
             // Check if blueprint was just marked as sent
             const wasSent = record.blueprint_sent === true && (!old_record || old_record.blueprint_sent === false);
 
             if (wasSent) {
-                const blueprintHtml = `
-                    <div style="font-family: sans-serif; padding: 20px; color: #000024;">
-                        <h2 style="color: #000024;">Hello ${record.name}!</h2>
-                        <p>Thank you for requesting the Inyutek Growth Blueprint.</p>
-                        <p>We've received your request and are excited to help you scale your business.</p>
-                        <div style="padding: 15px; background: #f4f4f4; border-radius: 8px; margin: 20px 0;">
-                            <p><strong>What's Next?</strong></p>
-                            <p>One of our growth specialists will be in touch shortly to walk you through the specifics of this blueprint.</p>
+                try {
+                    await sendGmail(saJson, "inyutek@gmail.com", record.email, "Your Growth Blueprint - Inyutek", `
+                        <div style="font-family: sans-serif; padding: 20px; color: #000024;">
+                            <h2 style="color: #000024;">Hello ${record.name}!</h2>
+                            <p>Thank you for requesting the Inyutek Growth Blueprint.</p>
+                            <p>We've received your request and are excited to help you scale your business.</p>
+                            <div style="padding: 15px; background: #f4f4f4; border-radius: 8px; margin: 20px 0;">
+                                <p><strong>What's Next?</strong></p>
+                                <p>One of our growth specialists will be in touch shortly to walk you through the specifics of this blueprint.</p>
+                            </div>
+                            <p>Best regards,<br /><strong>The Inyutek Team</strong></p>
                         </div>
-                        <p>Best regards,<br /><strong>The Inyutek Team</strong></p>
-                    </div>
-                `;
-                await sendGmail(accessToken, record.email, "Your Growth Blueprint - Inyutek", blueprintHtml);
-                console.log(`[append_lead_to_sheets] UPDATE handled - Blueprint email sent to ${record.email}.`);
+                    `);
+                    console.log(`[append_lead_to_sheets] Blueprint email sent to ${record.email}.`);
+                } catch (emailErr) {
+                    console.warn(`[append_lead_to_sheets] Blueprint email failed: ${emailErr.message}`);
+                }
             }
         }
 
