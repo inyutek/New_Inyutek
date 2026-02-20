@@ -7,6 +7,7 @@ import SmoothScroll from "@/components/smooth-scroll";
 
 import { Navbar } from "@/components/navbar";
 import { GlobalLoader } from "@/components/ui/global-loader";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -69,6 +70,7 @@ export default function RootLayout({
         <SmoothScroll>
           <Navbar />
           <TransitionProvider>{children}</TransitionProvider>
+          <ScrollToTop />
         </SmoothScroll>
       </body>
     </html>

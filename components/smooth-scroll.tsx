@@ -29,6 +29,16 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     const [lenis, setLenis] = useState<Lenis | null>(null)
 
     useEffect(() => {
+        // 1. Disable browser native scroll restoration to prevent it from jumping 
+        // to the previous position before Lenis/React can take over.
+        if ('scrollRestoration' in window.history) {
+            window.history.scrollRestoration = 'manual';
+        }
+
+        // 2. Force scroll to top immediately on mount.
+        // This ensures that even if the page reloads, it starts at the Hero.
+        window.scrollTo(0, 0);
+
         const newLenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

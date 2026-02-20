@@ -1,7 +1,6 @@
 "use server"
 
 import { getSupabase } from "@/lib/supabase"
-import { appendLead } from "@/lib/sheets"
 
 // Valid enum values (must match Postgres ENUMs and form dropdown options)
 const VALID_BUSINESS_TYPES = ["local_service", "ecommerce", "startup", "other"] as const
@@ -74,29 +73,7 @@ export async function submitContactForm(prevState: any, formData: FormData) {
             }
         }
 
-        // ── Step 2: Sync to Google Sheets (BACKGROUND — non-blocking) ──
-        try {
-            if (process.env.GOOGLE_SHEET_ID) {
-                await appendLead({
-                    name,
-                    email,
-                    phone,
-                    businessName,
-                    website,
-                    businessType,
-                    primaryGoal: goal,
-                    biggestProblem: problem,
-                    monthlyBudget: budget,
-                    source: "website_contact"
-                })
-                console.log("✅ Synced to Google Sheets")
-            }
-        } catch (sheetError) {
-            console.error("Google Sheets sync error (non-blocking):", sheetError)
-            // Don't fail — Supabase already has the data
-        }
-
-        // ── Step 3: Send email notification via Gmail (non-blocking) ──
+        // ── Step 2: Send email notification via Gmail (non-blocking) ──
         try {
             const { sendEmail } = await import("@/lib/gmail")
             await sendEmail({

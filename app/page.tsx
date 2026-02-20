@@ -43,8 +43,6 @@ export default function Home() {
       {/* Footer */}
       <Footer />
 
-      {/* Scroll to Top */}
-      <ScrollToTop />
     </main>
   )
 }
