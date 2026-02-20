@@ -8,7 +8,7 @@ function base64url(data: Uint8Array): string {
     return base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
 }
 
-async function getAccessToken(saJson: string): Promise<string> {
+async function getAccessToken(saJson: string, scopes: string[]): Promise<string> {
     const sa = JSON.parse(saJson);
     const now = Math.floor(Date.now() / 1000);
     const enc = new TextEncoder();
@@ -16,7 +16,7 @@ async function getAccessToken(saJson: string): Promise<string> {
     const hdr = base64url(enc.encode(JSON.stringify({ alg: "RS256", typ: "JWT" })));
     const payload = base64url(enc.encode(JSON.stringify({
         iss: sa.client_email,
-        scope: "https://www.googleapis.com/auth/spreadsheets",
+        scope: scopes.join(" "),
         aud: GOOGLE_AUTH_URL,
         exp: now + 3600,
         iat: now,
@@ -50,10 +50,40 @@ async function getAccessToken(saJson: string): Promise<string> {
     return data.access_token;
 }
 
+async function sendGmail(accessToken: string, to: string, subject: string, body: string) {
+    const message = [
+        `To: ${to}`,
+        `Subject: ${subject}`,
+        "Content-Type: text/html; charset=utf-8",
+        "",
+        body,
+    ].join("\r\n");
+
+    const encodedMessage = btoa(message)
+        .replace(/\+/g, "-")
+        .replace(/\//g, "_")
+        .replace(/=+$/, "");
+
+    const res = await fetch("https://gmail.googleapis.com/gmail/v1/users/me/messages/send", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            raw: encodedMessage,
+        }),
+    });
+
+    if (!res.ok) {
+        throw new Error(`Gmail API error: ${await res.text()}`);
+    }
+}
+
 Deno.serve(async (req: Request) => {
     try {
-        const { record, table } = await req.json();
-        console.log(`[append_lead_to_sheets] table='${table}' id=${record?.id}`);
+        const { record, old_record, table, type } = await req.json();
+        console.log(`[append_lead_to_sheets] op='${type}' table='${table}' id=${record?.id}`);
 
         const saJson = Deno.env.get("GOOGLE_SERVICE_ACCOUNT_JSON");
         const sheetId = Deno.env.get("GOOGLE_SHEET_ID");
@@ -61,14 +91,14 @@ Deno.serve(async (req: Request) => {
             throw new Error("Missing GOOGLE_SERVICE_ACCOUNT_JSON or GOOGLE_SHEET_ID in secrets");
         }
 
-        const accessToken = await getAccessToken(saJson);
+        const accessToken = await getAccessToken(saJson, [
+            "https://www.googleapis.com/auth/spreadsheets",
+            "https://www.googleapis.com/auth/gmail.send"
+        ]);
 
-        // Column layout: A=token, B=name, C=email, D=phone, E=business_name,
-        // F=website, G=business_type, H=primary_goal, I=biggest_problem,
-        // J=monthly_budget, K=source, L=blueprint_sent, M=sent_at, N=created_at
-        let row: (string | boolean)[];
-        if (table === "contact") {
-            row = [
+        if (type === "INSERT") {
+            // 1. Prepare row for Sheets
+            const row = [
                 record.token ?? "",
                 record.name ?? "",
                 record.email ?? "",
@@ -84,39 +114,52 @@ Deno.serve(async (req: Request) => {
                 record.sent_at ?? "",
                 record.created_at ?? new Date().toISOString(),
             ];
-        } else if (table === "leads") {
-            row = [
-                "",
-                record.name ?? "",
-                record.email ?? "",
-                record.phone ?? "",
-                record.business ?? "",
-                "", "", "", "", "",
-                "leads_table",
-                false, "",
-                record.created_at ?? new Date().toISOString(),
-            ];
-        } else {
-            console.log(`Unsupported table: ${table}, skipping.`);
-            return new Response(JSON.stringify({ skipped: true }), { status: 200 });
+
+            // 2. Append to Sheets
+            const sheetsUrl = `${GOOGLE_SHEETS_BASE_URL}/${sheetId}/values/Sheet1!A:N:append?valueInputOption=USER_ENTERED`;
+            await fetch(sheetsUrl, {
+                method: "POST",
+                headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
+                body: JSON.stringify({ values: [row] }),
+            });
+
+            // 3. Send Notification Email to Admin
+            const adminHtml = `
+                <h2>New Contact Form Submission</h2>
+                <p><b>Name:</b> ${record.name}</p>
+                <p><b>Email:</b> ${record.email}</p>
+                <p><b>Business:</b> ${record.business_name}</p>
+                <p><b>Goal:</b> ${record.primary_goal}</p>
+                <p><b>Problem:</b> ${record.biggest_problem}</p>
+            `;
+            await sendGmail(accessToken, "inyutek@gmail.com", `New Lead: ${record.name}`, adminHtml);
+            console.log(`[append_lead_to_sheets] INSERT handled - Sheets synced + Admin notified.`);
+
+        } else if (type === "UPDATE") {
+            // Check if blueprint was just marked as sent
+            const wasSent = record.blueprint_sent === true && (!old_record || old_record.blueprint_sent === false);
+
+            if (wasSent) {
+                const blueprintHtml = `
+                    <div style="font-family: sans-serif; padding: 20px; color: #000024;">
+                        <h2 style="color: #000024;">Hello ${record.name}!</h2>
+                        <p>Thank you for requesting the Inyutek Growth Blueprint.</p>
+                        <p>We've received your request and are excited to help you scale your business.</p>
+                        <div style="padding: 15px; background: #f4f4f4; border-radius: 8px; margin: 20px 0;">
+                            <p><strong>What's Next?</strong></p>
+                            <p>One of our growth specialists will be in touch shortly to walk you through the specifics of this blueprint.</p>
+                        </div>
+                        <p>Best regards,<br /><strong>The Inyutek Team</strong></p>
+                    </div>
+                `;
+                await sendGmail(accessToken, record.email, "Your Growth Blueprint - Inyutek", blueprintHtml);
+                console.log(`[append_lead_to_sheets] UPDATE handled - Blueprint email sent to ${record.email}.`);
+            }
         }
 
-        const url = `${GOOGLE_SHEETS_BASE_URL}/${sheetId}/values/Sheet1!A:N:append?valueInputOption=USER_ENTERED`;
-        const sheetsRes = await fetch(url, {
-            method: "POST",
-            headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
-            body: JSON.stringify({ values: [row] }),
-        });
-
-        if (!sheetsRes.ok) {
-            throw new Error(`Sheets API (${sheetsRes.status}): ${await sheetsRes.text()}`);
-        }
-
-        console.log(`[append_lead_to_sheets] Done - appended '${table}' row.`);
         return new Response(JSON.stringify({ success: true }), { status: 200 });
     } catch (err) {
-        const msg = err instanceof Error ? err.message : String(err);
-        console.error("[append_lead_to_sheets] ERROR:", msg);
-        return new Response(JSON.stringify({ error: msg }), { status: 500 });
+        console.error("[append_lead_to_sheets] ERROR:", err.message);
+        return new Response(JSON.stringify({ error: err.message }), { status: 500 });
     }
 });

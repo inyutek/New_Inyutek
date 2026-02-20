@@ -73,46 +73,8 @@ export async function submitContactForm(prevState: any, formData: FormData) {
             }
         }
 
-        // ── Step 2: Send email notification via Gmail (non-blocking) ──
-        try {
-            const { sendEmail } = await import("@/lib/gmail")
-            await sendEmail({
-                to: "inyutek@gmail.com",
-                subject: `New Lead: ${name} — ${businessName}`,
-                html: `
-                    <div style="font-family: sans-serif; padding: 20px; color: #000024;">
-                        <h2>New Contact Form Submission</h2>
-                        <table style="border-collapse: collapse; width: 100%;">
-                            <tr><td style="padding: 8px; font-weight: bold;">Name</td><td style="padding: 8px;">${name}</td></tr>
-                            <tr><td style="padding: 8px; font-weight: bold;">Email</td><td style="padding: 8px;">${email}</td></tr>
-                            <tr><td style="padding: 8px; font-weight: bold;">Phone</td><td style="padding: 8px;">${phone || 'N/A'}</td></tr>
-                            <tr><td style="padding: 8px; font-weight: bold;">Business</td><td style="padding: 8px;">${businessName}</td></tr>
-                            <tr><td style="padding: 8px; font-weight: bold;">Website</td><td style="padding: 8px;">${website || 'N/A'}</td></tr>
-                            <tr><td style="padding: 8px; font-weight: bold;">Type</td><td style="padding: 8px;">${businessType}</td></tr>
-                            <tr><td style="padding: 8px; font-weight: bold;">Goal</td><td style="padding: 8px;">${goal}</td></tr>
-                            <tr><td style="padding: 8px; font-weight: bold;">Problem</td><td style="padding: 8px;">${problem}</td></tr>
-                            <tr><td style="padding: 8px; font-weight: bold;">Budget</td><td style="padding: 8px;">${budget || 'N/A'}</td></tr>
-                        </table>
-                        <p style="margin-top: 16px; color: #666;">Token: ${token}</p>
-                    </div>
-                `,
-            })
-
-            // Update Supabase with email status
-            await getSupabase().from("contact").update({
-                email_sent: true,
-                email_sent_at: new Date().toISOString(),
-            }).eq("token", token)
-
-            console.log("✅ Notification email sent via Gmail")
-        } catch (emailError: any) {
-            console.error("Email send error (non-blocking):", emailError)
-            // Update Supabase with error
-            await getSupabase().from("contact").update({
-                email_sent: false,
-                email_error: emailError?.message || "Unknown email error",
-            }).eq("token", token)
-        }
+        // ── Step 2: Confirmation ──
+        // (Note: Email notifications are now handled automatically by Supabase Edge Functions)
 
         return {
             success: true,

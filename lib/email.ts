@@ -38,20 +38,9 @@ export async function sendLeadEmail(data: SendLeadEmailProps) {
             console.log("Lead email sent successfully via Resend.")
             return
         } catch (error) {
-            console.error("Failed to send lead email via Resend, falling back to Gmail:", error)
+            console.error("Failed to send lead email via Resend.")
         }
     }
-
-    // Fallback to Gmail
-    try {
-        const { sendEmail } = await import("@/lib/gmail");
-        await sendEmail({
-            to: "mj897535@gmail.com",
-            subject: "New Lead from Inyutek Website",
-            html: htmlContent
-        });
-        console.log("Lead email sent successfully via Gmail.")
-    } catch (error) {
-        console.error("Failed to send lead email via Gmail:", error)
-    }
+    // Fallback: Notify that emails should be handled by Supabase if Resend fails
+    console.log("Note: If Resend failed or is unconfigured, ensure Supabase Edge Functions are handling the fallback notification.")
 }
