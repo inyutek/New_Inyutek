@@ -27,6 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Hide the JS-only loader for non-JS crawlers (Google OAuth verifier, Googlebot).
+            Without JS, the loader stays visible forever and blocks the homepage content. */}
+        <noscript><style>{`#inyutek-loader { display: none !important; }`}</style></noscript>
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
