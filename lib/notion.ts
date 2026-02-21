@@ -39,13 +39,20 @@ export async function getPosts(): Promise<BlogPost[]> {
         // A better approach for the *list* is often the official API, but for *content* the unofficial one is better.
         // However, sticking to the plan of using notion-client for everything:
 
+        if (!recordMap || !recordMap.collection || !recordMap.collection_query) {
+            return []
+        }
+
         const collection = Object.values(recordMap.collection)[0]?.value
         const schema = collection?.schema
+        if (!schema) return []
 
-        // Get all blocks that are children of this collection
-        const blockIds = recordMap.collection_query?.[Object.keys(recordMap.collection_query)[0]]?.[
-            Object.keys(recordMap.collection_query[Object.keys(recordMap.collection_query)[0]])[0]
-        ]?.collection_group_results?.blockIds || []
+        const firstQueryKey = Object.keys(recordMap.collection_query)[0]
+        const secondQueryKey = firstQueryKey ? Object.keys(recordMap.collection_query[firstQueryKey])[0] : null
+
+        const blockIds = (firstQueryKey && secondQueryKey)
+            ? recordMap.collection_query[firstQueryKey][secondQueryKey]?.collection_group_results?.blockIds || []
+            : []
 
         const posts: BlogPost[] = []
 
@@ -138,12 +145,20 @@ export async function getCaseStudies(): Promise<BlogPost[]> {
         // We really should refactor this, but "Constraint: Do NOT change blog functionality" implies leaving getPosts alone is safer.
         // So we duplicate the parsing logic but for a different database ID.
 
+        if (!recordMap || !recordMap.collection || !recordMap.collection_query) {
+            return []
+        }
+
         const collection = Object.values(recordMap.collection)[0]?.value
         const schema = collection?.schema
+        if (!schema) return []
 
-        const blockIds = recordMap.collection_query?.[Object.keys(recordMap.collection_query)[0]]?.[
-            Object.keys(recordMap.collection_query[Object.keys(recordMap.collection_query)[0]])[0]
-        ]?.collection_group_results?.blockIds || []
+        const firstQueryKey = Object.keys(recordMap.collection_query)[0]
+        const secondQueryKey = firstQueryKey ? Object.keys(recordMap.collection_query[firstQueryKey])[0] : null
+
+        const blockIds = (firstQueryKey && secondQueryKey)
+            ? recordMap.collection_query[firstQueryKey][secondQueryKey]?.collection_group_results?.blockIds || []
+            : []
 
         const posts: BlogPost[] = []
 

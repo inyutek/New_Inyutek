@@ -129,7 +129,8 @@ Deno.serve(async (req: Request) => {
             ];
 
             // 2. Append to Google Sheets
-            const sheetsUrl = `${GOOGLE_SHEETS_BASE_URL}/${sheetId}/values/Sheet1!A:N:append?valueInputOption=USER_ENTERED`;
+            // Using insertDataOption=INSERT_ROWS ensures it pushes a new row even if there is empty formatting below
+            const sheetsUrl = `${GOOGLE_SHEETS_BASE_URL}/${sheetId}/values/Sheet1!A:N:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
             const sheetsRes = await fetch(sheetsUrl, {
                 method: "POST",
                 headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
@@ -167,8 +168,14 @@ Deno.serve(async (req: Request) => {
             console.log(`[append_lead_to_sheets] INSERT handled successfully.`);
 
         } else if (type === "UPDATE") {
+            console.log(`[append_lead_to_sheets] UPDATE triggered for record ID: ${record?.id}`);
+            console.log(`[append_lead_to_sheets] Old record sent status: ${old_record?.blueprint_sent}`);
+            console.log(`[append_lead_to_sheets] New record sent status: ${record?.blueprint_sent}`);
+
             // Check if blueprint was just marked as sent
             const wasSent = record.blueprint_sent === true && (!old_record || old_record.blueprint_sent === false);
+            console.log(`[append_lead_to_sheets] wasSent evaluation: ${wasSent}`);
+            console.log(`[append_lead_to_sheets] Resend API Key present: ${!!resendApiKey}`);
 
             if (wasSent && resendApiKey) {
                 try {
@@ -187,9 +194,48 @@ Deno.serve(async (req: Request) => {
                             </div>
                             <p>Best regards,<br /><strong>The Inyutek Team</strong></p>
                         </div>
-                        `
+                        `,
+                        "Inyutek <onboarding@inyutek.com>"
                     );
                     console.log(`[append_lead_to_sheets] Blueprint email sent to ${record.email}.`);
+
+                    // Update Google Sheets row
+                    if (accessToken && sheetId) {
+                        try {
+                            const getSheetsUrl = `${GOOGLE_SHEETS_BASE_URL}/${sheetId}/values/Sheet1!A:N`;
+                            const getRes = await fetch(getSheetsUrl, {
+                                headers: { Authorization: `Bearer ${accessToken}` }
+                            });
+
+                            if (getRes.ok) {
+                                const getResult = await getRes.json();
+                                const values = getResult.values || [];
+
+                                // Find row with matching token (column A / index 0)
+                                const rowIndex = values.findIndex((r: any[]) => r[0] === record.token);
+
+                                if (rowIndex !== -1) {
+                                    const absoluteRowNumber = rowIndex + 1;
+                                    const updateUrl = `${GOOGLE_SHEETS_BASE_URL}/${sheetId}/values/Sheet1!L${absoluteRowNumber}:M${absoluteRowNumber}?valueInputOption=USER_ENTERED`;
+
+                                    await fetch(updateUrl, {
+                                        method: "PUT",
+                                        headers: {
+                                            Authorization: `Bearer ${accessToken}`,
+                                            "Content-Type": "application/json"
+                                        },
+                                        body: JSON.stringify({ values: [[true, record.sent_at || new Date().toISOString()]] })
+                                    });
+                                    console.log(`[append_lead_to_sheets] Updated Google Sheet row ${absoluteRowNumber} blueprint_sent to true`);
+                                } else {
+                                    console.log(`[append_lead_to_sheets] Token ${record.token} not found in Google Sheets, skipping sheet update.`);
+                                }
+                            }
+                        } catch (sheetErr) {
+                            console.warn(`[append_lead_to_sheets] Failed to update Google Sheets: ${sheetErr.message}`);
+                        }
+                    }
+
                 } catch (emailErr) {
                     console.warn(`[append_lead_to_sheets] Blueprint email failed: ${emailErr.message}`);
                 }
