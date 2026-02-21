@@ -12,7 +12,7 @@ export function MissionSection() {
                         Our Mission
                     </h2>
                     <p className="type-body mt-6">
-                        To help growing businesses stop wasting time on random tactics and build a <span className="font-bold underline decoration-blue-200 decoration-4 underline-offset-4">simple lead system</span> that’s trackable, repeatable, and scalable.
+                        To help growing businesses stop wasting time on random tactics and build a <span className="font-bold underline decoration-blue-200 decoration-4 underline-offset-4">simple lead system</span> that's trackable, repeatable, and scalable.
                     </p>
                 </Reveal>
             </ScrollReveal>

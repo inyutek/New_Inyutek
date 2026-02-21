@@ -24,7 +24,7 @@ export default function CookiePolicyPage() {
                             This Cookie Policy explains how Inyutek (“we,” “us,” “our”) uses cookies and similar technologies on our website.
                         </p>
                         <div className="mt-8 text-sm text-gray-500">
-                            <p>Contact: <a href="mailto:hello@inyutek.com" className="text-[#000024] font-medium hover:underline">hello@inyutek.com</a></p>
+                            <p>Contact: <a href="mailto:inyutek@gmail.com" className="text-[#000024] font-medium hover:underline">inyutek@gmail.com</a></p>
                             <p>Business location: Amravati Maharashtra India</p>
                         </div>
                     </ScrollReveal>
@@ -106,7 +106,7 @@ export default function CookiePolicyPage() {
                             <ul className="space-y-3 text-gray-600">
                                 <li className="flex items-center gap-3">
                                     <span className="font-semibold text-[#000024] min-w-[80px]">Email:</span>
-                                    <a href="mailto:hello@inyutek.com" className="hover:text-[#000024] transition-colors">hello@inyutek.com</a>
+                                    <a href="mailto:inyutek@gmail.com" className="hover:text-[#000024] transition-colors">inyutek@gmail.com</a>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <span className="font-semibold text-[#000024] min-w-[80px]">Address:</span>

@@ -91,7 +91,7 @@ export function WhySection() {
                             {/* Image */}
                             <img
                                 src="/services/Why Inyutek.jpg"
-                                alt="Why Inyutek"
+                                alt="Conversion-first digital marketing agency team at Inyutek"
                                 className="w-full h-full object-cover"
                             />
                         </div>

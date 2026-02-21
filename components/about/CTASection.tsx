@@ -13,7 +13,7 @@ export function CTASection() {
                         Want a clear plan to grow?
                     </h2>
                     <p className="text-xl text-gray-500 mb-12 max-w-2xl mx-auto leading-relaxed">
-                        Book a free growth audit. You’ll leave with the top 3 fixes that will improve conversions and lead quality.
+                        Book a free growth audit. You'll leave with the top 3 fixes that will improve conversions and lead quality.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-5">

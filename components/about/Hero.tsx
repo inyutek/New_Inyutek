@@ -12,7 +12,7 @@ export function Hero() {
                 </h1>
 
                 <p className="type-body mb-10 max-w-3xl mx-auto">
-                    Inyutek helps local service businesses and ecommerce brands generate more calls, bookings, and sales through conversion-focused funnels, performance marketing, and tracking that proves what’s working.
+                    Inyutek helps local service businesses and ecommerce brands generate more calls, bookings, and sales through conversion-focused funnels, performance marketing, and tracking that proves what's working.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

@@ -49,10 +49,10 @@ export function ResultsSection() {
                                 How we create results without guessing
                             </h2>
                             <p className="text-lg text-gray-500 leading-relaxed mb-6">
-                                Because we’re early-stage, we focus on process + deliverables you can evaluate immediately.
+                                Because we're early-stage, we focus on process + deliverables you can evaluate immediately.
                             </p>
                             <p className="font-semibold text-[#000024] text-xl">
-                                You’ll receive:
+                                You'll receive:
                             </p>
                         </Reveal>
                     </div>

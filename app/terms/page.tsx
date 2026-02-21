@@ -18,7 +18,7 @@ export default function TermsAndConditions() {
             lastUpdated="January 1, 2026"
         >
             <p className="lead">
-                <strong>Contact:</strong> hello@inyutek.com<br />
+                <strong>Contact:</strong> inyutek@gmail.com<br />
                 <strong>Business location:</strong> AMRAVATI MAHARSHTRA INDIA
             </p>
 
@@ -153,7 +153,7 @@ export default function TermsAndConditions() {
             <h2>Contact</h2>
             <p>For questions about these Terms:</p>
             <p>
-                <strong>Email:</strong> <a href="mailto:hello@inyutek.com" className="text-[#000024] underline underline-offset-4 hover:opacity-70">hello@inyutek.com</a><br />
+                <strong>Email:</strong> <a href="mailto:inyutek@gmail.com" className="text-[#000024] underline underline-offset-4 hover:opacity-70">inyutek@gmail.com</a><br />
                 <strong>Address:</strong> Ganpati nagar, Old bypass Road Amravati Maharashtra India
             </p>
         </LegalLayout>

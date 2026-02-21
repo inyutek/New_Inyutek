@@ -1,12 +1,12 @@
 import { Metadata } from 'next'
-import { Hero } from './components/Hero'
-import { MissionSection } from './components/MissionSection'
-import { BeliefsSection } from './components/BeliefsSection'
-import { DifferentiationSection } from './components/DifferentiationSection'
-import { ResultsSection } from './components/ResultsSection'
-import { FitSection } from './components/FitSection'
+import { Hero } from '@/components/about/Hero'
+import { MissionSection } from '@/components/about/MissionSection'
+import { BeliefsSection } from '@/components/about/BeliefsSection'
+import { DifferentiationSection } from '@/components/about/DifferentiationSection'
+import { ResultsSection } from '@/components/about/ResultsSection'
+import { FitSection } from '@/components/about/FitSection'
 import { FAQ } from "@/components/sections/FAQ"
-import { CTASection } from './components/CTASection'
+import { CTASection } from '@/components/about/CTASection'
 import Footer from "@/components/sections/Footer"
 
 const faqs = [

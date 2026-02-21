@@ -8,7 +8,7 @@ const WHATSAPP_NUMBER = "919112235551"
 const WHATSAPP_TEXT = encodeURIComponent("Hi Inyutek team, I want to to inquire about services.")
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_TEXT}`
 const CALL_LINK = `tel:${PHONE_NUMBER}`
-const EMAIL = "hello@inyutek.com"
+const EMAIL = "inyutek@gmail.com"
 const LOCATION = "Amravati Maharashtra India"
 const MAP_LINK = "https://www.google.com/maps/place/Chintamani+Palace+%26+Lawn/@20.8949487,77.7597515,19z/data=!4m6!3m5!1s0x3bd6a57e736b5bcd:0x490ac6552597296c!8m2!3d20.8953027!4d77.7598843!16s%2Fg%2F11fkr2hbys?entry=ttu&g_ep=EgoyMDI2MDEyMS4wIKXMDSoASAFQAw%3D%3D"
 

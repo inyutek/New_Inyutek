@@ -7,12 +7,12 @@ import { Check, X } from "lucide-react"
 const bestFit = [
     "You want more calls, bookings, leads, or sales (not vanity metrics).",
     "You can respond to leads quickly (especially local services).",
-    "You’re ready to track outcomes and iterate weekly."
+    "You're ready to track outcomes and iterate weekly."
 ]
 
 const notFit = [
-    "You want overnight miracles or “just run ads” without fixing the funnel.",
-    "You don’t have the capacity to handle new leads.",
+    "You want overnight miracles or 'just run ads' without fixing the funnel.",
+    "You don't have the capacity to handle new leads.",
     "You refuse to measure conversions."
 ]
 

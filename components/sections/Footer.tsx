@@ -39,8 +39,8 @@ export default function Footer() {
                         </p>
 
                         <div className="flex flex-col gap-2 text-sm text-black/70">
-                            <a href="mailto:hello@inyutek.com" className="hover:opacity-70">
-                                Email: hello@inyutek.com
+                            <a href="mailto:inyutek@gmail.com" className="hover:opacity-70">
+                                Email: inyutek@gmail.com
                             </a>
                             <a href="https://wa.me/919112235551" className="hover:opacity-70">
                                 WhatsApp: +91 9112235551

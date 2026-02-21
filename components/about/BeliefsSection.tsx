@@ -5,11 +5,11 @@ import { Reveal } from "@/components/motion-presets"
 
 const beliefs = [
     {
-        title: "Clicks don’t matter. Conversions do.",
+        title: "Clicks don't matter. Conversions do.",
         description: "Traffic is vanity. Revenue is reality. We optimize for the metric that pays your bills."
     },
     {
-        title: "If it can’t be tracked, it can’t be improved.",
+        title: "If it can't be tracked, it can't be improved.",
         description: "We don't guess. We implement rigorous tracking so we know exactly where every dollar goes."
     },
     {

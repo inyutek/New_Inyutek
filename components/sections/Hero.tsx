@@ -171,10 +171,7 @@ export function Hero() {
                     <motion.div
                         style={{ opacity: textOpacity, scale: textScale, y: textY }}
                     >
-                        {/* Brand name — visible to crawlers for Google OAuth verification */}
-                        <p className="text-xs font-semibold tracking-[0.25em] uppercase text-[#000024]/50 mb-4">
-                            Inyutek
-                        </p>
+
                         <h1 className="type-h1 mb-8 mx-auto">
                             Lead generation that drives calls for local businesses and sales for e-commerce
                         </h1>
