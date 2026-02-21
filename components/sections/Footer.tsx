@@ -46,7 +46,7 @@ export default function Footer() {
                                 WhatsApp: +91 9112235551
                             </a>
                             <p>
-                                Location: Amravati, Maharastra, India
+                                Location: Amravati, Maharashtra, India
                             </p>
                         </div>
                     </div>
@@ -65,12 +65,12 @@ export default function Footer() {
                     <FooterColumn
                         title="Services"
                         items={[
-                            { label: "Local SEO Services", href: "/what-we-do#services" },
-                            { label: "Google Ads Management", href: "/what-we-do#services" },
-                            { label: "Social Media Marketing", href: "/what-we-do#services" },
-                            { label: "Ecommerce Marketing", href: "/what-we-do#services" },
-                            { label: "Conversion Rate Optimization (CRO)", href: "/what-we-do#services" },
-                            { label: "CRM & Marketing Automation", href: "/what-we-do#services" }
+                            { label: "Local SEO Services", href: "/what-we-do#local-seo" },
+                            { label: "Google Ads Management", href: "/what-we-do#google-ads" },
+                            { label: "Social Media Marketing", href: "/what-we-do#social-media" },
+                            { label: "Ecommerce Marketing", href: "/what-we-do#ecommerce-seo" },
+                            { label: "Conversion Rate Optimization (CRO)", href: "/what-we-do#cro" },
+                            { label: "CRM & Marketing Automation", href: "/what-we-do#crm-automation" }
                         ]}
                     />
 

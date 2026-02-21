@@ -134,7 +134,7 @@ function MobileServices() {
                             <img
                                 ref={imgRef}
                                 src="/services/Service%20Page%20Background.jpg"
-                                alt="Services Background"
+                                alt="Digital marketing services for local businesses and e-commerce"
                                 className={`w-full h-full object-cover object-left transition-opacity duration-500 ${isBgLoading ? 'opacity-0' : 'opacity-100'}`}
                                 onLoad={() => setIsBgLoading(false)}
                                 onError={() => setIsBgLoading(false)}
@@ -271,7 +271,7 @@ function DesktopServices() {
                                 <img
                                     ref={imgRef}
                                     src="/services/Service%20Page%20Background.jpg"
-                                    alt="Services Background"
+                                    alt="Digital marketing services for local businesses and e-commerce"
                                     className={`w-full h-full object-cover object-left transition-opacity duration-500 ${isBgLoading ? 'opacity-0' : 'opacity-100'}`}
                                     onLoad={() => setIsBgLoading(false)}
                                     onError={() => setIsBgLoading(false)}
@@ -342,6 +342,24 @@ function DesktopServices() {
 export function ServicesSection() {
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "ItemList",
+                        "name": "Inyutek Digital Marketing Services",
+                        "itemListElement": [
+                            { "@type": "ListItem", "position": 1, "name": "Conversion-Focused Landing Pages & CRO", "url": "https://inyutek.com/what-we-do#cro" },
+                            { "@type": "ListItem", "position": 2, "name": "Local SEO & Maps Optimisation", "url": "https://inyutek.com/what-we-do#local-seo" },
+                            { "@type": "ListItem", "position": 3, "name": "Google Ads & Meta Ads Management", "url": "https://inyutek.com/what-we-do#google-ads" },
+                            { "@type": "ListItem", "position": 4, "name": "Social Media Marketing", "url": "https://inyutek.com/what-we-do#social-media" },
+                            { "@type": "ListItem", "position": 5, "name": "E-commerce SEO & Content", "url": "https://inyutek.com/what-we-do#ecommerce-seo" },
+                            { "@type": "ListItem", "position": 6, "name": "CRM, Automation & Follow-Up", "url": "https://inyutek.com/what-we-do#crm-automation" }
+                        ]
+                    })
+                }}
+            />
             <MobileServices />
             <DesktopServices />
         </>

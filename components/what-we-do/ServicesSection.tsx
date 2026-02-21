@@ -7,6 +7,7 @@ import Link from "next/link"
 const services = [
     {
         id: 1,
+        anchorId: "cro",
         title: "Conversion-Focused Landing Pages & CRO",
         description: "Built for buyers, not just browsing. Real copy, strong offers, and friction-free paths to booking or buying. We measure exactly what converts.",
         icon: (
@@ -19,6 +20,7 @@ const services = [
     },
     {
         id: 2,
+        anchorId: "google-ads",
         title: "Google Ads + Meta Ads Management",
         description: "Stop wasting budget on low-quality clicks. We align ads with landing pages, test creative, and optimize weekly for lower CPA/CPL.",
         icon: (
@@ -30,6 +32,7 @@ const services = [
     },
     {
         id: 3,
+        anchorId: "local-seo",
         title: "Local SEO Maps + “near me” search",
         description: "Dominate the map pack. We optimize your Google Business Profile and build local authority so high-intent neighbors find you first.",
         icon: (
@@ -41,6 +44,7 @@ const services = [
     },
     {
         id: 4,
+        anchorId: "ecommerce-seo",
         title: "E-commerce SEO + Content",
         description: "Capture buyers, not just readers. We target product/category keywords and fix technical issues to drive organic sales.",
         icon: (
@@ -53,6 +57,7 @@ const services = [
     },
     {
         id: 5,
+        anchorId: "social-media",
         title: "Social Media Marketing (Organic + Paid)",
         description: "Content that gets inquiries, not just likes. We build campaigns with clear CTAs: DM, WhatsApp, or visit the shop.",
         icon: (
@@ -65,6 +70,7 @@ const services = [
     },
     {
         id: 6,
+        anchorId: "crm-automation",
         title: "CRM, Automation & Follow-Up",
         description: "Speed-to-lead matters. We set up auto-replies, lead routing, and nurture sequences so you never miss an opportunity.",
         icon: (
@@ -135,7 +141,7 @@ export function ServicesSection() {
                 {/* Grid Layout */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
                     {services.map((service, index) => (
-                        <div key={service.id} className="h-auto">
+                        <div key={service.id} id={service.anchorId} className="h-auto">
                             <ServiceCard data={service} className="h-full min-h-[280px]" />
                         </div>
                     ))}

@@ -11,13 +11,15 @@ function Card({
     y,
     opacity,
     rotate = 0,
-    imageSrc
+    imageSrc,
+    altText = "Inyutek digital marketing service"
 }: {
     className: string;
     y: MotionValue<number>;
     opacity: MotionValue<number>;
     rotate?: number;
     imageSrc?: string;
+    altText?: string;
 }) {
     const isServiceImage = imageSrc?.startsWith("/services/");
 
@@ -34,7 +36,7 @@ function Card({
                             <source srcSet={imageSrc.replace(/(\.\w+)$/, "-mobile.webp")} type="image/webp" />
                             <img
                                 src={imageSrc}
-                                alt="Hero Visual"
+                                alt={altText}
                                 className="w-full h-full object-contain"
                                 decoding="async"
                                 loading="eager"
@@ -43,7 +45,7 @@ function Card({
                     ) : (
                         <img
                             src={imageSrc}
-                            alt="Hero Visual"
+                            alt={altText}
                             className="w-full h-full object-contain"
                             decoding="async"
                             loading="eager"
@@ -217,6 +219,7 @@ export function Hero() {
                         opacity={opacity}
                         rotate={0}
                         imageSrc="/services/Website.jpg"
+                        altText="Professional website design and landing pages for lead generation"
                         className="left-[2%] top-[15%] w-[16.25rem] h-auto z-10 opacity-80 scale-90"
                     />
                     {/* Top Right */}
@@ -225,6 +228,7 @@ export function Hero() {
                         opacity={opacity}
                         rotate={0}
                         imageSrc="/services/Automation.jpg"
+                        altText="CRM and marketing automation setup for local businesses"
                         className="right-[2%] top-[18%] w-[17.5rem] h-auto z-10 opacity-80 scale-90"
                     />
 
@@ -236,6 +240,7 @@ export function Hero() {
                         opacity={opacity}
                         rotate={0}
                         imageSrc="/services/Social Media.jpg"
+                        altText="Social media marketing campaigns that drive inquiries and sales"
                         className="left-[20%] top-[38%] w-[17.5rem] h-auto z-20 shadow-2xl"
                     />
                     {/* Mid Right */}
@@ -244,6 +249,7 @@ export function Hero() {
                         opacity={opacity}
                         rotate={0}
                         imageSrc="/services/seo-search-engine-optimization-internet-digital-concept.jpg"
+                        altText="Local SEO and Google search optimization for higher rankings"
                         className="right-[20%] top-[35%] w-[15.5rem] h-auto z-20 shadow-2xl"
                     />
 
@@ -255,6 +261,7 @@ export function Hero() {
                         opacity={opacity}
                         rotate={0}
                         imageSrc="/services/online-marketing-commercial-connection-technology.jpg"
+                        altText="Google Ads and paid online marketing management for e-commerce"
                         className="left-[1%] bottom-[10%] w-[19.5rem] h-auto z-30 scale-105 shadow-2xl"
                     />
                     {/* Bottom Right */}
@@ -263,6 +270,7 @@ export function Hero() {
                         opacity={opacity}
                         rotate={0}
                         imageSrc="/services/Reporting.jpg"
+                        altText="Marketing performance reporting and analytics dashboard"
                         className="right-[1%] bottom-[12%] w-[19.5rem] h-auto z-30 scale-105 shadow-2xl"
                     />
 

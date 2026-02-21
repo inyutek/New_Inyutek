@@ -13,10 +13,32 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Lead Generation & Digital Marketing Agency | Inyutek",
-  description: "Lead generation agency for local businesses & e-commerce. Funnels, ads, SEO and automation that turn traffic into qualified leads. Book a call.",
+  description: "Inyutek is a lead generation agency for local businesses & e-commerce in India. We use funnels, Google Ads, SEO and automation to turn traffic into qualified leads and bookings. Book a free call.",
   icons: {
     icon: '/icon.png',
     apple: '/icon.png',
+  },
+  alternates: {
+    canonical: 'https://inyutek.com',
+  },
+  openGraph: {
+    type: 'website',
+    url: 'https://inyutek.com',
+    title: 'Lead Generation & Digital Marketing Agency | Inyutek',
+    description: 'Inyutek is a lead generation agency for local businesses & e-commerce in India. Funnels, Google Ads, SEO and automation that turn traffic into qualified leads. Book a free call.',
+    siteName: 'Inyutek',
+    images: [{
+      url: 'https://inyutek.com/og-image.jpg',
+      width: 1200,
+      height: 630,
+      alt: 'Inyutek — Lead Generation & Digital Marketing Agency',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Lead Generation & Digital Marketing Agency | Inyutek',
+    description: 'Inyutek is a lead generation agency for local businesses & e-commerce in India. Funnels, Google Ads, SEO and automation that turn traffic into qualified leads.',
+    images: ['https://inyutek.com/og-image.jpg'],
   },
 };
 
@@ -54,6 +76,49 @@ export default function RootLayout({
             gtag('config', 'G-NDQ194HJKV');
           `}
         </Script>
+        {/* JSON-LD: Organization + LocalBusiness Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://inyutek.com/#organization",
+                  "name": "Inyutek",
+                  "url": "https://inyutek.com",
+                  "logo": "https://inyutek.com/icon.png",
+                  "contactPoint": {
+                    "@type": "ContactPoint",
+                    "telephone": "+91-9112235551",
+                    "contactType": "customer service"
+                  },
+                  "sameAs": [
+                    "https://www.instagram.com/inyutek",
+                    "https://www.linkedin.com/company/inyutek"
+                  ]
+                },
+                {
+                  "@type": "LocalBusiness",
+                  "@id": "https://inyutek.com/#localbusiness",
+                  "name": "Inyutek",
+                  "description": "Lead generation agency for local businesses & e-commerce. Funnels, ads, SEO and automation that turn traffic into qualified leads.",
+                  "url": "https://inyutek.com",
+                  "telephone": "+91-9112235551",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Amravati",
+                    "addressRegion": "Maharashtra",
+                    "addressCountry": "IN"
+                  },
+                  "priceRange": "$$",
+                  "openingHours": "Mo-Fr 09:00-18:00"
+                }
+              ]
+            })
+          }}
+        />
       </head>
       <body className={`${inter.className} bg-white text-[#010B13] font-sans antialiased px-4 sm:px-6 lg:px-8`}>
         {/* ── INYUTEK Branded Loader (Layer 0 — first paint) ── */}
