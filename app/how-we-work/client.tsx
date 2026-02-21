@@ -1,12 +1,14 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
 import Footer from "@/components/sections/Footer"
 import { FAQ } from "@/components/sections/FAQ"
+import { HeroSection } from "@/components/how-we-work/HeroSection"
+import { WhatMakesItWork } from "@/components/how-we-work/WhatMakesItWork"
+import { ProcessSection } from "@/components/how-we-work/ProcessSection"
+import { DeliverablesSection } from "@/components/how-we-work/DeliverablesSection"
+import { RequirementsSection } from "@/components/how-we-work/RequirementsSection"
 
-// FAQ Data
 const faqs = [
     {
         question: "How long until we see results?",
@@ -17,8 +19,8 @@ const faqs = [
         answer: "Either. We can execute end-to-end or plug into your existing team."
     },
     {
-        question: "What if we don’t have a strong offer yet?",
-        answer: "Then we start with offer clarity and a simple funnel—because weak offers don’t convert, no matter the channel."
+        question: "What if we don't have a strong offer yet?",
+        answer: "Then we start with offer clarity and a simple funnel—because weak offers don't convert, no matter the channel."
     },
     {
         question: "Do you do long-term contracts?",
@@ -26,245 +28,24 @@ const faqs = [
     }
 ]
 
-
-import { useMediaQuery } from "@/hooks/use-media-query"
-
-function ProcessStepCard({ step }: { step: any }) {
-    const [isExpanded, setIsExpanded] = useState(false)
-    const isMobile = useMediaQuery("(max-width: 768px)")
-
-    // Force expanded on mobile, use state on desktop
-    const showExpanded = isMobile ? true : isExpanded
-
-    return (
-        <div
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="group bg-white p-8 rounded-2xl shadow-sm border border-gray-100/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden cursor-pointer text-center"
-        >
-            <h3 className={`type-card-title relative z-10 transition-all duration-300 ${showExpanded ? "mb-4" : ""} md:group-hover:mb-4`}>
-                {step.title}
-            </h3>
-
-            <div className={`grid transition-all duration-500 ease-in-out ${showExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"} md:grid-rows-[0fr] md:opacity-0 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100`}>
-                <div className="overflow-hidden space-y-4 pt-2">
-                    <div>
-                        <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What we do</span>
-                        <p className="text-gray-700 mt-1">{step.do}</p>
-                    </div>
-                    <div>
-                        <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">What you get</span>
-                        <p className="text-[#000024] font-medium mt-1">{step.get}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-
 export default function HowWeWorkClient() {
-
-
     return (
         <div className="bg-[#fbfbfb] text-[#000024]">
-            {/* HERO SECTION */}
-            <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 overflow-hidden">
-                <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <h1 className="type-h1 mb-8">
-                        How we turn clicks into calls, bookings, and sales
-                    </h1>
-                    <p className="type-body max-w-2xl mx-auto mb-10">
-                        A simple, repeatable system: we diagnose what’s leaking, build the funnel, launch fast, then optimize weekly based on real conversion data.
-                    </p>
-
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-                        <Link
-                            href="/contact"
-                            className="w-full sm:w-auto px-8 py-4 bg-[#000024] text-white rounded-lg font-medium text-lg shadow-xl hover:bg-[#000024]/90 transition-all hover:-translate-y-1 text-center"
-                        >
-                            Book a Free Growth Audit
-                        </Link>
-                        <Link
-                            href="/what-we-do"
-                            className="w-full sm:w-auto px-8 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-medium text-lg hover:bg-gray-50 transition-all hover:-translate-y-1 text-center"
-                        >
-                            See what we do
-                        </Link>
-                    </div>
-
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest">
-                        Free audit • clear priorities • zero pressure
-                    </p>
-                </div>
-            </section>
-
-            {/* WHAT MAKES THIS WORK */}
-            <section className="py-24 bg-white border-y border-gray-100">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="grid lg:grid-cols-2 gap-16 items-center">
-                        <div className="max-w-xl">
-                            <h2 className="type-h2 mb-6">
-                                Marketing works when the funnel is measurable
-                            </h2>
-                            <p className="type-lead">
-                                Most businesses try random tactics. We focus on the full path: Traffic → Landing page → Conversion → Follow-up → Revenue, with tracking at every step.
-                            </p>
-                        </div>
-
-                        <div className="rounded-2xl ">
-                            <div className="flex flex-wrap gap-3 justify-center">
-                                {["Clear offer", "Conversion-first pages", "Qualified leads", "Fast follow-up", "Weekly optimization"].map((item, i) => (
-                                    <span key={i} className="px-4 py-2 bg-white rounded-full text-sm font-semibold text-[#000024] shadow-sm border border-gray-100">
-                                        {item}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* OUR 4-STEP PROCESS */}
-            <section className="py-24 md:py-32 bg-[#fbfbfb]">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <h2 className="type-h1 text-center mb-16 md:mb-24">
-                        Our lead generation process
-                    </h2>
-
-                    <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
-                        {[
-                            {
-                                title: "Step 1 - Audit & Diagnose",
-                                do: "Review your offer, website/landing page, ads/SEO, tracking, and competitors.",
-                                get: "A short action plan with the top 3 bottlenecks blocking growth."
-                            },
-                            {
-                                title: "Step 2 - Funnel Plan",
-                                do: "Clarify your positioning, craft the core message, and map the conversion path.",
-                                get: "Funnel map + page outline + KPI targets (calls/bookings/sales)."
-                            },
-                            {
-                                title: "Step 3 - Build & Launch",
-                                do: "Build/upgrade landing pages, set up tracking, implement CRM follow-up, and launch campaigns.",
-                                get: "A working system that can generate leads - not a “strategy doc.”"
-                            },
-                            {
-                                title: "Step 4 - Optimize & Scale",
-                                do: "Weekly iteration: improve conversion rate, reduce CPL/CPA, and increase lead quality.",
-                                get: "Ongoing testing + reporting + scaling plan."
-                            }
-                        ].map((step, index) => (
-                            <ProcessStepCard key={index} step={step} />
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* WHAT YOU GET IN 14 DAYS */}
-            <section className="py-24 bg-white text-[#000024]">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="grid lg:grid-cols-2 gap-16">
-                        <div>
-                            <h2 className="type-h2 mb-8">
-                                What you’ll receive in the first 14 days
-                            </h2>
-                            <p className="text-gray-600 text-lg leading-relaxed">
-                                We move fast to get your foundation solid so we can start generating data and results.
-                            </p>
-                        </div>
-                        <div className="space-y-6">
-                            {[
-                                { title: "Conversion audit scorecard", desc: "What’s broken + What to fix first." },
-                                { title: "Funnel map", desc: "Click → Lead → Booked call / Purchase." },
-                                { title: "Landing page improvements", desc: "Copy + Structure + CTAs." },
-                                { title: "Tracking setup", desc: "Forms, Calls, WhatsApp, Purchases based on your model." },
-                                { title: "Follow-up system", desc: "Auto-replies + Reminders + Basic nurturing." }
-                            ].map((item, i) => (
-                                <div key={i} className="flex items-start gap-4 pb-6 border-b border-gray-100 last:border-0 last:pb-0">
-                                    <svg className="w-6 h-6 text-green-500 mt-1 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <div>
-                                        <h3 className="text-xl font-bold text-[#000024]">{item.title}</h3>
-                                        <p className="text-gray-600 mt-1">{item.desc}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-            {/* WHAT WE NEED & REPORTING */}
-            <section className="py-24 bg-white">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="grid md:grid-cols-2 gap-16 lg:gap-24">
-                        {/* What we need */}
-                        <div>
-                            <h2 className="text-3xl font-bold mb-8 text-[#000024]">
-                                What we need from you to move fast
-                            </h2>
-                            <ul className="space-y-4">
-                                {[
-                                    "Access to your website/landing builder or we build a landing page for you.",
-                                    "Access to ad accounts if running ads.",
-                                    "Your best offers/services/products + typical customer questions.",
-                                    "Fast response to leads especially for local service businesses."
-                                ].map((item, i) => (
-                                    <li key={i} className="flex items-start gap-3 text-gray-700">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-[#000024] mt-2.5 shrink-0" />
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-                            <div className="mt-8 p-6 bg-yellow-50 rounded-xl border border-yellow-100">
-                                <p className="text-sm text-yellow-800 font-medium">
-                                    <span className="font-bold block mb-1">Note important:</span>
-                                    If you miss calls or reply late, lead quality will look worse even if marketing is working.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Communication & Reporting */}
-                        <div>
-                            <h2 className="text-3xl font-bold mb-8 text-[#000024]">
-                                How you’ll know it’s working
-                            </h2>
-                            <div className="space-y-8">
-                                <div>
-                                    <h3 className="font-bold text-lg mb-4">We track what matters:</h3>
-                                    <div className="grid grid-cols-2 gap-3">
-                                        {["Calls / bookings / purchases", "Conversion rate", "Cost per lead / acquisition", "Lead quality", "Speed-to-lead"].map((metric, i) => (
-                                            <div key={i} className="bg-gray-50 px-3 py-2 rounded text-sm font-medium text-gray-600 border border-gray-100">
-                                                {metric}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3 className="font-bold text-lg mb-2">Reporting promise</h3>
-                                    <p className="text-gray-600">
-                                        Simple, trust-building. Weekly update: what we changed, what improved, and what we’re testing next.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* FAQ */}
+            <HeroSection />
+            <WhatMakesItWork />
+            <ProcessSection />
+            <DeliverablesSection />
+            <RequirementsSection />
             <FAQ items={faqs} />
 
-            {/* FINAL CTA */}
+            {/* Final CTA */}
             <section className="py-24 bg-white text-center">
                 <div className="max-w-4xl mx-auto px-6">
                     <h2 className="type-h2 mb-8">
                         Want a clear plan to get more leads or sales?
                     </h2>
                     <p className="type-body mb-10 max-w-2xl mx-auto">
-                        Book a free growth audit. You’ll leave with the top 3 fixes to improve conversions and lead quality.
+                        Book a free growth audit. You'll leave with the top 3 fixes to improve conversions and lead quality.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -275,7 +56,7 @@ export default function HowWeWorkClient() {
                             Book a Free Growth Audit
                         </Link>
                         <Link
-                            href="/about" // "About Inyutek" - assuming /about exists, checking file list... /about exists.
+                            href="/about"
                             className="w-full sm:w-auto px-10 py-4 bg-white text-[#000024] border border-[#000024]/10 rounded-lg font-medium text-lg hover:bg-gray-50 transition-all hover:-translate-y-1 text-center"
                         >
                             Learn About Inyutek
@@ -284,9 +65,7 @@ export default function HowWeWorkClient() {
                 </div>
             </section>
 
-            {/* Footer */}
             <Footer />
-
         </div>
     )
 }
