@@ -95,8 +95,9 @@ export function ContactForm() {
                         )}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label className="block text-sm font-medium text-[#000024] mb-2">Name</label>
+                                <label htmlFor="input-name" className="block text-sm font-medium text-[#000024] mb-2">Name</label>
                                 <input
+                                    id="input-name"
                                     required
                                     type="text"
                                     name="name"
@@ -105,8 +106,9 @@ export function ContactForm() {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-[#000024] mb-2">Business Name</label>
+                                <label htmlFor="input-businessName" className="block text-sm font-medium text-[#000024] mb-2">Business Name</label>
                                 <input
+                                    id="input-businessName"
                                     required
                                     type="text"
                                     name="businessName"
@@ -118,8 +120,9 @@ export function ContactForm() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label className="block text-sm font-medium text-[#000024] mb-2">Work Email</label>
+                                <label htmlFor="input-email" className="block text-sm font-medium text-[#000024] mb-2">Work Email</label>
                                 <input
+                                    id="input-email"
                                     required
                                     type="email"
                                     name="email"
@@ -128,8 +131,9 @@ export function ContactForm() {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-[#000024] mb-2">Phone Number</label>
+                                <label htmlFor="input-phone" className="block text-sm font-medium text-[#000024] mb-2">Phone Number</label>
                                 <input
+                                    id="input-phone"
                                     required
                                     type="tel"
                                     name="phone"
@@ -140,8 +144,9 @@ export function ContactForm() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-[#000024] mb-2">Website / Instagram / Store Link</label>
+                            <label htmlFor="input-website" className="block text-sm font-medium text-[#000024] mb-2">Website / Instagram / Store Link</label>
                             <input
+                                id="input-website"
                                 type="url"
                                 name="website"
                                 placeholder="https://..."
@@ -151,8 +156,9 @@ export function ContactForm() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label className="block text-sm font-medium text-[#000024] mb-2">Business Type</label>
+                                <label htmlFor="input-businessType" className="block text-sm font-medium text-[#000024] mb-2">Business Type</label>
                                 <select
+                                    id="input-businessType"
                                     required
                                     name="businessType"
                                     className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#000024]/10 bg-gray-50 text-[#000024]"
@@ -165,8 +171,9 @@ export function ContactForm() {
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-[#000024] mb-2">Primary Goal</label>
+                                <label htmlFor="input-goal" className="block text-sm font-medium text-[#000024] mb-2">Primary Goal</label>
                                 <select
+                                    id="input-goal"
                                     required
                                     name="goal"
                                     className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#000024]/10 bg-gray-50 text-[#000024]"
@@ -181,8 +188,9 @@ export function ContactForm() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-[#000024] mb-2">Biggest problem right now</label>
+                            <label htmlFor="input-problem" className="block text-sm font-medium text-[#000024] mb-2">Biggest problem right now</label>
                             <textarea
+                                id="input-problem"
                                 required
                                 name="problem"
                                 rows={3}
@@ -192,8 +200,9 @@ export function ContactForm() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-[#000024] mb-2">Monthly marketing budget (Optional)</label>
+                            <label htmlFor="input-budget" className="block text-sm font-medium text-[#000024] mb-2">Monthly marketing budget (Optional)</label>
                             <select
+                                id="input-budget"
                                 name="budget"
                                 className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#000024]/10 bg-gray-50 text-[#000024]"
                             >

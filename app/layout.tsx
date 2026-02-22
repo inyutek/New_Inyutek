@@ -3,9 +3,8 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { TransitionProvider } from "./transition-provider";
-import SmoothScroll from "@/components/smooth-scroll";
-
-import { Navbar } from "@/components/navbar";
+import SmoothScroll from "@/components/SmoothScroll";
+import { Navbar } from "@/components/Navbar";
 import { GlobalLoader } from "@/components/ui/global-loader";
 import ScrollToTop from "@/components/ScrollToTop";
 
@@ -18,8 +17,9 @@ export const metadata: Metadata = {
     icon: '/icon.png',
     apple: '/icon.png',
   },
+  metadataBase: new URL('https://inyutek.com'),
   alternates: {
-    canonical: 'https://inyutek.com',
+    canonical: '/',
   },
   openGraph: {
     type: 'website',
@@ -129,7 +129,7 @@ export default function RootLayout({
             src="https://www.googletagmanager.com/ns.html?id=GTM-WCMR3RWX"
             height="0"
             width="0"
-            style={{ display: "none", visibility: "hidden" }}
+            className="hidden invisible"
           />
         </noscript>
         <SmoothScroll>

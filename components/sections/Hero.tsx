@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react"
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion"
 import Link from "next/link"
+import Image from "next/image"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
 
 // Card component representing the "Image Cards"
@@ -30,27 +31,14 @@ function Card({
         >
             {imageSrc ? (
                 <div className="relative w-full h-full">
-                    {isServiceImage ? (
-                        <picture>
-                            <source srcSet={imageSrc.replace(/(\.\w+)$/, "-mobile.avif")} type="image/avif" />
-                            <source srcSet={imageSrc.replace(/(\.\w+)$/, "-mobile.webp")} type="image/webp" />
-                            <img
-                                src={imageSrc}
-                                alt={altText}
-                                className="w-full h-full object-contain"
-                                decoding="async"
-                                loading="eager"
-                            />
-                        </picture>
-                    ) : (
-                        <img
-                            src={imageSrc}
-                            alt={altText}
-                            className="w-full h-full object-contain"
-                            decoding="async"
-                            loading="eager"
-                        />
-                    )}
+                    <Image
+                        src={imageSrc}
+                        alt={altText}
+                        className="object-contain"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        priority
+                    />
                 </div>
             ) : (
                 /* Simulating an Image Placeholder */

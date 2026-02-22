@@ -69,8 +69,7 @@ export function CTASection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, ease, delay: 0.55 }}
-                    className="mt-10 flex flex-col md:flex-row items-center justify-center gap-4 relative"
-                    style={{ zIndex: 40 }}
+                    className="mt-10 flex flex-col md:flex-row items-center justify-center gap-4 relative z-40"
                 >
                     <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
                         <Link
