@@ -27,6 +27,9 @@ const faqs = [
 export const metadata: Metadata = {
     title: 'About Inyutek | Digital Marketing & Lead Generation Agency',
     description: 'Learn about Inyutek, a lead generation agency helping local businesses and e-commerce brands grow through funnels, ads, SEO, and automation.',
+    alternates: {
+        canonical: 'https://www.inyutek.com/about',
+    },
 }
 
 export default function AboutPage() {

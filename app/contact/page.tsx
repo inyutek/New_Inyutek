@@ -10,6 +10,9 @@ import Footer from '@/components/sections/Footer'
 export const metadata: Metadata = {
     title: 'Book a Free Growth Audit | Inyutek',
     description: 'Book a free growth audit with Inyutek. Get clear funnel fixes to increase calls, bookings, and ecommerce sales—no pressure, just next steps.',
+    alternates: {
+        canonical: 'https://www.inyutek.com/contact',
+    },
 }
 
 export default function ContactPage() {

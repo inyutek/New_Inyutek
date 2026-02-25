@@ -17,18 +17,40 @@ export const metadata: Metadata = {
     icon: '/icon.png',
     apple: '/icon.png',
   },
-  metadataBase: new URL('https://inyutek.com'),
+  metadataBase: new URL('https://www.inyutek.com'),
+  keywords: [
+    'digital marketing agency Amravati',
+    'lead generation agency India',
+    'SEO agency Amravati',
+    'Google Ads management India',
+    'Meta Ads agency',
+    'CRO agency',
+    'local SEO India',
+    'e-commerce marketing agency',
+    'marketing agency Maharashtra',
+  ],
+  authors: [{ name: 'Inyutek', url: 'https://www.inyutek.com' }],
+  creator: 'Inyutek',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
   alternates: {
-    canonical: '/',
+    canonical: 'https://www.inyutek.com',
   },
   openGraph: {
     type: 'website',
-    url: 'https://inyutek.com',
+    locale: 'en_IN',
+    url: 'https://www.inyutek.com',
     title: 'Lead Generation & Digital Marketing Agency | Inyutek',
     description: 'Inyutek is a lead generation agency for local businesses & e-commerce in India. Funnels, Google Ads, SEO and automation that turn traffic into qualified leads. Book a free call.',
     siteName: 'Inyutek',
     images: [{
-      url: 'https://inyutek.com/og-image.jpg',
+      url: '/og-image.jpg',
       width: 1200,
       height: 630,
       alt: 'Inyutek — Lead Generation & Digital Marketing Agency',
@@ -38,7 +60,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Lead Generation & Digital Marketing Agency | Inyutek',
     description: 'Inyutek is a lead generation agency for local businesses & e-commerce in India. Funnels, Google Ads, SEO and automation that turn traffic into qualified leads.',
-    images: ['https://inyutek.com/og-image.jpg'],
+    images: ['/og-image.jpg'],
   },
 };
 
@@ -85,10 +107,10 @@ export default function RootLayout({
               "@graph": [
                 {
                   "@type": "Organization",
-                  "@id": "https://inyutek.com/#organization",
+                  "@id": "https://www.inyutek.com/#organization",
                   "name": "Inyutek",
-                  "url": "https://inyutek.com",
-                  "logo": "https://inyutek.com/icon.png",
+                  "url": "https://www.inyutek.com",
+                  "logo": "https://www.inyutek.com/icon.png",
                   "contactPoint": {
                     "@type": "ContactPoint",
                     "telephone": "+91-9112235551",
@@ -101,19 +123,41 @@ export default function RootLayout({
                 },
                 {
                   "@type": "LocalBusiness",
-                  "@id": "https://inyutek.com/#localbusiness",
+                  "@id": "https://www.inyutek.com/#localbusiness",
                   "name": "Inyutek",
-                  "description": "Lead generation agency for local businesses & e-commerce. Funnels, ads, SEO and automation that turn traffic into qualified leads.",
-                  "url": "https://inyutek.com",
-                  "telephone": "+91-9112235551",
+                  "description": "Lead Generation & Digital Marketing Agency",
+                  "url": "https://www.inyutek.com",
+                  "telephone": "+919112235551",
+                  "email": "inyutek@gmail.com",
                   "address": {
                     "@type": "PostalAddress",
                     "addressLocality": "Amravati",
                     "addressRegion": "Maharashtra",
                     "addressCountry": "IN"
                   },
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "20.9320",
+                    "longitude": "77.7523"
+                  },
                   "priceRange": "$$",
-                  "openingHours": "Mo-Fr 09:00-18:00"
+                  "openingHours": "Mo-Fr 09:00-18:00",
+                  "serviceArea": {
+                    "@type": "Country",
+                    "name": "India"
+                  },
+                  "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Digital Marketing Services",
+                    "itemListElement": [
+                      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO Services" } },
+                      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads Management" } },
+                      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Meta Ads Management" } },
+                      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Conversion Rate Optimization" } },
+                      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CRM Automation" } },
+                      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social Media Marketing" } }
+                    ]
+                  }
                 }
               ]
             })

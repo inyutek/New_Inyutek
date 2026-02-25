@@ -1,0 +1,15 @@
+{
+    "redirects": [
+        {
+            "source": "/:path*",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "inyutek.com"
+                }
+            ],
+            "destination": "https://www.inyutek.com/:path*",
+            "permanent": true
+        }
+    ]
+}
