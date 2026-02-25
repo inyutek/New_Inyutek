@@ -1,4 +1,16 @@
 User-agent: *
 Allow: /
+Allow: /about
+Allow: /blog
+Allow: /case-studies
+Allow: /contact
+Allow: /cookie-policy
+Allow: /cookie-settings
+Allow: /how-we-work
+Allow: /portfolio
+Allow: /privacy-policy
+Allow: /terms
+Allow: /terms-of-service
+Allow: /what-we-do
 
 Sitemap: https://inyutek.com/sitemap.xml
