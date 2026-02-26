@@ -7,6 +7,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import { Navbar } from "@/components/Navbar";
 import { GlobalLoader } from "@/components/ui/global-loader";
 import ScrollToTop from "@/components/ScrollToTop";
+import { CookieBanner } from "@/components/CookieBanner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -75,6 +76,20 @@ export default function RootLayout({
         {/* Hide the JS-only loader for non-JS crawlers (Google OAuth verifier, Googlebot).
             Without JS, the loader stays visible forever and blocks the homepage content. */}
         <noscript><style>{`#inyutek-loader { display: none !important; }`}</style></noscript>
+        {/* ── Google Consent Mode v2 — MUST be first ── */}
+        <Script id="consent-defaults" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              analytics_storage: 'denied',
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              wait_for_update: 500
+            });
+          `}
+        </Script>
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -91,10 +106,7 @@ export default function RootLayout({
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-
             gtag('config', 'G-NDQ194HJKV');
           `}
         </Script>
@@ -180,6 +192,7 @@ export default function RootLayout({
           <Navbar />
           <TransitionProvider>{children}</TransitionProvider>
           <ScrollToTop />
+          <CookieBanner />
         </SmoothScroll>
       </body>
     </html>
