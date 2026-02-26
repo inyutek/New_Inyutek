@@ -10,6 +10,7 @@ const services = [
         anchorId: "cro",
         title: "Conversion-Focused Landing Pages & CRO",
         description: "Built for buyers, not just browsing. Real copy, strong offers, and friction-free paths to booking or buying. We measure exactly what converts.",
+        href: "/conversion-rate-optimization",
         icon: (
             <svg className="w-10 h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -23,6 +24,7 @@ const services = [
         anchorId: "google-ads",
         title: "Google Ads + Meta Ads Management",
         description: "Stop wasting budget on low-quality clicks. We align ads with landing pages, test creative, and optimize weekly for lower CPA/CPL.",
+        href: "/google-ads-management",
         icon: (
             <svg className="w-10 h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="12" cy="12" r="10" />
@@ -35,6 +37,7 @@ const services = [
         anchorId: "local-seo",
         title: "Local SEO Maps + “near me” search",
         description: "Dominate the map pack. We optimize your Google Business Profile and build local authority so high-intent neighbors find you first.",
+        href: "/local-seo-services",
         icon: (
             <svg className="w-10 h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
@@ -47,6 +50,7 @@ const services = [
         anchorId: "ecommerce-seo",
         title: "E-commerce SEO + Content",
         description: "Capture buyers, not just readers. We target product/category keywords and fix technical issues to drive organic sales.",
+        href: "/ecommerce-marketing",
         icon: (
             <svg className="w-10 h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
@@ -60,6 +64,7 @@ const services = [
         anchorId: "social-media",
         title: "Social Media Marketing (Organic + Paid)",
         description: "Content that gets inquiries, not just likes. We build campaigns with clear CTAs: DM, WhatsApp, or visit the shop.",
+        href: "/social-media-marketing",
         icon: (
             <svg className="w-10 h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -73,6 +78,7 @@ const services = [
         anchorId: "crm-automation",
         title: "CRM, Automation & Follow-Up",
         description: "Speed-to-lead matters. We set up auto-replies, lead routing, and nurture sequences so you never miss an opportunity.",
+        href: "/crm-marketing-automation",
         icon: (
             <svg className="w-10 h-10 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
@@ -115,6 +121,17 @@ function ServiceCard({
                     <p className="type-body pt-2">
                         {data.description}
                     </p>
+                    {data.href && (
+                        <div className="mt-4">
+                            <Link
+                                href={data.href}
+                                onClick={(e) => e.stopPropagation()}
+                                className="inline-flex items-center text-sm font-semibold text-[#000024] hover:opacity-70 transition-opacity"
+                            >
+                                Learn more <span className="ml-1">&rarr;</span>
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
