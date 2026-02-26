@@ -65,12 +65,12 @@ export default function Footer() {
                     <FooterColumn
                         title="Services"
                         items={[
-                            { label: "Local SEO Services", href: "/what-we-do#local-seo" },
-                            { label: "Google Ads Management", href: "/what-we-do#google-ads" },
-                            { label: "Social Media Marketing", href: "/what-we-do#social-media" },
-                            { label: "Ecommerce Marketing", href: "/what-we-do#ecommerce-seo" },
-                            { label: "Conversion Rate Optimization (CRO)", href: "/what-we-do#cro" },
-                            { label: "CRM & Marketing Automation", href: "/what-we-do#crm-automation" }
+                            { label: "Local SEO Services", href: "/local-seo-services" },
+                            { label: "Google Ads Management", href: "/google-ads-management" },
+                            { label: "Social Media Marketing", href: "/social-media-marketing" },
+                            { label: "Ecommerce Marketing", href: "/ecommerce-marketing" },
+                            { label: "Conversion Rate Optimization (CRO)", href: "/conversion-rate-optimization" },
+                            { label: "CRM & Marketing Automation", href: "/crm-marketing-automation" }
                         ]}
                     />
 

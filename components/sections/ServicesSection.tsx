@@ -97,7 +97,7 @@ function ServiceCard({
             <h4 className="type-card-title">
                 {data.title}
             </h4>
-            <p className="type-body">
+            <p className="type-body pb-2">
                 {data.description}
             </p>
         </div>
