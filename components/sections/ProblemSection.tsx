@@ -1,9 +1,10 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
 import { Skeleton } from "@/components/ui/skeleton"
+import Image from "next/image"
 
 const problems = [
     {
@@ -11,7 +12,7 @@ const problems = [
         title: "You’re getting views, not customers",
         description: "People land on your site, scroll, and leave because the offer isn’t instantly clear or compelling.",
         imageColor: "bg-gray-200", // Placeholder for different images
-        imageSrc: "/services/No%20customers.jpg",
+        imageSrc: "/services/no-customers-desktop.webp",
         icon: (
             <svg className="w-24 h-24 opacity-30" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19 3H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM5 19V5h14l.002 14H5z"></path>
@@ -24,7 +25,7 @@ const problems = [
         title: "Your funnel has friction",
         description: "Too many steps, slow pages, confusing forms, no WhatsApp/call-first path  leads drop before they convert.",
         imageColor: "bg-blue-100", // Just to differentiate visually for now
-        imageSrc: "/services/Funnel.jpg",
+        imageSrc: "/services/funnel-desktop.webp",
         icon: (
             <svg className="w-24 h-24 opacity-30" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20 2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h3v3.767L13.277 18H20c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm0 14h-7.277L9 18.233V16H4V4h16v12z"></path>
@@ -36,7 +37,7 @@ const problems = [
         title: "You can’t track what’s working",
         description: "If you don’t know which channel, keyword, or ad created the lead, you can’t scale profitably.",
         imageColor: "bg-red-100", // Just to differentiate visually for now
-        imageSrc: "/services/Tracking.jpg",
+        imageSrc: "/services/tracking-desktop.webp",
         icon: (
             <svg className="w-24 h-24 opacity-30" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M21 4H3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-1 14H4V6h16v12z"></path>
@@ -48,24 +49,23 @@ const problems = [
 
 function ProblemImageContent({ item }: { item: typeof problems[0] }) {
     const [isLoading, setIsLoading] = useState(true)
-    const imgRef = useRef<HTMLImageElement>(null)
 
     useEffect(() => {
-        if (imgRef.current?.complete) {
-            setIsLoading(false);
-        }
-    }, [])
+        // Reset loading state on item change
+        setIsLoading(true)
+    }, [item.imageSrc])
 
     if (!item.imageSrc) return item.icon
 
     return (
         <div className="relative w-full h-full">
             {isLoading && <Skeleton className="absolute inset-0 z-10 w-full h-full rounded-none" />}
-            <img
-                ref={imgRef}
+            <Image
                 src={item.imageSrc}
                 alt={item.title}
-                className={`w-full h-auto object-contain transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                fill
+                className={`object-cover transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                sizes="(max-width: 768px) 100vw, 50vw"
                 onLoad={() => setIsLoading(false)}
                 onError={() => setIsLoading(false)}
             />
@@ -113,7 +113,7 @@ function MobileProblem() {
                                         </p>
 
                                         {/* Inline Image Display */}
-                                        <div className={`w-full max-w-xs mx-auto rounded-lg flex items-center justify-center text-gray-400 relative overflow-hidden ${item.imageColor}`}>
+                                        <div className={`w-full max-w-xs mx-auto rounded-lg text-gray-400 relative overflow-hidden aspect-square ${item.imageColor}`}>
                                             <ProblemImageContent item={item} />
                                         </div>
                                     </div>
@@ -165,7 +165,7 @@ function DesktopProblem() {
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3 }}
-                            className={`relative flex items-center justify-center text-gray-400 overflow-hidden rounded-2xl ${problems[activeIndex].imageColor}`}
+                            className={`relative w-full aspect-square overflow-hidden rounded-2xl ${problems[activeIndex].imageColor}`}
                         >
                             <ProblemImageContent item={problems[activeIndex]} />
                         </motion.div>

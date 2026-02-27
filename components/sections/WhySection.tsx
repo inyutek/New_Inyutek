@@ -3,6 +3,7 @@
 import { Reveal } from "@/components/motion-presets"
 import { LucideIcon, LayoutTemplate, GitMerge, Hash } from "lucide-react"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
+import Image from "next/image"
 
 const features = [
     {
@@ -88,11 +89,12 @@ export function WhySection() {
                     {/* RIGHT: Image Placeholder */}
                     <Reveal delay={0.2} className="w-full">
                         <div className="relative aspect-square md:aspect-[4/3] bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200 shadow-sm overflow-hidden">
-                            {/* Image */}
-                            <img
-                                src="/services/Why Inyutek.jpg"
+                            <Image
+                                src="/services/why-inyutek-desktop.webp"
                                 alt="Conversion-first digital marketing agency team at Inyutek"
-                                className="w-full h-full object-cover"
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 100vw, 50vw"
                             />
                         </div>
                     </Reveal>

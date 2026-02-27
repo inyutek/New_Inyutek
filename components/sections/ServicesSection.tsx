@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Skeleton } from "@/components/ui/skeleton"
+import Image from "next/image"
 
 // Data for the Right Side Cards
 const services = [
@@ -105,15 +105,6 @@ function ServiceCard({
 }
 
 function MobileServices() {
-    const [isBgLoading, setIsBgLoading] = useState(true);
-    const imgRef = useRef<HTMLImageElement>(null);
-
-    useEffect(() => {
-        if (imgRef.current?.complete) {
-            setIsBgLoading(false);
-        }
-    }, [])
-
     return (
         <div id="services-mobile" className="block lg:hidden py-20 px-6 bg-[#fbfbfb]">
             <div className="flex flex-col gap-6">
@@ -125,21 +116,16 @@ function MobileServices() {
                     viewport={{ once: true, margin: "-100px" }}
                     className="w-full rounded-3xl overflow-hidden shadow-xl text-white min-h-[400px] relative"
                 >
-                    {/* Background Image - Optimized */}
+                    {/* Background Image */}
                     <div className="absolute inset-0 z-0 bg-[#000024]">
-                        {isBgLoading && <Skeleton className="absolute inset-0 z-10 w-full h-full rounded-none" />}
-                        <picture>
-                            <source srcSet="/services/Service%20Page%20Background-mobile.avif" type="image/avif" />
-                            <source srcSet="/services/Service%20Page%20Background-mobile.webp" type="image/webp" />
-                            <img
-                                ref={imgRef}
-                                src="/services/Service%20Page%20Background.jpg"
-                                alt="Digital marketing services for local businesses and e-commerce"
-                                className={`w-full h-full object-cover object-left transition-opacity duration-500 ${isBgLoading ? 'opacity-0' : 'opacity-100'}`}
-                                onLoad={() => setIsBgLoading(false)}
-                                onError={() => setIsBgLoading(false)}
-                            />
-                        </picture>
+                        <Image
+                            src="/services/service-page-background-mobile.webp"
+                            alt="Digital marketing services for local businesses and e-commerce"
+                            fill
+                            quality={80}
+                            className="object-cover object-left"
+                            sizes="100vw"
+                        />
                         <div className="absolute inset-0 bg-black/20" />
                     </div>
 
@@ -192,15 +178,7 @@ function DesktopServices() {
     const containerRef = useRef<HTMLDivElement>(null)
     const viewportRef = useRef<HTMLDivElement>(null)
     const listRef = useRef<HTMLDivElement>(null)
-    const [isBgLoading, setIsBgLoading] = useState(true);
-    const imgRef = useRef<HTMLImageElement>(null);
     const [scrollDistance, setScrollDistance] = useState(0);
-
-    useEffect(() => {
-        if (imgRef.current?.complete) {
-            setIsBgLoading(false);
-        }
-    }, [])
 
     // Dynamically calculate how far the list needs to scroll
     // based on actual rendered heights — auto-adapts to any zoom level.
@@ -262,21 +240,16 @@ function DesktopServices() {
                         }}
                         className="absolute top-1/2 -translate-y-1/2 z-20 h-[50vh] lg:h-[60vh] rounded-3xl overflow-hidden shadow-2xl bg-[#000024]"
                     >
-                        {/* Background Image - Optimized */}
+                        {/* Background Image */}
                         <div className="absolute inset-0 z-0">
-                            {isBgLoading && <Skeleton className="absolute inset-0 z-10 w-full h-full rounded-none" />}
-                            <picture>
-                                <source srcSet="/services/Service%20Page%20Background-desktop.avif" type="image/avif" />
-                                <source srcSet="/services/Service%20Page%20Background-desktop.webp" type="image/webp" />
-                                <img
-                                    ref={imgRef}
-                                    src="/services/Service%20Page%20Background.jpg"
-                                    alt="Digital marketing services for local businesses and e-commerce"
-                                    className={`w-full h-full object-cover object-left transition-opacity duration-500 ${isBgLoading ? 'opacity-0' : 'opacity-100'}`}
-                                    onLoad={() => setIsBgLoading(false)}
-                                    onError={() => setIsBgLoading(false)}
-                                />
-                            </picture>
+                            <Image
+                                src="/services/service-page-background-desktop.webp"
+                                alt="Digital marketing services for local businesses and e-commerce"
+                                fill
+                                quality={80}
+                                className="object-cover object-left"
+                                sizes="100vw"
+                            />
                             <div className="absolute inset-0 bg-black/20" /> {/* Overlay for text readability */}
                         </div>
 

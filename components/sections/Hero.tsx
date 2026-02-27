@@ -72,12 +72,12 @@ const CALL_LINK = `tel:${PHONE_NUMBER}`
 
 // All hero image sources — preloaded before loader dismisses
 const HERO_IMAGES = [
-    "/services/Website.jpg",
-    "/services/Automation.jpg",
-    "/services/Social Media.jpg",
-    "/services/seo-search-engine-optimization-internet-digital-concept.jpg",
-    "/services/online-marketing-commercial-connection-technology.jpg",
-    "/services/Reporting.jpg",
+    "/services/Website.webp",
+    "/services/Automation.webp",
+    "/services/social-media.webp",
+    "/services/seo-search-engine-optimization-internet-digital-concept.webp",
+    "/services/online-marketing-commercial-connection-technology.webp",
+    "/services/Reporting.webp",
 ]
 
 export function Hero() {
@@ -209,7 +209,7 @@ export function Hero() {
                     </motion.div>
                 </ScrollReveal>
 
-                
+
 
                 {/* ── DESKTOP: 3D Parallax Card Animation ──
                   *
@@ -226,7 +226,7 @@ export function Hero() {
                         y={yBack}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/services/Website.jpg"
+                        imageSrc="/services/Website.webp"
                         altText="Professional website design and landing pages for lead generation"
                         className="left-[2%] top-[15%] w-[16.25rem] h-[200px] z-10 opacity-80 scale-90"
                         priority={true}  // ← first desktop card = likely LCP element
@@ -235,7 +235,7 @@ export function Hero() {
                         y={yBack}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/services/Automation.jpg"
+                        imageSrc="/services/Automation.webp"
                         altText="CRM and marketing automation setup for local businesses"
                         className="right-[2%] top-[18%] w-[17.5rem] h-[200px] z-10 opacity-80 scale-90"
                     />
@@ -245,7 +245,7 @@ export function Hero() {
                         y={yMid}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/services/Social Media.jpg"
+                        imageSrc="/services/social-media.webp"
                         altText="Social media marketing campaigns that drive inquiries and sales"
                         className="left-[20%] top-[38%] w-[17.5rem] h-[200px] z-20 shadow-2xl"
                     />
@@ -253,7 +253,7 @@ export function Hero() {
                         y={yMid}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/services/seo-search-engine-optimization-internet-digital-concept.jpg"
+                        imageSrc="/services/seo-search-engine-optimization-internet-digital-concept.webp"
                         altText="Local SEO and Google search optimization for higher rankings"
                         className="right-[20%] top-[35%] w-[15.5rem] h-[200px] z-20 shadow-2xl"
                     />
@@ -263,7 +263,7 @@ export function Hero() {
                         y={yFront}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/services/online-marketing-commercial-connection-technology.jpg"
+                        imageSrc="/services/online-marketing-commercial-connection-technology.webp"
                         altText="Google Ads and paid online marketing management for e-commerce"
                         className="left-[1%] bottom-[10%] w-[19.5rem] h-[220px] z-30 scale-105 shadow-2xl"
                     />
@@ -271,7 +271,7 @@ export function Hero() {
                         y={yFront}
                         opacity={opacity}
                         rotate={0}
-                        imageSrc="/services/Reporting.jpg"
+                        imageSrc="/services/Reporting.webp"
                         altText="Marketing performance reporting and analytics dashboard"
                         className="right-[1%] bottom-[12%] w-[19.5rem] h-[220px] z-30 scale-105 shadow-2xl"
                     />

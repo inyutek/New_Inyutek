@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
+import Image from "next/image"
 
 const audiences = [
     {
@@ -10,7 +11,7 @@ const audiences = [
         title: "Local service businesses",
         description: "Get more calls, WhatsApp inquiries, and bookings.",
         imageColor: "bg-gray-100",
-        imageSrc: "/services/Local Businesses.jpg",
+        imageSrc: "/services/local-businesses-desktop.webp",
         icon: (
             <svg className="w-24 h-24 opacity-30 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
@@ -22,7 +23,7 @@ const audiences = [
         title: "Ecommerce brands",
         description: "Get more purchases, higher conversion rate, and lower CPA.",
         imageColor: "bg-gray-200",
-        imageSrc: "/services/E-commerce.jpg",
+        imageSrc: "/services/E-commerce-desktop.webp",
         icon: (
             <svg className="w-24 h-24 opacity-30 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
@@ -36,7 +37,7 @@ const audiences = [
         title: "Early-stage founders",
         description: "Validate offers and build a funnel you can scale.",
         imageColor: "bg-gray-100",
-        imageSrc: "/services/Startup.jpg",
+        imageSrc: "/services/Startup-desktop.webp",
         icon: (
             <svg className="w-24 h-24 opacity-30 text-[#000024]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
@@ -81,12 +82,14 @@ function MobileWhoWeHelp() {
                                         <p className="text-sm font-normal text-gray-600 leading-relaxed text-center">
                                             {item.description}
                                         </p>
-                                        <div className={`w-3/5 aspect-square rounded-lg flex items-center justify-center text-gray-400 mx-auto overflow-hidden ${item.imageColor}`}>
+                                        <div className={`w-3/5 aspect-square rounded-lg flex items-center justify-center text-gray-400 mx-auto overflow-hidden relative ${item.imageColor}`}>
                                             {item.imageSrc ? (
-                                                <img
+                                                <Image
                                                     src={item.imageSrc}
                                                     alt={item.title}
-                                                    className="w-full h-full object-cover"
+                                                    fill
+                                                    className="object-cover"
+                                                    sizes="(max-width: 768px) 100vw, 50vw"
                                                 />
                                             ) : (
                                                 item.icon
@@ -146,10 +149,12 @@ function DesktopWhoWeHelp() {
                             className={`absolute inset-0 flex items-center justify-center text-gray-400 overflow-hidden ${audiences[activeIndex].imageColor}`}
                         >
                             {audiences[activeIndex].imageSrc ? (
-                                <img
+                                <Image
                                     src={audiences[activeIndex].imageSrc}
                                     alt={audiences[activeIndex].title}
-                                    className="w-full h-full object-cover"
+                                    fill
+                                    className="object-cover"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
                                 />
                             ) : (
                                 audiences[activeIndex].icon
@@ -171,7 +176,7 @@ export function WhoWeHelpSection() {
                         Built for businesses that need growth, not vanity metrics
                     </h2>
                     <p className="type-body max-w-2xl mx-auto mb-2">
-                        If you’re serious about generating leads or sales consistently, we’ll build the system and optimize it week by week.
+                        If you're serious about generating leads or sales consistently, we'll build the system and optimize it week by week.
                     </p>
                 </div>
 

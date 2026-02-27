@@ -4,9 +4,10 @@ export default function ComingSoon({ children }: { children?: React.ReactNode })
     return (
         <div className="relative w-full h-[calc(100vh-64px)] overflow-hidden flex items-center justify-center">
             <Image
-                src="/coming-soon.png"
+                src="/coming-soon.webp"
                 alt="Coming Soon"
                 fill
+                quality={80}
                 className="object-cover"
                 priority
             />
